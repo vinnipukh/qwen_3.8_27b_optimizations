@@ -39,14 +39,15 @@ Beat stock llama.cpp HIP on at least one important Qwen3.8-27B workload on the R
 - Full original planning document preserved at `.planning/reference/ROADMAP-original.md` — 18 phases, 7 suggested milestones, profiling-first methodology, and project rules (benchmark before optimizing, one optimization at a time, keep stock baseline forever, test prefill and decode separately).
 - Hardware: AMD Radeon RX 7900 XT, RDNA3, LLVM target `gfx1100`, 20 GB VRAM. ROCm docs list it as supported (Runtime + HIP SDK); llama.cpp HIP build has an explicit gfx1100 example.
 - Reference runtime: llama.cpp ggml HIP backend reuses many CUDA kernel sources through HIP and links hipBLAS/rocBLAS — useful as both reference implementation and patch target.
-- Model: Qwen3.8-27B GGUF (Q4_K_M primary; Q4_K_S and Q5_K_M if VRAM permits). Exact model repo/file/quant metadata to be pinned in `models/README.md` during Phase 1. Weights are NOT downloaded yet (~16–17 GB for Q4_K_M); download happens at execution start after research confirms exact artifacts.
+- Model LOCKED: `JonathanColetti/Qwen3.8-27B-Uncensored-GGUF` → **Qwen3.8-27B-Uncensored-IQ4_XS.gguf** (15.31 GB, sha256 53adc4bb…, imatrix-quantized, MTP head retained) — chosen over Q4_K_M for context headroom on the 20 GB card. Full decision record: `.planning/research/MODEL-DECISION.md`. Base model is official `Qwen/Qwen3.8-27B` (earlier "model does not exist" research notes are superseded). Weights not yet downloaded; fetch at Phase-1 execution start with sha256 verification.
 - Dev environment: WSL2 on the user's Windows machine (Hyper-V available). ROCm compute/profiling tooling is Linux-first; WSL2 GPU passthrough is the chosen path. Environment feasibility (rocminfo/rocprof inside WSL2) is itself a Phase 1 validation gate.
+- Architecture (corrects original roadmap assumptions): hybrid linear attention — 48 Gated DeltaNet layers + 16 gated full-attention layers (qwen35 arch), tiny KV cache (~64 KiB/token est.), native MTP speculative-decoding head. Consequences: Phase 9 (KV cache) de-prioritized; Gated DeltaNet HIP/gfx1100 kernel coverage is the critical Phase-1 unknown and the prime custom-kernel frontier; spec-decode (MTP) becomes a benchmark dimension and decode-path accelerator.
 - Key technical tension to respect: decode runs at M≈1 while prefill has large M — separate prefill/decode kernel paths are a design goal, not an afterthought.
 - Success criteria from original doc: no correctness regression beyond tolerance, measurable speedup or VRAM reduction enabling larger context, publishable complete result matrix (not just best number).
 
 ## Constraints
 
-- **Hardware**: single RX 7900 XT, 20 GB VRAM — 27B Q4_K_M weights ≈ 16–17 GB leaves tight headroom; KV cache strategy matters
+- **Hardware**: single RX 7900 XT, 20 GB VRAM — locked IQ4_XS artifact is 15.31 GB, leaving ~4–5 GB for KV + buffers (hybrid arch KV ≈64 KiB/token f16 est.)
 - **Tech stack**: ROCm/HIP on Linux (WSL2), llama.cpp as reference runtime, HIP kernels compiled for gfx1100
 - **Methodology**: profile before optimizing; every optimization switchable; correctness tests next to every kernel; record compiler/ROCm/driver versions with every result
 - **Environment risk**: WSL2 ROCm support must be validated first — if passthrough/profiling tools fail, fall back to native Linux before any kernel work
@@ -59,7 +60,7 @@ Beat stock llama.cpp HIP on at least one important Qwen3.8-27B workload on the R
 | Dev environment: WSL2 (Hyper-V available) | User's machine is Windows; ROCm tooling is Linux-first | — Pending |
 | Drop Turkish output quality evals | User decision — not part of actual workload | — Pending |
 | Archive original ROADMAP.md to .planning/reference/ | Preserved as source material; GSD roadmap merges its phases/milestones | ✓ Done |
-| Model weights downloaded at execution start, not during planning | Exact GGUF artifact must be confirmed by research first; avoids wrong ~17 GB download | — Pending |
+| Primary artifact: JonathanColetti IQ4_XS (15.31 GB), context-headroom rationale | User locked 2026-08-21 after repo comparison vs HauhauCS Aggressive (patched-runtime/custom-quant variants rejected for baseline contamination) | ✓ Done |
 | GSD roadmap merges original 18 phases + 7 milestones | User explicitly requested merge, not replacement | — Pending |
 
 ## Evolution
