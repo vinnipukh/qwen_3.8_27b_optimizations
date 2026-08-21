@@ -15,15 +15,15 @@
 ### Benchmarking
 - [ ] **BENCH-01**: Reproducible benchmark harness wrapping llama-bench — fixed workload profiles, enforced pp/tg split, warmup + ≥3 repeats, machine-readable output
 - [ ] **BENCH-02**: Every result row fingerprinted — llama.cpp commit, ROCm/driver versions, GGUF sha256, clocks/temps via Windows-side telemetry
-- [ ] **BENCH-03**: VRAM ledger per run incl. process-RSS guard defeating the WSL2 silent-overcommit failure mode
-- [ ] **BENCH-04**: Baseline matrix published: pp/tg × context {4k, 8k, 16k, 32k} × flash-attn {on, off}
+- [ ] **BENCH-03**: VRAM ledger per run incl. process-RSS guard defeating the WSL2 silent-overcommit failure mode; fail-fast allocation policy (no retry loops), supervised synthetic overcommit test, crash-resilient result journal
+- [ ] **BENCH-04**: Baseline matrix published: pp/tg × context {4k, 8k, 16k, 32k} × flash-attn {on, off}, plus a stock-Vulkan comparator arm at its own pinned commit (GDN coverage verified there first); every claim names its backend; 32k tier gated by empirical free-VRAM pre-flight with expected-FAIL path under WSL2
 
 ### Correctness
 - [ ] **QUAL-01**: Op-level gate — `test-backend-ops` green required before any performance claim is accepted
 - [ ] **QUAL-02**: Model-level gate — wikitext-2 perplexity within ±1% of published 7.1583±0.25 AND fixed-prompt golden outputs (greedy decode) unchanged within tolerance
 
 ### Profiling
-- [ ] **PROF-01**: rocprofv3 kernel tracing produces usable per-kernel wall times under WSL2 (Phase-1 exit criterion; failure triggers native-Linux contingency per defined triggers)
+- [ ] **PROF-01**: Kernel-level attribution strategy resolved (binding gate in Phase 3; Phase 1 runs a non-binding rocprofv3 feasibility probe) — llama.cpp op-timers are the planned baseline with counter-less attribution pre-authorized; working rocprofv3/DXG capture is upside; native-Linux profiling session is the sanctioned escalation if timer-based attribution proves insufficient
 - [ ] **PROF-02**: Ranked bottleneck table mapping top kernels → ggml ops across 4 workload shapes (short/long prompt × short/long generation)
 
 ### Kernels & Integration
@@ -41,6 +41,7 @@
 - MTP speculative-decoding benchmark dimension + draft-model experiments
 - KV-cache optimization phase (de-prioritized: hybrid arch KV ≈64 KiB/token est.)
 - Additional quant comparators (Q4_K_M comparator optional in v1; Q6_K/Q8_0 deferred)
+- Coding-capability eval (HumanEval-style) for the locked artifact — recommended before relying on it as a daily coding agent (artifact ships with zero generative/code evals; Heretic maintainer flags down_proj ablation as potentially intelligence-damaging)
 - Qwen graph/tensor-level report deep-dive (Phase-10 style)
 
 ## Out of Scope
@@ -56,7 +57,23 @@
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| (filled by roadmap) | | |
+| ENV-01 | Phase 1 | Pending |
+| ENV-02 | Phase 1 | Pending |
+| ENV-03 | Phase 1 | Pending |
+| ENV-04 | Phase 1 | Pending |
+| BENCH-01 | Phase 2 | Pending |
+| BENCH-02 | Phase 2 | Pending |
+| BENCH-03 | Phase 2 | Pending |
+| BENCH-04 | Phase 2 | Pending |
+| QUAL-01 | Phase 3 | Pending |
+| QUAL-02 | Phase 3 | Pending |
+| PROF-01 | Phase 3 | Pending |
+| PROF-02 | Phase 3 | Pending |
+| KERN-01 | Phase 4 | Pending |
+| KERN-02 | Phase 5 | Pending |
+| KERN-03 | Phase 5 | Pending |
+| INTEG-01 | Phase 6 | Pending |
+| PUB-01 | Phase 6 | Pending |
 
 ---
 *Created 2026-08-21 after research phase; owner approved v1 scope in-session.*
