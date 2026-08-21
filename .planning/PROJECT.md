@@ -1,0 +1,83 @@
+# Qwen3.8-27B on RX 7900 XT — gfx1100 Inference Optimization
+
+## What This Is
+
+A reproducible GPU-specific inference optimization project for running Qwen3.8-27B on an AMD Radeon RX 7900 XT (RDNA3 / gfx1100, 20 GB VRAM). It starts from stock llama.cpp with the HIP/ROCm backend and progressively replaces verified hot-path bottlenecks with custom HIP kernels — benchmarking every change against a never-regressing baseline. The end goal is an independently benchmarked gfx1100-tuned inference path with published performance/VRAM results.
+
+## Core Value
+
+Beat stock llama.cpp HIP on at least one important Qwen3.8-27B workload on the RX 7900 XT with a custom gfx1100 kernel, while preserving model output quality within agreed numerical tolerance — measured, reproducible, and bisectable.
+
+## Requirements
+
+### Validated
+
+(None yet — ship to validate)
+
+### Active
+
+- [ ] Reproducible ROCm/HIP environment on RX 7900 XT (gfx1100) under WSL2, with recorded tool versions
+- [ ] Stock llama.cpp HIP build targeting gfx1100 as permanent reference baseline
+- [ ] Baseline benchmark suite for Qwen3.8-27B quantizations (Q4_K_S / Q4_K_M / Q5_K_M) covering prompt tok/s, generation tok/s, and VRAM breakdown
+- [ ] Fixed quality evaluation set (perplexity + deterministic coding/reasoning prompts) to guard numerical correctness
+- [ ] Profiling of real workloads producing a bottleneck table (kernel → % runtime → bound type)
+- [ ] Standalone HIP kernel playground with CPU reference → HIP implementation → numerical comparison → microbenchmark pipeline
+- [ ] First custom fused dequant+matmul kernel for Q4_K beating the stock llama.cpp kernel in a microbenchmark
+- [ ] Runtime integration behind a switchable flag (custom kernels ON/OFF) without destroying the baseline
+- [ ] End-to-end before/after benchmark results published against stock
+
+### Out of Scope
+
+- Complete inference engine from scratch — project builds on llama.cpp by explicit decision
+- Turkish output quality as an evaluation dimension — dropped by user decision
+- Multi-GPU support — stretch goal only, not v1
+- Custom sampler, speculative decoding, custom GGUF format, persistent-kernel scheduling — Phase 18 stretch goals; only after core milestones
+- Windows-native ROCm compute stack — dev/build happens in WSL2
+
+## Context
+
+- Full original planning document preserved at `.planning/reference/ROADMAP-original.md` — 18 phases, 7 suggested milestones, profiling-first methodology, and project rules (benchmark before optimizing, one optimization at a time, keep stock baseline forever, test prefill and decode separately).
+- Hardware: AMD Radeon RX 7900 XT, RDNA3, LLVM target `gfx1100`, 20 GB VRAM. ROCm docs list it as supported (Runtime + HIP SDK); llama.cpp HIP build has an explicit gfx1100 example.
+- Reference runtime: llama.cpp ggml HIP backend reuses many CUDA kernel sources through HIP and links hipBLAS/rocBLAS — useful as both reference implementation and patch target.
+- Model: Qwen3.8-27B GGUF (Q4_K_M primary; Q4_K_S and Q5_K_M if VRAM permits). Exact model repo/file/quant metadata to be pinned in `models/README.md` during Phase 1. Weights are NOT downloaded yet (~16–17 GB for Q4_K_M); download happens at execution start after research confirms exact artifacts.
+- Dev environment: WSL2 on the user's Windows machine (Hyper-V available). ROCm compute/profiling tooling is Linux-first; WSL2 GPU passthrough is the chosen path. Environment feasibility (rocminfo/rocprof inside WSL2) is itself a Phase 1 validation gate.
+- Key technical tension to respect: decode runs at M≈1 while prefill has large M — separate prefill/decode kernel paths are a design goal, not an afterthought.
+- Success criteria from original doc: no correctness regression beyond tolerance, measurable speedup or VRAM reduction enabling larger context, publishable complete result matrix (not just best number).
+
+## Constraints
+
+- **Hardware**: single RX 7900 XT, 20 GB VRAM — 27B Q4_K_M weights ≈ 16–17 GB leaves tight headroom; KV cache strategy matters
+- **Tech stack**: ROCm/HIP on Linux (WSL2), llama.cpp as reference runtime, HIP kernels compiled for gfx1100
+- **Methodology**: profile before optimizing; every optimization switchable; correctness tests next to every kernel; record compiler/ROCm/driver versions with every result
+- **Environment risk**: WSL2 ROCm support must be validated first — if passthrough/profiling tools fail, fall back to native Linux before any kernel work
+
+## Key Decisions
+
+| Decision | Rationale | Outcome |
+|----------|-----------|---------|
+| Build on llama.cpp instead of custom engine | Reuse working HIP backend; replace one bottleneck at a time; always have a baseline | — Pending |
+| Dev environment: WSL2 (Hyper-V available) | User's machine is Windows; ROCm tooling is Linux-first | — Pending |
+| Drop Turkish output quality evals | User decision — not part of actual workload | — Pending |
+| Archive original ROADMAP.md to .planning/reference/ | Preserved as source material; GSD roadmap merges its phases/milestones | ✓ Done |
+| Model weights downloaded at execution start, not during planning | Exact GGUF artifact must be confirmed by research first; avoids wrong ~17 GB download | — Pending |
+| GSD roadmap merges original 18 phases + 7 milestones | User explicitly requested merge, not replacement | — Pending |
+
+## Evolution
+
+This document evolves at phase transitions and milestone boundaries.
+
+**After each phase transition** (via `/gsd-transition`):
+1. Requirements invalidated? → Move to Out of Scope with reason
+2. Requirements validated? → Move to Validated with phase reference
+3. New requirements emerged? → Add to Active
+4. Decisions to log? → Add to Key Decisions
+5. "What This Is" still accurate? → Update if drifted
+
+**After each milestone** (via `/gsd-complete-milestone`):
+1. Full review of all sections
+2. Core Value check — still the right priority?
+3. Audit Out of Scope — reasons still valid?
+4. Update Context with current state
+
+---
+*Last updated: 2026-08-21 after initialization*
