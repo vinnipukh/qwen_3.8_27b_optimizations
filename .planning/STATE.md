@@ -1,83 +1,41 @@
 ---
-gsd_state_version: '1.0'  # placeholder; syncStateFrontmatter overwrites on first state.* call
-status: planning
+gsd_state_version: '1.0'
+status: executing
 progress:
   total_phases: 6
   completed_phases: 0
-  total_plans: 0
+  total_plans: 3
   completed_plans: 0
-  percent: 0
+  percent: 5
 ---
 
-# Project State
+# Project State — Phase 1 RESUME NOTES (2026-08-22, session interrupted by owner shutdown)
 
-## Project Reference
+## Where we are in Phase 1 (plans at .planning/phases/01-environment-validation-stock-baseline/)
 
-See: .planning/PROJECT.md (updated 2026-08-21)
+**DONE (committed):**
+- Plan 01-01 COMPLETE: ROCm 7.2.1 + librocdxg v1.2.2 installed (root, Ubuntu-24.04). rocminfo sees RX 7900 XT gfx1100. HIP device smoke PASSED (`RESULT=1 ARCH=gfx1100`, source kept at benchmarks/environment/hipsmoke.cpp). Fingerprints archived. D-04 update-pause = PENDING OWNER (registry writes need elevation — exact commands in benchmarks/environment/versions.txt).
+- Plan 01-02 COMPLETE: llama.cpp v0.2.0 @ bb4caa75 built for gfx1100 (source tree at guest /root/llama.cpp — DrvFs git-lock issue documented; configure flags in llamacpp-pin.txt incl. -DLLAMA_CURL=OFF -DLLAMA_BUILD_SERVER=OFF). 4 binaries archived baseline/binaries/v0.2.0-bb4caa75/. test-backend-ops PASS on ROCm0 backend.
+- Plan 01-03 T1+T2 DONE: model downloaded to models/, sha256 VERIFIED OK vs locked digest; models/README.md provenance written.
 
-**Core value:** Beat stock llama.cpp HIP on at least one important Qwen3.8-27B workload on the RX 7900 XT with a custom gfx1100 kernel, within agreed numerical tolerance — measured, reproducible, bisectable.
-**Current focus:** Phase 1 — Environment Validation & Stock Baseline
+**REMAINING (resume here):**
+1. Plan 01-03 T3 — ENV-03 runtime gate: run archived binary with model fully on GPU:
+   script template was C:\Users\arhan\AppData\Local\Temp\g1.sh (copy pattern: wsl cp to /root, chmod, run):
+   `cd /root/llama.cpp/build-ci/bin && source /etc/profile.d/rocdxg.sh && export LD_LIBRARY_PATH=$B:$LD_LIBRARY_PATH && ./llama-cli -m /mnt/e/.../models/Qwen3.8-27B-Uncensored-IQ4_XS.gguf -ngl 99 -c 2048 -p "Hello" -n 32 --temp 0 -e > startup-log.txt`
+   Objective predicates per plan 01-03 T3: offloaded 64/64 line; CUDA0 buffer ≥ ~13.7 GiB total; ZERO fallback-suspect lines; exit 0 + ≥16 chars output. On OOM: D-02 .wslconfig escalation FIRST (memory=24GB + wsl --shutdown), then -ngl descent ladder.
+   WARNING: loading from /mnt/e is slow (~9p); first attempt hit the owner's shutdown timer mid-load. Consider copying GGUF into guest ext4 (~/models) for the gate run, or just be patient.
+2. Plan 01-03 T4 — serial-last: `wsl --export Ubuntu-24.04 E:\wsl-snapshots\ubuntu-2404-rocm721-phase1.tar` (+ append size to versions.txt).
+3. Write phase SUMMARY.md, mark plans complete, update ROADMAP progress table.
 
-## Current Position
-
-Phase: 1 of 6 (Environment Validation & Stock Baseline)
-Plan: not yet planned
-Status: Ready to plan
-Last activity: 2026-08-21 — Roadmap created (merges original 18-phase plan + first-7-milestones into 6 GSD phases)
-
-Progress: [░░░░░░░░░░] 0%
-
-## Performance Metrics
-
-**Velocity:**
-- Total plans completed: 0
-- Average duration: —
-- Total execution time: —
-
-**By Phase:**
-
-| Phase | Plans | Total | Avg/Plan |
-|-------|-------|-------|----------|
-| - | - | - | - |
-
-**Recent Trend:**
-- Last 5 plans: —
-- Trend: —
-
-*Updated after each plan completion*
-
-## Accumulated Context
-
-### Decisions
-
-Decisions are logged in PROJECT.md Key Decisions table.
-Recent decisions affecting current work:
-
-- Model LOCKED: JonathanColetti IQ4_XS GGUF (15.31 GB, sha256 53adc4bb…) — context-headroom rationale; fetch at Phase-1 start with sha256 verification
-- Roadmap = merge, not replacement: original 18-phase methodology + first-7-milestones sequence preserved (owner-mandated); deferred originals mapped to v2 in REQUIREMENTS.md
-- WSL2 primary dev environment; native Linux is a dormant contingency triggered only by defined PROF-01/env-gate failures
-- Methodology rules binding across all phases: benchmark before optimizing; one optimization at a time; stock baseline forever; prefill/decode separate; measure VRAM; correctness tests next to every kernel; record versions; publish failures
-
-### Pending Todos
-
-None yet.
-
-### Blockers/Concerns
-
-- Watch (Phase 3): rocprofv3-under-WSL2 reliability is MEDIUM confidence — fallback ladder pre-agreed (rocprofv3 → llama.cpp timers → native-Linux contingency)
-- Watch (Phase 2): guest-side rocm-smi/amd-smi non-functional under ROCDXG — Windows-side telemetry mandatory from day one
-- Watch (Phase 1): driver↔ROCm pairing fragility — pause Adrenalin auto-updates; `wsl --export` snapshot after env validation passes
-
-## Deferred Items
-
-Items acknowledged and deferred at milestone close, most recent first:
-
-| Category | Item | Status | Deferred At | Milestone |
-|----------|------|--------|-------------|-----------|
-| *(none)* | | | | |
+## Gotchas learned this session (do not relearn)
+- Git-bash on Windows strips ${VAR} from args passed through wsl.exe → ALWAYS write scripts to files (C:\Users\arhan\AppData\Local\Temp maps to /mnt/c/...), copy into guest, execute.
+- printf with C-code containing %d gets eaten — use write-tool files not heredocs.
+- amdgpu-install 30.30.x has no 'wsl' usecase → use --usecase=rocm --no-dkms.
+- npm/webui subbuild invokes WINDOWS npm via interop → keep -DLLAMA_BUILD_SERVER=OFF.
+- git clone onto /mnt/e fails (lock file) → clone/build in ext4, copy binaries out.
+- test-backend-ops needs rocdxg env sourced or it silently tests CPU only.
+- Subagent provider (ox-alpha-free) dropped streams repeatedly today → long children unreliable; direct orchestration used instead (documented deviation).
 
 ## Session Continuity
-
-Last session: 2026-08-21
-Stopped at: Roadmap + STATE created; awaiting owner review before `/gsd-plan-phase 1`
-Resume file: None
+Last session: 2026-08-22 · Stopped at: runtime-gate launch aborted by owner shutdown
+Next command after resume: `/gsd-execute-phase` continuation of plan 01-03 (steps above)
