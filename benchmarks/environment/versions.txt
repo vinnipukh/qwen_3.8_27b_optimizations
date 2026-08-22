@@ -15,3 +15,4 @@ Applied when shell elevated:
   reg add HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate /v ExcludeWUDriversInQualityUpdate /t REG_DWORD /d 1 /f
 Adrenalin DriverUpdateNotifType=0 OPTIONAL (skip acceptable - notify-only is fine).
 Detection net: BENCH-02 driver fingerprint on every result row + ENV gates re-run on drift.
+snapshot: ubuntu-2404-rocm721-phase1.tar 49415639040 bytes (2026-08-22T20:19Z UTC) - post-validation frozen env incl ROCm 7.2.1 + librocdxg 1.2.2 + pinned llama.cpp build tree
