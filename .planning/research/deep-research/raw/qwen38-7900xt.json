@@ -1,0 +1,41 @@
+{
+ "query": "Qwen3.8-27B RX 7900 XT benchmark tokens per second llama.cpp",
+ "items": [
+  {
+   "url": "https://www.reddit.com/r/ROCm/comments/1t72ul7/got_qwen327b_mtp_running_on_amd_7900_xtx_at_75/",
+   "title": "Got Qwen3-27B MTP running on AMD 7900 XTX at",
+   "desc": "Got Qwen3-27B MTP running on AMD 7900 XTX at ~75 tok/s using llama.cpp. I'm getting around 75 tokens/s, I used the llama.cpp branch indicated ...",
+   "content": ""
+  },
+  {
+   "url": "https://www.youtube.com/watch?v=PTuGGdDuyPI",
+   "title": "Qwen3.8-27B - 200 Tokens per Second",
+   "desc": "In this video, I look at the long awaited Qwen3.8-27B model. Both what it can do and how to serve it at the maximum tokens per second. ...",
+   "content": ""
+  },
+  {
+   "url": "https://www.youtube.com/watch?v=agDPSAO8gZQ",
+   "title": "RTX 3090 vs 5090: Qwen3.8-27B Local AI Benchmark using ...",
+   "desc": "Running Qwen3.8-27B (Q4 quantized) locally — same model, same settings, head-to-head on llama.cpp with MTP acceleration. No API keys.",
+   "content": ""
+  },
+  {
+   "url": "https://kgptalkie.com/tutorials/generative-ai/qwen-3-8-27b-llama-cpp-speed-settings",
+   "title": "Qwen 3.8 27B Speed Settings on llama.cpp",
+   "desc": "## [Link to this section](https://kgptalkie.com/tutorials/generative-ai/qwen-3-8-27b-llama-cpp-speed-settings#raising-the-context-is-cheap-filling-it-is-not) Raising the Context Is Cheap. Filling It I",
+   "content": ""
+  },
+  {
+   "url": "https://medium.com/coding-nexus/one-flag-tripled-my-tokens-per-second-on-an-8gb-gpu-238f55d1e3bd",
+   "title": "One Flag Tripled My Tokens Per Second on an 8GB GPU",
+   "desc": "# One Flag Tripled My Tokens Per Second on an 8GB GPU\nGetting 8.7 tokens per second.\n\nJumped to 40+ tokens per second.\n\n## What MoE models are and why this matters\n```\nDefault behavior (no flag):\nAll ",
+   "content": ""
+  },
+  {
+   "url": "https://github.com/ggml-org/llama.cpp/issues/20651",
+   "title": "Qwen3.5 27B output incoherent when running on rx 7900 ...",
+   "desc": "When running llama-server. Thousands of tokens like the above, and doesn't stop … the model is completly functional. Output: A friendly ...",
+   "content": ""
+  }
+ ]
+}

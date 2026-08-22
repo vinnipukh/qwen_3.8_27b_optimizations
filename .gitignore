@@ -1,0 +1,15 @@
+# --- vendored toolchains & build artifacts (never track) ---
+freetoken-rocm-probe/tools/
+freetoken-rocm-probe/bin/
+freetoken-rocm-probe/zigidx.json
+
+# --- large model artifacts (provenance lives in models/README.md instead) ---
+models/*.gguf
+baseline/**/*.exe
+baseline/**/*.so
+baseline/**/*.a
+baseline/binaries/
+
+# --- OS / editor junk ---
+Thumbs.db
+Desktop.ini

@@ -34,7 +34,7 @@
 
 ## VRAM envelope estimate (IQ4_XS on RX 7900 XT 20 GB)
 
-weights 15.31 + KV @f16 (~64 KiB/token → ~2.0 GB @32k) + compute/runtime buffers ~1–1.5 GB ⇒ ~18.3–18.8 GB @32k (tight), comfortable ≤16k. Estimates tagged MEDIUM — verify against llama.cpp startup breakdown in Phase 1.
+weights 15.31 + KV @f16 (~64 KiB/token → ~2.0 GB @32k) + compute/runtime buffers ~1–1.5 GB ⇒ ~18.3–18.8 GB @32k native-Linux (tight), comfortable ≤16k. WSL2 DXG deficit measured −2.9 GB on XTX (assume ~17 GB usable on our card until probed) ⇒ @32k under WSL2 likely OOM/silent-overcommit; plan BENCH-04 accordingly (expected-fail path or 24k cap). Estimates tagged MEDIUM — verify against llama.cpp startup breakdown in Phase 1.
 
 ## Uncensoring provenance (for the record)
 

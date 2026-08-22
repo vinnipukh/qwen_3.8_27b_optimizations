@@ -1,0 +1,41 @@
+{
+ "query": "WSL2 GPU VRAM overcommit silent system RAM spill performance collapse",
+ "items": [
+  {
+   "url": "https://forums.developer.nvidia.com/t/cudahostalloc-limitations-in-wsl2/142288",
+   "title": "cudaHostAlloc limitations in WSL2",
+   "desc": "I am running into problems with cudaHostAlloc. It seems the limits placed on the amount of memory that can be allocated this way are ...",
+   "content": ""
+  },
+  {
+   "url": "https://www.reddit.com/r/LocalLLaMA/comments/1nmhtsg/wsl2_windows_gaming_pc_benchmarks/",
+   "title": "WSL2 windows gaming PC benchmarks : r/LocalLLaMA",
+   "desc": "your GPU VRAM will automatically spill into RAM. Don't do this, the performance is absolutely terrible. You can mostly disable this feature by ...",
+   "content": ""
+  },
+  {
+   "url": "https://github.com/microsoft/WSL/issues/40732",
+   "title": "⚠️ WSL2 GPU OOM leads to Hyper-V kernel panic and ...",
+   "desc": "# ⚠️ WSL2 GPU OOM leads to Hyper-V kernel panic and Windows BLUE SCREEN OF DEATH — total system crash, not a recoverable error#40732\n## Environment\n- **VRAM:** 24 GB total (only ~8 GB practically usab",
+   "content": ""
+  },
+  {
+   "url": "https://zenvanriel.com/ai-engineer-blog/wsl2-falls-short-local-ai-development/",
+   "title": "Why WSL2 Falls Short for Local AI Development",
+   "desc": "# Why WSL2 Falls Short for Local AI Development\nWSL2 consumed about a full gigabyte more VRAM than native Linux. It even used more VRAM than running directly on Windows.\n\n## The Virtualization Tax on ",
+   "content": ""
+  },
+  {
+   "url": "https://stackoverflow.com/questions/73447464/how-to-flush-gpu-memory-using-cuda-on-wsl2",
+   "title": "How to flush GPU memory using CUDA on WSL2",
+   "desc": "I have interrupted the training of the model in PyTorch on CUDA, which I've run on Windows Subsystem for Linux 2 (WSL2). The dedicated GPU memory of ...",
+   "content": ""
+  },
+  {
+   "url": "https://allenkuo.medium.com/vllm-or-ollama-on-blackwell-benchmarks-landmines-and-what-agents-actually-need-5dc539bb28ef",
+   "title": "vLLM or Ollama on Blackwell? Benchmarks, Landmines, and ...",
+   "desc": "# vLLM or Ollama on Blackwell? Benchmarks, Landmines, and What Agents Actually Need\n## Landmine #1: vLLM Silently Starves Other GPU Programs\nThis means VRAM is permanently occupied even when no reques",
+   "content": ""
+  }
+ ]
+}

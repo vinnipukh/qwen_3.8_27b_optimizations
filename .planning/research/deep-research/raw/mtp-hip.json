@@ -1,0 +1,41 @@
+{
+ "query": "llama.cpp MTP speculative decoding ROCm HIP draft model",
+ "items": [
+  {
+   "url": "https://www.reddit.com/r/LocalLLaMA/comments/1t63snn/why_llamacpp_cant_combine_speculative_decode/",
+   "title": "why llama.cpp can't combine speculative decode methods?",
+   "desc": "When llama.cpp attempts to inject these visual embeddings into the context slots, the speculative decoding logic seemingly fails to handle these ...",
+   "content": ""
+  },
+  {
+   "url": "https://github.com/ggml-org/llama.cpp/issues/23126",
+   "title": "Speculative decoding with draft model: extreme slowdown ...",
+   "desc": "HIP/ROCm works correctly (81%) #23088. MTP/NextN speculative decoding produces garbage output on Vulkan+RADV (correctness, not performance). ...",
+   "content": ""
+  },
+  {
+   "url": "https://www.reddit.com/r/LocalLLM/comments/1uyg4ak/i_tested_all_llamacpps_speculative_decoding/",
+   "title": "I tested all llama.cpp's speculative decoding methods on Qwen 3.6 27B ...",
+   "desc": "",
+   "content": ""
+  },
+  {
+   "url": "https://github.com/ggml-org/llama.cpp/discussions/23735",
+   "title": "MTP Support in Other Models? · ggml-org llama.cpp · Discussion #23735",
+   "desc": "",
+   "content": ""
+  },
+  {
+   "url": "https://github.com/ggml-org/llama.cpp/discussions/25198",
+   "title": "Pushing MTP to the limit with --spec-draft-p-min (15% faster) #25198",
+   "desc": "# {{editor}}'s edit\n## [![](https://avatars.githubusercontent.com/u/139488?s=64&v=4)\\ sanmai](https://github.com/sanmai) [on Jul 1Jul 1, 2026](https://github.com/ggml-org/llama.cpp/discussions/25198#d",
+   "content": ""
+  },
+  {
+   "url": "https://www.youtube.com/watch?v=hAHFENCe59M",
+   "title": "Llama.cpp Just Merged MTP And You Should Be Using It.",
+   "desc": "MTP is basically SSD (Speculative Decoding) but all packaged into a single model! Depending on model/hardware you can get up to 2x faster TPS ...",
+   "content": ""
+  }
+ ]
+}

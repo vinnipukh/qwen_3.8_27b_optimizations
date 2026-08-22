@@ -1,0 +1,41 @@
+{
+ "query": "llama.cpp HIP backend RDNA3 gfx1100 kernel optimization slow",
+ "items": [
+  {
+   "url": "https://www.reddit.com/r/ROCm/comments/1s1vo37/rocm_on_7900_xtx_significantly_slower_than_vulkan/",
+   "title": "ROCm on 7900 XTX significantly slower than Vulkan for ...",
+   "desc": "HIP backend currently suboptimal vs Vulkan on RDNA3? Vulkan is currently the best backend on RDNA3 (for llama.cpp. ROCm is: slower (~20%) less ...",
+   "content": ""
+  },
+  {
+   "url": "https://github.com/ggml-org/llama.cpp/discussions/15021",
+   "title": "Performance of llama.cpp on AMD ROCm (HIP) #15021",
+   "desc": "# {{editor}}'s edit\n## Information for package rocm-hip:\n```\n\n| model | size | params | backend | ngl | fa | test | t/s |\n| --- | --: | --: | --- | --: | --: | --: | --: |\n| llama 7B Q4\\_0 | 3.56 GiB ",
+   "content": ""
+  },
+  {
+   "url": "https://rocm.blogs.amd.com/ecosystems-and-partners/llama-cpp-oct2025/README.html",
+   "title": "Accelerating llama.cpp on AMD Instinct MI300X - ROCm™ Blogs",
+   "desc": "# Accelerating llama.cpp on AMD Instinct MI300X [#](https://rocm.blogs.amd.com/ecosystems-and-partners/llama-cpp-oct2025/README.html#accelerating-llama-cpp-on-amd-instinct-mi300x)\n## Benchmark results",
+   "content": ""
+  },
+  {
+   "url": "https://lemonade-server.ai/docs/guide/configuration/llamacpp/",
+   "title": "llama.cpp Backend Options",
+   "desc": "# llama.cpp Backend Options\n## Available Backends\n### System\n```\nexport LEMONADE_GGML_HIP_PATH=/opt/rocm/lib/libggml-hip.so\n```",
+   "content": ""
+  },
+  {
+   "url": "https://localaimaster.com/blog/amd-rocm-local-llm-setup",
+   "title": "AMD ROCm Local LLM Setup (2026): 96 tok/s on RX 7900 ...",
+   "desc": "# AMD ROCm Setup for Local LLMs (2026): Radeon, Strix Halo, MI300X\n## Ollama on ROCm {#ollama}\n```\nollama run llama3.1:8b \"hi\"\n# In another terminal:\nrocm-smi\n# Should show >0% GPU utilization during ",
+   "content": ""
+  },
+  {
+   "url": "https://github.com/ROCm/ROCm/issues/5706",
+   "title": "HIP backend in llama.cpp causes RDNA4 (gfx1201 ...",
+   "desc": "Using --split-mode layers on the llama.cpp server does improve performance: Prompt processing increased from ~450 to ~900 Performance ...",
+   "content": ""
+  }
+ ]
+}

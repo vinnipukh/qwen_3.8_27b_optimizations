@@ -1,0 +1,41 @@
+{
+ "query": "rocWMMA RDNA3 wave32 wave64 performance regression gfx1100",
+ "items": [
+  {
+   "url": "https://gpuopen.com/learn/wmma_on_rdna3/",
+   "title": "How to accelerate AI applications on RDNA 3 using WMMA",
+   "desc": "# How to accelerate AI applications on RDNA 3 using WMMA\n## Loading elements into matrix fragments\n| **wave32** | **wave64** | **Matrix A,B format** | **Matrix C,D format** |\n|-|-|-|-|\n| `__builtin_am",
+   "content": ""
+  },
+  {
+   "url": "https://rocm.docs.amd.com/projects/rocWMMA/en/latest/api-reference/api-reference-guide.html",
+   "title": "API reference guide — rocWMMA 2.2.1 Documentation",
+   "desc": "This document provides information about rocWMMA functions, Supported RDNA architectures (wave32): gfx1100 gfx1101 … rocWMMA supports a range of input, output, ...",
+   "content": ""
+  },
+  {
+   "url": "https://www.reddit.com/r/Amd/comments/143y1ww/why_is_a_wave_size_32_why_has_it_not_been_larger/",
+   "title": "Why is a wave size 32, why has it not been larger? : r/Amd",
+   "desc": "I couldn't find any material online explain the hard definition of why 32 was picked. I understand why wave size wouldn't be smaller since this would result ...",
+   "content": ""
+  },
+  {
+   "url": "https://github.com/ROCm/ROCm/issues/4748",
+   "title": "[Issue]: gfx1151 rocBLAS/hipBLAS performance regression ...",
+   "desc": "rocBLAS performance is unexpectedly bad ・ gfx1100 rocBLAS has 2.5-6X the performance as gfx1151 ・ is 1.5-3X faster than gfx1151 ・ there is ...",
+   "content": ""
+  },
+  {
+   "url": "https://chipsandcheese.com/p/microbenchmarking-amds-rdna-3-graphics-architecture",
+   "title": "Microbenchmarking AMD's RDNA 3 Graphics Architecture",
+   "desc": "# Microbenchmarking AMD’s RDNA 3 Graphics Architecture\n## WGP Compute Characteristics\n### Full GPU Throughput – Vulkan\nCuriously, RDNA 3 actually regresses in FP64 throughput.",
+   "content": ""
+  },
+  {
+   "url": "https://llm-tracker.info/howto/AMD-GPUs",
+   "title": "AMD GPUs",
+   "desc": "# RDNA3 (navi3x) on Linux\n## LLM Inferencing\n### llama.cpp\n#### Speculative Decode Testing\n```\n~/ai/llama.cpp-hjc4869/build/bin/llama-bench -m /models/gguf/Meta-Llama-3.1-70B-Instruct-Q4_K_M.gguf -fa ",
+   "content": ""
+  }
+ ]
+}

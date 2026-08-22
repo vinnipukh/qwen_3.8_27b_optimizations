@@ -1,0 +1,1 @@
+SCRAPE_FAILED: "Rate limit exceeded. Consumed (req/min): 12, Remaining (req/min): 0. Upgrade your plan at https://firecrawl.dev/pricing for increased rate limits or please retry after 41s, resets at Fri Aug 21 2026 21:18:06 GMT+0000 (Coordinated Universal Time)"

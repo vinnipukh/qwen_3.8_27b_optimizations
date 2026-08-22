@@ -1,0 +1,41 @@
+{
+ "query": "llama.cpp qwen35 Gated DeltaNet HIP ROCm gfx1100 issue",
+ "items": [
+  {
+   "url": "https://www.reddit.com/r/LocalLLaMA/comments/1rrxs1m/qwen_35_instability_on_llamacpp_and_strix_halo/",
+   "title": "Qwen 3.5 Instability on llama.cpp and Strix Halo? : r/LocalLLaMA - Reddit",
+   "desc": "You might want to disable GPU acceleration in your browser to reduce any possible interference. I had web browser rendering issues when GPU ...",
+   "content": ""
+  },
+  {
+   "url": "https://github.com/ggml-org/llama.cpp/issues/22927",
+   "title": "Eval bug: Seg Fault on dual R9700 cards, need confirmation. #22927",
+   "desc": "# Eval bug: Seg Fault on dual R9700 cards, need confirmation.#22927\n## 🐛 Bug: Segmentation fault with dual ROCm GPUs (gfx1201 / RDNA4) during model load\n### Minimal Reproduction\n```\n\nexport HIP_VISIB",
+   "content": ""
+  },
+  {
+   "url": "https://github.com/ggml-org/llama.cpp/issues/19972",
+   "title": "SOLVE_TRI falls back to rocBLAS strsm which fails on gfx906 (MI50 ...",
+   "desc": "SOLVE_TRI falls back to rocBLAS strsm which fails on gfx906. Qwen3.5-35B-A3B (Gated Delta Networks / linear attention architecture) Gated Delta ...",
+   "content": ""
+  },
+  {
+   "url": "https://rocm.blogs.amd.com/ecosystems-and-partners/llama-cpp/README.html",
+   "title": "Llama.cpp Meets Instinct: A New Era of Open-Source AI Acceleration",
+   "desc": "# Llama.cpp Meets Instinct: A New Era of Open-Source AI Acceleration [#](https://rocm.blogs.amd.com/ecosystems-and-partners/llama-cpp/README.html#llama-cpp-meets-instinct-a-new-era-of-open-source-ai-a",
+   "content": ""
+  },
+  {
+   "url": "https://qwen.readthedocs.io/en/latest/run_locally/llama.cpp.html",
+   "title": "llama.cpp - Qwen",
+   "desc": "# llama.cpp [¶](https://qwen.readthedocs.io/en/latest/run_locally/llama.cpp.html#llama-cpp)\n## Getting the GGUF [¶](https://qwen.readthedocs.io/en/latest/run_locally/llama.cpp.html#getting-the-gguf)\n#",
+   "content": ""
+  },
+  {
+   "url": "https://github.com/ggml-org/llama.cpp/discussions/27047",
+   "title": "llama.cpp on Windows with AMD ROCm (HIP) — Installation Guide",
+   "desc": "# llama.cpp on Windows with AMD ROCm (HIP) — Installation Guide  #27047\n### Uh oh!\nThere was an error while loading.\n\n# llama.cpp on Windows with AMD ROCm (HIP) — Installation Guide\n## Step 4: Downloa",
+   "content": ""
+  }
+ ]
+}

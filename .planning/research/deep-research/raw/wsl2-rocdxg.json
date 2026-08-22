@@ -1,0 +1,41 @@
+{
+ "query": "ROCm WSL2 librocdxg production limitations known issues",
+ "items": [
+  {
+   "url": "https://www.reddit.com/r/ROCm/comments/1doxxuc/cant_run_rocm_on_windows_10_with_wsl2_ubuntu_2204/",
+   "title": "Can't run ROCM on WIndows 10 with WSL2, Ubuntu 22.04 LTS - Reddit",
+   "desc": "Due to WSL architectural limitations for native Linux User Kernel Interface (UKI), rocm-smi is not supported. you may have broken your system ...",
+   "content": ""
+  },
+  {
+   "url": "https://rocm.docs.amd.com/projects/radeon-ryzen/en/latest/docs/install/installrad/wsl/howto_wsl.html",
+   "title": "WSL How to guide - Use ROCm on Radeon",
+   "desc": "# WSL How to guide - Use ROCm on Radeon [#](https://rocm.docs.amd.com/projects/radeon-ryzen/en/latest/docs/install/installrad/wsl/howto_wsl.html#wsl-how-to-guide-use-rocm-on-radeon)\n## AMD ROCDXG libr",
+   "content": ""
+  },
+  {
+   "url": "https://github.com/ROCm/librocdxg",
+   "title": "ROCm/librocdxg: repo for AMD ROCDXG project - GitHub",
+   "desc": "# AMD ROCDXG Libary\n## Known Issues and Limitations\n[Permalink: Known Issues and Limitations](https://github.com/ROCm/librocdxg#known-issues-and-limitations)\n\n- JAX is supported from version 0.9.1 onw",
+   "content": ""
+  },
+  {
+   "url": "https://www.phoronix.com/news/librocdxg-1.2-More-Ryzen-ROCm",
+   "title": "AMD Expands ROCm Support On Windows WSL To More Ryzen ...",
+   "desc": "The ROCDXG-based solution provides better ROCm compatibility within these Linux confines atop Windows 11. ROCm WSL2 support to more Ryzen ...",
+   "content": ""
+  },
+  {
+   "url": "https://aiweekly.co/alerts/amd-rocm-wsl2-dxg-path-works-but-loses-3gb-of-vram",
+   "title": "AMD ROCm WSL2 DXG Path Works but Loses 3GB of VRAM - AI Weekly",
+   "desc": "The WSL2 path via librocdxg reports roughly 3GB less free VRAM than native Windows on the same RX 7900 XTX under ROCm 7.2.4. Developer Diablo-D3 ...",
+   "content": ""
+  },
+  {
+   "url": "https://rocm.docs.amd.com/projects/radeon-ryzen/en/docs-6.3.4/docs/limitations.html",
+   "title": "Limitations and recommended settings - AMD ROCm Documentation",
+   "desc": "# Limitations and recommended settings [#](https://rocm.docs.amd.com/projects/radeon-ryzen/en/docs-6.3.4/docs/limitations.html#limitations-and-recommended-settings)\n## 6.3.4 release known issues [#](h",
+   "content": ""
+  }
+ ]
+}

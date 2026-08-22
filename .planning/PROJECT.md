@@ -25,6 +25,7 @@ Beat stock llama.cpp HIP on at least one important Qwen3.8-27B workload on the R
 - [ ] First custom fused dequant+matmul kernel for Q4_K beating the stock llama.cpp kernel in a microbenchmark
 - [ ] Runtime integration behind a switchable flag (custom kernels ON/OFF) without destroying the baseline
 - [ ] End-to-end before/after benchmark results published against stock
+- [ ] Context scaling track: measured max-context ceiling per backend (32k→256k ladder) with KV quantization quality gates, host-tiered KV prototype for ≥128k under WSL2, and long-context prefill strategy — see REQUIREMENTS.md CTX-01..05
 
 ### Out of Scope
 
@@ -33,6 +34,10 @@ Beat stock llama.cpp HIP on at least one important Qwen3.8-27B workload on the R
 - Multi-GPU support — stretch goal only, not v1
 - Custom sampler, speculative decoding, custom GGUF format, persistent-kernel scheduling — Phase 18 stretch goals; only after core milestones
 - Windows-native ROCm compute stack — dev/build happens in WSL2
+
+### Added 2026-08-22
+
+- **Context scaling to 256k** (owner request): in scope as a tracked requirement family (CTX-*), not a v1 exit criterion until CTX-01/02 establish the memory/quality budget. Rationale and math in `.planning/research/CONTEXT-SCALING.md`.
 
 ## Context
 

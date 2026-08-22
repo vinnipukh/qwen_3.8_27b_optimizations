@@ -1,0 +1,41 @@
+{
+ "query": "RX 7900 XT 20GB LLM inference VRAM budget quantization fit",
+ "items": [
+  {
+   "url": "https://www.reddit.com/r/LocalLLM/comments/1vipgfs/is_20_gb_stackable_vram_7900xt_not_xtxa_good/",
+   "title": "Is 20 gb stackable vram (7900xt not xtx)a good budget start ...",
+   "desc": "Ok so if my build is around the 7900 xt 20 gb vram. What are my limitations?\n\nxtx 24 gb is 30% more costly from where I'm from.\n\nMy question is if i need ...",
+   "content": ""
+  },
+  {
+   "url": "https://viperatech.com/news-details/gpu-for-running-llms-locally-in-2026-nvidia-vs-amd?srsltid=AfmBOorerY9MEUir8YD03kGa1O7NHlLAKb05xyDdNEflcuQGWjCAVgjV",
+   "title": "Best GPU for Running LLMs Locally in 2026: NVIDIA vs ...",
+   "desc": "The RX 7900 XT (20GB) is a slightly cheaper alternative with 20GB, which is still more than most NVIDIA mid-range cards offer.",
+   "content": ""
+  },
+  {
+   "url": "https://forum.level1techs.com/t/7900xtx-llm-inference-notes/250869",
+   "title": "7900xtx LLM inference notes - Machine Learning, LLMs, & AI",
+   "desc": "# [7900xtx LLM inference notes](https://forum.level1techs.com/t/7900xtx-llm-inference-notes/250869)\n## [Heading link](https://forum.level1techs.com/t/7900xtx-llm-inference-notes/250869#p-4085326-multi",
+   "content": ""
+  },
+  {
+   "url": "https://modelfit.io/gpu/rx-7900-xt/",
+   "title": "Best Local AI Models for AMD RX 7900 XT (20GB)",
+   "desc": "# Best Local AI Models for AMD RX 7900 XT (20GB)\nThe RX 7900 XT sits in a capacity gap NVIDIA does not serve: 20GB of VRAM, more than any 16GB card and cheaper than any 24GB one. That extra 4GB over a",
+   "content": ""
+  },
+  {
+   "url": "https://bizon-tech.com/blog/best-gpu-llm-training-inference?srsltid=AfmBOorVgK7ktSgm0MbFOlcOEGyHb2Ab0OATi7_kpStfM8vc4lXkEhAR",
+   "title": "Best GPU for LLM Inference and Training – 2026 [Updated]",
+   "desc": "VRAM Math Quantization reduces VRAM by 50 to 75% by compressing weights from 16-bit to 4-bit or 8-bit precision.",
+   "content": ""
+  },
+  {
+   "url": "https://www.youtube.com/watch?v=Mt_8iNHOHFQ",
+   "title": "AMD Just Put NVIDIA on Notice… While Using Half the Power",
+   "desc": "you can buy 3 RX 7900 XTX for the price of RTX 5090, and have the 3 cards work together to load bigger LLM's.",
+   "content": ""
+  }
+ ]
+}

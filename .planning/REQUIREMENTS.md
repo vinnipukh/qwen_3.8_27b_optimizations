@@ -33,11 +33,23 @@
 - [ ] **INTEG-01**: Winning kernel integrated behind ON/OFF compile/runtime switch via quilt patch series over pinned upstream; stock baseline build remains permanently available
 - [ ] **PUB-01**: Final deliverable published: complete stock-vs-optimized result matrix, raw data, methodology, known limitations
 
+### Context Scaling — 256k (added 2026-08-22, owner request)
+
+Feasibility + math: `.planning/research/CONTEXT-SCALING.md`. Model natively supports 262,144 ctx; only 16/64 layers carry KV (~64 KiB/token f16); 48 DeltaNet layers hold constant state.
+
+- [ ] **CTX-01**: Measured context×KV-scheme VRAM ledger under the WSL2 DXG budget — llama.cpp startup breakdown at {32k, 64k, 128k} × {f16, q8_0, q4_K} KV; replaces MEDIUM-confidence estimates; extends BENCH-03 ledger format
+- [ ] **CTX-02**: KV quantization quality gate — wikitext-2 ppl + golden-output deltas per KV scheme vs fp16 baseline, accepted only within QUAL-02 tolerance; publish scheme×context×quality matrix
+- [ ] **CTX-03**: No-tiering ceiling verdict — best-effort max-context fit attempt with q4_K KV (+ optional IQ3-class weight comparator arm) on both HIP/WSL and Vulkan/native arms; publish measured max stable context per backend
+- [ ] **CTX-04**: Host-tiered KV prototype — hot window in VRAM / cold prefix in host RAM for the 16 attention layers; correctness via QUAL gates unchanged (pure data movement); probe librocdxg pinned-memory knob first, pageable fallback documented; target ≥128k stable under WSL2
+- [ ] **CTX-05**: Long-context prefill strategy — chunked-prefill timing curve 32k→256k, persistent prompt-cache across runs, and DeltaNet-state checkpoint resume at semantic anchors for agentic context edits (FreeToken §3.1 analog)
+
 ## v2 Requirements (deferred)
 
 - Autotuning loop (tile/workgroup/LDS sweeps → tuned-config registry)
 - Shape/batch sweep matrices beyond BENCH-04 basics
 - rocWMMA experiments (A/B flag only; known wave-cooperative regressions risk)
+- Full hierarchical KV paging (attention-pattern-aware cold-tier recall) beyond CTX-04's recency/static policies
+- 256k as hard v1 exit criterion if CTX-01/02 show quality-budget conflicts — owner to confirm after CTX-01 lands
 - MTP speculative-decoding benchmark dimension + draft-model experiments
 - KV-cache optimization phase (de-prioritized: hybrid arch KV ≈64 KiB/token est.)
 - Additional quant comparators (Q4_K_M comparator optional in v1; Q6_K/Q8_0 deferred)

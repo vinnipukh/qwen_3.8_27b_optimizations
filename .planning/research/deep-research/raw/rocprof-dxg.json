@@ -1,0 +1,41 @@
+{
+ "query": "rocprofv3 rocprofiler-sdk WSL2 dxg profiling gfx11 counters",
+ "items": [
+  {
+   "url": "https://rocm.docs.amd.com/projects/rocprofiler-sdk/en/latest/how-to/using-rocprofv3.html",
+   "title": "Application tracing and profiling using rocprofv3",
+   "desc": "# Application tracing and profiling using rocprofv3 [#](https://rocm.docs.amd.com/projects/rocprofiler-sdk/en/latest/how-to/using-rocprofv3.html#application-tracing-and-profiling-using-rocprofv3)\n## K",
+   "content": ""
+  },
+  {
+   "url": "https://github.com/rocm/rocprof-compute-viewer",
+   "title": "ROCm/rocprof-compute-viewer",
+   "desc": "ROCprof Compute Viewer (RCV) is a tool for visualizing and analyzing GPU thread trace data collected using rocprofv3. The tool interprets the rocprofv3 ...",
+   "content": ""
+  },
+  {
+   "url": "https://rocm.docs.amd.com/projects/rocprofiler-sdk/en/docs-7.0.2/how-to/using-rocprofv3.html",
+   "title": "Using rocprofv3 — ROCprofiler-SDK 1.0.0 Documentation",
+   "desc": "ROCprofiler-SDK is a tooling infrastructure for profiling general-purpose GPU compute applications running on the ROCm software.",
+   "content": ""
+  },
+  {
+   "url": "https://github.com/ROCm/rocprofiler-sdk/discussions/38",
+   "title": "rocprof or rocprofv2 or rocprofv3 :- Can an example to ...",
+   "desc": "rocprofv3 supports specifying those counters on the command line via the --pmc argument. If those counters cannot be collected in one pass though, we support ...",
+   "content": ""
+  },
+  {
+   "url": "https://archlinux.org/packages/extra/x86_64/rocprofiler/",
+   "title": "rocprofiler 7.2.4-1 (x86_64)",
+   "desc": "ROC profiler library. Profiling with perf-counters and derived metrics. Package Size: 6.8 MB Installed Size: 45.6 MB. View the file list for rocprofiler",
+   "content": ""
+  },
+  {
+   "url": "https://www.reddit.com/r/ROCm/comments/1j2ns4g/does_rocm_really_work_with_wsl2/",
+   "title": "Does ROCm really work with WSL2?",
+   "desc": "I have a computer equipped with RX-6800 and Windows11, and the driver version is 25.1.1. I installed ROCm on the Ubuntu22.04 subsystem by following the ...",
+   "content": ""
+  }
+ ]
+}

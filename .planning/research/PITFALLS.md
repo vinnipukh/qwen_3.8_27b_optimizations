@@ -136,13 +136,13 @@ Porting `wmma::`/`mma.sync` logic 1:1 fails: RDNA3 WMMA instructions are **wave-
 **Why it happens:** marketing equivalence of "matrix cores ≈ tensor cores"; fragment layout differences are invisible until numerics/perf go sideways.
 
 **How to avoid:**
-- Treat WMMA as a Phase 8 experiment behind flags, always benchmarked against a pure-VALU (no-MMA) implementation on the exact decode/prefill shapes; never assume MMA wins on RDNA3 — at small M (decode) it often doesn't.
+- Treat WMMA as a v2/Milestone-2 experiment behind flags, always benchmarked against a pure-VALU (no-MMA) implementation on the exact decode/prefill shapes; never assume MMA wins on RDNA3 — at small M (decode) it often doesn't.
 - Pin rocWMMA/ROCm versions together; check the rocWMMA support matrix for gfx1100 before designing around it.
 - When integrating attention changes, benchmark fa on/off × bs1/bs8 separately (the regression regime is batch-dependent).
 
 **Warning signs:** attention kernel faster at 4k prefill but slower at long context; compile errors only on certain `GPU_TARGETS`; quality gate failures from fragment misinterpretation (garbage output, not just noise).
 
-**Phase to address:** Phase 8 (attention) primarily; flag hygiene rules belong in Phase 12 (runtime integration).
+**Phase to address:** attention experiments are v2/Milestone-2 scope (hybrid arch); flag hygiene rules belong in Phase 5/6 of Milestone 1 (runtime integration).
 
 ---
 
@@ -327,7 +327,7 @@ For Qwen3-30B-A3B (~18.6 GB Q4_K_M, ~16.5 GB IQ4_XS), full-GPU placement still w
 | 4 Profiler gate | Phase 1 exit criterion | rocprofv3 counter dump on real workload OR documented fallback decision |
 | 5 Driver coupling | Phase 1 + standing rule | Pinned-version doc + WSL snapshot file exists; gate re-run log after updates |
 | 6 Wave size | Phases 4–6 | Diff harness passes at both wave modes; no literal 32/64 in kernel sources (grep gate) |
-| 7 WMMA assumptions | Phase 8 (+12 flags) | MMA-vs-VALU per-shape table exists; fa on/off × bs grid measured |
+| 7 WMMA assumptions | v2/Milestone 2 (+integration flags in M1 Ph5–6) | MMA-vs-VALU per-shape table exists; fa on/off × bs grid measured |
 | 8 rocBLAS coverage | Phases 2–3, 6 | Dispatch/profiling table shows what routes to rocBLAS; warm-up crash absence confirmed |
 | 9 Upstream drift | Phases 1–2, standing | Pinned commit + archived binary reproducible; rebase protocol followed at boundaries |
 | 10 VRAM budget | Phase 1 (+9) | Per-quant/ctx ledger; largest-planned-prompt smoke test passed |
