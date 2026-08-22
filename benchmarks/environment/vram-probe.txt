@@ -1,0 +1,7 @@
+
+=== PHASE-1 RUNTIME GATE (plan 01-03 T3) — 2026-08-22T20:09Z ===
+verdict: PASS
+evidence: 132 layers assigned to ROCm0 (gfx1100); CPU-assigned layers: 0
+throughput: prompt ~111.5 tok/s @53tok; decode ~33.5 tok/s (32 tok sample)
+bandwidth check: 15.31GB/33.5tps ~= 457GB/s effective -> VRAM-only speed (DDR4 host ~= 50GB/s would give ~3 tok/s)
+flags: -ngl 99 -c 2048 --no-mmap --single-turn; exit 0
