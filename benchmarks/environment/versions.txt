@@ -1,0 +1,11 @@
+ROCm: 7.2.1
+librocdxg: 1.2.2 (rocdxg-roct, rocdxg-amd-smi-lib)
+Kernel: guest-reported-in-hipconfig
+Driver(frozen D-04): 32.0.31041.1004 (Adrenalin 26.10.41) - Windows-side verified via WMI
+updates-paused: PENDING-OWNER-ACTION (registry writes denied: shell not elevated; run as admin:
+  reg add HKLM\SOFTWARE\AMD\CN /v DriverUpdateNotifType /t REG_DWORD /d 0 /f
+  reg add HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate /v ExcludeWUDriversInQualityUpdate /t REG_DWORD /d 1 /f)
+HIP-smoke: PASS (RESULT=1 ARCH=gfx1100 NAME=AMD Radeon RX 7900 XT, exit 0)
+amdgpu-install deviation: usecase=wsl invalid in 30.30.x build; used --usecase=rocm --no-dkms
+smoke-source: benchmarks/environment/hipsmoke.cpp
+captured: 2026-08-22T11:23Z UTC

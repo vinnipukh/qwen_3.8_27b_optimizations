@@ -1,0 +1,46 @@
+HIP version: 7.2.53211-e1a6bc5663
+
+==hipconfig
+HIP_PATH           :/opt/rocm-7.2.1
+ROCM_PATH          :/opt/rocm-7.2.1
+HIP_COMPILER       :clang
+HIP_PLATFORM       :amd
+HIP_RUNTIME        :rocclr
+CPP_CONFIG         : -D__HIP_PLATFORM_HCC__= -D__HIP_PLATFORM_AMD__= -I/opt/rocm-7.2.1/include -I/include
+
+==hip-clang
+HIP_CLANG_PATH     :/opt/rocm-7.2.1/lib/llvm/bin
+AMD clang version 22.0.0git (https://github.com/RadeonOpenCompute/llvm-project roc-7.2.1 26084 f58b06dce1f9c15707c5f808fd002e18c2accf7e)
+Target: x86_64-unknown-linux-gnu
+Thread model: posix
+InstalledDir: /opt/rocm-7.2.1/lib/llvm/bin
+Configuration file: /opt/rocm-7.2.1/lib/llvm/bin/clang++.cfg
+AMD LLVM version 22.0.0git
+  Optimized build.
+  Default target: x86_64-unknown-linux-gnu
+  Host CPU: znver3
+
+  Registered Targets:
+    amdgcn - AMD GCN GPUs
+    r600   - AMD GPUs HD2XXX-HD6XXX
+    x86    - 32-bit X86: Pentium-Pro and above
+    x86-64 - 64-bit X86: EM64T and AMD64
+hip-clang-cxxflags :
+ -O3
+hip-clang-ldflags :
+--driver-mode=g++ -O3 --hip-link
+
+== Environment Variables
+PATH =/opt/rocm-wsl/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/lib/wsl/lib:/mnt/c/Program Files/Git/mingw64/bin:/mnt/c/Program Files/Git/usr/bin:/mnt/c/Users/arhan/bin:/mnt/c/Users/arhan/.pi/agent/bin:/mnt/c/Program Files/Alacritty/:/mnt/c/WINDOWS/system32:/mnt/c/WINDOWS:/mnt/c/WINDOWS/System32/Wbem:/mnt/c/WINDOWS/System32/WindowsPowerShell/v1.0/:/mnt/c/WINDOWS/System32/OpenSSH/:/mnt/c/Program Files/dotnet/:/mnt/c/Program Files/Docker/Docker/resources/bin:/mnt/c/Program Files/Git/cmd:/mnt/c/Program Files/nodejs/:/mnt/c/Program Files/GitHub CLI/:/mnt/c/Users/arhan/AppData/Local/Programs/Python/Python314/Scripts/:/mnt/c/Users/arhan/AppData/Local/Programs/Python/Python314/:/mnt/c/Users/arhan/AppData/Local/Programs/Python/Launcher/:/mnt/c/Users/arhan/AppData/Local/Microsoft/WindowsApps:/mnt/c/Users/arhan/AppData/Roaming/npm:/mnt/f/Apps/Zed/bin:/snap/bin:/opt/rocm/bin
+LD_LIBRARY_PATH=/opt/rocm-wsl/lib
+HSA_ENABLE_DXG_DETECTION=1
+
+== Linux Kernel
+Hostname      :
+arhan-masaustu
+Linux arhan-masaustu 6.18.33.2-microsoft-standard-WSL2 #1 SMP PREEMPT_DYNAMIC Thu Jun 18 21:54:43 UTC 2026 x86_64 x86_64 x86_64 GNU/Linux
+Distributor ID:	Ubuntu
+Description:	Ubuntu 24.04.4 LTS
+Release:	24.04
+Codename:	noble
+
