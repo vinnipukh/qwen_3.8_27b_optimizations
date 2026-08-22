@@ -9,3 +9,9 @@ HIP-smoke: PASS (RESULT=1 ARCH=gfx1100 NAME=AMD Radeon RX 7900 XT, exit 0)
 amdgpu-install deviation: usecase=wsl invalid in 30.30.x build; used --usecase=rocm --no-dkms
 smoke-source: benchmarks/environment/hipsmoke.cpp
 captured: 2026-08-22T11:23Z UTC
+
+D-04 AMENDMENT (owner, 2026-08-22): scope reduced to no-SILENT-driver-updates.
+Applied when shell elevated:
+  reg add HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate /v ExcludeWUDriversInQualityUpdate /t REG_DWORD /d 1 /f
+Adrenalin DriverUpdateNotifType=0 OPTIONAL (skip acceptable - notify-only is fine).
+Detection net: BENCH-02 driver fingerprint on every result row + ENV gates re-run on drift.
