@@ -7,26 +7,31 @@
 ## v1 Requirements
 
 ### Environment & Baseline
-- [ ] **ENV-01**: WSL2 ROCm stack validated — `rocminfo` enumerates gfx1100, HIP runtime functional under Adrenalin 26.2.2-for-WSL2 + ROCm 7.2.1 guest
-- [ ] **ENV-02**: Stock llama.cpp HIP build pinned to one commit targeting gfx1100; `llama-cli`, `llama-bench`, `llama-perplexity`, `test-backend-ops` all built
-- [ ] **ENV-03**: Model runs fully on GPU at baseline — Gated DeltaNet + gated-attention paths with zero CPU fallback (hybrid-arch coverage gate)
-- [ ] **ENV-04**: IQ4_XS artifact downloaded, sha256-verified, provenance (repo, commit, imatrix, quant metadata) recorded in `models/README.md`
+
+- [x] **ENV-01**: WSL2 ROCm stack validated — `rocminfo` enumerates gfx1100, HIP runtime functional under Adrenalin 26.2.2-for-WSL2 + ROCm 7.2.1 guest
+- [x] **ENV-02**: Stock llama.cpp HIP build pinned to one commit targeting gfx1100; `llama-cli`, `llama-bench`, `llama-perplexity`, `test-backend-ops` all built
+- [x] **ENV-03**: Model runs fully on GPU at baseline — Gated DeltaNet + gated-attention paths with zero CPU fallback (hybrid-arch coverage gate)
+- [x] **ENV-04**: IQ4_XS artifact downloaded, sha256-verified, provenance (repo, commit, imatrix, quant metadata) recorded in `models/README.md`
 
 ### Benchmarking
+
 - [ ] **BENCH-01**: Reproducible benchmark harness wrapping llama-bench — fixed workload profiles, enforced pp/tg split, warmup + ≥3 repeats, machine-readable output
 - [ ] **BENCH-02**: Every result row fingerprinted — llama.cpp commit, ROCm/driver versions, GGUF sha256, clocks/temps via Windows-side telemetry
 - [ ] **BENCH-03**: VRAM ledger per run incl. process-RSS guard defeating the WSL2 silent-overcommit failure mode; fail-fast allocation policy (no retry loops), supervised synthetic overcommit test, crash-resilient result journal
 - [ ] **BENCH-04**: Baseline matrix published: pp/tg × context {4k, 8k, 16k, 32k} × flash-attn {on, off}, plus a stock-Vulkan comparator arm at its own pinned commit (GDN coverage verified there first); every claim names its backend; 32k tier gated by empirical free-VRAM pre-flight with expected-FAIL path under WSL2
 
 ### Correctness
+
 - [ ] **QUAL-01**: Op-level gate — `test-backend-ops` green required before any performance claim is accepted
 - [ ] **QUAL-02**: Model-level gate — wikitext-2 perplexity within ±1% of published 7.1583±0.25 AND fixed-prompt golden outputs (greedy decode) unchanged within tolerance
 
 ### Profiling
+
 - [ ] **PROF-01**: Kernel-level attribution strategy resolved (binding gate in Phase 3; Phase 1 runs a non-binding rocprofv3 feasibility probe) — llama.cpp op-timers are the planned baseline with counter-less attribution pre-authorized; working rocprofv3/DXG capture is upside; native-Linux profiling session is the sanctioned escalation if timer-based attribution proves insufficient
 - [ ] **PROF-02**: Ranked bottleneck table mapping top kernels → ggml ops across 4 workload shapes (short/long prompt × short/long generation)
 
 ### Kernels & Integration
+
 - [ ] **KERN-01**: Kernel playground scaffold operating the full pipeline: CPU reference → HIP implementation → numerical comparison → microbenchmark
 - [ ] **KERN-02**: First custom gfx1100 kernel attacks the #1 profiled bottleneck (expected candidates: Gated DeltaNet scan or IQ4_XS quantized matmul); numerically correct vs reference within tolerance
 - [ ] **KERN-03**: Winning kernel beats stock in microbenchmark AND end-to-end A/B with correctness gates intact
@@ -69,10 +74,10 @@ Feasibility + math: `.planning/research/CONTEXT-SCALING.md`. Model natively supp
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| ENV-01 | Phase 1 | Pending |
-| ENV-02 | Phase 1 | Pending |
-| ENV-03 | Phase 1 | Pending |
-| ENV-04 | Phase 1 | Pending |
+| ENV-01 | Phase 1 | Complete |
+| ENV-02 | Phase 1 | Complete |
+| ENV-03 | Phase 1 | Complete |
+| ENV-04 | Phase 1 | Complete |
 | BENCH-01 | Phase 2 | Pending |
 | BENCH-02 | Phase 2 | Pending |
 | BENCH-03 | Phase 2 | Pending |
