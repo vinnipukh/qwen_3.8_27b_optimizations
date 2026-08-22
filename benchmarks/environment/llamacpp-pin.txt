@@ -1,0 +1,7 @@
+pin-tag: v0.2.0
+commit: bb4caa7540188872173c44d161602d9271386413
+tag-date: 2026-08-21
+lineage-check: b8394=3a5cb629@2026-03-17 (PR #20518) - satisfied
+configure: -G Ninja -DGGML_HIP=ON -DGPU_TARGETS=gfx1100 -DCMAKE_BUILD_TYPE=Release -DLLAMA_CURL=OFF -DLLAMA_BUILD_SERVER=OFF (+ccache)
+source-tree: guest ext4 /root/llama.cpp (DrvFs git-lock incompatibility documented)
+compiler: gcc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0 / hipcc HIP version: 7.2.53211-e1a6bc5663
