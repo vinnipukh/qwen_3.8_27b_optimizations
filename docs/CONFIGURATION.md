@@ -12,6 +12,7 @@ against the frozen Phase 1 environment.
 ```ini
 [wsl2]
 memory=28GB
+swap=16GB
 ```
 
 **Required.** With the default ~15 GB guest RAM allocation, VRAM allocation fails with
@@ -88,7 +89,7 @@ Full fingerprint files: `benchmarks/environment/` (versions.txt, hipconfig.txt, 
 ## D-04 update policy
 
 No silent driver updates. Scope (as amended): prevent *silent* updates so the ROCm/driver
-pairing stays frozen; notification-only behavior is acceptable. Applied mechanism:
+pairing stays frozen; notification-only behavior is acceptable. Sanctioned mechanism (**PENDING — requires an elevated shell, owner action**; not yet applied):
 
 ```powershell
 reg add HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate /v ExcludeWUDriversInQualityUpdate /t REG_DWORD /d 1 /f

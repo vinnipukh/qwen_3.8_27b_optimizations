@@ -11,7 +11,7 @@ prefill and decode measured separately, failures published like wins.
 
 | Item | State |
 |---|---|
-| Phase | **1 of 6 complete** — Environment Validation & Stock Baseline (2026-08-22) |
+| Phase | **1 of 6 complete** — Environment Validation & Stock Baseline (completed 2026-08-23) |
 | Stock baseline | pp **111.5 tok/s** · tg **33.5 tok/s** (2048 ctx, single turn, fully GPU-resident) |
 | Baseline archive | `baseline/binaries/v0.2.0-bb4caa75/` (llama.cpp v0.2.0 @ `bb4caa75`) |
 | Model | Locked: `JonathanColetti/Qwen3.8-27B-Uncensored-IQ4_XS.gguf`, 15.31 GB, sha256-verified (`models/README.md`) |
