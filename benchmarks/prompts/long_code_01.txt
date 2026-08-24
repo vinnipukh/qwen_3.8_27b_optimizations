@@ -1,0 +1,314 @@
+// Long Code Benchmark Corpus: Concurrent Lock-Free Ring Buffer & Thread Pool Implementation
+#include <atomic>
+#include <cassert>
+#include <chrono>
+#include <cmath>
+#include <condition_variable>
+#include <cstddef>
+#include <cstdint>
+#include <functional>
+#include <iostream>
+#include <memory>
+#include <mutex>
+#include <optional>
+#include <queue>
+#include <thread>
+#include <vector>
+
+namespace bench_corpus {
+
+template <typename T, size_t Capacity>
+class LockFreeRingBuffer {
+    static_assert((Capacity & (Capacity - 1)) == 0, "Capacity must be a power of two.");
+public:
+    LockFreeRingBuffer() : head_(0), tail_(0) {
+        buffer_ = std::make_unique<Node[]>(Capacity);
+        for (size_t i = 0; i < Capacity; ++i) {
+            buffer_[i].sequence.store(i, std::memory_order_relaxed);
+        }
+    }
+
+    bool push(const T& data) {
+        Node* node = nullptr;
+        size_t pos = tail_.load(std::memory_order_relaxed);
+        for (;;) {
+            node = &buffer_[pos & buffer_mask_];
+            size_t seq = node->sequence.load(std::memory_order_acquire);
+            intptr_t diff = static_cast<intptr_t>(seq) - static_cast<intptr_t>(pos);
+            if (diff == 0) {
+                if (tail_.compare_exchange_weak(pos, pos + 1, std::memory_order_relaxed)) {
+                    break;
+                }
+            } else if (diff < 0) {
+                return false; // Buffer is full
+            } else {
+                pos = tail_.load(std::memory_order_relaxed);
+            }
+        }
+        node->data = data;
+        node->sequence.store(pos + 1, std::memory_order_release);
+        return true;
+    }
+
+    bool pop(T& result) {
+        Node* node = nullptr;
+        size_t pos = head_.load(std::memory_order_relaxed);
+        for (;;) {
+            node = &buffer_[pos & buffer_mask_];
+            size_t seq = node->sequence.load(std::memory_order_acquire);
+            intptr_t diff = static_cast<intptr_t>(seq) - static_cast<intptr_t>(pos + 1);
+            if (diff == 0) {
+                if (head_.compare_exchange_weak(pos, pos + 1, std::memory_order_relaxed)) {
+                    break;
+                }
+            } else if (diff < 0) {
+                return false; // Buffer is empty
+            } else {
+                pos = head_.load(std::memory_order_relaxed);
+            }
+        }
+        result = std::move(node->data);
+        node->sequence.store(pos + buffer_mask_ + 1, std::memory_order_release);
+        return true;
+    }
+
+    [[nodiscard]] size_t capacity() const noexcept { return Capacity; }
+
+private:
+    struct Node {
+        std::atomic<size_t> sequence;
+        T data;
+    };
+
+    static constexpr size_t buffer_mask_ = Capacity - 1;
+    std::unique_ptr<Node[]> buffer_;
+    alignas(64) std::atomic<size_t> head_;
+    alignas(64) std::atomic<size_t> tail_;
+};
+
+class ThreadPool {
+public:
+    explicit ThreadPool(size_t thread_count = std::thread::hardware_concurrency())
+        : stop_requested_(false) {
+        for (size_t i = 0; i < thread_count; ++i) {
+            workers_.emplace_back([this]() {
+                while (true) {
+                    std::function<void()> task;
+                    {
+                        std::unique_lock<std::mutex> lock(queue_mutex_);
+                        condition_.wait(lock, [this]() {
+                            return stop_requested_ || !tasks_.empty();
+                        });
+                        if (stop_requested_ && tasks_.empty()) {
+                            return;
+                        }
+                        task = std::move(tasks_.front());
+                        tasks_.pop();
+                    }
+                    task();
+                }
+            });
+        }
+    }
+
+    template <typename F, typename... Args>
+    void enqueue(F&& f, Args&&... args) {
+        auto task = std::bind(std::forward<F>(f), std::forward<Args>(args)...);
+        {
+            std::unique_lock<std::mutex> lock(queue_mutex_);
+            if (stop_requested_) {
+                throw std::runtime_error("enqueue on stopped ThreadPool");
+            }
+            tasks_.emplace(task);
+        }
+        condition_.notify_one();
+    }
+
+    ~ThreadPool() {
+        {
+            std::unique_lock<std::mutex> lock(queue_mutex_);
+            stop_requested_ = true;
+        }
+        condition_.notify_all();
+        for (std::thread& worker : workers_) {
+            if (worker.joinable()) {
+                worker.join();
+            }
+        }
+    }
+
+private:
+    std::vector<std::thread> workers_;
+    std::queue<std::function<void()>> tasks_;
+    std::mutex queue_mutex_;
+    std::condition_variable condition_;
+    bool stop_requested_;
+};
+
+// Vectorized mathematical operations module
+struct Matrix4x4 {
+    float m[4][4];
+
+    static Matrix4x4 identity() {
+        Matrix4x4 res = {};
+        res.m[0][0] = 1.0f; res.m[1][1] = 1.0f;
+        res.m[2][2] = 1.0f; res.m[3][3] = 1.0f;
+        return res;
+    }
+
+    static Matrix4x4 multiply(const Matrix4x4& a, const Matrix4x4& b) {
+        Matrix4x4 out = {};
+        for (int r = 0; r < 4; ++r) {
+            for (int c = 0; c < 4; ++c) {
+                float sum = 0.0f;
+                for (int k = 0; k < 4; ++k) {
+                    sum += a.m[r][k] * b.m[k][c];
+                }
+                out.m[r][c] = sum;
+            }
+        }
+        return out;
+    }
+
+    void transpose() {
+        for (int r = 0; r < 4; ++r) {
+            for (int c = r + 1; c < 4; ++c) {
+                std::swap(m[r][c], m[c][r]);
+            }
+        }
+    }
+};
+
+class TensorWorkspace {
+public:
+    TensorWorkspace(size_t rows, size_t cols) : rows_(rows), cols_(cols), data_(rows * cols, 0.0f) {}
+
+    void fill_pattern(float base) {
+        for (size_t i = 0; i < data_.size(); ++i) {
+            data_[i] = base + static_cast<float>(i % 128) * 0.01f;
+        }
+    }
+
+    void scale(float factor) {
+        for (float& val : data_) {
+            val *= factor;
+        }
+    }
+
+    [[nodiscard]] float compute_l2_norm() const {
+        double acc = 0.0;
+        for (float val : data_) {
+            acc += static_cast<double>(val) * static_cast<double>(val);
+        }
+        return static_cast<float>(std::sqrt(acc));
+    }
+
+    [[nodiscard]] size_t total_elements() const noexcept { return data_.size(); }
+
+private:
+    size_t rows_;
+    size_t cols_;
+    std::vector<float> data_;
+};
+
+// Cache-aligned memory pool allocator for high-frequency operations
+class MemoryPoolAllocator {
+public:
+    explicit MemoryPoolAllocator(size_t block_size, size_t block_count)
+        : block_size_(block_size), block_count_(block_count) {
+        size_t total = block_size * block_count;
+        storage_ = std::make_unique<uint8_t[]>(total);
+        for (size_t i = 0; i < block_count; ++i) {
+            free_list_.push_back(storage_.get() + (i * block_size));
+        }
+    }
+
+    void* allocate() {
+        std::lock_guard<std::mutex> lock(alloc_mutex_);
+        if (free_list_.empty()) {
+            return nullptr;
+        }
+        void* ptr = free_list_.back();
+        free_list_.pop_back();
+        return ptr;
+    }
+
+    void deallocate(void* ptr) {
+        std::lock_guard<std::mutex> lock(alloc_mutex_);
+        if (ptr >= storage_.get() && ptr < storage_.get() + (block_size_ * block_count_)) {
+            free_list_.push_back(static_cast<uint8_t*>(ptr));
+        }
+    }
+
+    [[nodiscard]] size_t available_blocks() const {
+        return free_list_.size();
+    }
+
+private:
+    size_t block_size_;
+    size_t block_count_;
+    std::unique_ptr<uint8_t[]> storage_;
+    std::vector<uint8_t*> free_list_;
+    std::mutex alloc_mutex_;
+};
+
+// Asynchronous event loop dispatcher with priority queue support
+class EventDispatcher {
+public:
+    enum class Priority : uint8_t { Low = 0, Normal = 1, High = 2, Urgent = 3 };
+
+    struct Event {
+        Priority prio;
+        uint64_t timestamp;
+        std::function<void()> callback;
+
+        bool operator<(const Event& other) const {
+            if (prio == other.prio) {
+                return timestamp > other.timestamp;
+            }
+            return static_cast<uint8_t>(prio) < static_cast<uint8_t>(other.prio);
+        }
+    };
+
+    EventDispatcher() : running_(false), seq_(0) {}
+
+    void post(Priority p, std::function<void()> cb) {
+        std::lock_guard<std::mutex> lock(mutex_);
+        events_.push(Event{p, ++seq_, std::move(cb)});
+        cv_.notify_one();
+    }
+
+    void run_loop() {
+        running_ = true;
+        while (running_) {
+            Event ev;
+            {
+                std::unique_lock<std::mutex> lock(mutex_);
+                cv_.wait(lock, [this]() { return !running_ || !events_.empty(); });
+                if (!running_ && events_.empty()) break;
+                ev = events_.top();
+                events_.pop();
+            }
+            if (ev.callback) {
+                ev.callback();
+            }
+        }
+    }
+
+    void stop() {
+        {
+            std::lock_guard<std::mutex> lock(mutex_);
+            running_ = false;
+        }
+        cv_.notify_all();
+    }
+
+private:
+    bool running_;
+    uint64_t seq_;
+    std::priority_queue<Event> events_;
+    std::mutex mutex_;
+    std::condition_variable cv_;
+};
+
+} // namespace bench_corpus

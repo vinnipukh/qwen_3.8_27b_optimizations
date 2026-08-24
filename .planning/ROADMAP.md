@@ -20,6 +20,7 @@ Inherited verbatim from the original roadmap; planners and executors apply them 
 8. **Keep correctness tests next to every kernel.**
 9. **Record compiler/ROCm/driver versions** with every result.
 10. **Publish failed experiments too.**
+11. **MANDATORY TIMEOUTS ON EVERY BASH COMMAND:** Every bash command and harness subprocess call MUST specify an explicit, bounded timeout to prevent hangs.
 
 ## Merge Map: original plan → GSD phases
 
@@ -46,8 +47,8 @@ Inherited verbatim from the original roadmap; planners and executors apply them 
 ## Phases
 
 - [x] **Phase 1: Environment Validation & Stock Baseline** - Validated WSL2 ROCm/HIP stack, pinned stock llama.cpp gfx1100 build, locked IQ4_XS artifact running fully on GPU (completed 2026-08-23)
-- [ ] **Phase 2: Benchmark Harness & Baseline Matrix** - Fingerprinted reproducible pp/tg-split harness with RSS-guarded VRAM ledger publishing the stock baseline matrix
-- [ ] **Phase 3: Correctness Gates & Bottleneck Profiling** - Two-tier quality gates armed; rocprofv3 validated over dxg under WSL2; ranked bottleneck table names target #1
+- [x] **Phase 2: Benchmark Harness & Baseline Matrix** - Fingerprinted reproducible pp/tg-split harness with RSS-guarded VRAM ledger publishing the stock baseline matrix (completed 2026-08-23)
+- [x] **Phase 3: Correctness Gates & Bottleneck Profiling** - Two-tier quality gates armed; rocprofv3/eval profiler validated over dxg under WSL2; ranked bottleneck table names Target #1 (completed 2026-08-24)
 - [ ] **Phase 4: Kernel Playground Scaffold** - Standalone CPU-reference → HIP → numerical-compare → microbenchmark pipeline operating outside llama.cpp
 - [ ] **Phase 5: First Custom Kernel (Bottleneck Attack)** - Custom gfx1100 kernel for profiled bottleneck #1: numerically correct, beats stock in microbenchmark and e2e A/B
 - [ ] **Phase 6: Integration, Full Validation & Publication** - Winners behind ON/OFF flags via quilt patches; stock baseline intact forever; complete before/after matrix published
@@ -89,7 +90,7 @@ Inherited verbatim from the original roadmap; planners and executors apply them 
 **Key deliverables**: `benchmarks/` harness scripts; append-only fingerprinted result store (`results/<date>_<run-id>/`); written run protocol (thermal pairing within one window, repeat policy, record-don't-control clocks); crash-resilient result journal with fail-fast OOM policy (allocation caps, no retry loops — repeated GPU-OOM under WSL2 can hard-crash the host via Hyper-V per microsoft/WSL#40732 pattern; synthetic overcommit test runs supervised only); published stock baseline matrix.
 **Original-roadmap lineage**: orig Phase 1.4 baseline metrics pulled forward as infrastructure; Milestone 2; feeds orig Phases 15–16 profiles.
 **WSL2 risk notes**: Guest-side `rocm-smi`/`amd-smi` do not work under ROCDXG — Windows-side telemetry (HWiNFO/Adrenalin overlay → sensor CSV) is mandatory from day one; document the substitution from the original roadmap's `rocm-smi.txt` artifact. RSS guard exists specifically to defeat the silent VRAM-overcommit failure mode (spill to system RAM = 5–10× throughput collapse while tokens still flow). Set `-c` explicitly, always — OOM arrives at first long prompt, not model load. Fingerprint librocdxg#60 (ROCr busy-spin ~2 cores per GPU context under WSL2) during calibration; consider taskset isolation for decode-latency measurements. Verify `.wslconfig` memory settings don't clamp the ROCm pool (ROCm#6022 class bug).
-**Plans**: TBD (indicative: 4 plans — llama-bench wrapper; fingerprinting + telemetry bridge; RSS guard + VRAM ledger; baseline matrix execution)
+**Plans**: 5 plans (executed and verified) — 02-01 (wrapper & corpus), 02-02 (fingerprint & telemetry), 02-03 (store, guard & preflight), 02-04 (matrix orchestration & calibration), 02-05 (Vulkan comparator arm & coverage gate)
 **Parallelization**: Harness wrapper, fingerprinting/telemetry pipeline, and RSS-guard ledger are three independent plans runnable concurrently via subagents; baseline-matrix execution waits for all three.
 
 ### Phase 3: Correctness Gates & Bottleneck Profiling
@@ -176,9 +177,9 @@ Inherited verbatim from the original roadmap; planners and executors apply them 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Environment Validation & Stock Baseline | 4/3 | Complete    | 2026-08-23 |
-| 2. Benchmark Harness & Baseline Matrix | 0/TBD | Not started | - |
-| 3. Correctness Gates & Bottleneck Profiling | 0/TBD | Not started | - |
-| 4. Kernel Playground Scaffold | 0/TBD | Not started | - |
+| 2. Benchmark Harness & Baseline Matrix | 5/5 | Complete    | 2026-08-23 |
+| 3. Correctness Gates & Bottleneck Profiling | 4/4 | Complete    | 2026-08-24 |
+| 4. Kernel Playground Scaffold | 0/TBD | Ready for planning | - |
 | 5. First Custom Kernel (Bottleneck Attack) | 0/TBD | Not started | - |
 | 6. Integration, Full Validation & Publication | 0/TBD | Not started | - |
 

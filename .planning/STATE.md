@@ -1,19 +1,18 @@
 ---
 gsd_state_version: 1.0
-current_phase: 2
-current_phase_name: Benchmark Harness & Baseline Matrix
-status: executing
-stopped_at: Phase 2 context gathered
-last_updated: "2026-08-23T14:13:21.176Z"
-last_activity: 2026-08-23
-last_activity_desc: Phase 1 complete, transitioned to Phase 2
-state_head: 668a4771cd1d681dc1931a20427e41765b8f9cd4
+current_phase: 4
+current_phase_name: Kernel Playground Scaffold
+status: ready_for_planning
+stopped_at: Phase 3 execution complete (all 4 plans executed and verified)
+last_updated: "2026-08-24T21:30:00.000Z"
+last_activity: 2026-08-24
+last_activity_desc: Phase 3 complete. Two-tier quality gates armed, profiling table published, and Optimization Target #1 (MUL_MAT) designated.
 progress:
   total_phases: 6
-  completed_phases: 1
-  total_plans: 8
-  completed_plans: 3
-  percent: 17
+  completed_phases: 3
+  total_plans: 12
+  completed_plans: 12
+  percent: 50
 ---
 
 # Project State
@@ -24,41 +23,25 @@ See: .planning/PROJECT.md
 
 **Core value:** Beat stock llama.cpp HIP on at least one important Qwen3.8-27B workload on the RX 7900 XT with a custom gfx1100 kernel, within agreed numerical tolerance — measured, reproducible, bisectable.
 
-**Current focus:** Phase 1 EXECUTED (all 3 plans done) — pending verifier report → phase-complete gate. Next up: Phase 2 Benchmark Harness & Baseline Matrix.
+**Current focus:** Phase 4 Kernel Playground Scaffold — ready for planning and implementation.
 
 ## Current Position
 
-Phase: 2 (Benchmark Harness & Baseline Matrix) — READY TO EXECUTE
-Status: Ready to execute
-Last activity: 2026-08-23 — Phase 1 complete, transitioned to Phase 2
+Phase: 4 (Kernel Playground Scaffold) — READY FOR PLANNING
+Status: In Progress
+Last activity: 2026-08-24 — Phase 3 execution complete
 
-Progress: [██░░░░░░░] ~17% (1 of 6 phases)
+Progress: [█████░░░░░] 50% (3 of 6 phases)
 
-## What Phase 1 proved
+## What Phase 3 proved & delivered
 
-- Platform kill-gate CLEARED: ROCm 7.2.1 + librocdxg 1.2.2 under WSL2, gfx1100 enumerated, HIP kernels execute on device
-- Stock baseline EXISTS: llama.cpp v0.2.0 @ bb4caa75, 4 binaries archived, op-tests green on ROCm0 backend
-- Model runs FULLY on GPU: 132/132 tensor layers on ROCm0, zero CPU assignments
-- **Stock numbers to beat: pp 111.5 tok/s · tg 33.5 tok/s** (2048 ctx, single turn)
-- Environment frozen: E:\wsl-snapshots\ubuntu-2404-rocm721-phase1.tar (49 GB; slim re-export offered to owner)
+- **Op-Level Correctness Gate (`benchmarks/bin/run_op_gate.py`, QUAL-01):** Executed `test-backend-ops test -b ROCm0` across 21,093 cases (0 errors) on gfx1100 with explicit PASS assertions on `GATED_DELTA_NET`, `SOLVE_TRI`, `SSM_CONV`, `SSM_SCAN`, `FLASH_ATTN_EXT`, `MUL_MAT` (`benchmarks/results/phase3/op_gate.json`).
+- **Model-Level Quality Gate & Golden Baseline (`benchmarks/bin/run_model_gate.py`, QUAL-02):** Pinned WikiText-2 PPL reference at **6.4271 +/- 0.04103** ($\pm 1\%$ interval $[6.3628, 6.4914]$) and 6/6 deterministic prompt canary store (`benchmarks/golden/stock_baseline_golden.json`, `benchmarks/results/phase3/model_gate.json`).
+- **High-Precision Graph Evaluation Profiler (`benchmarks/bin/eval_profiler`, PROF-01):** Standalone C++ profiler instrumenting `ggml_backend_sched_set_eval_callback` with microsecond-resolution per-node timing across prefill and decode.
+- **Dispatch Overhead & HIP Graphs Audit (`benchmarks/profiling/dispatch_overhead_report.md`):** Proved HIP graphs deliver **+19%** decode throughput speedup (70.5 t/s vs 59.3 t/s) by batching 520 kernel launches per step across WSL2 DXG.
+- **Ranked Bottleneck Table & Optimization Target #1 (`benchmarks/profiling/BOTTLENECK-TABLE.md`, `bottleneck_summary.json`, PROF-02):** Profiled canonical shapes S1–S4. Formally designated `MUL_MAT` (quantized IQ4_XS GEMV/GEMM) as **Optimization Target #1** (31.12% cumulative GPU wall time; 50.89% prefill, 30.04% decode).
+- **Test Suite Green:** 47 unit and integration tests passing (`benchmarks/tests/`).
 
-## Key environment facts (carry forward)
+## Next Step
 
-- .wslconfig memory=28GB was REQUIRED (15 GB caused DXG ENOMEM during VRAM alloc)
-- Canonical model copy for runs: guest /root/models/ (mmap over /mnt/e stalls)
-- Headless llama-cli needs: setsid + --simple-io + --single-turn
-- D-04 amended: no-silent-updates scope; one elevated registry command still pending owner
-
-## Pending Todos
-
-- Owner: elevated-shell registry command (see benchmarks/environment/versions.txt)
-- Snapshot slimming decision (49 GB → optional ~15-25 GB)
-- Verifier report → then `phase complete 1`
-
-## Session Continuity
-
-**Resume file:** .planning/phases/02-benchmark-harness-baseline-matrix/02-CONTEXT.md
-
-Last session: 2026-08-23T10:36:14.989Z
-Stopped at: Phase 2 context gathered
-Next command after verifier lands: `phase complete 1` → `/gsd-plan-phase 2`
+Phase 4: Kernel Playground Scaffold (CPU reference → standalone gfx1100 HIP kernel → numerical comparison → microbenchmark sweep pipeline outside llama.cpp).

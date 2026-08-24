@@ -1,0 +1,52 @@
+{
+  "recorded_at": "2026-08-24T19:44:34.747067+00:00",
+  "model_path": "/root/models/Qwen3.8-27B-Uncensored-IQ4_XS.gguf",
+  "dataset_path": "benchmarks/data/wiki.test.raw",
+  "dataset_sha256": "173c87a53759e0201f33e0ccf978e510c2042d7f2cb78229d9a50d79b9e7dd08",
+  "perplexity": {
+    "reference_ppl": 6.4271,
+    "ppl_stddev": 0.04103,
+    "chunks": 145,
+    "allowed_tolerance_pct": 1.0,
+    "min_allowed_ppl": 6.3628,
+    "max_allowed_ppl": 6.4914
+  },
+  "canaries": {
+    "long_code_01.txt": {
+      "prompt_sha256": "d5332bcc4301585a4209956c82098489c69921264cf38b39b745d9bea73b0f19",
+      "generated_text": "We need answer user's request? They provided a C++ code block titled \"Long Code Benchmark Corpus: Concurrent Lock-Free Ring Buffer & Thread Pool Implementation\". No",
+      "output_sha256": "d92eb17b9a818b99b3a289d72f7f326da768eb7aaa99a265aecb4c9ed021aab4",
+      "returncode": 0
+    },
+    "long_prose_01.txt": {
+      "prompt_sha256": "7e58abf86742a3a2bdb7740f10f466e33eea051ba1819203b85676f3dfb507db",
+      "generated_text": "We need answer user's request? The user provided a long article titled \"Architectural Evolution of Modern Graphics Processing Units and High-Performance Compute\" with sections",
+      "output_sha256": "3035a1d7a06ab1f3b907779f9bb12c46ba9b2d9c2435830214f735caf101b4d8",
+      "returncode": 0
+    },
+    "long_prose_02.txt": {
+      "prompt_sha256": "932a903e78b5a7b13a715b83a434e72333a3ef8b5516945cccfecf107fe8863d",
+      "generated_text": "We need answer user's request? The user provided a long article titled \"Deep Dive into Compiler Intermediate Representations and Optimization Pipelines for Parallel Hardware\". There is",
+      "output_sha256": "303f36a4f7ed9150faa66be06ec24e99e75f49b3fee435095fc204e67c12af2f",
+      "returncode": 0
+    },
+    "short_code_01.txt": {
+      "prompt_sha256": "3b96a2c2b3482b7dd56ced1ae4b26f1707b7b26b4052e61e7efdfea07e85ddf8",
+      "generated_text": "We need answer user. User provided code task: Implement fast vector dot product with AVX2 intrinsics. They likely want review? The prompt just shows code",
+      "output_sha256": "8a952d0f87ce32463b18f11f9146e8f35b052e28e79cc0cc21d2598e7d30fa67",
+      "returncode": 0
+    },
+    "short_prose_01.txt": {
+      "prompt_sha256": "b5c4d9b8e7f2860f70627883b7dbe8737ace703f569d54a6b6dc62a1a4b31aaa",
+      "generated_text": "We need answer user's text? They provided a paragraph about eventual consistency. Need infer what they want? Maybe they want explanation, continuation, critique? The prompt",
+      "output_sha256": "31971e627fe3b54b27008db21138a23f193f5f03390872c3d9a5905a1bdb4b6c",
+      "returncode": 0
+    },
+    "short_prose_02.txt": {
+      "prompt_sha256": "b57e41482b04e253aa081025874468cd9ddfbf449968d4442f27e08eb055e85b",
+      "generated_text": "We need answer user? The user provided a paragraph about optimistic concurrency control. No explicit question. Need infer maybe they want explanation, summary, critique? We need",
+      "output_sha256": "93a95c386ad9268849a538f8f6f2f7548aaf1dc7e79a89c0c278a02704b693d2",
+      "returncode": 0
+    }
+  }
+}

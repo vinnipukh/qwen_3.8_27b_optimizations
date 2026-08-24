@@ -1,11 +1,32 @@
 {
   "version": 1,
+  "_hashScheme": "sha256 of upstream SKILL.md, LF-normalized",
   "skills": {
-    "firecrawl-deep-research": {
-      "source": "firecrawl/firecrawl-workflows",
+    "deep-research": {
+      "source": "local",
+      "sourceType": "local",
+      "skillPath": "skills/deep-research/SKILL.md",
+      "computedHash": "63f91016aedf5e6ad07efb9165bc21d92552abb6b5a1c791a4d039c2d4dc9da1",
+      "installed": "2026-08-23",
+      "rationale": "Playwright-CLI port of firecrawl-deep-research, renamed to deep-research. Uses playwright-cli browser automation instead of Firecrawl API."
+    },
+    "magpie-kernel-evaluator": {
+      "source": "amd/skills",
       "sourceType": "github",
-      "skillPath": "skills/firecrawl-deep-research/SKILL.md",
-      "computedHash": "33e39ac464abe957912be3833436b5d798523fdc74e4db102fdcbfa0276769cd"
+      "sourceUrl": "https://github.com/amd/skills",
+      "upstreamPath": "skills/magpie-kernel-evaluator/SKILL.md",
+      "installed": "2026-08-23",
+      "rationale": "Design prior art for Phase 4 KERN-01 quartet and Phase 5 microbenchmark conventions (analyze/compare discipline). Magpie tool itself not installed. See .agents/skills/magpie-kernel-evaluator/PROJECT-NOTES.md",
+      "computedHash": "f5cb653044771bf33df9093c92226be8c1de7905b6144da7ba3ad411ea39b421"
+    },
+    "rocm-doctor": {
+      "source": "amd/skills",
+      "sourceType": "github",
+      "sourceUrl": "https://github.com/amd/skills",
+      "upstreamPath": "staging/rocm-doctor/SKILL.md",
+      "installed": "2026-08-23",
+      "rationale": "Parked for PROF-01 native-Linux contingency only; skill's scope gate declines WSL2 by design — do not weaken. See .agents/skills/rocm-doctor/PROJECT-NOTES.md",
+      "computedHash": "0c763034dbe3668bce22ba91e087ac6c58002f79d52b2d27fc40657ae19db179"
     }
   }
 }

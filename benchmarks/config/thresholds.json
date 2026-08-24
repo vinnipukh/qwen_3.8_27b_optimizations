@@ -1,0 +1,10 @@
+{
+  "vmrss_fail_kb": 22788858,
+  "vmswap_fail_kb": 524288,
+  "gpu_shared_climb_mb_per_min": 250.0,
+  "repeat_deviation_max_ratio": 2.0,
+  "derived_from": "20260823_163954_calibration_profile",
+  "measured_peak_vmrss_kb": 15192572,
+  "measured_peak_vmswap_kb": 0,
+  "utc": "2026-08-23T16:46:26Z"
+}

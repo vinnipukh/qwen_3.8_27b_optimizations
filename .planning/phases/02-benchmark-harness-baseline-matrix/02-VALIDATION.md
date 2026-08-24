@@ -3,9 +3,9 @@ phase: 2
 slug: benchmark-harness-baseline-matrix
 # status lifecycle: draft (seeded by plan-phase) → validated (set by validate-phase §6)
 # audit-milestone §5.5 distinguishes NOT-VALIDATED (draft) from PARTIAL (validated + nyquist_compliant: false) (#2117)
-status: draft
-nyquist_compliant: false
-wave_0_complete: false
+status: validated
+nyquist_compliant: true
+wave_0_complete: true
 created: 2026-08-23
 ---
 
@@ -40,15 +40,15 @@ created: 2026-08-23
 
 | Task ID | Plan | Wave | Requirement | Threat Ref | Secure Behavior | Test Type | Automated Command | File Exists | Status |
 |---------|------|------|-------------|------------|-----------------|-----------|-------------------|-------------|--------|
-| 02-01-xx | 01 | 1 | BENCH-01 | — | wrapper emits 4 rows/tier with correct p/n/fa fields; rejects contaminated defaults | unit (fixture jsonl parse) | `pytest benchmarks/tests/test_llabench_wrapper.py -x` | ❌ W0 | ⬜ pending |
-| 02-01-xx | 01 | 1 | BENCH-01 | — | re-run variance gate \|mean₁−mean₂\|/mean ≤ 5% logic | unit (synthetic pairs) | `pytest benchmarks/tests/test_repro_gate.py -x` | ❌ W0 | ⬜ pending |
-| 02-0x-xx | 0x | 1 | BENCH-02 | — | manifest contains all D2-10 fields non-empty; binary/model/.wslconfig sha256 recomputable | unit + smoke | `pytest benchmarks/tests/test_manifest.py -x` | ❌ W0 | ⬜ pending |
-| 02-0x-xx | 0x | 1 | BENCH-02 | T-shmem | shmem digest parser: fixture snapshot → mandatory-field dict; DEAD/stale signatures detected | unit (byte fixtures) | `pytest benchmarks/tests/test_shmem_digest.py -x` | ❌ W0 | ⬜ pending |
-| 02-0x-xx | 0x | 1 | BENCH-03 | — | spiked RSS series ⇒ FAILED:suspected-spill (D2-14 regression test) | unit | `pytest benchmarks/tests/test_guard_fixtures.py -x` | ❌ W0 | ⬜ pending |
-| 02-0x-xx | 0x | 1 | BENCH-03 | — | rows.jsonl survives simulated SIGKILL (fsync-per-row proof) | unit (tmpdir) | `pytest benchmarks/tests/test_journal_crash.py -x` | ❌ W0 | ⬜ pending |
-| 02-0x-xx | 0x | 2 | BENCH-04 | — | matrix assembler: 4 tiers × {pp,pg} × {fa off,on} in D2-19 order; FAILED cells excluded-but-published | unit | `pytest benchmarks/tests/test_matrix_assembly.py -x` | ❌ W0 | ⬜ pending |
-| 02-0x-xx | 0x | 2 | BENCH-04 | — | Vulkan coverage gate: support-CSV contains ✅ GATED_DELTA_NET/SOLVE_TRI/SSM_CONV/SSM_SCAN | integration (GPU, Vulkan arm) | `bash benchmarks/tests/vulkan_gate.sh` | ❌ W0 arm-dep | ⬜ pending |
-| calibration | — | last | BENCH-03 | — | ONE supervised near-OOM live trip | manual-only | RUNBOOK §calibration | manual | ⬜ pending |
+| 02-01-xx | 01 | 1 | BENCH-01 | — | wrapper emits 4 rows/tier with correct p/n/fa fields; rejects contaminated defaults | unit (fixture jsonl parse) | `pytest benchmarks/tests/test_llabench_wrapper.py -x` | ✅ | ✅ green |
+| 02-01-xx | 01 | 1 | BENCH-01 | — | re-run variance gate \|mean₁−mean₂\|/mean ≤ 5% logic | unit (synthetic pairs) | `pytest benchmarks/tests/test_repro_gate.py -x` | ✅ | ✅ green |
+| 02-02-xx | 02 | 1 | BENCH-02 | — | manifest contains all D2-10 fields non-empty; binary/model/.wslconfig sha256 recomputable | unit + smoke | `pytest benchmarks/tests/test_manifest.py -x` | ✅ | ✅ green |
+| 02-02-xx | 02 | 1 | BENCH-02 | T-shmem | shmem digest parser: fixture snapshot → mandatory-field dict; DEAD/stale signatures detected | unit (byte fixtures) | `pytest benchmarks/tests/test_shmem_digest.py -x` | ✅ | ✅ green |
+| 02-03-xx | 03 | 1 | BENCH-03 | — | spiked RSS series ⇒ FAILED:suspected-spill (D2-14 regression test) | unit | `pytest benchmarks/tests/test_guard_fixtures.py -x` | ✅ | ✅ green |
+| 02-03-xx | 03 | 1 | BENCH-03 | — | rows.jsonl survives simulated SIGKILL (fsync-per-row proof) | unit (tmpdir) | `pytest benchmarks/tests/test_journal_crash.py -x` | ✅ | ✅ green |
+| 02-04-xx | 04 | 2 | BENCH-04 | — | matrix assembler: 4 tiers × {pp,pg} × {fa off,on} in D2-19 order; FAILED cells excluded-but-published | unit | `pytest benchmarks/tests/test_matrix_assembly.py -x` | ✅ | ✅ green |
+| 02-05-xx | 05 | 2 | BENCH-04 | — | Vulkan coverage gate: support-CSV contains ✅ GATED_DELTA_NET/SOLVE_TRI/SSM_CONV/SSM_SCAN | integration (GPU, Vulkan arm) | `bash benchmarks/tests/vulkan_gate.sh` | ✅ | ✅ green |
+| calibration | 04 | last | BENCH-03 | — | ONE supervised near-OOM live trip | manual | RUNBOOK §calibration | ✅ | ✅ green |
 
 *Status: ⬜ pending · ✅ green · ❌ red · ⚠️ flaky*
 
@@ -56,9 +56,9 @@ created: 2026-08-23
 
 ## Wave 0 Requirements
 
-- [ ] `benchmarks/tests/` scaffold + `pytest.ini` (or unittest discovery fallback)
-- [ ] Fixture generators: synthetic llama-bench jsonl, spiked RSS traces, HWiNFO SM2 byte snapshots, support-CSV samples
-- [ ] `benchmarks/RUNBOOK.md` skeleton (threshold values filled at calibration session)
+- [x] `benchmarks/tests/` scaffold + `pytest.ini` (or unittest discovery fallback)
+- [x] Fixture generators: synthetic llama-bench jsonl, spiked RSS traces, HWiNFO SM2 byte snapshots, support-CSV samples
+- [x] `benchmarks/RUNBOOK.md` skeleton (threshold values filled at calibration session)
 
 ---
 

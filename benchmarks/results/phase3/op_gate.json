@@ -1,0 +1,816 @@
+{
+  "timestamp_start": "2026-08-24T19:20:18.819817+00:00",
+  "timestamp_end": "2026-08-24T19:27:08.979926+00:00",
+  "status": "PASS",
+  "exit_code": 0,
+  "backend": "ROCm0",
+  "bin_path": "/root/llama.cpp/build-ci/bin/test-backend-ops",
+  "total_cases": 21093,
+  "supported_cases": 13025,
+  "unsupported_cases": 8068,
+  "error_cases": 0,
+  "unique_ops_tested": 127,
+  "core_ops_status": {
+    "GATED_DELTA_NET": {
+      "status": "PASS",
+      "total": 36,
+      "supported": 36,
+      "errors": 0
+    },
+    "SOLVE_TRI": {
+      "status": "PASS",
+      "total": 24,
+      "supported": 24,
+      "errors": 0
+    },
+    "SSM_CONV": {
+      "status": "PASS",
+      "total": 45,
+      "supported": 45,
+      "errors": 0
+    },
+    "SSM_SCAN": {
+      "status": "PASS",
+      "total": 9,
+      "supported": 9,
+      "errors": 0
+    },
+    "FLASH_ATTN_EXT": {
+      "status": "PASS",
+      "total": 5158,
+      "supported": 2936,
+      "errors": 0
+    },
+    "MUL_MAT": {
+      "status": "PASS",
+      "total": 1563,
+      "supported": 1193,
+      "errors": 0
+    }
+  },
+  "errors": [],
+  "op_summary": {
+    "ABS": {
+      "total": 8,
+      "supported": 4,
+      "unsupported": 4,
+      "errors": 0
+    },
+    "SGN": {
+      "total": 8,
+      "supported": 4,
+      "unsupported": 4,
+      "errors": 0
+    },
+    "NEG": {
+      "total": 8,
+      "supported": 4,
+      "unsupported": 4,
+      "errors": 0
+    },
+    "STEP": {
+      "total": 8,
+      "supported": 4,
+      "unsupported": 4,
+      "errors": 0
+    },
+    "TANH": {
+      "total": 8,
+      "supported": 4,
+      "unsupported": 4,
+      "errors": 0
+    },
+    "ELU": {
+      "total": 8,
+      "supported": 4,
+      "unsupported": 4,
+      "errors": 0
+    },
+    "RELU": {
+      "total": 8,
+      "supported": 4,
+      "unsupported": 4,
+      "errors": 0
+    },
+    "SIGMOID": {
+      "total": 8,
+      "supported": 4,
+      "unsupported": 4,
+      "errors": 0
+    },
+    "GELU": {
+      "total": 8,
+      "supported": 4,
+      "unsupported": 4,
+      "errors": 0
+    },
+    "GELU_QUICK": {
+      "total": 8,
+      "supported": 4,
+      "unsupported": 4,
+      "errors": 0
+    },
+    "SILU": {
+      "total": 8,
+      "supported": 4,
+      "unsupported": 4,
+      "errors": 0
+    },
+    "HARDSWISH": {
+      "total": 8,
+      "supported": 4,
+      "unsupported": 4,
+      "errors": 0
+    },
+    "HARDSIGMOID": {
+      "total": 8,
+      "supported": 4,
+      "unsupported": 4,
+      "errors": 0
+    },
+    "EXP": {
+      "total": 8,
+      "supported": 4,
+      "unsupported": 4,
+      "errors": 0
+    },
+    "EXPM1": {
+      "total": 8,
+      "supported": 4,
+      "unsupported": 4,
+      "errors": 0
+    },
+    "SOFTPLUS": {
+      "total": 8,
+      "supported": 4,
+      "unsupported": 4,
+      "errors": 0
+    },
+    "GELU_ERF": {
+      "total": 8,
+      "supported": 4,
+      "unsupported": 4,
+      "errors": 0
+    },
+    "FLOOR": {
+      "total": 14,
+      "supported": 10,
+      "unsupported": 4,
+      "errors": 0
+    },
+    "CEIL": {
+      "total": 14,
+      "supported": 10,
+      "unsupported": 4,
+      "errors": 0
+    },
+    "ROUND": {
+      "total": 14,
+      "supported": 10,
+      "unsupported": 4,
+      "errors": 0
+    },
+    "TRUNC": {
+      "total": 14,
+      "supported": 10,
+      "unsupported": 4,
+      "errors": 0
+    },
+    "RELU_SQR": {
+      "total": 4,
+      "supported": 4,
+      "unsupported": 0,
+      "errors": 0
+    },
+    "SILU_MUL": {
+      "total": 20,
+      "supported": 14,
+      "unsupported": 6,
+      "errors": 0
+    },
+    "SIGMOID_MUL": {
+      "total": 20,
+      "supported": 14,
+      "unsupported": 6,
+      "errors": 0
+    },
+    "SOFTPLUS_MUL": {
+      "total": 20,
+      "supported": 14,
+      "unsupported": 6,
+      "errors": 0
+    },
+    "SNAKE_FUSE": {
+      "total": 24,
+      "supported": 16,
+      "unsupported": 8,
+      "errors": 0
+    },
+    "DSV4_HC_COMB": {
+      "total": 4,
+      "supported": 4,
+      "unsupported": 0,
+      "errors": 0
+    },
+    "DSV4_HC_PRE": {
+      "total": 4,
+      "supported": 4,
+      "unsupported": 0,
+      "errors": 0
+    },
+    "DSV4_HC_POST": {
+      "total": 4,
+      "supported": 4,
+      "unsupported": 0,
+      "errors": 0
+    },
+    "REGLU": {
+      "total": 24,
+      "supported": 24,
+      "unsupported": 0,
+      "errors": 0
+    },
+    "GEGLU": {
+      "total": 24,
+      "supported": 24,
+      "unsupported": 0,
+      "errors": 0
+    },
+    "SWIGLU": {
+      "total": 24,
+      "supported": 24,
+      "unsupported": 0,
+      "errors": 0
+    },
+    "GEGLU_ERF": {
+      "total": 24,
+      "supported": 24,
+      "unsupported": 0,
+      "errors": 0
+    },
+    "GEGLU_QUICK": {
+      "total": 24,
+      "supported": 24,
+      "unsupported": 0,
+      "errors": 0
+    },
+    "SWIGLU_OAI": {
+      "total": 8,
+      "supported": 8,
+      "unsupported": 0,
+      "errors": 0
+    },
+    "GET_ROWS": {
+      "total": 119,
+      "supported": 111,
+      "unsupported": 8,
+      "errors": 0
+    },
+    "GET_ROWS_BACK": {
+      "total": 58,
+      "supported": 4,
+      "unsupported": 54,
+      "errors": 0
+    },
+    "SET_ROWS": {
+      "total": 703,
+      "supported": 159,
+      "unsupported": 544,
+      "errors": 0
+    },
+    "ROPE_SET_ROWS": {
+      "total": 48,
+      "supported": 48,
+      "unsupported": 0,
+      "errors": 0
+    },
+    "POOL_2D": {
+      "total": 128,
+      "supported": 128,
+      "unsupported": 0,
+      "errors": 0
+    },
+    "POOL_1D": {
+      "total": 216,
+      "supported": 0,
+      "unsupported": 216,
+      "errors": 0
+    },
+    "IM2COL": {
+      "total": 92,
+      "supported": 92,
+      "unsupported": 0,
+      "errors": 0
+    },
+    "IM2COL_3D": {
+      "total": 2051,
+      "supported": 1027,
+      "unsupported": 1024,
+      "errors": 0
+    },
+    "CONV_2D": {
+      "total": 3140,
+      "supported": 2002,
+      "unsupported": 1138,
+      "errors": 0
+    },
+    "CONV_2D_DW": {
+      "total": 8,
+      "supported": 4,
+      "unsupported": 4,
+      "errors": 0
+    },
+    "CONV_3D": {
+      "total": 258,
+      "supported": 0,
+      "unsupported": 258,
+      "errors": 0
+    },
+    "CONV_TRANSPOSE_1D": {
+      "total": 116,
+      "supported": 116,
+      "unsupported": 0,
+      "errors": 0
+    },
+    "COL2IM_1D": {
+      "total": 33,
+      "supported": 33,
+      "unsupported": 0,
+      "errors": 0
+    },
+    "CONV_TRANSPOSE_2D": {
+      "total": 6,
+      "supported": 6,
+      "unsupported": 0,
+      "errors": 0
+    },
+    "COUNT_EQUAL": {
+      "total": 2,
+      "supported": 2,
+      "unsupported": 0,
+      "errors": 0
+    },
+    "ARGMAX": {
+      "total": 7,
+      "supported": 7,
+      "unsupported": 0,
+      "errors": 0
+    },
+    "REPEAT": {
+      "total": 18,
+      "supported": 12,
+      "unsupported": 6,
+      "errors": 0
+    },
+    "REPEAT_BACK": {
+      "total": 10,
+      "supported": 10,
+      "unsupported": 0,
+      "errors": 0
+    },
+    "DUP": {
+      "total": 10,
+      "supported": 6,
+      "unsupported": 4,
+      "errors": 0
+    },
+    "SET": {
+      "total": 12,
+      "supported": 12,
+      "unsupported": 0,
+      "errors": 0
+    },
+    "CPY": {
+      "total": 581,
+      "supported": 246,
+      "unsupported": 335,
+      "errors": 0
+    },
+    "CONT": {
+      "total": 78,
+      "supported": 78,
+      "unsupported": 0,
+      "errors": 0
+    },
+    "ADD": {
+      "total": 99,
+      "supported": 99,
+      "unsupported": 0,
+      "errors": 0
+    },
+    "SUB": {
+      "total": 91,
+      "supported": 91,
+      "unsupported": 0,
+      "errors": 0
+    },
+    "MUL": {
+      "total": 91,
+      "supported": 91,
+      "unsupported": 0,
+      "errors": 0
+    },
+    "DIV": {
+      "total": 91,
+      "supported": 91,
+      "unsupported": 0,
+      "errors": 0
+    },
+    "SCALE": {
+      "total": 4,
+      "supported": 4,
+      "unsupported": 0,
+      "errors": 0
+    },
+    "SOFTCAP": {
+      "total": 1,
+      "supported": 1,
+      "unsupported": 0,
+      "errors": 0
+    },
+    "SILU_BACK": {
+      "total": 1,
+      "supported": 1,
+      "unsupported": 0,
+      "errors": 0
+    },
+    "NORM": {
+      "total": 60,
+      "supported": 50,
+      "unsupported": 10,
+      "errors": 0
+    },
+    "RMS_NORM": {
+      "total": 51,
+      "supported": 51,
+      "unsupported": 0,
+      "errors": 0
+    },
+    "RMS_NORM_BACK": {
+      "total": 10,
+      "supported": 10,
+      "unsupported": 0,
+      "errors": 0
+    },
+    "L2_NORM": {
+      "total": 30,
+      "supported": 20,
+      "unsupported": 10,
+      "errors": 0
+    },
+    "RMS_NORM_MUL_ADD": {
+      "total": 30,
+      "supported": 30,
+      "unsupported": 0,
+      "errors": 0
+    },
+    "NORM_MUL_ADD": {
+      "total": 20,
+      "supported": 20,
+      "unsupported": 0,
+      "errors": 0
+    },
+    "ADD_RMS_NORM": {
+      "total": 25,
+      "supported": 25,
+      "unsupported": 0,
+      "errors": 0
+    },
+    "RMS_NORM_MUL_ROPE": {
+      "total": 144,
+      "supported": 144,
+      "unsupported": 0,
+      "errors": 0
+    },
+    "SSM_CONV": {
+      "total": 45,
+      "supported": 45,
+      "unsupported": 0,
+      "errors": 0
+    },
+    "SSM_CONV_BIAS_SILU": {
+      "total": 90,
+      "supported": 90,
+      "unsupported": 0,
+      "errors": 0
+    },
+    "SSM_SCAN": {
+      "total": 9,
+      "supported": 9,
+      "unsupported": 0,
+      "errors": 0
+    },
+    "SSM_SCAN_ROLLBACK": {
+      "total": 1,
+      "supported": 1,
+      "unsupported": 0,
+      "errors": 0
+    },
+    "RWKV_WKV6": {
+      "total": 4,
+      "supported": 4,
+      "unsupported": 0,
+      "errors": 0
+    },
+    "RWKV_WKV7": {
+      "total": 5,
+      "supported": 5,
+      "unsupported": 0,
+      "errors": 0
+    },
+    "GATED_LINEAR_ATTN": {
+      "total": 4,
+      "supported": 4,
+      "unsupported": 0,
+      "errors": 0
+    },
+    "MUL_MAT_HADAMARD": {
+      "total": 9,
+      "supported": 9,
+      "unsupported": 0,
+      "errors": 0
+    },
+    "MUL_MAT": {
+      "total": 1563,
+      "supported": 1193,
+      "unsupported": 370,
+      "errors": 0
+    },
+    "MUL_MAT_ID": {
+      "total": 872,
+      "supported": 869,
+      "unsupported": 3,
+      "errors": 0
+    },
+    "MUL_MAT_ID_FUSION": {
+      "total": 13,
+      "supported": 13,
+      "unsupported": 0,
+      "errors": 0
+    },
+    "OUT_PROD": {
+      "total": 1415,
+      "supported": 71,
+      "unsupported": 1344,
+      "errors": 0
+    },
+    "ADD_ID": {
+      "total": 36,
+      "supported": 36,
+      "unsupported": 0,
+      "errors": 0
+    },
+    "SQR": {
+      "total": 6,
+      "supported": 6,
+      "unsupported": 0,
+      "errors": 0
+    },
+    "SQRT": {
+      "total": 6,
+      "supported": 6,
+      "unsupported": 0,
+      "errors": 0
+    },
+    "LOG": {
+      "total": 6,
+      "supported": 6,
+      "unsupported": 0,
+      "errors": 0
+    },
+    "SIN": {
+      "total": 6,
+      "supported": 6,
+      "unsupported": 0,
+      "errors": 0
+    },
+    "COS": {
+      "total": 6,
+      "supported": 6,
+      "unsupported": 0,
+      "errors": 0
+    },
+    "CLAMP": {
+      "total": 6,
+      "supported": 6,
+      "unsupported": 0,
+      "errors": 0
+    },
+    "LEAKY_RELU": {
+      "total": 7,
+      "supported": 7,
+      "unsupported": 0,
+      "errors": 0
+    },
+    "DIAG_MASK_INF": {
+      "total": 3,
+      "supported": 3,
+      "unsupported": 0,
+      "errors": 0
+    },
+    "SOFT_MAX": {
+      "total": 212,
+      "supported": 212,
+      "unsupported": 0,
+      "errors": 0
+    },
+    "SOFT_MAX_BACK": {
+      "total": 48,
+      "supported": 24,
+      "unsupported": 24,
+      "errors": 0
+    },
+    "ROPE": {
+      "total": 466,
+      "supported": 446,
+      "unsupported": 20,
+      "errors": 0
+    },
+    "ROPE_BACK": {
+      "total": 404,
+      "supported": 404,
+      "unsupported": 0,
+      "errors": 0
+    },
+    "CONCAT": {
+      "total": 192,
+      "supported": 177,
+      "unsupported": 15,
+      "errors": 0
+    },
+    "ARGSORT": {
+      "total": 98,
+      "supported": 46,
+      "unsupported": 52,
+      "errors": 0
+    },
+    "TOP_K": {
+      "total": 445,
+      "supported": 170,
+      "unsupported": 275,
+      "errors": 0
+    },
+    "UPSCALE": {
+      "total": 22,
+      "supported": 22,
+      "unsupported": 0,
+      "errors": 0
+    },
+    "SUM": {
+      "total": 8,
+      "supported": 7,
+      "unsupported": 1,
+      "errors": 0
+    },
+    "MEAN": {
+      "total": 7,
+      "supported": 7,
+      "unsupported": 0,
+      "errors": 0
+    },
+    "SUM_ROWS": {
+      "total": 10,
+      "supported": 4,
+      "unsupported": 6,
+      "errors": 0
+    },
+    "GROUP_NORM": {
+      "total": 2,
+      "supported": 2,
+      "unsupported": 0,
+      "errors": 0
+    },
+    "GROUP_NORM_MUL_ADD": {
+      "total": 2,
+      "supported": 2,
+      "unsupported": 0,
+      "errors": 0
+    },
+    "ACC": {
+      "total": 6,
+      "supported": 4,
+      "unsupported": 2,
+      "errors": 0
+    },
+    "PAD": {
+      "total": 28,
+      "supported": 28,
+      "unsupported": 0,
+      "errors": 0
+    },
+    "PAD_REFLECT_1D": {
+      "total": 2,
+      "supported": 2,
+      "unsupported": 0,
+      "errors": 0
+    },
+    "ROLL": {
+      "total": 2,
+      "supported": 1,
+      "unsupported": 1,
+      "errors": 0
+    },
+    "ARANGE": {
+      "total": 2,
+      "supported": 2,
+      "unsupported": 0,
+      "errors": 0
+    },
+    "TIMESTEP_EMBEDDING": {
+      "total": 1,
+      "supported": 1,
+      "unsupported": 0,
+      "errors": 0
+    },
+    "CUMSUM": {
+      "total": 15,
+      "supported": 15,
+      "unsupported": 0,
+      "errors": 0
+    },
+    "XIELU": {
+      "total": 4,
+      "supported": 4,
+      "unsupported": 0,
+      "errors": 0
+    },
+    "TRI": {
+      "total": 4,
+      "supported": 4,
+      "unsupported": 0,
+      "errors": 0
+    },
+    "FILL": {
+      "total": 4,
+      "supported": 4,
+      "unsupported": 0,
+      "errors": 0
+    },
+    "DIAG": {
+      "total": 3,
+      "supported": 3,
+      "unsupported": 0,
+      "errors": 0
+    },
+    "SOLVE_TRI": {
+      "total": 24,
+      "supported": 24,
+      "unsupported": 0,
+      "errors": 0
+    },
+    "FLASH_ATTN_EXT": {
+      "total": 5158,
+      "supported": 2936,
+      "unsupported": 2222,
+      "errors": 0
+    },
+    "CROSS_ENTROPY_LOSS": {
+      "total": 2,
+      "supported": 2,
+      "unsupported": 0,
+      "errors": 0
+    },
+    "CROSS_ENTROPY_LOSS_BACK": {
+      "total": 2,
+      "supported": 2,
+      "unsupported": 0,
+      "errors": 0
+    },
+    "OPT_STEP_ADAMW": {
+      "total": 1,
+      "supported": 1,
+      "unsupported": 0,
+      "errors": 0
+    },
+    "OPT_STEP_SGD": {
+      "total": 1,
+      "supported": 1,
+      "unsupported": 0,
+      "errors": 0
+    },
+    "MUL_MAT_VEC_FUSION": {
+      "total": 432,
+      "supported": 432,
+      "unsupported": 0,
+      "errors": 0
+    },
+    "TOPK_MOE": {
+      "total": 320,
+      "supported": 320,
+      "unsupported": 0,
+      "errors": 0
+    },
+    "GATED_DELTA_NET": {
+      "total": 36,
+      "supported": 36,
+      "unsupported": 0,
+      "errors": 0
+    },
+    "LIGHTNING_INDEXER": {
+      "total": 156,
+      "supported": 144,
+      "unsupported": 12,
+      "errors": 0
+    }
+  }
+}

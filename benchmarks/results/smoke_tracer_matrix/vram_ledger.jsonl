@@ -1,0 +1,2 @@
+{"cell":"c1024_pp_fa_off","buffers":{"compute_mib":511.01},"guard_peaks":{"vmrss_peak_kb":15192572,"vmswap_peak_kb":0},"dxg_line":"(20421 MiB, 18245.0 MiB free)"}
+{"cell":"c1024_tg_fa_off","buffers":{"compute_mib":511.01},"guard_peaks":{"vmrss_peak_kb":15192572,"vmswap_peak_kb":0},"dxg_line":"(20421 MiB, 18245.0 MiB free)"}

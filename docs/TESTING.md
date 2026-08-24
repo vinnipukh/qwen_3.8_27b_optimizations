@@ -1,76 +1,69 @@
 <!-- generated-by: gsd-doc-writer -->
 
-# Testing & Quality Gates
+# Testing & Verification Doctrine
 
-Quality is enforced by two independent gates plus a measurement protocol. A kernel or code change
-is not "done" until every applicable gate passes and the numbers are published — failures are
-published too.
+This project enforces strict correctness, reproducibility, and safety gates before any
+performance claim or custom kernel optimization is accepted.
 
-## Gate tiers
-
-| Tier | Tool | When required |
-|---|---|---|
-| Op-level | `test-backend-ops` (ROCm0 backend) | Green **before any performance claim** is accepted |
-| Model-level | `llama-perplexity` (wikitext-2) + golden-output decode | Before any change is declared a win end-to-end |
-
-Both binaries exist as archived stock builds at `baseline/binaries/v0.2.0-bb4caa75/`.
-Phase 1 evidence of a green op-level run: `benchmarks/environment/test-backend-ops-phase1.txt`.
-
-## Op-level gate
-
-`test-backend-ops` must pass on the ROCm0 backend for the current build before any benchmark row
-from that build is considered valid. Run it from the guest-side source tree (`/root/llama.cpp`)
-or against the archived binary.
-
-## Model-level gate
-
-Two checks, both against the frozen model
-`models/Qwen3.8-27B-Uncensored-IQ4_XS.gguf` (sha256-verified; gitignored):
-
-1. **Perplexity**: wikitext-2 perplexity within ±1% of the published reference **7.1583**
-   (published tolerance band 7.1583 ± 0.25).
-2. **Golden outputs**: fixed-prompt greedy decode (`--temp 0`) must match recorded baseline
-   outputs within tolerance.
-
-Any deviation beyond tolerance invalidates the optimization, regardless of speed.
-
-## Numerical validation quartet (kernel work)
-
-Each candidate op traverses the full pipeline and records four error metrics:
+## Gate Hierarchy
 
 ```
-ref_cpu.cpp  →  impl_gfx1100.hip  →  test_compare.cpp  →  bench_sweep.cpp
-(CPU ref)       (HIP kernel)         (error metrics)      (timing sweep)
+Level 0: Unit & Guard Regression Tests (47 tests in benchmarks/tests/)
+Level 1: Platform & Environment Gates (ENV-01..04, rocminfo, hipconfig, versions.txt)
+Level 2: Constraint & Integrity Gates (BENCH-01, scan_banned_signatures, D2-19 ordering)
+Level 3: VRAM & RSS Overcommit Gates (BENCH-03, preflight buffer check, three-signal guard)
+Level 4: Vulkan Coverage Gate (D2-04, vulkan_gate.sh 6-part check)
+Level 5: Numerical Correctness Gates (QUAL-01 test-backend-ops, QUAL-02 perplexity + canaries)
+Level 6: Kernel Numerical Comparison (test_compare vs CPU golden ref, KERN-01)
 ```
 
-Recorded metrics per comparison: **max-abs**, **mean-abs**, **relative**, **cosine** error.
-These tables are part of the deliverable, not internal scratch notes.
+## Running the Unit Test Suite
 
-## Benchmark protocol rules (binding)
+The unit test suite validates wrapper argument construction, reproducibility math,
+system fingerprinting, HWiNFO shared memory decoding, thermal watchdog kill command
+validation, forked SIGKILL journal crash resilience, VRAM pre-flight allocation logic,
+matrix aggregation, op-level correctness gate parsing (QUAL-01), model-level quality gate
+tolerances and golden canaries (QUAL-02), and bottleneck profiling parser logic (PROF-01/02).
 
-- **pp/tg split mandatory** — prompt processing (prefill, M≫1) and text generation (decode,
-  M≈1) are measured and reported separately. Blended tok/s is banned everywhere.
-- **Warmup runs** precede all timed measurements.
-- **≥3 repeats** per measurement; report variance, not single-shot bests.
-- **Fingerprint every result row**: llama.cpp commit, ROCm/driver versions, GGUF sha256,
-  clocks/temps from Windows-side telemetry (guest `rocm-smi`/`amd-smi` do not work under
-  ROCDXG).
-- **VRAM ledger + RSS guard** per run: process-RSS monitoring exists to defeat WSL2's silent
-  VRAM-overcommit failure mode (spill to system RAM = 5–10× throughput collapse while tokens
-  still flow). Fail-fast allocation policy — no retry loops (repeated GPU-OOM under WSL2 can
-  hard-crash the host). Set `-c` explicitly, always.
-- **Thermal windows**: final compared numbers must come from paired runs within one thermal
-  window. Clocks are recorded, not controlled.
+From repo root in WSL2:
 
-## Status: planned vs running
+```bash
+PYTHONPATH=. python3 -m pytest benchmarks/tests/ -q
+```
 
-| Component | Status |
-|---|---|
-| Archived stock binaries incl. `test-backend-ops` | ✅ Running (Phase 1) |
-| Environment fingerprint files | ✅ Running (`benchmarks/environment/`) |
-| Automated harness (llama-bench wrapper, fingerprinting pipeline, RSS-guarded ledger) | ⏳ Planned — lands in Phase 2 |
-| Golden-output capture automation | ⏳ Planned — Phase 2 |
-| Baseline matrix publication | ⏳ Planned — Phase 2 |
+All 47 unit tests run pure-CPU/fixture-driven and execute in under 25 seconds.
 
-Until the Phase 2 harness lands, measurements follow the manual protocol above with results
-teed into `benchmarks/` subdirectories.
+## Smoke Matrix Integration Test
+
+`benchmarks/tests/smoke_matrix.sh` runs a complete end-to-end mini benchmark session
+on the real GPU and asserts:
+1. `manifest.json` exists with all non-empty D2-10 fingerprint fields.
+2. `rows.jsonl` contains the exact expected row count with zero contaminating default signatures.
+3. `CHECKSUMS.sha256` verifies with `sha256sum -c` exit code 0.
+
+Run from repo root:
+```bash
+bash benchmarks/tests/smoke_matrix.sh
+```
+
+## Six-Part Vulkan Coverage Gate
+
+`benchmarks/tests/vulkan_gate.sh` enforces the 6-part D2-04 requirement before any Vulkan
+performance claim can be cited:
+1. Static shader inventory check (GDN and IQ4_XS shaders present).
+2. Operator support CSV comparison (`hip-support-comparator.csv` vs `vulkan-support.csv`).
+3. Full `test-backend-ops` suite verification on Vulkan.
+4. Tensor layer residency check (132/132 layers on GPU).
+5. Coherent greedy-decode smoke test.
+6. Fallback and partial-support audit.
+
+Run from repo root:
+```bash
+bash benchmarks/tests/vulkan_gate.sh
+```
+
+## Safety & Crash Resilience Tests
+
+* **SIGKILL Crash Resilience (`test_journal_crash.py`):** Simulates writer death via `os.kill(SIGKILL)` in a forked child process, proving that every `fsync()`-ed row survives without JSON corruption.
+* **Tamper Evidence (`test_journal_crash.py`):** Asserts that modifying a single byte in any tracked file causes `sha256sum -c CHECKSUMS.sha256` to fail immediately.
+* **Adversarial Guard Regression (`test_guard_fixtures.py`):** Asserts that spiked RSS, swap growth, and shared GPU memory leak traces reliably trigger `FAILED:suspected-spill` verdicts.

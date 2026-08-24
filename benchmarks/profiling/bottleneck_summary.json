@@ -1,0 +1,2545 @@
+{
+  "generated_at": "2026-08-24T21:22:17.598203+00:00",
+  "model_artifact": "/root/models/Qwen3.8-27B-Uncensored-IQ4_XS.gguf",
+  "gpu_target": "gfx1100 (AMD Radeon RX 7900 XT)",
+  "optimization_target_1": "MUL_MAT",
+  "optimization_target_1_rationale": "Operation 'MUL_MAT' accounts for 31.12% of total GPU runtime across all 4 benchmarked shapes (88033.03 ms cumulative). It represents the dominant compute/memory bottleneck in both prefill (50.89%) and decode (30.04%).",
+  "cumulative_ranked_ops": [
+    {
+      "op": "MUL_MAT",
+      "cumulative_ms": 88033.03,
+      "pct_total": 31.12,
+      "prefill_ms": 7450.93,
+      "prefill_pct": 50.89,
+      "decode_ms": 80582.1,
+      "decode_pct": 30.04,
+      "bound_type": "Memory Bandwidth / Dequant Bound"
+    },
+    {
+      "op": "MUL",
+      "cumulative_ms": 38439.19,
+      "pct_total": 13.59,
+      "prefill_ms": 1277.74,
+      "prefill_pct": 8.73,
+      "decode_ms": 37161.45,
+      "decode_pct": 13.85,
+      "bound_type": "Memory Bandwidth Bound"
+    },
+    {
+      "op": "RMS_NORM",
+      "cumulative_ms": 27619.77,
+      "pct_total": 9.76,
+      "prefill_ms": 880.44,
+      "prefill_pct": 6.01,
+      "decode_ms": 26739.33,
+      "decode_pct": 9.97,
+      "bound_type": "Memory Bandwidth Bound"
+    },
+    {
+      "op": "ADD",
+      "cumulative_ms": 23901.92,
+      "pct_total": 8.45,
+      "prefill_ms": 702.61,
+      "prefill_pct": 4.8,
+      "decode_ms": 23199.31,
+      "decode_pct": 8.65,
+      "bound_type": "Memory Bandwidth Bound"
+    },
+    {
+      "op": "SILU",
+      "cumulative_ms": 14028.5,
+      "pct_total": 4.96,
+      "prefill_ms": 399.27,
+      "prefill_pct": 2.73,
+      "decode_ms": 13629.22,
+      "decode_pct": 5.08,
+      "bound_type": "Compute / Elementwise Bound"
+    },
+    {
+      "op": "GET_ROWS",
+      "cumulative_ms": 12093.74,
+      "pct_total": 4.28,
+      "prefill_ms": 428.88,
+      "prefill_pct": 2.93,
+      "decode_ms": 11664.86,
+      "decode_pct": 4.35,
+      "bound_type": "Memory Bandwidth / Gathering Bound"
+    },
+    {
+      "op": "CPY",
+      "cumulative_ms": 11720.08,
+      "pct_total": 4.14,
+      "prefill_ms": 373.22,
+      "prefill_pct": 2.55,
+      "decode_ms": 11346.87,
+      "decode_pct": 4.23,
+      "bound_type": "Memory Bandwidth Bound"
+    },
+    {
+      "op": "L2_NORM",
+      "cumulative_ms": 11409.25,
+      "pct_total": 4.03,
+      "prefill_ms": 342.53,
+      "prefill_pct": 2.34,
+      "decode_ms": 11066.72,
+      "decode_pct": 4.13,
+      "bound_type": "Memory Bandwidth Bound"
+    },
+    {
+      "op": "SWIGLU",
+      "cumulative_ms": 7885.69,
+      "pct_total": 2.79,
+      "prefill_ms": 370.75,
+      "prefill_pct": 2.53,
+      "decode_ms": 7514.94,
+      "decode_pct": 2.8,
+      "bound_type": "Compute / Elementwise Bound"
+    },
+    {
+      "op": "SIGMOID",
+      "cumulative_ms": 7625.45,
+      "pct_total": 2.7,
+      "prefill_ms": 230.02,
+      "prefill_pct": 1.57,
+      "decode_ms": 7395.43,
+      "decode_pct": 2.76,
+      "bound_type": "Compute / Elementwise Bound"
+    },
+    {
+      "op": "GATED_DELTA_NET",
+      "cumulative_ms": 6376.7,
+      "pct_total": 2.25,
+      "prefill_ms": 666.71,
+      "prefill_pct": 4.55,
+      "decode_ms": 5709.99,
+      "decode_pct": 2.13,
+      "bound_type": "Compute / Register Bound"
+    },
+    {
+      "op": "CONCAT",
+      "cumulative_ms": 5860.47,
+      "pct_total": 2.07,
+      "prefill_ms": 251.01,
+      "prefill_pct": 1.71,
+      "decode_ms": 5609.46,
+      "decode_pct": 2.09,
+      "bound_type": "Memory / Compute Bound"
+    },
+    {
+      "op": "SSM_CONV",
+      "cumulative_ms": 5772.27,
+      "pct_total": 2.04,
+      "prefill_ms": 204.65,
+      "prefill_pct": 1.4,
+      "decode_ms": 5567.61,
+      "decode_pct": 2.08,
+      "bound_type": "Memory / Register Bound"
+    },
+    {
+      "op": "SOFTPLUS",
+      "cumulative_ms": 5752.19,
+      "pct_total": 2.03,
+      "prefill_ms": 171.23,
+      "prefill_pct": 1.17,
+      "decode_ms": 5580.96,
+      "decode_pct": 2.08,
+      "bound_type": "Memory / Compute Bound"
+    },
+    {
+      "op": "FLASH_ATTN_EXT",
+      "cumulative_ms": 4458.27,
+      "pct_total": 1.58,
+      "prefill_ms": 386.37,
+      "prefill_pct": 2.64,
+      "decode_ms": 4071.91,
+      "decode_pct": 1.52,
+      "bound_type": "Compute / Memory Bandwidth Bound"
+    },
+    {
+      "op": "ROPE",
+      "cumulative_ms": 3966.21,
+      "pct_total": 1.4,
+      "prefill_ms": 163.27,
+      "prefill_pct": 1.12,
+      "decode_ms": 3802.94,
+      "decode_pct": 1.42,
+      "bound_type": "Memory Bandwidth / Compute Bound"
+    },
+    {
+      "op": "SET_ROWS",
+      "cumulative_ms": 3844.01,
+      "pct_total": 1.36,
+      "prefill_ms": 133.75,
+      "prefill_pct": 0.91,
+      "decode_ms": 3710.25,
+      "decode_pct": 1.38,
+      "bound_type": "Memory / Compute Bound"
+    },
+    {
+      "op": "CONT",
+      "cumulative_ms": 1955.07,
+      "pct_total": 0.69,
+      "prefill_ms": 79.18,
+      "prefill_pct": 0.54,
+      "decode_ms": 1875.89,
+      "decode_pct": 0.7,
+      "bound_type": "Memory / Compute Bound"
+    },
+    {
+      "op": "RESHAPE",
+      "cumulative_ms": 1015.07,
+      "pct_total": 0.36,
+      "prefill_ms": 39.42,
+      "prefill_pct": 0.27,
+      "decode_ms": 975.65,
+      "decode_pct": 0.36,
+      "bound_type": "Memory / Compute Bound"
+    },
+    {
+      "op": "VIEW",
+      "cumulative_ms": 909.7,
+      "pct_total": 0.32,
+      "prefill_ms": 33.53,
+      "prefill_pct": 0.23,
+      "decode_ms": 876.17,
+      "decode_pct": 0.33,
+      "bound_type": "Memory / Compute Bound"
+    },
+    {
+      "op": "SCALE",
+      "cumulative_ms": 125.37,
+      "pct_total": 0.04,
+      "prefill_ms": 51.57,
+      "prefill_pct": 0.35,
+      "decode_ms": 73.8,
+      "decode_pct": 0.03,
+      "bound_type": "Memory Bandwidth Bound"
+    },
+    {
+      "op": "TRANSPOSE",
+      "cumulative_ms": 42.8,
+      "pct_total": 0.02,
+      "prefill_ms": 1.9,
+      "prefill_pct": 0.01,
+      "decode_ms": 40.89,
+      "decode_pct": 0.02,
+      "bound_type": "Memory / Compute Bound"
+    },
+    {
+      "op": "PERMUTE",
+      "cumulative_ms": 40.33,
+      "pct_total": 0.01,
+      "prefill_ms": 0.94,
+      "prefill_pct": 0.01,
+      "decode_ms": 39.39,
+      "decode_pct": 0.01,
+      "bound_type": "Memory / Compute Bound"
+    }
+  ],
+  "shape_profiles": {
+    "S1_interactive": {
+      "meta": {
+        "name": "S1_interactive",
+        "prompt_tokens": 128,
+        "gen_tokens": 128,
+        "desc": "Interactive (128 / 128)"
+      },
+      "profile": {
+        "prompt_tokens": 103,
+        "gen_tokens": 128,
+        "prefill_wall_ms": 521.101,
+        "decode_wall_ms": 46545.2,
+        "total_prefill_ms": 512.918,
+        "total_decode_ms": 45862.2,
+        "total_overall_ms": 46375.1,
+        "ranked_prefill": [
+          {
+            "op": "MUL_MAT",
+            "pct": 41.2665,
+            "total_ms": 211.663,
+            "count": 497,
+            "avg_us": 425.88,
+            "bound_type": "Memory Bandwidth / Dequant Bound"
+          },
+          {
+            "op": "MUL",
+            "pct": 10.4998,
+            "total_ms": 53.855,
+            "count": 321,
+            "avg_us": 167.77,
+            "bound_type": "Memory Bandwidth Bound"
+          },
+          {
+            "op": "RMS_NORM",
+            "pct": 6.16823,
+            "total_ms": 31.638,
+            "count": 209,
+            "avg_us": 151.38,
+            "bound_type": "Memory Bandwidth Bound"
+          },
+          {
+            "op": "ADD",
+            "pct": 5.304,
+            "total_ms": 27.205,
+            "count": 176,
+            "avg_us": 154.57,
+            "bound_type": "Memory Bandwidth Bound"
+          },
+          {
+            "op": "GET_ROWS",
+            "pct": 4.27194,
+            "total_ms": 21.912,
+            "count": 194,
+            "avg_us": 112.95,
+            "bound_type": "Memory Bandwidth / Gathering Bound"
+          },
+          {
+            "op": "SILU",
+            "pct": 3.80871,
+            "total_ms": 19.536,
+            "count": 96,
+            "avg_us": 203.5,
+            "bound_type": "Compute / Elementwise Bound"
+          },
+          {
+            "op": "CPY",
+            "pct": 3.23268,
+            "total_ms": 16.581,
+            "count": 192,
+            "avg_us": 86.36,
+            "bound_type": "Memory Bandwidth Bound"
+          },
+          {
+            "op": "GATED_DELTA_NET",
+            "pct": 2.91154,
+            "total_ms": 14.934,
+            "count": 48,
+            "avg_us": 311.12,
+            "bound_type": "Compute / Register Bound"
+          },
+          {
+            "op": "SCALE",
+            "pct": 2.84379,
+            "total_ms": 14.586,
+            "count": 96,
+            "avg_us": 151.94,
+            "bound_type": "Memory Bandwidth Bound"
+          },
+          {
+            "op": "FLASH_ATTN_EXT",
+            "pct": 2.42027,
+            "total_ms": 12.414,
+            "count": 16,
+            "avg_us": 775.87,
+            "bound_type": "Compute / Memory Bandwidth Bound"
+          },
+          {
+            "op": "L2_NORM",
+            "pct": 2.34816,
+            "total_ms": 12.044,
+            "count": 96,
+            "avg_us": 125.46,
+            "bound_type": "Memory Bandwidth Bound"
+          },
+          {
+            "op": "CONCAT",
+            "pct": 2.28577,
+            "total_ms": 11.724,
+            "count": 48,
+            "avg_us": 244.25,
+            "bound_type": "Memory / Compute Bound"
+          },
+          {
+            "op": "ROPE",
+            "pct": 2.15997,
+            "total_ms": 11.079,
+            "count": 32,
+            "avg_us": 346.21,
+            "bound_type": "Memory Bandwidth / Compute Bound"
+          },
+          {
+            "op": "SWIGLU",
+            "pct": 2.09036,
+            "total_ms": 10.722,
+            "count": 64,
+            "avg_us": 167.53,
+            "bound_type": "Compute / Elementwise Bound"
+          },
+          {
+            "op": "SSM_CONV",
+            "pct": 1.88786,
+            "total_ms": 9.683,
+            "count": 48,
+            "avg_us": 201.73,
+            "bound_type": "Memory / Register Bound"
+          },
+          {
+            "op": "SIGMOID",
+            "pct": 1.77241,
+            "total_ms": 9.091,
+            "count": 64,
+            "avg_us": 142.05,
+            "bound_type": "Compute / Elementwise Bound"
+          },
+          {
+            "op": "SET_ROWS",
+            "pct": 1.67423,
+            "total_ms": 8.587,
+            "count": 32,
+            "avg_us": 268.36,
+            "bound_type": "Memory / Compute Bound"
+          },
+          {
+            "op": "SOFTPLUS",
+            "pct": 1.28167,
+            "total_ms": 6.574,
+            "count": 48,
+            "avg_us": 136.96,
+            "bound_type": "Memory / Compute Bound"
+          },
+          {
+            "op": "RESHAPE",
+            "pct": 0.741521,
+            "total_ms": 3.803,
+            "count": 576,
+            "avg_us": 6.6,
+            "bound_type": "Memory / Compute Bound"
+          },
+          {
+            "op": "VIEW",
+            "pct": 0.49234,
+            "total_ms": 2.525,
+            "count": 690,
+            "avg_us": 3.66,
+            "bound_type": "Memory / Compute Bound"
+          },
+          {
+            "op": "CONT",
+            "pct": 0.457904,
+            "total_ms": 2.349,
+            "count": 16,
+            "avg_us": 146.79,
+            "bound_type": "Memory / Compute Bound"
+          },
+          {
+            "op": "TRANSPOSE",
+            "pct": 0.0604153,
+            "total_ms": 0.31,
+            "count": 48,
+            "avg_us": 6.46,
+            "bound_type": "Memory / Compute Bound"
+          },
+          {
+            "op": "PERMUTE",
+            "pct": 0.0200067,
+            "total_ms": 0.103,
+            "count": 48,
+            "avg_us": 2.14,
+            "bound_type": "Memory / Compute Bound"
+          }
+        ],
+        "ranked_decode": [
+          {
+            "op": "MUL_MAT",
+            "pct": 27.0521,
+            "total_ms": 12406.7,
+            "count": 63616,
+            "avg_us": 195.02,
+            "bound_type": "Memory Bandwidth / Dequant Bound"
+          },
+          {
+            "op": "RMS_NORM",
+            "pct": 14.6735,
+            "total_ms": 6729.6,
+            "count": 26752,
+            "avg_us": 251.56,
+            "bound_type": "Memory Bandwidth Bound"
+          },
+          {
+            "op": "MUL",
+            "pct": 14.1155,
+            "total_ms": 6473.67,
+            "count": 41088,
+            "avg_us": 157.56,
+            "bound_type": "Memory Bandwidth Bound"
+          },
+          {
+            "op": "ADD",
+            "pct": 7.73292,
+            "total_ms": 3546.49,
+            "count": 22528,
+            "avg_us": 157.43,
+            "bound_type": "Memory Bandwidth Bound"
+          },
+          {
+            "op": "GET_ROWS",
+            "pct": 4.45891,
+            "total_ms": 2044.95,
+            "count": 24832,
+            "avg_us": 82.35,
+            "bound_type": "Memory Bandwidth / Gathering Bound"
+          },
+          {
+            "op": "CPY",
+            "pct": 4.29956,
+            "total_ms": 1971.87,
+            "count": 24576,
+            "avg_us": 80.24,
+            "bound_type": "Memory Bandwidth Bound"
+          },
+          {
+            "op": "SILU",
+            "pct": 4.23139,
+            "total_ms": 1940.61,
+            "count": 12288,
+            "avg_us": 157.93,
+            "bound_type": "Compute / Elementwise Bound"
+          },
+          {
+            "op": "L2_NORM",
+            "pct": 4.18736,
+            "total_ms": 1920.41,
+            "count": 12288,
+            "avg_us": 156.28,
+            "bound_type": "Memory Bandwidth Bound"
+          },
+          {
+            "op": "SWIGLU",
+            "pct": 2.86641,
+            "total_ms": 1314.6,
+            "count": 8192,
+            "avg_us": 160.47,
+            "bound_type": "Compute / Elementwise Bound"
+          },
+          {
+            "op": "SIGMOID",
+            "pct": 2.80792,
+            "total_ms": 1287.77,
+            "count": 8192,
+            "avg_us": 157.2,
+            "bound_type": "Compute / Elementwise Bound"
+          },
+          {
+            "op": "GATED_DELTA_NET",
+            "pct": 2.15838,
+            "total_ms": 989.88,
+            "count": 6144,
+            "avg_us": 161.11,
+            "bound_type": "Compute / Register Bound"
+          },
+          {
+            "op": "CONCAT",
+            "pct": 2.14085,
+            "total_ms": 981.841,
+            "count": 6144,
+            "avg_us": 159.81,
+            "bound_type": "Memory / Compute Bound"
+          },
+          {
+            "op": "SSM_CONV",
+            "pct": 2.11695,
+            "total_ms": 970.879,
+            "count": 6144,
+            "avg_us": 158.02,
+            "bound_type": "Memory / Register Bound"
+          },
+          {
+            "op": "SOFTPLUS",
+            "pct": 2.11554,
+            "total_ms": 970.233,
+            "count": 6144,
+            "avg_us": 157.91,
+            "bound_type": "Memory / Compute Bound"
+          },
+          {
+            "op": "ROPE",
+            "pct": 1.4457,
+            "total_ms": 663.031,
+            "count": 4096,
+            "avg_us": 161.87,
+            "bound_type": "Memory Bandwidth / Compute Bound"
+          },
+          {
+            "op": "SET_ROWS",
+            "pct": 1.40553,
+            "total_ms": 644.606,
+            "count": 4096,
+            "avg_us": 157.38,
+            "bound_type": "Memory / Compute Bound"
+          },
+          {
+            "op": "FLASH_ATTN_EXT",
+            "pct": 0.741633,
+            "total_ms": 340.129,
+            "count": 2048,
+            "avg_us": 166.08,
+            "bound_type": "Compute / Memory Bandwidth Bound"
+          },
+          {
+            "op": "CONT",
+            "pct": 0.712469,
+            "total_ms": 326.754,
+            "count": 2048,
+            "avg_us": 159.55,
+            "bound_type": "Memory / Compute Bound"
+          },
+          {
+            "op": "RESHAPE",
+            "pct": 0.360033,
+            "total_ms": 165.119,
+            "count": 73728,
+            "avg_us": 2.24,
+            "bound_type": "Memory / Compute Bound"
+          },
+          {
+            "op": "VIEW",
+            "pct": 0.319493,
+            "total_ms": 146.527,
+            "count": 88320,
+            "avg_us": 1.66,
+            "bound_type": "Memory / Compute Bound"
+          },
+          {
+            "op": "SCALE",
+            "pct": 0.0270878,
+            "total_ms": 12.423,
+            "count": 12288,
+            "avg_us": 1.01,
+            "bound_type": "Memory Bandwidth Bound"
+          },
+          {
+            "op": "TRANSPOSE",
+            "pct": 0.0158821,
+            "total_ms": 7.284,
+            "count": 6144,
+            "avg_us": 1.19,
+            "bound_type": "Memory / Compute Bound"
+          },
+          {
+            "op": "PERMUTE",
+            "pct": 0.0149038,
+            "total_ms": 6.835,
+            "count": 6144,
+            "avg_us": 1.11,
+            "bound_type": "Memory / Compute Bound"
+          }
+        ],
+        "ranked_overall": [
+          {
+            "op": "MUL_MAT",
+            "pct": 27.2093,
+            "total_ms": 12618.3,
+            "count": 64113,
+            "avg_us": 196.81,
+            "bound_type": "Memory Bandwidth / Dequant Bound"
+          },
+          {
+            "op": "RMS_NORM",
+            "pct": 14.5795,
+            "total_ms": 6761.24,
+            "count": 26961,
+            "avg_us": 250.78,
+            "bound_type": "Memory Bandwidth Bound"
+          },
+          {
+            "op": "MUL",
+            "pct": 14.0755,
+            "total_ms": 6527.52,
+            "count": 41409,
+            "avg_us": 157.63,
+            "bound_type": "Memory Bandwidth Bound"
+          },
+          {
+            "op": "ADD",
+            "pct": 7.70606,
+            "total_ms": 3573.69,
+            "count": 22704,
+            "avg_us": 157.4,
+            "bound_type": "Memory Bandwidth Bound"
+          },
+          {
+            "op": "GET_ROWS",
+            "pct": 4.45684,
+            "total_ms": 2066.86,
+            "count": 25026,
+            "avg_us": 82.59,
+            "bound_type": "Memory Bandwidth / Gathering Bound"
+          },
+          {
+            "op": "CPY",
+            "pct": 4.28776,
+            "total_ms": 1988.45,
+            "count": 24768,
+            "avg_us": 80.28,
+            "bound_type": "Memory Bandwidth Bound"
+          },
+          {
+            "op": "SILU",
+            "pct": 4.22671,
+            "total_ms": 1960.14,
+            "count": 12384,
+            "avg_us": 158.28,
+            "bound_type": "Compute / Elementwise Bound"
+          },
+          {
+            "op": "L2_NORM",
+            "pct": 4.16701,
+            "total_ms": 1932.46,
+            "count": 12384,
+            "avg_us": 156.04,
+            "bound_type": "Memory Bandwidth Bound"
+          },
+          {
+            "op": "SWIGLU",
+            "pct": 2.85782,
+            "total_ms": 1325.32,
+            "count": 8256,
+            "avg_us": 160.53,
+            "bound_type": "Compute / Elementwise Bound"
+          },
+          {
+            "op": "SIGMOID",
+            "pct": 2.79647,
+            "total_ms": 1296.86,
+            "count": 8256,
+            "avg_us": 157.08,
+            "bound_type": "Compute / Elementwise Bound"
+          },
+          {
+            "op": "GATED_DELTA_NET",
+            "pct": 2.16671,
+            "total_ms": 1004.81,
+            "count": 6192,
+            "avg_us": 162.28,
+            "bound_type": "Compute / Register Bound"
+          },
+          {
+            "op": "CONCAT",
+            "pct": 2.14245,
+            "total_ms": 993.565,
+            "count": 6192,
+            "avg_us": 160.46,
+            "bound_type": "Memory / Compute Bound"
+          },
+          {
+            "op": "SSM_CONV",
+            "pct": 2.11442,
+            "total_ms": 980.562,
+            "count": 6192,
+            "avg_us": 158.36,
+            "bound_type": "Memory / Register Bound"
+          },
+          {
+            "op": "SOFTPLUS",
+            "pct": 2.10632,
+            "total_ms": 976.807,
+            "count": 6192,
+            "avg_us": 157.75,
+            "bound_type": "Memory / Compute Bound"
+          },
+          {
+            "op": "ROPE",
+            "pct": 1.4536,
+            "total_ms": 674.11,
+            "count": 4128,
+            "avg_us": 163.3,
+            "bound_type": "Memory Bandwidth / Compute Bound"
+          },
+          {
+            "op": "SET_ROWS",
+            "pct": 1.4085,
+            "total_ms": 653.194,
+            "count": 4128,
+            "avg_us": 158.24,
+            "bound_type": "Memory / Compute Bound"
+          },
+          {
+            "op": "FLASH_ATTN_EXT",
+            "pct": 0.760199,
+            "total_ms": 352.543,
+            "count": 2064,
+            "avg_us": 170.81,
+            "bound_type": "Compute / Memory Bandwidth Bound"
+          },
+          {
+            "op": "CONT",
+            "pct": 0.709653,
+            "total_ms": 329.102,
+            "count": 2064,
+            "avg_us": 159.45,
+            "bound_type": "Memory / Compute Bound"
+          },
+          {
+            "op": "RESHAPE",
+            "pct": 0.364253,
+            "total_ms": 168.923,
+            "count": 74304,
+            "avg_us": 2.27,
+            "bound_type": "Memory / Compute Bound"
+          },
+          {
+            "op": "VIEW",
+            "pct": 0.321405,
+            "total_ms": 149.052,
+            "count": 89010,
+            "avg_us": 1.67,
+            "bound_type": "Memory / Compute Bound"
+          },
+          {
+            "op": "SCALE",
+            "pct": 0.0582412,
+            "total_ms": 27.009,
+            "count": 12384,
+            "avg_us": 2.18,
+            "bound_type": "Memory Bandwidth Bound"
+          },
+          {
+            "op": "TRANSPOSE",
+            "pct": 0.0163746,
+            "total_ms": 7.594,
+            "count": 6192,
+            "avg_us": 1.23,
+            "bound_type": "Memory / Compute Bound"
+          },
+          {
+            "op": "PERMUTE",
+            "pct": 0.0149602,
+            "total_ms": 6.938,
+            "count": 6192,
+            "avg_us": 1.12,
+            "bound_type": "Memory / Compute Bound"
+          }
+        ],
+        "disable_graphs": false
+      }
+    },
+    "S2_decode_heavy": {
+      "meta": {
+        "name": "S2_decode_heavy",
+        "prompt_tokens": 128,
+        "gen_tokens": 256,
+        "desc": "Decode Heavy (128 / 256)"
+      },
+      "profile": {
+        "prompt_tokens": 103,
+        "gen_tokens": 256,
+        "prefill_wall_ms": 459.649,
+        "decode_wall_ms": 91189.1,
+        "total_prefill_ms": 453.109,
+        "total_decode_ms": 89762.9,
+        "total_overall_ms": 90216.0,
+        "ranked_prefill": [
+          {
+            "op": "MUL_MAT",
+            "pct": 46.687,
+            "total_ms": 211.543,
+            "count": 497,
+            "avg_us": 425.64,
+            "bound_type": "Memory Bandwidth / Dequant Bound"
+          },
+          {
+            "op": "MUL",
+            "pct": 9.39567,
+            "total_ms": 42.573,
+            "count": 321,
+            "avg_us": 132.62,
+            "bound_type": "Memory Bandwidth Bound"
+          },
+          {
+            "op": "RMS_NORM",
+            "pct": 5.46119,
+            "total_ms": 24.745,
+            "count": 209,
+            "avg_us": 118.4,
+            "bound_type": "Memory Bandwidth Bound"
+          },
+          {
+            "op": "ADD",
+            "pct": 4.28957,
+            "total_ms": 19.436,
+            "count": 176,
+            "avg_us": 110.43,
+            "bound_type": "Memory Bandwidth Bound"
+          },
+          {
+            "op": "SILU",
+            "pct": 3.86781,
+            "total_ms": 17.525,
+            "count": 96,
+            "avg_us": 182.56,
+            "bound_type": "Compute / Elementwise Bound"
+          },
+          {
+            "op": "GET_ROWS",
+            "pct": 3.77504,
+            "total_ms": 17.105,
+            "count": 194,
+            "avg_us": 88.17,
+            "bound_type": "Memory Bandwidth / Gathering Bound"
+          },
+          {
+            "op": "GATED_DELTA_NET",
+            "pct": 3.17396,
+            "total_ms": 14.382,
+            "count": 48,
+            "avg_us": 299.62,
+            "bound_type": "Compute / Register Bound"
+          },
+          {
+            "op": "FLASH_ATTN_EXT",
+            "pct": 3.10618,
+            "total_ms": 14.074,
+            "count": 16,
+            "avg_us": 879.65,
+            "bound_type": "Compute / Memory Bandwidth Bound"
+          },
+          {
+            "op": "CPY",
+            "pct": 3.00335,
+            "total_ms": 13.608,
+            "count": 192,
+            "avg_us": 70.88,
+            "bound_type": "Memory Bandwidth Bound"
+          },
+          {
+            "op": "SCALE",
+            "pct": 2.40568,
+            "total_ms": 10.9,
+            "count": 96,
+            "avg_us": 113.55,
+            "bound_type": "Memory Bandwidth Bound"
+          },
+          {
+            "op": "L2_NORM",
+            "pct": 2.14346,
+            "total_ms": 9.712,
+            "count": 96,
+            "avg_us": 101.17,
+            "bound_type": "Memory Bandwidth Bound"
+          },
+          {
+            "op": "ROPE",
+            "pct": 2.06,
+            "total_ms": 9.334,
+            "count": 32,
+            "avg_us": 291.69,
+            "bound_type": "Memory Bandwidth / Compute Bound"
+          },
+          {
+            "op": "CONCAT",
+            "pct": 1.9551,
+            "total_ms": 8.859,
+            "count": 48,
+            "avg_us": 184.56,
+            "bound_type": "Memory / Compute Bound"
+          },
+          {
+            "op": "SWIGLU",
+            "pct": 1.78962,
+            "total_ms": 8.109,
+            "count": 64,
+            "avg_us": 126.7,
+            "bound_type": "Compute / Elementwise Bound"
+          },
+          {
+            "op": "SSM_CONV",
+            "pct": 1.6573,
+            "total_ms": 7.509,
+            "count": 48,
+            "avg_us": 156.44,
+            "bound_type": "Memory / Register Bound"
+          },
+          {
+            "op": "SET_ROWS",
+            "pct": 1.461,
+            "total_ms": 6.62,
+            "count": 32,
+            "avg_us": 206.87,
+            "bound_type": "Memory / Compute Bound"
+          },
+          {
+            "op": "SIGMOID",
+            "pct": 1.45307,
+            "total_ms": 6.584,
+            "count": 64,
+            "avg_us": 102.88,
+            "bound_type": "Compute / Elementwise Bound"
+          },
+          {
+            "op": "SOFTPLUS",
+            "pct": 1.02481,
+            "total_ms": 4.643,
+            "count": 48,
+            "avg_us": 96.74,
+            "bound_type": "Memory / Compute Bound"
+          },
+          {
+            "op": "RESHAPE",
+            "pct": 0.466166,
+            "total_ms": 2.112,
+            "count": 576,
+            "avg_us": 3.67,
+            "bound_type": "Memory / Compute Bound"
+          },
+          {
+            "op": "CONT",
+            "pct": 0.412896,
+            "total_ms": 1.871,
+            "count": 16,
+            "avg_us": 116.93,
+            "bound_type": "Memory / Compute Bound"
+          },
+          {
+            "op": "VIEW",
+            "pct": 0.384262,
+            "total_ms": 1.741,
+            "count": 690,
+            "avg_us": 2.52,
+            "bound_type": "Memory / Compute Bound"
+          },
+          {
+            "op": "TRANSPOSE",
+            "pct": 0.0138214,
+            "total_ms": 0.063,
+            "count": 48,
+            "avg_us": 1.3,
+            "bound_type": "Memory / Compute Bound"
+          },
+          {
+            "op": "PERMUTE",
+            "pct": 0.0130746,
+            "total_ms": 0.059,
+            "count": 48,
+            "avg_us": 1.23,
+            "bound_type": "Memory / Compute Bound"
+          }
+        ],
+        "ranked_decode": [
+          {
+            "op": "MUL_MAT",
+            "pct": 30.7765,
+            "total_ms": 27625.8,
+            "count": 127232,
+            "avg_us": 217.13,
+            "bound_type": "Memory Bandwidth / Dequant Bound"
+          },
+          {
+            "op": "MUL",
+            "pct": 14.462,
+            "total_ms": 12981.5,
+            "count": 82176,
+            "avg_us": 157.97,
+            "bound_type": "Memory Bandwidth Bound"
+          },
+          {
+            "op": "RMS_NORM",
+            "pct": 9.42614,
+            "total_ms": 8461.18,
+            "count": 53504,
+            "avg_us": 158.14,
+            "bound_type": "Memory Bandwidth Bound"
+          },
+          {
+            "op": "ADD",
+            "pct": 7.9367,
+            "total_ms": 7124.21,
+            "count": 45056,
+            "avg_us": 158.12,
+            "bound_type": "Memory Bandwidth Bound"
+          },
+          {
+            "op": "GET_ROWS",
+            "pct": 4.55647,
+            "total_ms": 4090.02,
+            "count": 49664,
+            "avg_us": 82.35,
+            "bound_type": "Memory Bandwidth / Gathering Bound"
+          },
+          {
+            "op": "CPY",
+            "pct": 4.42875,
+            "total_ms": 3975.38,
+            "count": 49152,
+            "avg_us": 80.88,
+            "bound_type": "Memory Bandwidth Bound"
+          },
+          {
+            "op": "SILU",
+            "pct": 4.3508,
+            "total_ms": 3905.41,
+            "count": 24576,
+            "avg_us": 158.91,
+            "bound_type": "Compute / Elementwise Bound"
+          },
+          {
+            "op": "L2_NORM",
+            "pct": 4.31039,
+            "total_ms": 3869.13,
+            "count": 24576,
+            "avg_us": 157.44,
+            "bound_type": "Memory Bandwidth Bound"
+          },
+          {
+            "op": "SWIGLU",
+            "pct": 2.91884,
+            "total_ms": 2620.03,
+            "count": 16384,
+            "avg_us": 159.91,
+            "bound_type": "Compute / Elementwise Bound"
+          },
+          {
+            "op": "SIGMOID",
+            "pct": 2.87864,
+            "total_ms": 2583.95,
+            "count": 16384,
+            "avg_us": 157.71,
+            "bound_type": "Compute / Elementwise Bound"
+          },
+          {
+            "op": "GATED_DELTA_NET",
+            "pct": 2.2268,
+            "total_ms": 1998.84,
+            "count": 12288,
+            "avg_us": 162.67,
+            "bound_type": "Compute / Register Bound"
+          },
+          {
+            "op": "CONCAT",
+            "pct": 2.18513,
+            "total_ms": 1961.43,
+            "count": 12288,
+            "avg_us": 159.62,
+            "bound_type": "Memory / Compute Bound"
+          },
+          {
+            "op": "SOFTPLUS",
+            "pct": 2.17288,
+            "total_ms": 1950.44,
+            "count": 12288,
+            "avg_us": 158.73,
+            "bound_type": "Memory / Compute Bound"
+          },
+          {
+            "op": "SSM_CONV",
+            "pct": 2.16381,
+            "total_ms": 1942.3,
+            "count": 12288,
+            "avg_us": 158.06,
+            "bound_type": "Memory / Register Bound"
+          },
+          {
+            "op": "ROPE",
+            "pct": 1.48032,
+            "total_ms": 1328.78,
+            "count": 8192,
+            "avg_us": 162.21,
+            "bound_type": "Memory Bandwidth / Compute Bound"
+          },
+          {
+            "op": "SET_ROWS",
+            "pct": 1.43795,
+            "total_ms": 1290.75,
+            "count": 8192,
+            "avg_us": 157.56,
+            "bound_type": "Memory / Compute Bound"
+          },
+          {
+            "op": "FLASH_ATTN_EXT",
+            "pct": 0.765666,
+            "total_ms": 687.284,
+            "count": 4096,
+            "avg_us": 167.79,
+            "bound_type": "Compute / Memory Bandwidth Bound"
+          },
+          {
+            "op": "CONT",
+            "pct": 0.728089,
+            "total_ms": 653.554,
+            "count": 4096,
+            "avg_us": 159.56,
+            "bound_type": "Memory / Compute Bound"
+          },
+          {
+            "op": "RESHAPE",
+            "pct": 0.38755,
+            "total_ms": 347.876,
+            "count": 147456,
+            "avg_us": 2.36,
+            "bound_type": "Memory / Compute Bound"
+          },
+          {
+            "op": "VIEW",
+            "pct": 0.345259,
+            "total_ms": 309.914,
+            "count": 176640,
+            "avg_us": 1.75,
+            "bound_type": "Memory / Compute Bound"
+          },
+          {
+            "op": "SCALE",
+            "pct": 0.0295763,
+            "total_ms": 26.549,
+            "count": 24576,
+            "avg_us": 1.08,
+            "bound_type": "Memory Bandwidth Bound"
+          },
+          {
+            "op": "PERMUTE",
+            "pct": 0.0163103,
+            "total_ms": 14.641,
+            "count": 12288,
+            "avg_us": 1.19,
+            "bound_type": "Memory / Compute Bound"
+          },
+          {
+            "op": "TRANSPOSE",
+            "pct": 0.0154562,
+            "total_ms": 13.874,
+            "count": 12288,
+            "avg_us": 1.13,
+            "bound_type": "Memory / Compute Bound"
+          }
+        ],
+        "ranked_overall": [
+          {
+            "op": "MUL_MAT",
+            "pct": 30.8564,
+            "total_ms": 27837.4,
+            "count": 127729,
+            "avg_us": 217.94,
+            "bound_type": "Memory Bandwidth / Dequant Bound"
+          },
+          {
+            "op": "MUL",
+            "pct": 14.4366,
+            "total_ms": 13024.1,
+            "count": 82497,
+            "avg_us": 157.87,
+            "bound_type": "Memory Bandwidth Bound"
+          },
+          {
+            "op": "RMS_NORM",
+            "pct": 9.40623,
+            "total_ms": 8485.92,
+            "count": 53713,
+            "avg_us": 157.99,
+            "bound_type": "Memory Bandwidth Bound"
+          },
+          {
+            "op": "ADD",
+            "pct": 7.91838,
+            "total_ms": 7143.65,
+            "count": 45232,
+            "avg_us": 157.93,
+            "bound_type": "Memory Bandwidth Bound"
+          },
+          {
+            "op": "GET_ROWS",
+            "pct": 4.55255,
+            "total_ms": 4107.13,
+            "count": 49858,
+            "avg_us": 82.38,
+            "bound_type": "Memory Bandwidth / Gathering Bound"
+          },
+          {
+            "op": "CPY",
+            "pct": 4.42159,
+            "total_ms": 3988.99,
+            "count": 49344,
+            "avg_us": 80.84,
+            "bound_type": "Memory Bandwidth Bound"
+          },
+          {
+            "op": "SILU",
+            "pct": 4.34838,
+            "total_ms": 3922.93,
+            "count": 24672,
+            "avg_us": 159.0,
+            "bound_type": "Compute / Elementwise Bound"
+          },
+          {
+            "op": "L2_NORM",
+            "pct": 4.29951,
+            "total_ms": 3878.84,
+            "count": 24672,
+            "avg_us": 157.22,
+            "bound_type": "Memory Bandwidth Bound"
+          },
+          {
+            "op": "SWIGLU",
+            "pct": 2.91317,
+            "total_ms": 2628.14,
+            "count": 16448,
+            "avg_us": 159.78,
+            "bound_type": "Compute / Elementwise Bound"
+          },
+          {
+            "op": "SIGMOID",
+            "pct": 2.87148,
+            "total_ms": 2590.53,
+            "count": 16448,
+            "avg_us": 157.5,
+            "bound_type": "Compute / Elementwise Bound"
+          },
+          {
+            "op": "GATED_DELTA_NET",
+            "pct": 2.23156,
+            "total_ms": 2013.23,
+            "count": 12336,
+            "avg_us": 163.2,
+            "bound_type": "Compute / Register Bound"
+          },
+          {
+            "op": "CONCAT",
+            "pct": 2.18397,
+            "total_ms": 1970.29,
+            "count": 12336,
+            "avg_us": 159.72,
+            "bound_type": "Memory / Compute Bound"
+          },
+          {
+            "op": "SOFTPLUS",
+            "pct": 2.16712,
+            "total_ms": 1955.09,
+            "count": 12336,
+            "avg_us": 158.49,
+            "bound_type": "Memory / Compute Bound"
+          },
+          {
+            "op": "SSM_CONV",
+            "pct": 2.16127,
+            "total_ms": 1949.81,
+            "count": 12336,
+            "avg_us": 158.06,
+            "bound_type": "Memory / Register Bound"
+          },
+          {
+            "op": "ROPE",
+            "pct": 1.48323,
+            "total_ms": 1338.12,
+            "count": 8224,
+            "avg_us": 162.71,
+            "bound_type": "Memory Bandwidth / Compute Bound"
+          },
+          {
+            "op": "SET_ROWS",
+            "pct": 1.43807,
+            "total_ms": 1297.37,
+            "count": 8224,
+            "avg_us": 157.75,
+            "bound_type": "Memory / Compute Bound"
+          },
+          {
+            "op": "FLASH_ATTN_EXT",
+            "pct": 0.777421,
+            "total_ms": 701.359,
+            "count": 4112,
+            "avg_us": 170.56,
+            "bound_type": "Compute / Memory Bandwidth Bound"
+          },
+          {
+            "op": "CONT",
+            "pct": 0.726506,
+            "total_ms": 655.425,
+            "count": 4112,
+            "avg_us": 159.39,
+            "bound_type": "Memory / Compute Bound"
+          },
+          {
+            "op": "RESHAPE",
+            "pct": 0.387945,
+            "total_ms": 349.989,
+            "count": 148032,
+            "avg_us": 2.36,
+            "bound_type": "Memory / Compute Bound"
+          },
+          {
+            "op": "VIEW",
+            "pct": 0.345455,
+            "total_ms": 311.656,
+            "count": 177330,
+            "avg_us": 1.76,
+            "bound_type": "Memory / Compute Bound"
+          },
+          {
+            "op": "SCALE",
+            "pct": 0.0415103,
+            "total_ms": 37.449,
+            "count": 24672,
+            "avg_us": 1.52,
+            "bound_type": "Memory Bandwidth Bound"
+          },
+          {
+            "op": "PERMUTE",
+            "pct": 0.016294,
+            "total_ms": 14.7,
+            "count": 12336,
+            "avg_us": 1.19,
+            "bound_type": "Memory / Compute Bound"
+          },
+          {
+            "op": "TRANSPOSE",
+            "pct": 0.015448,
+            "total_ms": 13.937,
+            "count": 12336,
+            "avg_us": 1.13,
+            "bound_type": "Memory / Compute Bound"
+          }
+        ],
+        "disable_graphs": false
+      }
+    },
+    "S3_prefill_heavy": {
+      "meta": {
+        "name": "S3_prefill_heavy",
+        "prompt_tokens": 4096,
+        "gen_tokens": 128,
+        "desc": "Prefill Heavy (4096 / 128)"
+      },
+      "profile": {
+        "prompt_tokens": 3308,
+        "gen_tokens": 128,
+        "prefill_wall_ms": 7331.89,
+        "decode_wall_ms": 46815.7,
+        "total_prefill_ms": 7269.35,
+        "total_decode_ms": 46133.9,
+        "total_overall_ms": 53403.2,
+        "ranked_prefill": [
+          {
+            "op": "MUL_MAT",
+            "pct": 50.953,
+            "total_ms": 3703.95,
+            "count": 3479,
+            "avg_us": 1064.66,
+            "bound_type": "Memory Bandwidth / Dequant Bound"
+          },
+          {
+            "op": "MUL",
+            "pct": 8.74849,
+            "total_ms": 635.958,
+            "count": 2247,
+            "avg_us": 283.02,
+            "bound_type": "Memory Bandwidth Bound"
+          },
+          {
+            "op": "RMS_NORM",
+            "pct": 6.132,
+            "total_ms": 445.757,
+            "count": 1463,
+            "avg_us": 304.69,
+            "bound_type": "Memory Bandwidth Bound"
+          },
+          {
+            "op": "ADD",
+            "pct": 4.84722,
+            "total_ms": 352.362,
+            "count": 1232,
+            "avg_us": 286.01,
+            "bound_type": "Memory Bandwidth Bound"
+          },
+          {
+            "op": "GATED_DELTA_NET",
+            "pct": 4.64463,
+            "total_ms": 337.634,
+            "count": 336,
+            "avg_us": 1004.86,
+            "bound_type": "Compute / Register Bound"
+          },
+          {
+            "op": "GET_ROWS",
+            "pct": 2.89321,
+            "total_ms": 210.318,
+            "count": 1358,
+            "avg_us": 154.87,
+            "bound_type": "Memory Bandwidth / Gathering Bound"
+          },
+          {
+            "op": "SILU",
+            "pct": 2.66604,
+            "total_ms": 193.804,
+            "count": 672,
+            "avg_us": 288.4,
+            "bound_type": "Compute / Elementwise Bound"
+          },
+          {
+            "op": "SWIGLU",
+            "pct": 2.59559,
+            "total_ms": 188.682,
+            "count": 448,
+            "avg_us": 421.17,
+            "bound_type": "Compute / Elementwise Bound"
+          },
+          {
+            "op": "FLASH_ATTN_EXT",
+            "pct": 2.59145,
+            "total_ms": 188.381,
+            "count": 112,
+            "avg_us": 1681.98,
+            "bound_type": "Compute / Memory Bandwidth Bound"
+          },
+          {
+            "op": "CPY",
+            "pct": 2.56327,
+            "total_ms": 186.333,
+            "count": 1344,
+            "avg_us": 138.64,
+            "bound_type": "Memory Bandwidth Bound"
+          },
+          {
+            "op": "L2_NORM",
+            "pct": 2.36102,
+            "total_ms": 171.631,
+            "count": 672,
+            "avg_us": 255.4,
+            "bound_type": "Memory Bandwidth Bound"
+          },
+          {
+            "op": "CONCAT",
+            "pct": 1.70491,
+            "total_ms": 123.936,
+            "count": 336,
+            "avg_us": 368.86,
+            "bound_type": "Memory / Compute Bound"
+          },
+          {
+            "op": "SIGMOID",
+            "pct": 1.57498,
+            "total_ms": 114.491,
+            "count": 448,
+            "avg_us": 255.56,
+            "bound_type": "Compute / Elementwise Bound"
+          },
+          {
+            "op": "SSM_CONV",
+            "pct": 1.38727,
+            "total_ms": 100.845,
+            "count": 336,
+            "avg_us": 300.13,
+            "bound_type": "Memory / Register Bound"
+          },
+          {
+            "op": "SOFTPLUS",
+            "pct": 1.19411,
+            "total_ms": 86.804,
+            "count": 336,
+            "avg_us": 258.35,
+            "bound_type": "Memory / Compute Bound"
+          },
+          {
+            "op": "ROPE",
+            "pct": 1.04639,
+            "total_ms": 76.065,
+            "count": 224,
+            "avg_us": 339.58,
+            "bound_type": "Memory Bandwidth / Compute Bound"
+          },
+          {
+            "op": "SET_ROWS",
+            "pct": 0.890777,
+            "total_ms": 64.754,
+            "count": 224,
+            "avg_us": 289.08,
+            "bound_type": "Memory / Compute Bound"
+          },
+          {
+            "op": "CONT",
+            "pct": 0.552348,
+            "total_ms": 40.152,
+            "count": 112,
+            "avg_us": 358.5,
+            "bound_type": "Memory / Compute Bound"
+          },
+          {
+            "op": "RESHAPE",
+            "pct": 0.241448,
+            "total_ms": 17.552,
+            "count": 4032,
+            "avg_us": 4.35,
+            "bound_type": "Memory / Compute Bound"
+          },
+          {
+            "op": "VIEW",
+            "pct": 0.207663,
+            "total_ms": 15.096,
+            "count": 4830,
+            "avg_us": 3.13,
+            "bound_type": "Memory / Compute Bound"
+          },
+          {
+            "op": "SCALE",
+            "pct": 0.189349,
+            "total_ms": 13.764,
+            "count": 672,
+            "avg_us": 20.48,
+            "bound_type": "Memory Bandwidth Bound"
+          },
+          {
+            "op": "TRANSPOSE",
+            "pct": 0.00952732,
+            "total_ms": 0.693,
+            "count": 336,
+            "avg_us": 2.06,
+            "bound_type": "Memory / Compute Bound"
+          },
+          {
+            "op": "PERMUTE",
+            "pct": 0.00527743,
+            "total_ms": 0.384,
+            "count": 336,
+            "avg_us": 1.14,
+            "bound_type": "Memory / Compute Bound"
+          }
+        ],
+        "ranked_decode": [
+          {
+            "op": "MUL_MAT",
+            "pct": 26.2367,
+            "total_ms": 12104.0,
+            "count": 63616,
+            "avg_us": 190.27,
+            "bound_type": "Memory Bandwidth / Dequant Bound"
+          },
+          {
+            "op": "MUL",
+            "pct": 13.4233,
+            "total_ms": 6192.68,
+            "count": 41088,
+            "avg_us": 150.72,
+            "bound_type": "Memory Bandwidth Bound"
+          },
+          {
+            "op": "SILU",
+            "pct": 9.36667,
+            "total_ms": 4321.21,
+            "count": 12288,
+            "avg_us": 351.66,
+            "bound_type": "Compute / Elementwise Bound"
+          },
+          {
+            "op": "RMS_NORM",
+            "pct": 8.75045,
+            "total_ms": 4036.92,
+            "count": 26752,
+            "avg_us": 150.9,
+            "bound_type": "Memory Bandwidth Bound"
+          },
+          {
+            "op": "ADD",
+            "pct": 7.3686,
+            "total_ms": 3399.42,
+            "count": 22528,
+            "avg_us": 150.9,
+            "bound_type": "Memory Bandwidth Bound"
+          },
+          {
+            "op": "FLASH_ATTN_EXT",
+            "pct": 5.06608,
+            "total_ms": 2337.18,
+            "count": 2048,
+            "avg_us": 1141.2,
+            "bound_type": "Compute / Memory Bandwidth Bound"
+          },
+          {
+            "op": "GET_ROWS",
+            "pct": 4.17151,
+            "total_ms": 1924.48,
+            "count": 24832,
+            "avg_us": 77.5,
+            "bound_type": "Memory Bandwidth / Gathering Bound"
+          },
+          {
+            "op": "CPY",
+            "pct": 4.07805,
+            "total_ms": 1881.36,
+            "count": 24576,
+            "avg_us": 76.55,
+            "bound_type": "Memory Bandwidth Bound"
+          },
+          {
+            "op": "L2_NORM",
+            "pct": 3.97862,
+            "total_ms": 1835.49,
+            "count": 12288,
+            "avg_us": 149.37,
+            "bound_type": "Memory Bandwidth Bound"
+          },
+          {
+            "op": "SWIGLU",
+            "pct": 2.71551,
+            "total_ms": 1252.77,
+            "count": 8192,
+            "avg_us": 152.93,
+            "bound_type": "Compute / Elementwise Bound"
+          },
+          {
+            "op": "SIGMOID",
+            "pct": 2.65775,
+            "total_ms": 1226.12,
+            "count": 8192,
+            "avg_us": 149.67,
+            "bound_type": "Compute / Elementwise Bound"
+          },
+          {
+            "op": "GATED_DELTA_NET",
+            "pct": 2.05626,
+            "total_ms": 948.63,
+            "count": 6144,
+            "avg_us": 154.4,
+            "bound_type": "Compute / Register Bound"
+          },
+          {
+            "op": "CONCAT",
+            "pct": 2.01471,
+            "total_ms": 929.461,
+            "count": 6144,
+            "avg_us": 151.28,
+            "bound_type": "Memory / Compute Bound"
+          },
+          {
+            "op": "SSM_CONV",
+            "pct": 2.00953,
+            "total_ms": 927.076,
+            "count": 6144,
+            "avg_us": 150.89,
+            "bound_type": "Memory / Register Bound"
+          },
+          {
+            "op": "SOFTPLUS",
+            "pct": 2.00421,
+            "total_ms": 924.619,
+            "count": 6144,
+            "avg_us": 150.49,
+            "bound_type": "Memory / Compute Bound"
+          },
+          {
+            "op": "ROPE",
+            "pct": 1.36726,
+            "total_ms": 630.77,
+            "count": 4096,
+            "avg_us": 154.0,
+            "bound_type": "Memory Bandwidth / Compute Bound"
+          },
+          {
+            "op": "SET_ROWS",
+            "pct": 1.33688,
+            "total_ms": 616.756,
+            "count": 4096,
+            "avg_us": 150.57,
+            "bound_type": "Memory / Compute Bound"
+          },
+          {
+            "op": "CONT",
+            "pct": 0.67521,
+            "total_ms": 311.5,
+            "count": 2048,
+            "avg_us": 152.1,
+            "bound_type": "Memory / Compute Bound"
+          },
+          {
+            "op": "RESHAPE",
+            "pct": 0.349241,
+            "total_ms": 161.119,
+            "count": 73728,
+            "avg_us": 2.19,
+            "bound_type": "Memory / Compute Bound"
+          },
+          {
+            "op": "VIEW",
+            "pct": 0.317663,
+            "total_ms": 146.55,
+            "count": 88320,
+            "avg_us": 1.66,
+            "bound_type": "Memory / Compute Bound"
+          },
+          {
+            "op": "SCALE",
+            "pct": 0.0268776,
+            "total_ms": 12.4,
+            "count": 12288,
+            "avg_us": 1.01,
+            "bound_type": "Memory Bandwidth Bound"
+          },
+          {
+            "op": "TRANSPOSE",
+            "pct": 0.0154206,
+            "total_ms": 7.114,
+            "count": 6144,
+            "avg_us": 1.16,
+            "bound_type": "Memory / Compute Bound"
+          },
+          {
+            "op": "PERMUTE",
+            "pct": 0.0135368,
+            "total_ms": 6.245,
+            "count": 6144,
+            "avg_us": 1.02,
+            "bound_type": "Memory / Compute Bound"
+          }
+        ],
+        "ranked_overall": [
+          {
+            "op": "MUL_MAT",
+            "pct": 29.6011,
+            "total_ms": 15808.0,
+            "count": 67095,
+            "avg_us": 235.61,
+            "bound_type": "Memory Bandwidth / Dequant Bound"
+          },
+          {
+            "op": "MUL",
+            "pct": 12.7869,
+            "total_ms": 6828.64,
+            "count": 43335,
+            "avg_us": 157.58,
+            "bound_type": "Memory Bandwidth Bound"
+          },
+          {
+            "op": "SILU",
+            "pct": 8.45457,
+            "total_ms": 4515.01,
+            "count": 12960,
+            "avg_us": 348.38,
+            "bound_type": "Compute / Elementwise Bound"
+          },
+          {
+            "op": "RMS_NORM",
+            "pct": 8.39402,
+            "total_ms": 4482.68,
+            "count": 28215,
+            "avg_us": 158.88,
+            "bound_type": "Memory Bandwidth Bound"
+          },
+          {
+            "op": "ADD",
+            "pct": 7.02538,
+            "total_ms": 3751.78,
+            "count": 23760,
+            "avg_us": 157.9,
+            "bound_type": "Memory Bandwidth Bound"
+          },
+          {
+            "op": "FLASH_ATTN_EXT",
+            "pct": 4.72923,
+            "total_ms": 2525.56,
+            "count": 2160,
+            "avg_us": 1169.24,
+            "bound_type": "Compute / Memory Bandwidth Bound"
+          },
+          {
+            "op": "GET_ROWS",
+            "pct": 3.9975,
+            "total_ms": 2134.79,
+            "count": 26190,
+            "avg_us": 81.51,
+            "bound_type": "Memory Bandwidth / Gathering Bound"
+          },
+          {
+            "op": "CPY",
+            "pct": 3.87185,
+            "total_ms": 2067.69,
+            "count": 25920,
+            "avg_us": 79.77,
+            "bound_type": "Memory Bandwidth Bound"
+          },
+          {
+            "op": "L2_NORM",
+            "pct": 3.75843,
+            "total_ms": 2007.12,
+            "count": 12960,
+            "avg_us": 154.87,
+            "bound_type": "Memory Bandwidth Bound"
+          },
+          {
+            "op": "SWIGLU",
+            "pct": 2.69919,
+            "total_ms": 1441.45,
+            "count": 8640,
+            "avg_us": 166.84,
+            "bound_type": "Compute / Elementwise Bound"
+          },
+          {
+            "op": "SIGMOID",
+            "pct": 2.51036,
+            "total_ms": 1340.62,
+            "count": 8640,
+            "avg_us": 155.16,
+            "bound_type": "Compute / Elementwise Bound"
+          },
+          {
+            "op": "GATED_DELTA_NET",
+            "pct": 2.40859,
+            "total_ms": 1286.26,
+            "count": 6480,
+            "avg_us": 198.5,
+            "bound_type": "Compute / Register Bound"
+          },
+          {
+            "op": "CONCAT",
+            "pct": 1.97254,
+            "total_ms": 1053.4,
+            "count": 6480,
+            "avg_us": 162.56,
+            "bound_type": "Memory / Compute Bound"
+          },
+          {
+            "op": "SSM_CONV",
+            "pct": 1.92483,
+            "total_ms": 1027.92,
+            "count": 6480,
+            "avg_us": 158.63,
+            "bound_type": "Memory / Register Bound"
+          },
+          {
+            "op": "SOFTPLUS",
+            "pct": 1.89394,
+            "total_ms": 1011.42,
+            "count": 6480,
+            "avg_us": 156.08,
+            "bound_type": "Memory / Compute Bound"
+          },
+          {
+            "op": "ROPE",
+            "pct": 1.32358,
+            "total_ms": 706.835,
+            "count": 4320,
+            "avg_us": 163.62,
+            "bound_type": "Memory Bandwidth / Compute Bound"
+          },
+          {
+            "op": "SET_ROWS",
+            "pct": 1.27616,
+            "total_ms": 681.51,
+            "count": 4320,
+            "avg_us": 157.76,
+            "bound_type": "Memory / Compute Bound"
+          },
+          {
+            "op": "CONT",
+            "pct": 0.658486,
+            "total_ms": 351.653,
+            "count": 2160,
+            "avg_us": 162.8,
+            "bound_type": "Memory / Compute Bound"
+          },
+          {
+            "op": "RESHAPE",
+            "pct": 0.334568,
+            "total_ms": 178.67,
+            "count": 77760,
+            "avg_us": 2.3,
+            "bound_type": "Memory / Compute Bound"
+          },
+          {
+            "op": "VIEW",
+            "pct": 0.30269,
+            "total_ms": 161.646,
+            "count": 93150,
+            "avg_us": 1.74,
+            "bound_type": "Memory / Compute Bound"
+          },
+          {
+            "op": "SCALE",
+            "pct": 0.0489936,
+            "total_ms": 26.164,
+            "count": 12960,
+            "avg_us": 2.02,
+            "bound_type": "Memory Bandwidth Bound"
+          },
+          {
+            "op": "TRANSPOSE",
+            "pct": 0.0146184,
+            "total_ms": 7.807,
+            "count": 6480,
+            "avg_us": 1.2,
+            "bound_type": "Memory / Compute Bound"
+          },
+          {
+            "op": "PERMUTE",
+            "pct": 0.0124125,
+            "total_ms": 6.629,
+            "count": 6480,
+            "avg_us": 1.02,
+            "bound_type": "Memory / Compute Bound"
+          }
+        ],
+        "disable_graphs": false
+      }
+    },
+    "S4_agentic": {
+      "meta": {
+        "name": "S4_agentic",
+        "prompt_tokens": 4096,
+        "gen_tokens": 256,
+        "desc": "Agentic Multi-Turn (4096 / 256)"
+      },
+      "profile": {
+        "prompt_tokens": 3308,
+        "gen_tokens": 256,
+        "prefill_wall_ms": 6460.39,
+        "decode_wall_ms": 87745.4,
+        "total_prefill_ms": 6404.54,
+        "total_decode_ms": 86476.2,
+        "total_overall_ms": 92880.7,
+        "ranked_prefill": [
+          {
+            "op": "MUL_MAT",
+            "pct": 51.8971,
+            "total_ms": 3323.77,
+            "count": 3479,
+            "avg_us": 955.38,
+            "bound_type": "Memory Bandwidth / Dequant Bound"
+          },
+          {
+            "op": "MUL",
+            "pct": 8.51506,
+            "total_ms": 545.35,
+            "count": 2247,
+            "avg_us": 242.7,
+            "bound_type": "Memory Bandwidth Bound"
+          },
+          {
+            "op": "RMS_NORM",
+            "pct": 5.9068,
+            "total_ms": 378.303,
+            "count": 1463,
+            "avg_us": 258.58,
+            "bound_type": "Memory Bandwidth Bound"
+          },
+          {
+            "op": "ADD",
+            "pct": 4.74049,
+            "total_ms": 303.606,
+            "count": 1232,
+            "avg_us": 246.43,
+            "bound_type": "Memory Bandwidth Bound"
+          },
+          {
+            "op": "GATED_DELTA_NET",
+            "pct": 4.68037,
+            "total_ms": 299.756,
+            "count": 336,
+            "avg_us": 892.13,
+            "bound_type": "Compute / Register Bound"
+          },
+          {
+            "op": "GET_ROWS",
+            "pct": 2.80337,
+            "total_ms": 179.543,
+            "count": 1358,
+            "avg_us": 132.21,
+            "bound_type": "Memory Bandwidth / Gathering Bound"
+          },
+          {
+            "op": "FLASH_ATTN_EXT",
+            "pct": 2.67772,
+            "total_ms": 171.496,
+            "count": 112,
+            "avg_us": 1531.21,
+            "bound_type": "Compute / Memory Bandwidth Bound"
+          },
+          {
+            "op": "SILU",
+            "pct": 2.62955,
+            "total_ms": 168.41,
+            "count": 672,
+            "avg_us": 250.61,
+            "bound_type": "Compute / Elementwise Bound"
+          },
+          {
+            "op": "SWIGLU",
+            "pct": 2.54869,
+            "total_ms": 163.232,
+            "count": 448,
+            "avg_us": 364.36,
+            "bound_type": "Compute / Elementwise Bound"
+          },
+          {
+            "op": "CPY",
+            "pct": 2.44659,
+            "total_ms": 156.693,
+            "count": 1344,
+            "avg_us": 116.59,
+            "bound_type": "Memory Bandwidth Bound"
+          },
+          {
+            "op": "L2_NORM",
+            "pct": 2.32875,
+            "total_ms": 149.146,
+            "count": 672,
+            "avg_us": 221.94,
+            "bound_type": "Memory Bandwidth Bound"
+          },
+          {
+            "op": "CONCAT",
+            "pct": 1.66274,
+            "total_ms": 106.491,
+            "count": 336,
+            "avg_us": 316.94,
+            "bound_type": "Memory / Compute Bound"
+          },
+          {
+            "op": "SIGMOID",
+            "pct": 1.55911,
+            "total_ms": 99.853,
+            "count": 448,
+            "avg_us": 222.89,
+            "bound_type": "Compute / Elementwise Bound"
+          },
+          {
+            "op": "SSM_CONV",
+            "pct": 1.35242,
+            "total_ms": 86.616,
+            "count": 336,
+            "avg_us": 257.79,
+            "bound_type": "Memory / Register Bound"
+          },
+          {
+            "op": "SOFTPLUS",
+            "pct": 1.14304,
+            "total_ms": 73.207,
+            "count": 336,
+            "avg_us": 217.88,
+            "bound_type": "Memory / Compute Bound"
+          },
+          {
+            "op": "ROPE",
+            "pct": 1.04293,
+            "total_ms": 66.795,
+            "count": 224,
+            "avg_us": 298.19,
+            "bound_type": "Memory Bandwidth / Compute Bound"
+          },
+          {
+            "op": "SET_ROWS",
+            "pct": 0.839916,
+            "total_ms": 53.793,
+            "count": 224,
+            "avg_us": 240.15,
+            "bound_type": "Memory / Compute Bound"
+          },
+          {
+            "op": "CONT",
+            "pct": 0.543539,
+            "total_ms": 34.811,
+            "count": 112,
+            "avg_us": 310.81,
+            "bound_type": "Memory / Compute Bound"
+          },
+          {
+            "op": "RESHAPE",
+            "pct": 0.249078,
+            "total_ms": 15.952,
+            "count": 4032,
+            "avg_us": 3.96,
+            "bound_type": "Memory / Compute Bound"
+          },
+          {
+            "op": "VIEW",
+            "pct": 0.22125,
+            "total_ms": 14.17,
+            "count": 4830,
+            "avg_us": 2.93,
+            "bound_type": "Memory / Compute Bound"
+          },
+          {
+            "op": "SCALE",
+            "pct": 0.19232,
+            "total_ms": 12.317,
+            "count": 672,
+            "avg_us": 18.33,
+            "bound_type": "Memory Bandwidth Bound"
+          },
+          {
+            "op": "TRANSPOSE",
+            "pct": 0.0130688,
+            "total_ms": 0.837,
+            "count": 336,
+            "avg_us": 2.49,
+            "bound_type": "Memory / Compute Bound"
+          },
+          {
+            "op": "PERMUTE",
+            "pct": 0.00615833,
+            "total_ms": 0.394,
+            "count": 336,
+            "avg_us": 1.17,
+            "bound_type": "Memory / Compute Bound"
+          }
+        ],
+        "ranked_decode": [
+          {
+            "op": "MUL_MAT",
+            "pct": 32.8941,
+            "total_ms": 28445.6,
+            "count": 127232,
+            "avg_us": 223.57,
+            "bound_type": "Memory Bandwidth / Dequant Bound"
+          },
+          {
+            "op": "MUL",
+            "pct": 13.3141,
+            "total_ms": 11513.6,
+            "count": 82176,
+            "avg_us": 140.11,
+            "bound_type": "Memory Bandwidth Bound"
+          },
+          {
+            "op": "ADD",
+            "pct": 10.5569,
+            "total_ms": 9129.19,
+            "count": 45056,
+            "avg_us": 202.62,
+            "bound_type": "Memory Bandwidth Bound"
+          },
+          {
+            "op": "RMS_NORM",
+            "pct": 8.68635,
+            "total_ms": 7511.63,
+            "count": 53504,
+            "avg_us": 140.39,
+            "bound_type": "Memory Bandwidth Bound"
+          },
+          {
+            "op": "GET_ROWS",
+            "pct": 4.16925,
+            "total_ms": 3605.41,
+            "count": 49664,
+            "avg_us": 72.6,
+            "bound_type": "Memory Bandwidth / Gathering Bound"
+          },
+          {
+            "op": "CPY",
+            "pct": 4.06847,
+            "total_ms": 3518.26,
+            "count": 49152,
+            "avg_us": 71.58,
+            "bound_type": "Memory Bandwidth Bound"
+          },
+          {
+            "op": "SILU",
+            "pct": 4.0034,
+            "total_ms": 3461.99,
+            "count": 24576,
+            "avg_us": 140.87,
+            "bound_type": "Compute / Elementwise Bound"
+          },
+          {
+            "op": "L2_NORM",
+            "pct": 3.97993,
+            "total_ms": 3441.69,
+            "count": 24576,
+            "avg_us": 140.04,
+            "bound_type": "Memory Bandwidth Bound"
+          },
+          {
+            "op": "SWIGLU",
+            "pct": 2.69154,
+            "total_ms": 2327.54,
+            "count": 16384,
+            "avg_us": 142.06,
+            "bound_type": "Compute / Elementwise Bound"
+          },
+          {
+            "op": "SIGMOID",
+            "pct": 2.65691,
+            "total_ms": 2297.59,
+            "count": 16384,
+            "avg_us": 140.23,
+            "bound_type": "Compute / Elementwise Bound"
+          },
+          {
+            "op": "GATED_DELTA_NET",
+            "pct": 2.04986,
+            "total_ms": 1772.64,
+            "count": 12288,
+            "avg_us": 144.26,
+            "bound_type": "Compute / Register Bound"
+          },
+          {
+            "op": "CONCAT",
+            "pct": 2.00833,
+            "total_ms": 1736.73,
+            "count": 12288,
+            "avg_us": 141.34,
+            "bound_type": "Memory / Compute Bound"
+          },
+          {
+            "op": "SOFTPLUS",
+            "pct": 2.00711,
+            "total_ms": 1735.67,
+            "count": 12288,
+            "avg_us": 141.25,
+            "bound_type": "Memory / Compute Bound"
+          },
+          {
+            "op": "SSM_CONV",
+            "pct": 1.9975,
+            "total_ms": 1727.36,
+            "count": 12288,
+            "avg_us": 140.57,
+            "bound_type": "Memory / Register Bound"
+          },
+          {
+            "op": "ROPE",
+            "pct": 1.36495,
+            "total_ms": 1180.36,
+            "count": 8192,
+            "avg_us": 144.09,
+            "bound_type": "Memory Bandwidth / Compute Bound"
+          },
+          {
+            "op": "SET_ROWS",
+            "pct": 1.33926,
+            "total_ms": 1158.14,
+            "count": 8192,
+            "avg_us": 141.38,
+            "bound_type": "Memory / Compute Bound"
+          },
+          {
+            "op": "FLASH_ATTN_EXT",
+            "pct": 0.817931,
+            "total_ms": 707.316,
+            "count": 4096,
+            "avg_us": 172.69,
+            "bound_type": "Compute / Memory Bandwidth Bound"
+          },
+          {
+            "op": "CONT",
+            "pct": 0.675424,
+            "total_ms": 584.081,
+            "count": 4096,
+            "avg_us": 142.6,
+            "bound_type": "Memory / Compute Bound"
+          },
+          {
+            "op": "RESHAPE",
+            "pct": 0.348691,
+            "total_ms": 301.535,
+            "count": 147456,
+            "avg_us": 2.04,
+            "bound_type": "Memory / Compute Bound"
+          },
+          {
+            "op": "VIEW",
+            "pct": 0.315903,
+            "total_ms": 273.181,
+            "count": 176640,
+            "avg_us": 1.55,
+            "bound_type": "Memory / Compute Bound"
+          },
+          {
+            "op": "SCALE",
+            "pct": 0.0259338,
+            "total_ms": 22.427,
+            "count": 24576,
+            "avg_us": 0.91,
+            "bound_type": "Memory Bandwidth Bound"
+          },
+          {
+            "op": "TRANSPOSE",
+            "pct": 0.0145944,
+            "total_ms": 12.621,
+            "count": 12288,
+            "avg_us": 1.03,
+            "bound_type": "Memory / Compute Bound"
+          },
+          {
+            "op": "PERMUTE",
+            "pct": 0.0134895,
+            "total_ms": 11.665,
+            "count": 12288,
+            "avg_us": 0.95,
+            "bound_type": "Memory / Compute Bound"
+          }
+        ],
+        "ranked_overall": [
+          {
+            "op": "MUL_MAT",
+            "pct": 34.2045,
+            "total_ms": 31769.4,
+            "count": 130711,
+            "avg_us": 243.05,
+            "bound_type": "Memory Bandwidth / Dequant Bound"
+          },
+          {
+            "op": "MUL",
+            "pct": 12.9832,
+            "total_ms": 12058.9,
+            "count": 84423,
+            "avg_us": 142.84,
+            "bound_type": "Memory Bandwidth Bound"
+          },
+          {
+            "op": "ADD",
+            "pct": 10.1558,
+            "total_ms": 9432.8,
+            "count": 46288,
+            "avg_us": 203.78,
+            "bound_type": "Memory Bandwidth Bound"
+          },
+          {
+            "op": "RMS_NORM",
+            "pct": 8.49469,
+            "total_ms": 7889.93,
+            "count": 54967,
+            "avg_us": 143.54,
+            "bound_type": "Memory Bandwidth Bound"
+          },
+          {
+            "op": "GET_ROWS",
+            "pct": 4.07506,
+            "total_ms": 3784.95,
+            "count": 51022,
+            "avg_us": 74.18,
+            "bound_type": "Memory Bandwidth / Gathering Bound"
+          },
+          {
+            "op": "CPY",
+            "pct": 3.95663,
+            "total_ms": 3674.95,
+            "count": 50496,
+            "avg_us": 72.78,
+            "bound_type": "Memory Bandwidth Bound"
+          },
+          {
+            "op": "SILU",
+            "pct": 3.90867,
+            "total_ms": 3630.4,
+            "count": 25248,
+            "avg_us": 143.79,
+            "bound_type": "Compute / Elementwise Bound"
+          },
+          {
+            "op": "L2_NORM",
+            "pct": 3.86608,
+            "total_ms": 3590.84,
+            "count": 25248,
+            "avg_us": 142.22,
+            "bound_type": "Memory Bandwidth Bound"
+          },
+          {
+            "op": "SWIGLU",
+            "pct": 2.68169,
+            "total_ms": 2490.77,
+            "count": 16832,
+            "avg_us": 147.98,
+            "bound_type": "Compute / Elementwise Bound"
+          },
+          {
+            "op": "SIGMOID",
+            "pct": 2.58121,
+            "total_ms": 2397.45,
+            "count": 16832,
+            "avg_us": 142.43,
+            "bound_type": "Compute / Elementwise Bound"
+          },
+          {
+            "op": "GATED_DELTA_NET",
+            "pct": 2.23125,
+            "total_ms": 2072.4,
+            "count": 12624,
+            "avg_us": 164.16,
+            "bound_type": "Compute / Register Bound"
+          },
+          {
+            "op": "CONCAT",
+            "pct": 1.9845,
+            "total_ms": 1843.22,
+            "count": 12624,
+            "avg_us": 146.01,
+            "bound_type": "Memory / Compute Bound"
+          },
+          {
+            "op": "SSM_CONV",
+            "pct": 1.95302,
+            "total_ms": 1813.98,
+            "count": 12624,
+            "avg_us": 143.69,
+            "bound_type": "Memory / Register Bound"
+          },
+          {
+            "op": "SOFTPLUS",
+            "pct": 1.94753,
+            "total_ms": 1808.88,
+            "count": 12624,
+            "avg_us": 143.29,
+            "bound_type": "Memory / Compute Bound"
+          },
+          {
+            "op": "ROPE",
+            "pct": 1.34275,
+            "total_ms": 1247.16,
+            "count": 8416,
+            "avg_us": 148.19,
+            "bound_type": "Memory Bandwidth / Compute Bound"
+          },
+          {
+            "op": "SET_ROWS",
+            "pct": 1.30483,
+            "total_ms": 1211.93,
+            "count": 8416,
+            "avg_us": 144.0,
+            "bound_type": "Memory / Compute Bound"
+          },
+          {
+            "op": "FLASH_ATTN_EXT",
+            "pct": 0.946172,
+            "total_ms": 878.811,
+            "count": 4208,
+            "avg_us": 208.84,
+            "bound_type": "Compute / Memory Bandwidth Bound"
+          },
+          {
+            "op": "CONT",
+            "pct": 0.66633,
+            "total_ms": 618.893,
+            "count": 4208,
+            "avg_us": 147.07,
+            "bound_type": "Memory / Compute Bound"
+          },
+          {
+            "op": "RESHAPE",
+            "pct": 0.341822,
+            "total_ms": 317.487,
+            "count": 151488,
+            "avg_us": 2.1,
+            "bound_type": "Memory / Compute Bound"
+          },
+          {
+            "op": "VIEW",
+            "pct": 0.309377,
+            "total_ms": 287.351,
+            "count": 181470,
+            "avg_us": 1.58,
+            "bound_type": "Memory / Compute Bound"
+          },
+          {
+            "op": "SCALE",
+            "pct": 0.0374069,
+            "total_ms": 34.744,
+            "count": 25248,
+            "avg_us": 1.38,
+            "bound_type": "Memory Bandwidth Bound"
+          },
+          {
+            "op": "TRANSPOSE",
+            "pct": 0.0144892,
+            "total_ms": 13.458,
+            "count": 12624,
+            "avg_us": 1.07,
+            "bound_type": "Memory / Compute Bound"
+          },
+          {
+            "op": "PERMUTE",
+            "pct": 0.012984,
+            "total_ms": 12.06,
+            "count": 12624,
+            "avg_us": 0.96,
+            "bound_type": "Memory / Compute Bound"
+          }
+        ],
+        "disable_graphs": false
+      }
+    }
+  }
+}

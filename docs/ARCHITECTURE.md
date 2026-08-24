@@ -2,7 +2,7 @@
 
 # Architecture
 
-Qwen3.8-27B (IQ4_XS) inference optimization on an RX 7900 XT (`gfx1100`) via llama.cpp HIP
+Qwen3.8-27B (IQ4_XS) inference optimization on an AMD Radeon RX 7900 XT (`gfx1100`) via llama.cpp HIP
 under WSL2 + ROCm 7.2.1. Goal: custom HIP kernels that beat stock on at least one workload,
 with correctness gates enforced before any integration.
 
@@ -13,15 +13,25 @@ with correctness gates enforced before any integration.
 ├── baseline/
 │   └── binaries/v0.2.0-bb4caa75/   # stock pinned binaries (llama-cli, llama-bench,
 │                                   #   llama-perplexity, test-backend-ops); gitignored
-├── benchmarks/environment/         # environment fingerprints: rocminfo, hipconfig,
-│                                   #   versions.txt, hipsmoke.cpp, llamacpp-pin.txt,
-│                                   #   vram-probe.txt, startup-log.txt, backend-op log
+├── benchmarks/
+│   ├── bin/                        # Orchestrator CLIs (run_session, run_prompts, calibrate, publish_matrix)
+│   ├── config/                     # Empirical thresholds (thresholds.json) and label maps
+│   ├── environment/                # Environment fingerprints: versions.txt, hipconfig.txt, rocminfo.txt,
+│   │                               #   hip-support-comparator.csv, startup-log.txt, vram-probe.txt
+│   ├── host/                       # Host-side daemons: hwinfo_daemon.py, thermal_watchdog.py
+│   ├── lib/                        # Core harness libraries: llabench.py, fingerprint.py, guard.py,
+│   │                               #   store.py, preflight.py, toast.py
+│   ├── prompts/                    # Deterministic 6-prompt corpus (short/long x code/prose)
+│   ├── results/                    # Append-only run journals (rows.jsonl, manifest.json, CHECKSUMS.sha256)
+│   ├── tests/                      # Pytest suite (35 tests) + fixtures + smoke/gate shell scripts
+│   ├── vulkan/                     # Native Vulkan comparator arm build scripts and coverage gate report
+│   └── RUNBOOK.md                  # Binding session protocol, guard thresholds, and thermal policy
 ├── models/                         # GGUF artifact (gitignored) + README.md provenance
 ├── src/                            # custom kernel work lands here (empty pre-Phase 4)
 ├── logs/                           # run logs
-├── freetoken-rocm-probe/           # early ROCm probe tooling (vendored toolchains ignored)
+├── freetoken-rocm-probe/           # early ROCm probe tooling
 └── .planning/                      # ROADMAP.md, REQUIREMENTS.md, PROJECT.md, STATE.md,
-                                    #   phases/01-*/, reference/ROADMAP-original.md
+                                    #   phases/01-*/, phases/02-*/, reference/ROADMAP-original.md
 ```
 
 ## Execution environment
@@ -29,6 +39,8 @@ with correctness gates enforced before any integration.
 ```
 Windows host
 │   AMD Adrenalin driver (WSL2 support), .wslconfig memory=28GB (REQUIRED)
+│   HWiNFO64 Shared Memory v2 telemetry bridge (Global\HWiNFO_SENS_SM2)
+│   Thermal watchdog service (cross-boundary wsl.exe process kill @ 95°C)
 ▼
 WSL2 guest (Ubuntu 24.04, root-only)
 │   /dev/dxg passthrough via librocdxg v1.2.2
@@ -50,7 +62,8 @@ Key constraints:
 | `.wslconfig` `memory=28GB` | DXG ENOMEM during VRAM allocation at lower values (`dxgkio_create_allocation: -12`) |
 | Source tree on guest ext4 | git file-lock operations fail on DrvFs (`/mnt/e`) |
 | Model copy at `/root/models/` | mmap reads over `/mnt/e` stall |
-| Headless runs: `setsid --simple-io --single-turn --no-mmap` | `llama-cli` hangs in `n_tty_write` on dead PTY otherwise |
+| Headless runs: `setsid --simple-io --single-turn --load-mode none` | `llama-cli` hangs in `n_tty_write` on dead PTY otherwise |
+| Pre-flight VRAM Gate | Allocations > 18.25 GB free VRAM intercepted to prevent silent memory thrashing or DXG panic |
 
 ## Roadmap summary (6 phases)
 
@@ -59,8 +72,8 @@ first. See `.planning/ROADMAP.md` for details and the merge map to the original 
 
 | Phase | Focus | Status |
 |---|---|---|
-| 1 | Environment validation & stock baseline | done — pp 111.5 / tg 33.5 tok/s archived |
-| 2 | Benchmark harness & baseline matrix | pending |
+| 1 | Environment validation & stock baseline | done — ROCm 7.2.1 cleared, 132/132 GPU layers verified |
+| 2 | Benchmark harness & baseline matrix | done — 16-cell baseline published, guard & preflight active |
 | 3 | Correctness gates & bottleneck profiling | pending |
 | 4 | Kernel playground scaffold | pending |
 | 5 | First custom kernel (bottleneck attack) | pending |

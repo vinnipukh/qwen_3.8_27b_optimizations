@@ -1,0 +1,303 @@
+{
+  "ok_cells": {
+    "HIP_c4096_pp_fa_off": {
+      "cell_key": "HIP_c4096_pp_fa_off",
+      "backend": "HIP",
+      "tier": 4096,
+      "type": "pp",
+      "flash_attn": "off",
+      "mean_ts": 859.2,
+      "stddev_ts": 155.6,
+      "samples_ts": [
+        945.597,
+        946.976,
+        941.65,
+        586.055,
+        875.723
+      ],
+      "verdict": "OK",
+      "evidence": "",
+      "run_id": "20260823_164724_baseline_hip",
+      "timestamp": ""
+    },
+    "HIP_c4096_tg_fa_off": {
+      "cell_key": "HIP_c4096_tg_fa_off",
+      "backend": "HIP",
+      "tier": 4096,
+      "type": "tg",
+      "flash_attn": "off",
+      "mean_ts": 494.61,
+      "stddev_ts": 55.61,
+      "samples_ts": [
+        521.781,
+        395.485,
+        511.398,
+        520.836,
+        523.564
+      ],
+      "verdict": "OK",
+      "evidence": "",
+      "run_id": "20260823_164724_baseline_hip",
+      "timestamp": ""
+    },
+    "HIP_c4096_pp_fa_on": {
+      "cell_key": "HIP_c4096_pp_fa_on",
+      "backend": "HIP",
+      "tier": 4096,
+      "type": "pp",
+      "flash_attn": "on",
+      "mean_ts": 932.1,
+      "stddev_ts": 19.86,
+      "samples_ts": [
+        896.581,
+        940.755,
+        940.956,
+        940.381,
+        941.833
+      ],
+      "verdict": "OK",
+      "evidence": "",
+      "run_id": "20260823_164724_baseline_hip",
+      "timestamp": ""
+    },
+    "HIP_c4096_tg_fa_on": {
+      "cell_key": "HIP_c4096_tg_fa_on",
+      "backend": "HIP",
+      "tier": 4096,
+      "type": "tg",
+      "flash_attn": "on",
+      "mean_ts": 503.96,
+      "stddev_ts": 56.49,
+      "samples_ts": [
+        519.822,
+        539.17,
+        538.216,
+        404.457,
+        518.114
+      ],
+      "verdict": "OK",
+      "evidence": "",
+      "run_id": "20260823_164724_baseline_hip",
+      "timestamp": ""
+    },
+    "HIP_c8192_pp_fa_off": {
+      "cell_key": "HIP_c8192_pp_fa_off",
+      "backend": "HIP",
+      "tier": 8192,
+      "type": "pp",
+      "flash_attn": "off",
+      "mean_ts": 835.75,
+      "stddev_ts": 78.9,
+      "samples_ts": [
+        875.882,
+        886.016,
+        696.655,
+        849.318,
+        870.886
+      ],
+      "verdict": "OK",
+      "evidence": "",
+      "run_id": "20260823_164724_baseline_hip",
+      "timestamp": ""
+    },
+    "HIP_c8192_tg_fa_off": {
+      "cell_key": "HIP_c8192_tg_fa_off",
+      "backend": "HIP",
+      "tier": 8192,
+      "type": "tg",
+      "flash_attn": "off",
+      "mean_ts": 551.86,
+      "stddev_ts": 56.39,
+      "samples_ts": [
+        585.81,
+        592.09,
+        486.034,
+        600.484,
+        494.858
+      ],
+      "verdict": "OK",
+      "evidence": "",
+      "run_id": "20260823_164724_baseline_hip",
+      "timestamp": ""
+    },
+    "HIP_c8192_pp_fa_on": {
+      "cell_key": "HIP_c8192_pp_fa_on",
+      "backend": "HIP",
+      "tier": 8192,
+      "type": "pp",
+      "flash_attn": "on",
+      "mean_ts": 775.05,
+      "stddev_ts": 92.22,
+      "samples_ts": [
+        677.453,
+        830.078,
+        825.518,
+        868.269,
+        673.912
+      ],
+      "verdict": "OK",
+      "evidence": "",
+      "run_id": "20260823_164724_baseline_hip",
+      "timestamp": ""
+    },
+    "HIP_c8192_tg_fa_on": {
+      "cell_key": "HIP_c8192_tg_fa_on",
+      "backend": "HIP",
+      "tier": 8192,
+      "type": "tg",
+      "flash_attn": "on",
+      "mean_ts": 603.9,
+      "stddev_ts": 27.99,
+      "samples_ts": [
+        605.881,
+        634.778,
+        627.466,
+        571.952,
+        579.411
+      ],
+      "verdict": "OK",
+      "evidence": "",
+      "run_id": "20260823_164724_baseline_hip",
+      "timestamp": ""
+    },
+    "HIP_c16384_pp_fa_off": {
+      "cell_key": "HIP_c16384_pp_fa_off",
+      "backend": "HIP",
+      "tier": 16384,
+      "type": "pp",
+      "flash_attn": "off",
+      "mean_ts": 707.59,
+      "stddev_ts": 42.66,
+      "samples_ts": [
+        697.037,
+        683.633,
+        783.255,
+        690.336,
+        683.672
+      ],
+      "verdict": "OK",
+      "evidence": "",
+      "run_id": "20260823_164724_baseline_hip",
+      "timestamp": ""
+    },
+    "HIP_c16384_tg_fa_off": {
+      "cell_key": "HIP_c16384_tg_fa_off",
+      "backend": "HIP",
+      "tier": 16384,
+      "type": "tg",
+      "flash_attn": "off",
+      "mean_ts": 589.28,
+      "stddev_ts": 27.09,
+      "samples_ts": [
+        572.613,
+        579.868,
+        580.866,
+        575.684,
+        637.383
+      ],
+      "verdict": "OK",
+      "evidence": "",
+      "run_id": "20260823_164724_baseline_hip",
+      "timestamp": ""
+    },
+    "HIP_c16384_pp_fa_on": {
+      "cell_key": "HIP_c16384_pp_fa_on",
+      "backend": "HIP",
+      "tier": 16384,
+      "type": "pp",
+      "flash_attn": "on",
+      "mean_ts": 725.88,
+      "stddev_ts": 53.17,
+      "samples_ts": [
+        685.853,
+        788.876,
+        684.38,
+        691.312,
+        778.993
+      ],
+      "verdict": "OK",
+      "evidence": "",
+      "run_id": "20260823_164724_baseline_hip",
+      "timestamp": ""
+    },
+    "HIP_c16384_tg_fa_on": {
+      "cell_key": "HIP_c16384_tg_fa_on",
+      "backend": "HIP",
+      "tier": 16384,
+      "type": "tg",
+      "flash_attn": "on",
+      "mean_ts": 605.55,
+      "stddev_ts": 26.6,
+      "samples_ts": [
+        608.038,
+        601.382,
+        584.011,
+        649.363,
+        584.964
+      ],
+      "verdict": "OK",
+      "evidence": "",
+      "run_id": "20260823_164724_baseline_hip",
+      "timestamp": ""
+    }
+  },
+  "failed_cells": [
+    {
+      "cell_key": "HIP_c32768_pp_fa_off",
+      "backend": "HIP",
+      "tier": 32768,
+      "type": "pp",
+      "flash_attn": "off",
+      "mean_ts": 0.0,
+      "stddev_ts": 0.0,
+      "samples_ts": [],
+      "verdict": "FAILED:preflight-oom",
+      "evidence": "Estimated needed 18183.8 MiB (with margin 19093.0 MiB) exceeds available 18245.0 MiB free",
+      "run_id": "20260823_164724_baseline_hip",
+      "timestamp": "2026-08-23T17:08:22Z"
+    },
+    {
+      "cell_key": "HIP_c32768_tg_fa_off",
+      "backend": "HIP",
+      "tier": 32768,
+      "type": "tg",
+      "flash_attn": "off",
+      "mean_ts": 0.0,
+      "stddev_ts": 0.0,
+      "samples_ts": [],
+      "verdict": "FAILED:preflight-oom",
+      "evidence": "Estimated needed 18183.8 MiB (with margin 19093.0 MiB) exceeds available 18245.0 MiB free",
+      "run_id": "20260823_164724_baseline_hip",
+      "timestamp": "2026-08-23T17:08:22Z"
+    },
+    {
+      "cell_key": "HIP_c32768_pp_fa_on",
+      "backend": "HIP",
+      "tier": 32768,
+      "type": "pp",
+      "flash_attn": "on",
+      "mean_ts": 0.0,
+      "stddev_ts": 0.0,
+      "samples_ts": [],
+      "verdict": "FAILED:preflight-oom",
+      "evidence": "Estimated needed 18183.8 MiB (with margin 19093.0 MiB) exceeds available 18245.0 MiB free",
+      "run_id": "20260823_164724_baseline_hip",
+      "timestamp": "2026-08-23T17:08:22Z"
+    },
+    {
+      "cell_key": "HIP_c32768_tg_fa_on",
+      "backend": "HIP",
+      "tier": 32768,
+      "type": "tg",
+      "flash_attn": "on",
+      "mean_ts": 0.0,
+      "stddev_ts": 0.0,
+      "samples_ts": [],
+      "verdict": "FAILED:preflight-oom",
+      "evidence": "Estimated needed 18183.8 MiB (with margin 19093.0 MiB) exceeds available 18245.0 MiB free",
+      "run_id": "20260823_164724_baseline_hip",
+      "timestamp": "2026-08-23T17:08:22Z"
+    }
+  ],
+  "review_cells": []
+}

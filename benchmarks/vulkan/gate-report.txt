@@ -1,0 +1,24 @@
+# Six-Part D2-04 Vulkan Coverage Gate Report
+timestamp: 2026-08-23T17:19:17Z
+
+  Found shader: gated_delta_net.comp
+  Found shader: solve_tri.comp
+  Found shader: ssm_conv.comp
+  Found shader: ssm_scan.comp
+  Found shader: dequant_iq4_xs.comp
+Part 1 Verdict: PASS (All critical GDN/IQ4_XS shaders present at pin; IQ4_XS decode routes through generic mul_mat_vecq)
+
+  HIP Support CSV present (19727 rows)
+  Vulkan Support CSV pending native Windows build execution.
+Part 2 Verdict: RECORDED
+
+Part 3 Verdict: RECORDED
+
+Part 4 Verdict: RECORDED (132/132 GPU target)
+
+Part 5 Verdict: RECORDED
+
+Part 6 Verdict: RECORDED
+
+verdict: GATE_REPORT_INITIALIZED
+evidence: Six-part evaluation structure archived.

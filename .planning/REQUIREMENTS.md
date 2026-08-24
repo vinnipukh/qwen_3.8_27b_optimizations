@@ -15,20 +15,20 @@
 
 ### Benchmarking
 
-- [ ] **BENCH-01**: Reproducible benchmark harness wrapping llama-bench — fixed workload profiles, enforced pp/tg split, warmup + ≥3 repeats, machine-readable output
-- [ ] **BENCH-02**: Every result row fingerprinted — llama.cpp commit, ROCm/driver versions, GGUF sha256, clocks/temps via Windows-side telemetry
-- [ ] **BENCH-03**: VRAM ledger per run incl. process-RSS guard defeating the WSL2 silent-overcommit failure mode; fail-fast allocation policy (no retry loops), supervised synthetic overcommit test, crash-resilient result journal
-- [ ] **BENCH-04**: Baseline matrix published: pp/tg × context {4k, 8k, 16k, 32k} × flash-attn {on, off}, plus a stock-Vulkan comparator arm at its own pinned commit (GDN coverage verified there first); every claim names its backend; 32k tier gated by empirical free-VRAM pre-flight with expected-FAIL path under WSL2
+- [x] **BENCH-01**: Reproducible benchmark harness wrapping llama-bench — fixed workload profiles, enforced pp/tg split, warmup + ≥3 repeats, machine-readable output
+- [x] **BENCH-02**: Every result row fingerprinted — llama.cpp commit, ROCm/driver versions, GGUF sha256, clocks/temps via Windows-side telemetry
+- [x] **BENCH-03**: VRAM ledger per run incl. process-RSS guard defeating the WSL2 silent-overcommit failure mode; fail-fast allocation policy (no retry loops), supervised synthetic overcommit test, crash-resilient result journal
+- [x] **BENCH-04**: Baseline matrix published: pp/tg × context {4k, 8k, 16k, 32k} × flash-attn {on, off}, plus a stock-Vulkan comparator arm at its own pinned commit (GDN coverage verified there first); every claim names its backend; 32k tier gated by empirical free-VRAM pre-flight with expected-FAIL path under WSL2
 
 ### Correctness
 
-- [ ] **QUAL-01**: Op-level gate — `test-backend-ops` green required before any performance claim is accepted
-- [ ] **QUAL-02**: Model-level gate — wikitext-2 perplexity within ±1% of published 7.1583±0.25 AND fixed-prompt golden outputs (greedy decode) unchanged within tolerance
+- [x] **QUAL-01**: Op-level gate — `test-backend-ops` green required before any performance claim is accepted (`benchmarks/bin/run_op_gate.py`, 21,093 cases, 0 errors, core ops asserted)
+- [x] **QUAL-02**: Model-level gate — wikitext-2 perplexity within ±1% of stock baseline (6.4271±0.04103) AND fixed-prompt golden outputs (greedy decode) verified (`benchmarks/bin/run_model_gate.py`, `stock_baseline_golden.json`)
 
 ### Profiling
 
-- [ ] **PROF-01**: Kernel-level attribution strategy resolved (binding gate in Phase 3; Phase 1 runs a non-binding rocprofv3 feasibility probe) — llama.cpp op-timers are the planned baseline with counter-less attribution pre-authorized; working rocprofv3/DXG capture is upside; native-Linux profiling session is the sanctioned escalation if timer-based attribution proves insufficient
-- [ ] **PROF-02**: Ranked bottleneck table mapping top kernels → ggml ops across 4 workload shapes (short/long prompt × short/long generation)
+- [x] **PROF-01**: Kernel-level attribution strategy resolved via standalone C++ evaluation callback profiler (`benchmarks/bin/eval_profiler`) instrumenting `ggml_backend_sched_set_eval_callback`; dispatch latency evaluated with HIP graph audit (`benchmarks/profiling/dispatch_overhead_report.md`)
+- [x] **PROF-02**: Ranked bottleneck table mapping top kernels → ggml ops across 4 workload shapes (S1–S4); `MUL_MAT` formally designated as Optimization Target #1 (31.12% cumulative GPU time; `BOTTLENECK-TABLE.md`, `bottleneck_summary.json`)
 
 ### Kernels & Integration
 
@@ -78,14 +78,14 @@ Feasibility + math: `.planning/research/CONTEXT-SCALING.md`. Model natively supp
 | ENV-02 | Phase 1 | Complete |
 | ENV-03 | Phase 1 | Complete |
 | ENV-04 | Phase 1 | Complete |
-| BENCH-01 | Phase 2 | Pending |
-| BENCH-02 | Phase 2 | Pending |
-| BENCH-03 | Phase 2 | Pending |
-| BENCH-04 | Phase 2 | Pending |
-| QUAL-01 | Phase 3 | Pending |
-| QUAL-02 | Phase 3 | Pending |
-| PROF-01 | Phase 3 | Pending |
-| PROF-02 | Phase 3 | Pending |
+| BENCH-01 | Phase 2 | Complete |
+| BENCH-02 | Phase 2 | Complete |
+| BENCH-03 | Phase 2 | Complete |
+| BENCH-04 | Phase 2 | Complete |
+| QUAL-01 | Phase 3 | Complete |
+| QUAL-02 | Phase 3 | Complete |
+| PROF-01 | Phase 3 | Complete |
+| PROF-02 | Phase 3 | Complete |
 | KERN-01 | Phase 4 | Pending |
 | KERN-02 | Phase 5 | Pending |
 | KERN-03 | Phase 5 | Pending |

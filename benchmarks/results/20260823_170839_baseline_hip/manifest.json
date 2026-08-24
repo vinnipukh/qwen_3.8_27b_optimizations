@@ -1,0 +1,33 @@
+{
+  "harness_git_rev": "1057ca051aad31d16d40a34b6602ce557941314d",
+  "llamacpp_commit": "bb4caa7540188872173c44d161602d9271386413",
+  "llamacpp_pin_tag": "v0.2.0",
+  "llamacpp_build_flags": "-G Ninja -DGGML_HIP=ON -DGPU_TARGETS=gfx1100 -DCMAKE_BUILD_TYPE=Release -DLLAMA_CURL=OFF -DLLAMA_BUILD_SERVER=OFF (+ccache)",
+  "llamacpp_compiler": "gcc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0 / hipcc HIP version: 7.2.53211-e1a6bc5663",
+  "binary_sha256": "ff5890f4067cd5dd71f87ee09d35945c0cf60c855040da33ba410690e40c47a8",
+  "baseline_binary_sha256": "ff5890f4067cd5dd71f87ee09d35945c0cf60c855040da33ba410690e40c47a8",
+  "model_sha256": "53adc4bbed67044d662273356bbf3a50fdec667ac21bbf18d13e5815fbccc7f5",
+  "model_hf_revision": "dee0a3164d9e11bbbebf5b63f52ba99443d14fc3",
+  "backend_arm": "HIP",
+  "rocm_version": "7.2.1",
+  "librocdxg_version": "1.2.2 (rocdxg-roct, rocdxg-amd-smi-lib)",
+  "guest_kernel": "6.18.33.2-microsoft-standard-WSL2",
+  "wsl_kernel": "Linux version 6.18.33.2-microsoft-standard-WSL2 (root@f1bbfb02316b) (gcc (GCC) 13.2.0, GNU ld (GNU Binutils) 2.41) #1 SMP PREEMPT_DYNAMIC Thu Jun 18 21:54:43 UTC 2026",
+  "windows_build": "10.0.26200.0",
+  "adrenalin_driver_version": "32.0.31041.1004",
+  "wslconfig_sha256": "cc305ccf3cc9862889b80454efca11155fa3b08d7b268e1752305aafd25ff1c6",
+  "telemetry_mode": "absent",
+  "utc_start": "2026-08-23T17:08:39Z",
+  "utc_end": "2026-08-23T17:08:39Z",
+  "skew_check": {
+    "guest_utc": "2026-08-23T17:08:39Z",
+    "host_utc": "2026-08-23T17:08:37Z",
+    "delta_seconds": 2.57
+  },
+  "tune_state": {
+    "confirmation": "stock confirmed - no overclocking",
+    "timestamp": "2026-08-23T17:08:39Z",
+    "notes": "Verified stock frequencies and voltage tables"
+  },
+  "supersedes": null
+}

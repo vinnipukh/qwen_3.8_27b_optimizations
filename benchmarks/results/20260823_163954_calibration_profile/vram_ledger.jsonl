@@ -1,0 +1,8 @@
+{"cell":"c4096_pp_fa_off","buffers":{"compute_mib":505.0},"guard_peaks":{"vmrss_peak_kb":15192520,"vmswap_peak_kb":0},"dxg_line":"(20421 MiB, 18245.0 MiB free)"}
+{"cell":"c4096_tg_fa_off","buffers":{"compute_mib":505.0},"guard_peaks":{"vmrss_peak_kb":15192520,"vmswap_peak_kb":0},"dxg_line":"(20421 MiB, 18245.0 MiB free)"}
+{"cell":"c4096_pp_fa_on","buffers":{"compute_mib":505.0},"guard_peaks":{"vmrss_peak_kb":15192520,"vmswap_peak_kb":0},"dxg_line":"(20421 MiB, 18245.0 MiB free)"}
+{"cell":"c4096_tg_fa_on","buffers":{"compute_mib":505.0},"guard_peaks":{"vmrss_peak_kb":15192520,"vmswap_peak_kb":0},"dxg_line":"(20421 MiB, 18245.0 MiB free)"}
+{"cell":"c8192_pp_fa_off","buffers":{"compute_mib":505.0},"guard_peaks":{"vmrss_peak_kb":15192572,"vmswap_peak_kb":0},"dxg_line":"(20421 MiB, 18245.0 MiB free)"}
+{"cell":"c8192_tg_fa_off","buffers":{"compute_mib":505.0},"guard_peaks":{"vmrss_peak_kb":15192572,"vmswap_peak_kb":0},"dxg_line":"(20421 MiB, 18245.0 MiB free)"}
+{"cell":"c8192_pp_fa_on","buffers":{"compute_mib":505.0},"guard_peaks":{"vmrss_peak_kb":15192572,"vmswap_peak_kb":0},"dxg_line":"(20421 MiB, 18245.0 MiB free)"}
+{"cell":"c8192_tg_fa_on","buffers":{"compute_mib":505.0},"guard_peaks":{"vmrss_peak_kb":15192572,"vmswap_peak_kb":0},"dxg_line":"(20421 MiB, 18245.0 MiB free)"}

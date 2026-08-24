@@ -2,6 +2,24 @@
 freetoken-rocm-probe/tools/
 freetoken-rocm-probe/bin/
 freetoken-rocm-probe/zigidx.json
+benchmarks/bin/eval_profiler
+benchmarks/tools/test_compile
+benchmarks/tools/*.o
+
+# --- Python & test caches ---
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+benchmarks/tests/.pytest_cache/
+benchmarks/results/.session.lock
+
+# --- runtime logs & scratch ---
+logs/
+*.log
+.planning/tmp/
+arhan-masaustu/
+scrape_sahibinden.sh
 
 # --- large model artifacts (provenance lives in models/README.md instead) ---
 models/*.gguf
@@ -13,3 +31,5 @@ baseline/binaries/
 # --- OS / editor junk ---
 Thumbs.db
 Desktop.ini
+.DS_Store
+

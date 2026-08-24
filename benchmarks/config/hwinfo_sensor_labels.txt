@@ -1,0 +1,12 @@
+# HWiNFO Sensor Label Map (Documented Fallback / Heuristic Mode)
+# Generated: 2026-08-23T16:39:52Z
+
+canonical: gpu_core_clock_mhz -> heuristic match
+canonical: gpu_mem_clock_mhz -> heuristic match
+canonical: temp_edge_c -> heuristic match
+canonical: temp_hotspot_c -> heuristic match
+canonical: power_board_w -> heuristic match
+canonical: fan_pct -> heuristic match
+canonical: gpu_util_pct -> heuristic match
+canonical: vram_used_mb -> heuristic match
+canonical: shared_gpu_memory_mb -> heuristic match

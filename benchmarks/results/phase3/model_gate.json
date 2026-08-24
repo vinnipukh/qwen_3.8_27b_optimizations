@@ -1,0 +1,47 @@
+{
+  "timestamp_start": "2026-08-24T19:44:41.546368+00:00",
+  "timestamp_end": "2026-08-24T19:51:48.593581+00:00",
+  "status": "PASS",
+  "perplexity": {
+    "status": "PASS",
+    "measured_ppl": 6.4271,
+    "measured_err": 0.04103,
+    "reference_ppl": 6.4271,
+    "allowed_range": [
+      6.3628,
+      6.4914
+    ],
+    "delta_pct": 0.0
+  },
+  "canaries": {
+    "status": "PASS",
+    "total": 6,
+    "passed": 6,
+    "checks": {
+      "long_code_01.txt": {
+        "status": "PASS",
+        "output_sha256": "d92eb17b9a818b99b3a289d72f7f326da768eb7aaa99a265aecb4c9ed021aab4"
+      },
+      "long_prose_01.txt": {
+        "status": "PASS",
+        "output_sha256": "3035a1d7a06ab1f3b907779f9bb12c46ba9b2d9c2435830214f735caf101b4d8"
+      },
+      "long_prose_02.txt": {
+        "status": "PASS",
+        "output_sha256": "303f36a4f7ed9150faa66be06ec24e99e75f49b3fee435095fc204e67c12af2f"
+      },
+      "short_code_01.txt": {
+        "status": "PASS",
+        "output_sha256": "8a952d0f87ce32463b18f11f9146e8f35b052e28e79cc0cc21d2598e7d30fa67"
+      },
+      "short_prose_01.txt": {
+        "status": "PASS",
+        "output_sha256": "31971e627fe3b54b27008db21138a23f193f5f03390872c3d9a5905a1bdb4b6c"
+      },
+      "short_prose_02.txt": {
+        "status": "PASS",
+        "output_sha256": "93a95c386ad9268849a538f8f6f2f7548aaf1dc7e79a89c0c278a02704b693d2"
+      }
+    }
+  }
+}

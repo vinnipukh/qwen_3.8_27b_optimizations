@@ -1,94 +1,103 @@
 <!-- generated-by: gsd-doc-writer -->
 
-# Development
+# Developer Guide
 
-Development happens in the WSL2 guest (root-only Ubuntu 24.04) against the pinned
-llama.cpp tree at `/root/llama.cpp`. Windows-side tooling drives the guest via `wsl.exe`.
+Workflows and conventions for developing custom gfx1100 kernels, running test suites,
+and executing reproducible benchmark sessions.
 
-## WSL2 gotchas (learned in Phase 1)
+## Working with WSL2 & Git
 
-| Gotcha | Symptom | Fix |
-|---|---|---|
-| DrvFs git locks | `git` index-lock operations fail on `/mnt/e` | Keep source trees on guest ext4 (`/root/llama.cpp`) |
-| PTY hang | `llama-cli` blocks in `n_tty_write` on dead PTY | Headless runs: `setsid --simple-io --single-turn --no-mmap` |
-| mmap stall over `/mnt/e` | Model load from DrvFs stalls | Use canonical copy at `/root/models/` |
-| Guest RAM too low | DXG ENOMEM at VRAM alloc (`dxgkio_create_allocation: -12`) | `.wslconfig` `memory=28GB` (REQUIRED; ~27 GB visible) |
-| npm via Windows interop | WebUI build fails through interop | Server/UI disabled at build time; HF dist fallback |
-| Env not sourced | HIP ops see CPU only | Source `/etc/profile.d/rocdxg.sh` (`HSA_ENABLE_DXG_DETECTION=1`) before runs |
+The repo root lives on the Windows host filesystem (`E:\Projects\qwen_3.8_27b_optimizations`),
+accessible in the WSL2 guest at `/mnt/e/Projects/qwen_3.8_27b_optimizations`.
 
-Also: Git-bash mangles `$VARS` passed through `wsl.exe` args — write scripts to guest
-files and execute them instead of inlining shell with variables.
+**Rule:** Python harness code and test scripts can be executed directly from `/mnt/e`. However,
+C++ source trees and compilation builds (e.g. `/root/llama.cpp`) must remain on the **guest ext4**
+filesystem because DrvFs exhibits file-locking incompatibilities with git and cmake.
 
-## Rebuild llama.cpp from pin
+## Running the Test Suite
 
-Pin record: `benchmarks/environment/llamacpp-pin.txt` — tag `v0.2.0`, commit
-`bb4caa7540188872173c44d161602d9271386413`. Never rebuild over the archived stock
-binaries in `baseline/binaries/v0.2.0-bb4caa75/`; build to a separate directory.
+The test suite contains 47 unit and regression tests covering wrapper constraints,
+reproducibility math, fingerprint manifests, HWiNFO shared memory parsing, thermal watchdog
+kill command construction, SIGKILL crash resilience, pre-flight allocation, matrix assembly,
+op-level correctness gates (QUAL-01), model-level quality gates (QUAL-02), and bottleneck profiling (PROF-01/02).
+
+From repo root in WSL2:
 
 ```bash
-# inside WSL2, as root
-source /etc/profile.d/rocdxg.sh
-cd /root/llama.cpp && git checkout bb4caa7540188872173c44d161602d9271386413
-cmake -B build -G Ninja \
-  -DGGML_HIP=ON -DGPU_TARGETS=gfx1100 \
-  -DCMAKE_BUILD_TYPE=Release \
-  -DLLAMA_BUILD_SERVER=OFF -DLLAMA_CURL=OFF
-cmake --build build --target llama-cli llama-bench llama-perplexity test-backend-ops
+# Run complete test suite:
+PYTHONPATH=. python3 -m pytest benchmarks/tests/ -q
+
+# Run specific test module:
+PYTHONPATH=. python3 -m pytest benchmarks/tests/test_op_gate.py -v
+PYTHONPATH=. python3 -m pytest benchmarks/tests/test_model_gate.py -v
+PYTHONPATH=. python3 -m pytest benchmarks/tests/test_bottleneck_profiling.py -v
 ```
 
-Record any deviation from these flags plus compiler versions in the result notes.
+## Running Benchmark Sessions
 
-## Re-run correctness gates
+All benchmark sessions are orchestrated through `benchmarks/bin/run_session.py`:
 
-Three gates from Phase 1, re-run after every environment or kernel change:
+```bash
+# Saturated matrix session (4k, 8k, 16k, 32k):
+python3 benchmarks/bin/run_session.py --tiers 4096 8192 16384 32768 --repeats 5 --delay 10
 
-1. **HIP smoke** — compile and run `benchmarks/environment/hipsmoke.cpp`; stdout must
-   contain `gfx1100`:
+# Fast single-tier reproducibility check:
+python3 benchmarks/bin/run_session.py --tiers 8192 --repeats 5 --delay 10
 
-   ```bash
-   hipcc benchmarks/environment/hipsmoke.cpp -o /tmp/hipsmoke && /tmp/hipsmoke | grep gfx1100
-   ```
+# Smoke test (tiny 1024 context, 1 repeat, 0s delay):
+python3 benchmarks/bin/run_session.py --smoke
+```
 
-2. **Backend op tests** — full numerical validation of the GGML backends:
+Each session:
+1. Acquires `benchmarks/results/.session.lock`.
+2. Creates an append-only run directory `benchmarks/results/<timestamp>_<label>/`.
+3. Runs the pre-flight check against free VRAM.
+4. Executes the pinned binary with live background `/proc` RSS monitoring.
+5. Fsyncs every row to `rows.jsonl`.
+6. Closes with `CHECKSUMS.sha256` and dispatches a Windows toast notification.
 
-   ```bash
-   ./build/bin/test-backend-ops
-   ```
+## Running the Layer-2 Prompt Runner
 
-   Reference output for the stock pin: `benchmarks/environment/test-backend-ops-phase1.txt`.
+To evaluate greedy token generation over the 6 deterministic prompt files in `benchmarks/prompts/`:
 
-3. **Runtime gate script pattern** — headless generation must produce coherent tokens
-   with all tensors on GPU (startup log shows zero CPU fallback):
+```bash
+python3 benchmarks/bin/run_prompts.py --tier 4096 --gen 128
+```
 
-   ```bash
-   setsid /root/llama.cpp/build/bin/llama-cli \
-     -m /root/models/Qwen3.8-27B-Uncensored-IQ4_XS.gguf \
-     -ngl 99 --simple-io --single-turn --no-mmap \
-     -p "prompt" -n 64 2>&1 | tee logs/run-$(date -u +%Y%m%dT%H%M%SZ).log
-   ```
+## Running Calibration
 
-   Check the log: device assignment lines list `gfx1100`, no fallback warnings.
+To discover sensor labels, derive guard thresholds, or test near-OOM safety:
 
-## Benchmarking discipline
+```bash
+# Discover HWiNFO sensor labels:
+python3 benchmarks/bin/calibrate.py labels
 
-- Prefill (M≫1) and decode (M≈1) are measured separately — blended tok/s is banned.
-- One change per benchmark run; always compare against the archived stock baseline.
-- Record ROCm/driver/toolchain versions with every result (`benchmarks/environment/versions.txt`
-  is the template).
+# Rehearse thermal watchdog kill path on dummy process:
+python3 benchmarks/bin/calibrate.py rehearse-kill
 
-## Planning workflow
+# Profile healthy runs (4k/8k) and write benchmarks/config/thresholds.json:
+python3 benchmarks/bin/calibrate.py profile
 
-Work is planned and executed phase-by-phase via the GSD commands:
-`/gsd-plan-phase N` produces the phase plan(s) under `.planning/phases/NN-*/`;
-`/gsd-execute-phase N` executes them. Current state lives in `.planning/STATE.md`.
-The roadmap and binding methodology rules are in `.planning/ROADMAP.md`.
+# Supervised near-OOM verification on tier 32768:
+python3 benchmarks/bin/calibrate.py near-oom
+```
 
-## Commit discipline
+## Publishing Matrix Reports
 
-- **Atomic commits** — one logical change (one kernel, one gate fix, one harness change)
-  per commit.
-- **Evidence-carrying messages** — include what changed, the benchmark numbers
-  (prefill/tg split), gate results, and versions. Failed experiments get committed and
-  documented too; publishing failures is a project rule.
-- The model GGUF and stock binaries stay gitignored; provenance lives in
-  `models/README.md`, fingerprints in `benchmarks/environment/`.
+To aggregate one or more benchmark sessions and publish `BASELINE-MATRIX.md`:
+
+```bash
+python3 benchmarks/bin/publish_matrix.py \
+  benchmarks/results/20260823_164724_baseline_hip \
+  --repro-run benchmarks/results/20260823_170839_baseline_hip
+```
+
+## Adding Custom Kernels (Phases 4–5)
+
+See complete hardware ISA and kernel reference library at [`.planning/reference/GPU-KERNEL-RESOURCES.md`](../.planning/reference/GPU-KERNEL-RESOURCES.md).
+
+1. Author CPU golden reference in `src/ref/`.
+2. Implement HIP kernel targeting `gfx1100` in `src/hip/`.
+3. Validate numerical tolerance (`test_compare`) against CPU reference.
+4. Run microbenchmarks (`bench_sweep`) comparing against stock HIP implementation.
+5. Integrate winning kernels behind ON/OFF compile flags via quilt patches.

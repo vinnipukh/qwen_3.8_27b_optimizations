@@ -1,0 +1,7 @@
+{
+  "layer": 2,
+  "tier": 2048,
+  "bin": "/root/llama.cpp/build-ci/bin/llama-cli",
+  "model": "/root/models/Qwen3.8-27B-Uncensored-IQ4_XS.gguf",
+  "timestamp": "20260823_163207"
+}

@@ -55,6 +55,10 @@ Beat stock llama.cpp HIP on at least one important Qwen3.8-27B workload on the R
 - **Hardware**: single RX 7900 XT, 20 GB VRAM — locked IQ4_XS artifact is 15.31 GB, leaving ~4–5 GB for KV + buffers (hybrid arch KV ≈64 KiB/token f16 est.)
 - **Tech stack**: ROCm/HIP on Linux (WSL2), llama.cpp as reference runtime, HIP kernels compiled for gfx1100
 - **Methodology**: profile before optimizing; every optimization switchable; correctness tests next to every kernel; record compiler/ROCm/driver versions with every result
+- **Execution Rule**: MANDATORY TIMEOUTS & STEP-UP DISCIPLINE —
+  1. EVERY bash command and subprocess execution MUST specify an explicit, bounded timeout (e.g. 60–90s, max 300s).
+  2. Device pre-flight (`rocminfo`) required before heavy runs to guard against DXG deadlocks.
+  3. Step-up verification (CPU `-ngl 0` → partial GPU `-ngl 10` → full GPU `-ngl 99`) for all new binaries to prevent silent TDR stalls and WSL memory thrashing.
 - **Environment risk**: WSL2 ROCm support must be validated first — if passthrough/profiling tools fail, fall back to native Linux before any kernel work
 
 ## Key Decisions

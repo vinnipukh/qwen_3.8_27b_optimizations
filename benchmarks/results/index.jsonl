@@ -1,0 +1,6 @@
+{"run_id": "smoke_tracer_matrix", "close_utc": "2026-08-23T16:38:54Z", "backend_arm": "HIP", "ok_count": 2, "failed_count": 0}
+{"run_id": "20260823_163954_calibration_profile", "close_utc": "2026-08-23T16:46:26Z", "backend_arm": "HIP", "ok_count": 8, "failed_count": 0}
+{"run_id": "20260823_164634_calibration_near_oom", "close_utc": "2026-08-23T16:46:44Z", "backend_arm": "HIP", "ok_count": 0, "failed_count": 4}
+{"run_id": "20260823_164724_baseline_hip", "close_utc": "2026-08-23T17:08:22Z", "backend_arm": "HIP", "ok_count": 12, "failed_count": 4}
+{"run_id": "20260823_170839_baseline_hip", "close_utc": "2026-08-23T17:16:17Z", "backend_arm": "HIP", "ok_count": 4, "failed_count": 0}
+{"run_id": "smoke_tracer_matrix", "close_utc": "2026-08-23T17:17:11Z", "backend_arm": "HIP", "ok_count": 2, "failed_count": 0}

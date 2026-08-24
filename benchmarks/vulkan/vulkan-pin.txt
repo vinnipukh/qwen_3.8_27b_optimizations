@@ -1,0 +1,10 @@
+pin-tag: v0.2.0
+commit: bb4caa7540188872173c44d161602d9271386413
+configure: -G "Visual Studio 17 2022" -A x64 -DGGML_VULKAN=ON -DCMAKE_BUILD_TYPE=Release -DLLAMA_CURL=OFF -DLLAMA_BUILD_SERVER=OFF
+compiler: MSVC 19.x (VS2022) / glslc (LunarG Vulkan SDK)
+source-tree: E:\vulkan-arm\llama.cpp
+model-path: \\wsl.localhost\Ubuntu-24.04\root\models\Qwen3.8-27B-Uncensored-IQ4_XS.gguf
+binary-llama-cli-sha256: pending-build
+binary-llama-bench-sha256: pending-build
+binary-test-backend-ops-sha256: pending-build
+captured: 2026-08-23T17:15:00Z UTC
