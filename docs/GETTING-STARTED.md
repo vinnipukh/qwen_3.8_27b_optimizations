@@ -172,3 +172,119 @@ Standalone IQ4_XS matmul playground (`kernels/matmul_iq4xs/`) — GEMV (M=1 deco
    # Model gate (WikiText-2 PPL 6.4271 and 6/6 canaries):
    python3 benchmarks/bin/run_model_gate.py --cli-bin /root/llama.cpp/build-custom/bin/llama-cli
    ```
+
+## 9. Phase 7 End-to-End Paired A/B — Quickstart (Hybrid DP4A + WMMA)
+
+Complete cold-start to measured decode/prefill uplift on `gfx1100` (RX 7900 XT). Run stock
+vs custom back-to-back in **one thermal window** with `hwinfo_daemon`.
+
+### 9.1 Cold-start WSL and GPU enumeration
+
+Run from **PowerShell (host)** — full DXG reset:
+
+```bash
+wsl --shutdown
+wsl -d Ubuntu-24.04 -u root
+```
+
+Inside WSL guest, export the DXG detection flag (persisted in `/etc/profile.d/rocdxg.sh` on provisioned guests):
+
+```bash
+export HSA_ENABLE_DXG_DETECTION=1
+rocminfo | grep gfx1100
+# expected:  Name:                    gfx1100  /  amdgcn-amd-amdhsa--gfx1100
+```
+
+If no match, verify ROCm 7.2.1 `/opt/rocm-7.2.1` and `librocdxg` 1.2.2 are on `LD_LIBRARY_PATH`.
+
+### 9.2 Build stock vs custom (persistent `/root`, `ccache`, timeouts)
+
+> **Filesystem:** Always build under `/root` (ext4 guest) — `/root/llama.cpp`, `/root/llama-custom-07`, `/root/models`. `/tmp` is cleared on every `wsl --shutdown`; `/mnt/e` (DrvFs) is slow and breaks HIP symlinks. `/root` survives shutdown.
+
+> **ccache:** `apt-get install -y ccache` and prepend `ccache` via `-DCMAKE_CXX_COMPILER_LAUNCHER=ccache -DCMAKE_HIP_COMPILER_LAUNCHER=ccache` to cut rebuilds from ~8 min to ~90 s.
+
+Stock is prebuilt at `/root/llama.cpp/build-ci` (pinned `bb4caa75`). Rebuild only if patched tree changed. Custom Phase 7 hybrid (cooperative 8-thread DP4A GEMV + 64×32 double-buffered WMMA GEMM) builds as:
+
+```bash
+export HSA_ENABLE_DXG_DETECTION=1
+# Optional but recommended: ccache
+export CCACHE_DIR=/root/.ccache
+
+# Stock (OFF) — verify bit-identical if needed:
+cmake -S /root/llama.cpp -B /root/llama.cpp/build-ci -G Ninja \
+  -DGGML_HIP=ON -DCMAKE_HIP_ARCHITECTURES=gfx1100 \
+  -DGGML_CUDA_ENABLE_CUSTOM_GFX1100=OFF \
+  -DCMAKE_BUILD_TYPE=Release
+
+# Custom (ON) — Phase 7 hybrid:
+cmake -S llama.cpp -B /root/llama-custom-07 -G Ninja \
+  -DGGML_HIP=ON -DCMAKE_HIP_ARCHITECTURES=gfx1100 \
+  -DGGML_CUDA_ENABLE_CUSTOM_GFX1100=ON \
+  -DCMAKE_BUILD_TYPE=Release
+
+cmake --build /root/llama-custom-07 -j8
+```
+
+***Timeouts:*** Wrap every HIP invocation with an explicit bound (`timeout 300 cmake --build ...`, `timeout 90` for `llama-cli`, `timeout 300` for `llama-bench` sweeps) — DXG deadlocks hang without a kill signal.
+
+Quilt provenance check:
+
+```bash
+git -C /root/llama.cpp diff HEAD --stat
+git -C /root/llama.cpp apply --check /mnt/e/Projects/qwen_3.8_27b_optimizations/patches/0001-gfx1100-mul-mat-custom.patch  # must PASS
+```
+
+### 9.3 Paired `llama-bench` — decode vs prefill (thermal paired)
+
+Use identical model and flags for both arms (`-p 4096 -n 128 -ngl 99 -b 2048 -r 3`, pp/tg split reported separately). Run stock then custom in one window with `hwinfo_daemon` recording:
+
+```bash
+export HSA_ENABLE_DXG_DETECTION=1
+MODEL=/root/models/Qwen3.8-27B-Uncensored-IQ4_XS.gguf
+
+# Optional: start thermal telemetry (host HWiNFO Shared Memory, 1 Hz)
+# python3 benchmarks/host/hwinfo_daemon.py --watch --pid-file /tmp/bench.pid --out-dir benchmarks/results/phase7/ &
+# python3 benchmarks/host/thermal_watchdog.py --threshold-c 90 &
+
+# Stock
+timeout 300 /root/llama.cpp/build-ci/bin/llama-bench \
+  -m $MODEL -p 4096 -n 128 -ngl 99 -b 2048 -r 3
+
+# Custom (hybrid DP4A+WMMA)
+timeout 300 /root/llama-custom-07/bin/llama-bench \
+  -m $MODEL -p 4096 -n 128 -ngl 99 -b 2048 -r 3
+```
+
+Compare `pp` (prefill) and `tg` (decode) tokens/s. Phase 7 goal: custom **tg > stock** on decode (M=1, e.g. 5120×5120) and **pp > stock** at M≥128 (prefill contexts 1024–4096). Record raw `stdout` + `RunStore` `rows.jsonl`/`CHECKSUMS.sha256` under `benchmarks/results/phase7/ab_stock_*` and `ab_custom_*` for publication.
+
+> **Thermal discipline:** Run both benches back-to-back without host sleeps, fan overrides, or clock changes — *record-don't-control*. Host watchdog kills at 95 °C junction (`thermal_watchdog.py`). Document clocks/power/temps per row; see `benchmarks/RUNBOOK.md §thermal-policy` and `docs/PUBLICATION.md`.
+
+### 9.4 Paired `llama-cli` — generation sanity (808 vs 849)
+
+Same prompt, same seed, stock vs custom — verifies token coherence and decode throughput on a real chat turn:
+
+```bash
+export HSA_ENABLE_DXG_DETECTION=1
+MODEL=/root/models/Qwen3.8-27B-Uncensored-IQ4_XS.gguf
+PROMPT="Explain liquid neural networks vs transformers in one paragraph"
+
+# Stock
+timeout 90 /root/llama.cpp/build-ci/bin/llama-cli \
+  -m $MODEL -p "$PROMPT" -n 512 -ngl 99 --temp 0
+
+# Custom
+timeout 90 /root/llama-custom-07/bin/llama-cli \
+  -m $MODEL -p "$PROMPT" -n 512 -ngl 99 --temp 0
+```
+
+Expected on provisioned WSL2 gfx1100: stock generates ~808 tokens, custom ~849 tokens for the same `-n 512` window in prior captures (custom slightly higher `tg` tok/s, not a correctness delta — both pass 6/6 canaries and WikiText-2 PPL 6.4271). The informative delta is the **greeting token**: stock often starts `Hi` while custom starts `Hello` — same semantics, different sampler path only if temperature non-zero; at `--temp 0` outputs are bit-identical per QUAL-01/02 gates.
+
+### 9.5 Operational notes
+
+- **Persistent vs ephemeral:** `/root` (ext4) persists across `wsl --shutdown`; `/tmp`, `/dev/shm`, and `/mnt/e` do not or are not performance-safe. Keep models in `/root/models`, builds in `/root/llama-*`, and results in `benchmarks/results/phase7/` (DrvFs path is for patch sharing only).
+- **ccache:** Set `CCACHE_DIR=/root/.ccache` (10 GB cap `ccache -M 10G`). First build populates cache; incremental patch edits rebuild in <2 min.
+- **Timeouts (MANDATORY):** Every HIP/bench subprocess must have a bounded timeout — `timeout 90` for `llama-cli`/`test-backend-ops`, `timeout 300` for `cmake --build` and `llama-bench` sweeps. DXG without timeout hangs the WSL guest until `wsl --shutdown`.
+- **Thermal:** Launch `benchmarks/host/hwinfo_daemon.py` (HWiNFO Shared Memory v2 `Global\HWiNFO_SENS_SM2`, 1 Hz) and `benchmarks/host/thermal_watchdog.py --threshold-c 90` before the paired sweep; keep one continuous thermal window. `logs/thermal_monitor.log` must show no 90 °C kills — fallback polling (WinError 5 if HWiNFO not running) is degraded but acceptable with an explicit `telemetry_mode: absent` note in `manifest.json`.
+- **Step-up discipline:** Validate new builds CPU-first (`-ngl 0`), then partial (`-ngl 10`), then full (`-ngl 99`) before the paired sweep to avoid DXG TDRs.
+
+Next: `docs/PUBLICATION.md §Phase 7` and `benchmarks/profiling/KERNEL-BENCH-DIFF.md §8` for raw paths, LDS `[32][33]`/`[2][32][33]` and `__launch_bounds__(256,4)` guardrail audits, and failed-variant log.

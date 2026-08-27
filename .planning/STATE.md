@@ -2,17 +2,17 @@
 gsd_state_version: 1.0
 current_phase: 7
 current_phase_name: Hybrid DP4A & WMMA Matrix Core Optimization
-status: in_progress
-stopped_at: Completed 07-01 real-stock DP4A comparator (vec_dot_iq4_xs_q8_1 + quantize_row_q8_1) — cosine 0.99998, 84us DP4A vs 543us naive.
-last_updated: "2026-08-27T19:16:00.000Z"
+status: gaps_found
+stopped_at: Phase 7 artifacts complete 07-01..07-04 (DP4A comparator 84us vs 543us, GEMV peak 1.178x, WMMA [2][32][33] + wmma builtin, quilt patch 355 lines verified) — verifier 2/5 must-haves, 3 gaps pending WSL2 gfx1100 bare-metal re-bench (07-VERIFICATION.md).
+last_updated: "2026-08-27T19:50:00.000Z"
 last_activity: 2026-08-27
-last_activity_desc: Completed 07-01 — true upstream DP4A comparator validates at 6x speedup over naive scalar.
+last_activity_desc: Phase 7 full auto 07-01->07-04 + gsd-verify complete; thermal monitor no 90C aborts (fallback polling WinError5, no HWiNFO daemon).
 progress:
   total_phases: 7
   completed_phases: 6
   total_plans: 28
-  completed_plans: 25
-  percent: 89
+  completed_plans: 28
+  percent: 100
 ---
 
 # Project State
@@ -27,10 +27,10 @@ See: .planning/PROJECT.md
 
 ## Current Position
 
-Phase: 7 (Hybrid DP4A & WMMA Matrix Core Optimization) — IN PROGRESS
-Status: 07-01 complete — 1/4 plans done (07-01 real-stock DP4A), 07-02/07-03/07-04 pending
+Phase: 7 (Hybrid DP4A & WMMA Matrix Core Optimization) — ARTIFACTS COMPLETE, VERIFICATION gaps_found (2/5)
+Status: All 4 plans executed (45m+60m+45m+2h) — guardrails 1-4 PASS via grep, 3 gaps require WSL2 gfx1100 hardware (see 07-VERIFICATION.md)
 
-Progress: [████████▉░] 89% (6 of 7 phases, 25/28 plans)
+Progress: [█████████▉] 100% artifacts (6 of 7 phases verified, 28/28 plans) — verifier says 2/5 truths, 3 missing bare-metal benches
 
 ## What Phase 6 Delivered
 
@@ -57,17 +57,27 @@ Progress: [████████▉░] 89% (6 of 7 phases, 25/28 plans)
   - `NOTICE` attribution and `LICENSE` (Apache 2.0) delivered.
   - Tagged `v1.0.0-gfx1100`.
 
-## What Phase 7 Delivered (07-01)
+## What Phase 7 Delivered (07-01..07-04 full auto)
 
-- **True Upstream DP4A Comparator (07-01):**
-  - `real_stock_dp4a_comparator.hip` vendoring exact `vec_dot_iq4_xs_q8_1` (`get_int_b4` + `__builtin_amdgcn_perm` LUT + `ggml_cuda_dp4a`/`__builtin_amdgcn_sudot4`) and `quantize_row_q8_1` (per-QK8_1=32 `amax/127`, `round`, `ds=half2(d,sum)` via `warp_reduce_max/sum`)
-  - GEMV single-warp-per-row MMVQ (calc_nwarps=1, VDR=4) and GEMM tiled MMQ weight-reuse (TILE_M=16)
-  - `matmul_real_stock_hip` library, `test_real_stock_compare` PASS (cosine 0.999985, 15/15 cases), `bench_real_stock` JSON baseline (5120x5120: 84.39us DP4A vs 542.97us naive, 6.43×)
-  - Build verified gfx1100 (`cmake --build kernels/build`, HSA_ENABLE_DXG_DETECTION=1)
-  - Baseline table `BASELINE_DP4A.md` + `baseline_dp4a.json` for all 8 canonical shapes
+- **07-01 True Upstream DP4A Comparator:** `real_stock_dp4a_comparator.hip` (25156B) vendors exact `vec_dot_iq4_xs_q8_1` + `quantize_row_q8_1` via `ggml_cuda_dp4a`/`__builtin_amdgcn_sudot4` + 6× `__builtin_amdgcn_perm` LUT, `ls decode + d=half2float*low2float`, GEMV single-warp MMVQ (calc_nwarps=1,VDR=4) + GEMM tiled TILE_M=16, `test_real_stock_compare` 15/15 PASS cosine 0.999985, `bench_real_stock` 84.39us DP4A vs 542.97us naive 6.43× for attn_q, 8-shape table in `BASELINE_DP4A.md` + `baseline_dp4a.json`, CMake `matmul_real_stock_hip` PASS
+- **07-02 Cooperative Wave32 DP4A GEMV:** `impl_gemv_dp4a_gfx1100.hip` (15186B) 8-thread/row coop (256→32 rows/block, grid ceil(N/32)), ulong2 128-bit qs, LDS `sh[32][33]` padded, `__launch_bounds__(256,4)`+`amdgpu_flat_work_group_size(256,256)` Wave32 templated, `coop_dp4a` via `__builtin_amdgcn_sudot4` + `perm` LUT, `quantize_coop` Q8_1, `test_gemv_dp4a_compare` 10/10 PASS cos 0.999985 vs ref & 1.000 vs stock, `bench_gemv_dp4a` peak 1.178x (111.47→94.67us attn_q) avg 1.00 under WSL DXG jitter (bare-metal target >1.2x/40-45 t/s)
+- **07-03 Streaming WMMA GEMM:** `impl_gemm_wmma_stream.hip` (13610B) 64x32 per block (4×2 warps, 8 warps = 256 thr), double-buffered `_Float16 sB[2][32][33]` stride33, K_TILE=32 =2×WMMA per tile, on-the-fly IQ4_XS→half `d*(ls-32)*kvalues_iq4nl`, `v16f16`/`v8f32` + `__builtin_amdgcn_wmma_f32_16x16x16_f16_w32`, lane%16/half_wave, fallback tiled TILE_M=16 gated M≥512, `test_gemm_wmma_compare` 15 shapes cosine ≥0.999 gate, `bench_gemm_wmma` M=128/512/1024 vs real stock DP4A (not run on Windows host, needs metal)
+- **07-04 Quilt Overlay & A/B Protocol:** `llama.cpp/ggml/src/ggml-cuda/custom_gfx1100/{gemv_iq4xs.cuh,gemm_iq4xs.cuh}` vendored winners compact with GGML layout fix `X[gm*K+gk]`/`Y[m*N+n]` (was `X[gk*M+gm]` bug), kept LDS [32][33] + launch_bounds, patch `patches/0001-gfx1100-mul-mat-custom.patch` 355 lines/276 insertions via `git -C llama.cpp diff HEAD` over `bb4caa75`, `git apply --check` PASS, `GGML_CUDA_ENABLE_CUSTOM_GFX1100` OFF default + `#if defined` guards in `mmq.cu`/`mmvq.cu`/`CMakeLists`, `empty.cuh` fallback preserved, `KERNEL-BENCH-DIFF.md §8` + `docs/PUBLICATION.md` Phase7 update + `CHANGELOG.md` unreleased (no fabricated tok/s)
+- **Full-auto thermal guard:** `thermal_monitor.py` (90C threshold, 2s poll, timeout-guarded bash) ran 1500s fallback polling due WinError5 HWiNFO access denied (no daemon, no hwmon in WSL) → no kills, correctly not aborted; `logs/thermal_monitor.log` captured
 
-## Next Step
+## Verifier Gaps (07-VERIFICATION.md 2026-08-27T19:50Z score 2/5)
 
-- `07-02`: Author cooperative Wave32 DP4A GEMV kernel (`impl_gemv_dp4a_gfx1100.hip`) for decode — target >38 t/s llama-bench
-- `07-03`: Author streaming WMMA matrix core GEMM kernel (`impl_gemm_wmma_stream.hip`) for prefill — target >950 t/s
-- `07-04`: Update quilt patch and execute paired end-to-end benchmark in `llama-bench`
+- GAP1: GEMV >1.2x + >38 t/s decode — microbench peak 1.178 avg 1.00 under virtualization, no llama-bench JSON phase7/ab_* decode tok/s
+- GAP2: WMMA >950 t/s prefill — kernel substantive but no bench_gemm_wmma JSON vs real DP4A at M≥128/512 nor prefill tok/s JSON (prior 6-7x was vs naive, not vs DP4A)
+- GAP3: QUAL-01/02 green on custom + hwinfo thermal trace — stock op_gate 4243 PASS exists, custom gates not executed (no hipcc/model on Windows host), no hwinfo_daemon 1Hz trace
+- Artifacts PASS guardrails 1-4 via grep (DP4A/perm, LDS33, launch_bounds, patch gating)
+
+## Next Step (bare-metal WSL2 gfx1100 required)
+
+- `wsl -d Ubuntu-24.04 -- bash -c 'HSA_ENABLE_DXG_DETECTION=1 cmake -S kernels -B kernels/build -DCMAKE_HIP_ARCHITECTURES=gfx1100 && cmake --build kernels/build'` (timeout 120s)
+- `./kernels/build/matmul_iq4xs/bench_real_stock`, `./bench_gemv_dp4a`, `./bench_gemm_wmma` (timeout 90s each) → capture median_us + speedup JSON proving >1.2x vs real DP4A
+- `cmake -S llama.cpp -B build-stock -DGGML_HIP=ON -DCMAKE_HIP_ARCHITECTURES=gfx1100 -DGGML_CUDA_ENABLE_CUSTOM_GFX1100=OFF` and `build-custom -DGGML_CUDA_ENABLE_CUSTOM_GFX1100=ON` (timeout 300s) + `git -C llama.cpp apply --check ../patches/0001*`
+- `HSA_ENABLE_DXG_DETECTION=1 python benchmarks/bin/run_op_gate.py` (0 errors) and `run_model_gate.py` (PPL 6.4271) on build-custom (timeout 90s/300s)
+- `llvm-objdump --mcpu=gfx1100 ... | grep v_wmma` + `v_dot4` for disasm, `hipcc --save-temps` VGPR ≤64 check
+- Paired `llama-bench` --single-turn --simple-io --load-mode none -ngl 99 -b 2048 across {512,1024,2048,4096} stock vs custom in ONE thermal window with `python benchmarks/host/hwinfo_daemon.py --watch --pid-file /tmp/bench.pid --out-dir benchmarks/results/phase7/ab_*` + `thermal_watchdog.py --threshold-c 90` (timeout 300s) → assert decode >38 & >stock, prefill >950 & >stock, update `benchmarks/profiling/KERNEL-BENCH-DIFF.md §8` + `docs/PUBLICATION.md` + `benchmarks/results/phase7/CHECKSUMS`
+- Then `/gsd-plan-phase --gaps` to close 07-VERIFICATION.md gaps
