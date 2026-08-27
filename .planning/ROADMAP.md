@@ -182,7 +182,8 @@ Inherited verbatim from the original roadmap; planners and executors apply them 
 | 3. Correctness Gates & Bottleneck Profiling | 4/4 | Complete    | 2026-08-24 |
 | 4. Kernel Playground Scaffold | 3/3 | Complete    | 2026-08-25 |
 | 5. First Custom Kernel (Bottleneck Attack) | 4/4 | Complete    | 2026-08-25 |
-| 6. Integration, Full Validation & Publication | 0/TBD | Not started | - |
+| 6. Integration, Full Validation & Publication | 5/5 | Complete    | 2026-08-25 |
+| 7. Hybrid DP4A & WMMA Matrix Core Optimization | 1/4 | In Progress | 2026-08-27 (07-01) |
 
 ## Coverage Validation
 
