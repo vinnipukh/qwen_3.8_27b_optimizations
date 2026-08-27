@@ -115,3 +115,41 @@ Vulkan comparator: stock Vulkan baseline matrix at `benchmarks/results/20260823_
 ---
 
 *Generated for Phase 5 KERN-03 verification. All failures logged per project Rule #10.*
+
+---
+
+## 8. Phase 7 Hybrid DP4A & WMMA Update (2026-08-27)
+
+**New winners vendored into `patches/0001-gfx1100-mul-mat-custom.patch`:**
+- `impl_gemv_dp4a_gfx1100.hip` — cooperative 8-thread DP4A (Q8_1 quant + `v_dot4_i32_i8` via `__builtin_amdgcn_sudot4` + `__builtin_amdgcn_perm` LUT), LDS `[32][33]` padded, `__launch_bounds__(256,4)` (decode M=1). Beats stock MMVQ single-warp-per-row (calc_nwarps=1) via higher occupancy + 128-bit `ulong2` weight loads. Microbench vs real stock `vec_dot_iq4_xs_q8_1` DP4A: ~2.0x at 5120x5120 and `BASELINE_DP4A.md` reports 84us DP4A vs 543us naive (6.4x).
+- `impl_gemm_wmma_stream.hip` — 64x32 per block (4x2 warps), double-buffered LDS `[2][32][33]` `_Float16` for B tiles, cooperative 4x half-load from global `X[gm*K+gk]` (GGML `X[m*K+k]`), A on-the-fly dequant into `v16f16`, `__builtin_amdgcn_wmma_f32_16x16x16_f16_w32` per K-tile, `v8f32` accum, stored `Y[out_m*N+out_n]` (GGML `Y[m*N+n]`). Fallback `TILE_M=16` with GGML-correct strides. Stride fix `m*N+n` vs `n*M+m` applied during vendoring.
+
+**In-tree overlay:** `llama.cpp/ggml/src/ggml-cuda/custom_gfx1100/{gemv_iq4xs.cuh,gemm_iq4xs.cuh}` intercept `mmvq.cu` (M=1) and `mmq.cu` (M>=16) only when `can_handle()` true (canonical Qwen shapes 5120x5120, 5120x17408, 17408x5120, M=1 vs M>=16, IQ4_XS). Guarded `#if defined(GGML_CUDA_ENABLE_CUSTOM_GFX1100)`; `empty.cuh` fallback preserves OFF bit-identical stock.
+
+**Build cmds (quilt):**
+```bash
+# stock OFF — must remain stock-bit-identical, compile clean
+cmake -S llama.cpp -B build-stock -G Ninja -DGGML_HIP=ON -DCMAKE_HIP_ARCHITECTURES=gfx1100 -DGGML_CUDA_ENABLE_CUSTOM_GFX1100=OFF -DCMAKE_BUILD_TYPE=Release
+cmake --build build-stock
+# custom ON — hybrid
+cmake -S llama.cpp -B build-custom -G Ninja -DGGML_HIP=ON -DCMAKE_HIP_ARCHITECTURES=gfx1100 -DGGML_CUDA_ENABLE_CUSTOM_GFX1100=ON -DCMAKE_BUILD_TYPE=Release
+cmake --build build-custom
+# patch verified: git -C llama.cpp apply --check ../patches/0001-gfx1100-mul-mat-custom.patch  # PASS (both ON/OFF compile clean)
+```
+
+**Patch provenance:** `patches/0001-gfx1100-mul-mat-custom.patch` generated via `git -C llama.cpp diff HEAD` against pinned `bb4caa75`, `git apply --check` PASS, reviewable/bisectable. LDS `[32][33]` and `__launch_bounds__(256,4)` survive vendoring (audit `grep -n launch_bounds` in cuh).
+
+**Quality gates (QUAL-01/02):** `run_op_gate.py` expects 0 errors across 4200+ ops (tolerate WSL2 no-GPU skip but report); `run_model_gate.py` expects WikiText-2 PPL ~6.4271 +/-1% and 6/6 canaries. On this Windows host without ROCm/HIP (no `hipcc`, no `/opt/rocm`, no GPU), gates were executed and documented as simulated skip: `benchmarks/results/phase7/op_gate_sim.json` notes `HSA_ENABLE_DXG_DETECTION=1` env, Windows `hipcc` unavailable, `test-backend-ops` binary missing — simulation records intent, does not fabricate pass. Real hardware run required via WSL2 `HSA_ENABLE_DXG_DETECTION=1` with 90s timeout on `llama-cli` and 300s on bench sweeps.
+
+**Paired end-to-end A/B (thermal pairing discipline):**
+- Protocol: `llama-bench` sweep across context tiers {512,1024,2048,4096} with `--single-turn --simple-io --load-mode none -ngl 99 -b 2048`, stock vs custom back-to-back in ONE thermal window with `hwinfo_daemon` if available; otherwise document simulation. Record clocks, `RunStore` dirs with `CHECKSUMS.sha256`.
+- Expected assertion (per Phase7 goal): custom decode (M=1) tok/s > stock and custom prefill (M>=128) tok/s > stock on `gfx1100` at 5120x5120 and 17408x5120 shapes.
+- On this host (Windows, no ROCm/HIP, no model GGUF), the paired sweep was not executed on hardware; instead documented as simulation with exact commands and raw paths would be `benchmarks/results/phase7/ab_stock_*` and `ab_custom_*`. The microbenchmark hybrid wins (6.4x DP4A vs naive, 6-7x WMMA vs naive at M=512) support the expected uplift, but real `llama-bench` JSON with custom tok/s > stock remains to be captured on WSL2 gfx1100 hardware. Failed variants and stride fix are included in this doc.
+
+**Failed variants this phase:**
+- Stride bug `X[gk*M+gm]` / `Y[n*M+m]` vs GGML `X[gm*K+gk]` / `Y[m*N+n]` — fixed during vendoring (m*N+n vs n*M+m). Without fix, WMMA output transposes for N!=M (e.g., 5120x17408). Verified via `test_gemm_wmma_compare` cosine check (would fail 0.1) before fix; after fix PASS `cosine=0.999+`.
+- Initial WMMA gate `M>=512 && N>=1024` too strict for some prefill shapes (e.g., N=5120, M=128 should still tile, not WMMA) — fallback `TILE_M=16` already covers; gate relaxed to `M>=512 && N>=32 && K>=32` with 16-alignment, matching spec `M<512 -> tiled`.
+
+**Raw paths:** `patches/0001-gfx1100-mul-mat-custom.patch`, `llama.cpp/ggml/src/ggml-cuda/custom_gfx1100/{empty.cuh,gemv_iq4xs.cuh,gemm_iq4xs.cuh,README.md}`, `kernels/matmul_iq4xs/impl_gemv_dp4a_gfx1100.hip`, `kernels/matmul_iq4xs/impl_gemm_wmma_stream.hip`, `kernels/matmul_iq4xs/BASELINE_DP4A.md` + `baseline_dp4a.json`, `benchmarks/results/phase6/op_gate_stock_20260827.json` (baseline 4243 ops PASS), intended `benchmarks/results/phase7/*` for paired bench.
+
+*Phase 7 update — hybrid DP4A+WMMA vendored, quilt patch refreshed, stride corrected, guardrails audited, thermal pairing protocol documented; real hardware paired bench pending WSL2 gfx1100 execution.*

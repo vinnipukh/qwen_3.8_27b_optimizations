@@ -12,17 +12,14 @@ index 11ed9e8..1952354 100644
  option(GGML_VULKAN                          "ggml: use Vulkan"                                OFF)
 diff --git a/ggml/src/ggml-cuda/custom_gfx1100/README.md b/ggml/src/ggml-cuda/custom_gfx1100/README.md
 new file mode 100644
-index 0000000..1584921
+index 0000000..c7b6462
 --- /dev/null
 +++ b/ggml/src/ggml-cuda/custom_gfx1100/README.md
-@@ -0,0 +1,9 @@
-+# Custom gfx1100 IQ4_XS Kernels -- Phase 6
-+
+@@ -0,0 +1,6 @@
++# Custom gfx1100 IQ4_XS Kernels -- Phase 7 Hybrid
 +Source: kernels/matmul_iq4xs/
-+
-+- gemv_iq4xs.cuh: 128-bit aligned vector loads, zero-LDS cooperative 8-thread/row dequant, shared reduction (decode M=1).
-+- gemm_iq4xs.cuh: TILE_M=16 reuse + RDNA3 WMMA hardware matrix cores (prefill M>=16).
-+
++- gemv_iq4xs.cuh: Cooperative 8-thread/row DP4A (v_dot4_i32_i8) with on-the-fly Q8_1 quantization, LDS [32][33] padded, __launch_bounds__(256,4) (decode M=1).
++- gemm_iq4xs.cuh: WMMA hardware matrix cores 64x32 double-buffered LDS [2][32][33] + fallback TILE_M=16, __launch_bounds__(256,4), GGML layouts [K,M] and [N,M] corrected (m*N+n vs n*M+m fix).
 +Controlled by CMake option GGML_CUDA_ENABLE_CUSTOM_GFX1100 (default OFF).
 +When OFF, compiles clean and behaves bit-identically to upstream stock.
 diff --git a/ggml/src/ggml-cuda/custom_gfx1100/empty.cuh b/ggml/src/ggml-cuda/custom_gfx1100/empty.cuh
@@ -57,12 +54,13 @@ index 0000000..049967d
 +}
 +#endif
 diff --git a/ggml/src/ggml-cuda/custom_gfx1100/gemm_iq4xs.cuh b/ggml/src/ggml-cuda/custom_gfx1100/gemm_iq4xs.cuh
-new file mode 100755
-index 0000000..7410426
+new file mode 100644
+index 0000000..46dc189
 --- /dev/null
 +++ b/ggml/src/ggml-cuda/custom_gfx1100/gemm_iq4xs.cuh
-@@ -0,0 +1,218 @@
-+// Vendored from kernels/matmul_iq4xs/impl_gemm_wmma.hip -- gfx1100 Wave32 GEMM M>>1
+@@ -0,0 +1,94 @@
++// Vendored from kernels/matmul_iq4xs/impl_gemm_wmma_stream.hip -- gfx1100 WMMA GEMM (Phase 07-03)
++// 64x32 per block, double-buffered LDS [2][32][33], __launch_bounds__(256,4), GGML layouts [K,M] and [N,M] fixed
 +#pragma once
 +#include <hip/hip_runtime.h>
 +#include <hip/hip_fp16.h>
@@ -70,6 +68,10 @@ index 0000000..7410426
 +#include "ggml-common.h"
 +
 +#if defined(GGML_CUDA_ENABLE_CUSTOM_GFX1100)
++
++#ifndef QK_K
++#define QK_K 256
++#endif
 +
 +typedef float v8f32 __attribute__((ext_vector_type(8)));
 +typedef _Float16 v16f16 __attribute__((ext_vector_type(16)));
@@ -77,216 +79,88 @@ index 0000000..7410426
 +static __device__ __constant__ const int8_t kvalues_iq4nl_dev_gemm[16] = {
 +    -127, -104, -83, -65, -49, -35, -22, -10, 1, 13, 25, 38, 53, 69, 89, 113
 +};
++static inline __device__ float custom_fp16_to_fp32_gemm(ggml_fp16_t h){ union{uint16_t u; __half hh;} v; v.u=h; return __half2float(v.hh); }
 +
-+static inline __device__ float custom_fp16_to_fp32(ggml_fp16_t h) {
-+    union { uint16_t u; __half h; } val;
-+    val.u = h;
-+    return __half2float(val.h);
-+}
-+
-+template<int TILE_M = 16>
-+__global__ __launch_bounds__(256, 4) __attribute__((amdgpu_flat_work_group_size(256,256)))
-+static void gemm_iq4xs_tiled_kernel(
-+    const block_iq4_xs* __restrict__ W,
-+    const float* __restrict__ X,
-+    float* __restrict__ Y,
-+    int64_t K,
-+    int64_t N,
-+    int64_t M
-+) {
-+    int64_t total_tiles = N * ((M + TILE_M - 1) / TILE_M);
-+    int64_t tid = (int64_t)blockIdx.x * blockDim.x + threadIdx.x;
-+    if (tid >= total_tiles) return;
-+    int64_t tiles_per_row = (M + TILE_M - 1) / TILE_M;
-+    int64_t n = tid / tiles_per_row;
-+    int64_t tile_id = tid % tiles_per_row;
-+    int64_t m0 = tile_id * TILE_M;
-+    int64_t m1 = m0 + TILE_M;
-+    if (m1 > M) m1 = M;
-+    int tile_m = (int)(m1 - m0);
-+
-+    int64_t blocks_per_row = K / 256;
-+    const block_iq4_xs* row_blocks = W + n * blocks_per_row;
-+
-+    double acc[16] = {0.0};
-+
-+    for (int64_t b = 0; b < blocks_per_row; ++b) {
-+        const block_iq4_xs* blk = &row_blocks[b];
-+        float d = custom_fp16_to_fp32(blk->d);
-+        for (int ib = 0; ib < 8; ++ib) {
-+            int ls_low  = (blk->scales_l[ib / 2] >> (4 * (ib & 1))) & 0x0F;
-+            int ls_high = (blk->scales_h >> (2 * ib)) & 0x03;
-+            int ls = ls_low | (ls_high << 4);
-+            double dl = static_cast<double>(d) * static_cast<double>(static_cast<float>(ls) - 32.0f);
-+
-+            struct Aligned16 { uint64_t lo; uint64_t hi; };
-+            Aligned16 qs_val;
-+            qs_val.lo = *reinterpret_cast<const uint64_t*>(blk->qs + ib * 16);
-+            qs_val.hi = *reinterpret_cast<const uint64_t*>(blk->qs + ib * 16 + 8);
-+            const uint8_t* qs_bytes = reinterpret_cast<const uint8_t*>(&qs_val);
-+            int64_t k_base = b * 256 + ib * 32;
-+
-+            #pragma unroll
-+            for (int j = 0; j < 16; ++j) {
-+                uint8_t q_byte = qs_bytes[j];
-+                int lo = q_byte & 0x0F;
-+                int hi = (q_byte >> 4) & 0x0F;
-+                double w_lo = dl * static_cast<double>(kvalues_iq4nl_dev_gemm[lo]);
-+                double w_hi = dl * static_cast<double>(kvalues_iq4nl_dev_gemm[hi]);
-+
-+                #pragma unroll
-+                for (int tm = 0; tm < 16; ++tm) {
-+                    if (tm >= tile_m) break;
-+                    int64_t m = m0 + tm;
-+                    double x_lo = static_cast<double>(X[m * K + (k_base + j)]);
-+                    double x_hi = static_cast<double>(X[m * K + (k_base + j + 16)]);
-+                    acc[tm] += w_lo * x_lo;
-+                    acc[tm] += w_hi * x_hi;
-+                }
++// Fallback tiled GEMM TILE_M=16 -- weight reuse, GGML Y[m*N+n], X[m*K+k]
++template<int TILE_M=16>
++__global__ __launch_bounds__(256,4) __attribute__((amdgpu_flat_work_group_size(256,256)))
++void gemm_iq4xs_stream_tiled_kernel_cuh(const block_iq4_xs* __restrict__ W, const float* __restrict__ X, float* __restrict__ Y, int64_t K, int64_t N, int64_t M){
++    int64_t total_tiles=N*((M+TILE_M-1)/TILE_M); int64_t tid=(int64_t)blockIdx.x*blockDim.x+threadIdx.x; if(tid>=total_tiles) return;
++    int64_t tiles_per_row=(M+TILE_M-1)/TILE_M; int64_t n=tid/tiles_per_row; int64_t tile_id=tid%tiles_per_row;
++    int64_t m0=tile_id*TILE_M; int64_t m1=m0+TILE_M; if(m1>M) m1=M; int tile_m=(int)(m1-m0);
++    int64_t blocks_per_row=K/QK_K; const block_iq4_xs* row_blocks=W+n*blocks_per_row;
++    double acc[16]={0.0};
++    for(int64_t b=0;b<blocks_per_row;++b){ const block_iq4_xs* blk=&row_blocks[b]; float d=custom_fp16_to_fp32_gemm(blk->d);
++        for(int ib=0;ib<8;++ib){ int ls_low=(blk->scales_l[ib/2]>>(4*(ib&1)))&0x0F; int ls_high=(blk->scales_h>>(2*ib))&0x03; int ls=ls_low|(ls_high<<4); double dl=(double)d*(double)( (float)ls -32.0f);
++            struct Aligned16{uint64_t lo; uint64_t hi;}; Aligned16 qs_val; qs_val.lo=*reinterpret_cast<const uint64_t*>(blk->qs+ib*16); qs_val.hi=*reinterpret_cast<const uint64_t*>(blk->qs+ib*16+8); const uint8_t* qs_bytes=reinterpret_cast<const uint8_t*>(&qs_val);
++            int64_t k_base=b*QK_K+ib*32;
++            for(int j=0;j<16;++j){ uint8_t q_byte=qs_bytes[j]; int lo=q_byte&0x0F; int hi=(q_byte>>4)&0x0F; double w_lo=dl*(double)kvalues_iq4nl_dev_gemm[lo]; double w_hi=dl*(double)kvalues_iq4nl_dev_gemm[hi];
++                for(int tm=0;tm<16;++tm){ if(tm>=tile_m) break; int64_t m=m0+tm; double x_lo=(double)X[m*K + (k_base+j)]; double x_hi=(double)X[m*K + (k_base+j+16)]; acc[tm]+=w_lo*x_lo; acc[tm]+=w_hi*x_hi; }
 +            }
 +        }
 +    }
-+    #pragma unroll
-+    for (int tm = 0; tm < 16; ++tm) {
-+        if (tm >= tile_m) break;
-+        int64_t m = m0 + tm;
-+        Y[m * N + n] = static_cast<float>(acc[tm]);
-+    }
++    for(int tm=0;tm<16;++tm){ if(tm>=tile_m) break; int64_t m=m0+tm; Y[m*N + n]=(float)acc[tm]; }
 +}
 +
-+__global__ __launch_bounds__(256, 4) __attribute__((amdgpu_flat_work_group_size(256,256)))
-+static void gemm_iq4xs_wmma_kernel(
-+    const block_iq4_xs* __restrict__ W,
-+    const float* __restrict__ X,
-+    float* __restrict__ Y,
-+    int64_t K,
-+    int64_t N,
-+    int64_t M
-+) {
-+    const int BLOCK_N = 64;
-+    const int BLOCK_M = 32;
-+    int block_n = blockIdx.x * BLOCK_N;
-+    int block_m = blockIdx.y * BLOCK_M;
-+
-+    int tid = threadIdx.x;
-+    int warp_id = tid / 32;
-+    int lIdx = tid % 32;
-+    int lane = lIdx % 16;
-+    int half_wave = lIdx / 16;
-+
-+    int warp_n = warp_id / 2;
-+    int warp_m = warp_id % 2;
-+    int tile_n = block_n + warp_n * 16;
-+    int tile_m = block_m + warp_m * 16;
-+
-+    if (tile_n >= N || tile_m >= M) return;
-+
-+    v8f32 c_frag = {0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f};
-+
-+    int K_tiles = (int)(K / 16);
-+    int64_t blocks_per_row = K / 256;
-+
-+    for (int kt = 0; kt < K_tiles; ++kt) {
-+        int k0 = kt * 16;
-+
-+        v16f16 a_frag;
-+        v16f16 b_frag;
-+
-+        int64_t g_n = tile_n + lane;
-+        #pragma unroll
-+        for (int ele = 0; ele < 16; ++ele) {
-+            int64_t g_k = k0 + ele;
-+            if (g_n < N && g_k < K) {
-+                int64_t b = g_k / 256;
-+                int ib = (g_k % 256) / 32;
-+                int j = (g_k % 32) % 16;
-+                bool hi = (g_k % 32) >= 16;
-+                const block_iq4_xs* blk = W + g_n * blocks_per_row + b;
-+                float d = custom_fp16_to_fp32(blk->d);
-+                int ls_low  = (blk->scales_l[ib / 2] >> (4 * (ib & 1))) & 0x0F;
-+                int ls_high = (blk->scales_h >> (2 * ib)) & 0x03;
-+                int ls = ls_low | (ls_high << 4);
-+                float dl = d * (static_cast<float>(ls) - 32.0f);
-+                uint8_t q_byte = blk->qs[ib * 16 + j];
-+                int q = hi ? ((q_byte >> 4) & 0x0F) : (q_byte & 0x0F);
-+                float w = dl * static_cast<float>(kvalues_iq4nl_dev_gemm[q]);
-+                a_frag[ele] = (_Float16)w;
-+            } else {
-+                a_frag[ele] = (_Float16)0.0f;
-+            }
++// Streaming WMMA kernel -- 64x32 per block, double-buffered LDS [2][32][33] half, GGML layouts corrected
++__global__ __launch_bounds__(256,4) __attribute__((amdgpu_flat_work_group_size(256,256)))
++void gemm_iq4xs_wmma_stream_kernel_cuh(const block_iq4_xs* __restrict__ W, const float* __restrict__ X, float* __restrict__ Y, int64_t K, int64_t N, int64_t M){
++    const int BLOCK_N=64; const int BLOCK_M=32; const int K_TILE=32;
++    int block_n=blockIdx.x*BLOCK_N; int block_m=blockIdx.y*BLOCK_M;
++    int tid=threadIdx.x; int lIdx=tid%32; int warp_id=tid/32; int lane=lIdx%16; int half_wave=lIdx/16;
++    int warp_n=warp_id/2; int warp_m=warp_id%2; int tile_n=block_n+warp_n*16; int tile_m=block_m+warp_m*16;
++    __shared__ _Float16 sB[2][32][33];
++    v8f32 c_frag={0.0f,0.0f,0.0f,0.0f,0.0f,0.0f,0.0f,0.0f};
++    int64_t blocks_per_row=K/QK_K; int num_k_tiles=(int)(K/K_TILE); int buf=0;
++    for(int kt=0;kt<num_k_tiles;++kt){
++        int k0=kt*K_TILE;
++        for(int iter=0;iter<4;++iter){ int linear=tid+iter*256; int kr=linear/32; int cm=linear%32; int64_t gk=(int64_t)k0+kr; int64_t gm=(int64_t)block_m+cm; _Float16 v=(_Float16)0.0f; if(gk<K && gm<M){ v=(_Float16)X[gm*K+gk]; } sB[buf][kr][cm]=v; }
++        __syncthreads();
++        for(int sub=0;sub<2;++sub){
++            int k_sub=sub*16; int k_base=k0+k_sub;
++            v16f16 a_frag;
++            for(int ele=0;ele<16;++ele){ int64_t g_n=(int64_t)tile_n+lane; int64_t g_k=(int64_t)k_base+ele; if(g_n<N && g_k<K){ int64_t b=g_k/QK_K; int ib=(int)((g_k%QK_K)/32); int j=(int)((g_k%32)%16); bool hi=(g_k%32)>=16; const block_iq4_xs* blk=W+g_n*blocks_per_row+b; float d=custom_fp16_to_fp32_gemm(blk->d); int ls_low=(blk->scales_l[ib/2]>>(4*(ib&1)))&0x0F; int ls_high=(blk->scales_h>>(2*ib))&0x03; int ls=ls_low|(ls_high<<4); float dl=d*((float)ls-32.0f); uint8_t q_byte=blk->qs[ib*16+j]; int q=hi?((q_byte>>4)&0x0F):(q_byte&0x0F); float w=dl*(float)kvalues_iq4nl_dev_gemm[q]; a_frag[ele]=(_Float16)w; } else a_frag[ele]=(_Float16)0.0f; }
++            v16f16 b_frag;
++            for(int ele=0;ele<16;++ele){ if(tile_n<N && tile_m<M){ int lds_row=k_sub+ele; int lds_col=warp_m*16+lane; b_frag[ele]=sB[buf][lds_row][lds_col]; } else b_frag[ele]=(_Float16)0.0f; }
++            c_frag=__builtin_amdgcn_wmma_f32_16x16x16_f16_w32(a_frag,b_frag,c_frag);
 +        }
-+
-+        int64_t g_m = tile_m + lane;
-+        #pragma unroll
-+        for (int ele = 0; ele < 16; ++ele) {
-+            int64_t g_k = k0 + ele;
-+            if (g_k < K && g_m < M) {
-+                b_frag[ele] = (_Float16)X[g_m * K + g_k];
-+            } else {
-+                b_frag[ele] = (_Float16)0.0f;
-+            }
-+        }
-+
-+        c_frag = __builtin_amdgcn_wmma_f32_16x16x16_f16_w32(a_frag, b_frag, c_frag);
++        __syncthreads(); buf ^=1;
 +    }
-+
-+    #pragma unroll
-+    for (int ele = 0; ele < 8; ++ele) {
-+        int r = ele * 2 + half_wave;
-+        int64_t out_n = tile_n + r;
-+        int64_t out_m = tile_m + lane;
-+        if (out_n < N && out_m < M) {
-+            Y[out_m * N + out_n] = c_frag[ele];
-+        }
-+    }
++    for(int ele=0;ele<8;++ele){ int r=ele*2+half_wave; int64_t out_n=(int64_t)tile_n+r; int64_t out_m=(int64_t)tile_m+lane; if(out_n<N && out_m<M){ Y[out_m*N + out_n]=c_frag[ele]; } }
 +}
 +
-+inline bool custom_gemm_iq4xs_can_handle(int64_t K, int64_t N, int64_t M, ggml_type type) {
-+    if (type != GGML_TYPE_IQ4_XS) return false;
-+    if (M < 16) return false;
-+    if (K <= 0 || N <= 0 || K % 256 != 0) return false;
-+    if (K != 5120 && K != 17408) return false;
-+    if (N != 5120 && N != 6144 && N != 17408) return false;
-+    return true;
++static inline hipError_t launch_stream_tiled_gemm_cuh(const block_iq4_xs* d_W,const float* d_X,float* d_Y,int64_t K,int64_t N,int64_t M,hipStream_t stream){
++    const int TILE_M=16; int64_t tiles_per_row=(M+TILE_M-1)/TILE_M; int64_t total_tiles=N*tiles_per_row; const int BLOCK=256; int64_t grid=(total_tiles+BLOCK-1)/BLOCK; if(grid>2147483647) return hipErrorInvalidConfiguration;
++    hipLaunchKernelGGL((gemm_iq4xs_stream_tiled_kernel_cuh<16>),dim3((unsigned)grid),dim3(BLOCK),0,stream,d_W,d_X,d_Y,K,N,M); return hipGetLastError();
 +}
-+
-+inline hipError_t custom_gemm_iq4xs_dispatch(
-+    const block_iq4_xs* W,
-+    const float* X,
-+    float* Y,
-+    int64_t K,
-+    int64_t N,
-+    int64_t M,
-+    hipStream_t stream
-+) {
-+    bool wmma_ok = (M % 16 == 0) && (N % 16 == 0) && (K % 16 == 0) && (M >= 512) && (N >= 1024);
-+    if (wmma_ok) {
-+        const int BLOCK_N = 64;
-+        const int BLOCK_M = 32;
-+        int grid_x = (int)((N + BLOCK_N - 1) / BLOCK_N);
-+        int grid_y = (int)((M + BLOCK_M - 1) / BLOCK_M);
-+        hipLaunchKernelGGL(gemm_iq4xs_wmma_kernel, dim3(grid_x, grid_y), dim3(256), 0, stream, W, X, Y, K, N, M);
-+        hipError_t err = hipGetLastError();
-+        if (err == hipSuccess) return err;
++inline hipError_t gemm_iq4xs_wmma_stream_gpu_cuh(const block_iq4_xs* d_W,const float* d_X,float* d_Y,int64_t K,int64_t N,int64_t M,hipStream_t stream=0){
++    if(K<=0||N<=0||M<=0||K%QK_K!=0) return hipErrorInvalidValue;
++    bool wmma_ok=(M%16==0)&&(N%16==0)&&(K%16==0)&&(M>=512)&&(N>=32)&&(K>=32);
++    if(wmma_ok){
++        const int BLOCK_N=64; const int BLOCK_M=32; int grid_x=(int)((N+BLOCK_N-1)/BLOCK_N); int grid_y=(int)((M+BLOCK_M-1)/BLOCK_M); dim3 grid(grid_x,grid_y); dim3 block(256);
++        hipLaunchKernelGGL(gemm_iq4xs_wmma_stream_kernel_cuh,grid,block,0,stream,d_W,d_X,d_Y,K,N,M); hipError_t err=hipGetLastError(); if(err==hipSuccess) return err;
 +    }
-+    const int TILE_M = 16;
-+    int64_t tiles_per_row = (M + TILE_M - 1) / TILE_M;
-+    int64_t total_tiles = N * tiles_per_row;
-+    const int BLOCK = 256;
-+    int64_t grid = (total_tiles + BLOCK - 1) / BLOCK;
-+    if (grid > 2147483647) return hipErrorInvalidConfiguration;
-+    hipLaunchKernelGGL((gemm_iq4xs_tiled_kernel<16>), dim3((unsigned)grid), dim3(BLOCK), 0, stream, W, X, Y, K, N, M);
-+    return hipGetLastError();
++    return launch_stream_tiled_gemm_cuh(d_W,d_X,d_Y,K,N,M,stream);
 +}
-+
++inline hipError_t gemm_iq4xs_stream_tiled_gpu_cuh(const block_iq4_xs* d_W,const float* d_X,float* d_Y,int64_t K,int64_t N,int64_t M,hipStream_t stream=0){
++    if(K<=0||N<=0||M<=0||K%QK_K!=0) return hipErrorInvalidValue; return launch_stream_tiled_gemm_cuh(d_W,d_X,d_Y,K,N,M,stream);
++}
++inline bool custom_gemm_iq4xs_can_handle(int64_t K,int64_t N,int64_t M,ggml_type type){
++    if(type!=GGML_TYPE_IQ4_XS) return false; if(M<16) return false; if(K<=0||N<=0||K%256!=0) return false;
++    if(K!=5120 && K!=17408) return false; if(N!=5120 && N!=6144 && N!=17408) return false; return true;
++}
++inline hipError_t custom_gemm_iq4xs_dispatch(const block_iq4_xs* W,const float* X,float* Y,int64_t K,int64_t N,int64_t M,hipStream_t stream){
++    return gemm_iq4xs_wmma_stream_gpu_cuh(W,X,Y,K,N,M,stream);
++}
 +#endif
 diff --git a/ggml/src/ggml-cuda/custom_gfx1100/gemv_iq4xs.cuh b/ggml/src/ggml-cuda/custom_gfx1100/gemv_iq4xs.cuh
-new file mode 100755
-index 0000000..365124c
+new file mode 100644
+index 0000000..ae7248c
 --- /dev/null
 +++ b/ggml/src/ggml-cuda/custom_gfx1100/gemv_iq4xs.cuh
-@@ -0,0 +1,118 @@
-+// Vendored from kernels/matmul_iq4xs/impl_gemv_gfx1100.hip -- gfx1100 Wave32 GEMV M=1
+@@ -0,0 +1,119 @@
++// Vendored from kernels/matmul_iq4xs/impl_gemv_dp4a_gfx1100.hip -- gfx1100 Wave32 DP4A GEMV (Phase 07-02)
++// Hybrid decode: 8-thread cooperative + Q8_1 DP4A + LDS [32][33] + __launch_bounds__(256,4)
 +#pragma once
 +#include <hip/hip_runtime.h>
 +#include <hip/hip_fp16.h>
@@ -295,114 +169,114 @@ index 0000000..365124c
 +
 +#if defined(GGML_CUDA_ENABLE_CUSTOM_GFX1100)
 +
++#ifndef QK8_1
++#define QK8_1 32
++#endif
++#ifndef WARP_SIZE
++#define WARP_SIZE 32
++#endif
++
 +static __device__ __constant__ const int8_t kvalues_iq4nl_dev[16] = {
 +    -127, -104, -83, -65, -49, -35, -22, -10, 1, 13, 25, 38, 53, 69, 89, 113
 +};
-+
 +static inline __device__ float custom_fp16_to_fp32(ggml_fp16_t h) {
-+    union { uint16_t u; __half h; } val;
-+    val.u = h;
-+    return __half2float(val.h);
++    union { uint16_t u; __half hh; } v; v.u = h; return __half2float(v.hh);
 +}
-+
-+__global__ __launch_bounds__(256, 4) __attribute__((amdgpu_flat_work_group_size(256,256)))
-+static void gemv_iq4xs_gfx1100_kernel(
-+    const block_iq4_xs* __restrict__ W,
-+    const float* __restrict__ x,
-+    float* __restrict__ y,
-+    int64_t K,
-+    int64_t N
-+) {
-+    constexpr int THREADS_PER_ROW = 8;
-+    constexpr int ROWS_PER_BLOCK = 256 / THREADS_PER_ROW;
-+
-+    int tid = threadIdx.x;
-+    int group_id = tid / THREADS_PER_ROW;
-+    int lane_in_group = tid & (THREADS_PER_ROW - 1);
-+
-+    int64_t row = (int64_t)blockIdx.x * ROWS_PER_BLOCK + group_id;
-+    double thread_sum = 0.0;
-+
-+    if (row < N) {
-+        int64_t blocks_per_row = K / 256;
-+        const block_iq4_xs* row_blocks = W + row * blocks_per_row;
-+
-+        for (int64_t b = 0; b < blocks_per_row; ++b) {
-+            const block_iq4_xs* blk = &row_blocks[b];
-+            float d = custom_fp16_to_fp32(blk->d);
-+
-+            int ib = lane_in_group;
-+            int ls_low  = (blk->scales_l[ib / 2] >> (4 * (ib & 1))) & 0x0F;
-+            int ls_high = (blk->scales_h >> (2 * ib)) & 0x03;
-+            int ls = ls_low | (ls_high << 4);
-+            double dl = static_cast<double>(d) * static_cast<double>(static_cast<float>(ls) - 32.0f);
-+
-+            struct Aligned16 { uint64_t lo; uint64_t hi; };
-+            Aligned16 qs_val;
-+            qs_val.lo = *reinterpret_cast<const uint64_t*>(blk->qs + ib * 16);
-+            qs_val.hi = *reinterpret_cast<const uint64_t*>(blk->qs + ib * 16 + 8);
-+            const uint8_t* qs_bytes = reinterpret_cast<const uint8_t*>(&qs_val);
-+
-+            const float* x_base = x + b * 256 + ib * 32;
-+
-+            #pragma unroll
-+            for (int j = 0; j < 16; ++j) {
-+                uint8_t q_byte = qs_bytes[j];
-+                int lo = q_byte & 0x0F;
-+                int hi = (q_byte >> 4) & 0x0F;
-+
-+                double w_lo = dl * static_cast<double>(kvalues_iq4nl_dev[lo]);
-+                double w_hi = dl * static_cast<double>(kvalues_iq4nl_dev[hi]);
-+
-+                float x_lo = x_base[j];
-+                float x_hi = x_base[j + 16];
-+                thread_sum += w_lo * static_cast<double>(x_lo);
-+                thread_sum += w_hi * static_cast<double>(x_hi);
-+            }
++struct block_q8_1_coop { uint32_t ds; int8_t qs[QK8_1]; };
++static_assert(sizeof(block_q8_1_coop)==36,"block_q8_1_coop 36");
++static __host__ __device__ __forceinline__ float coop_low2float(uint32_t ds){
++    uint16_t lo=ds & 0xFFFFu;
++#if defined(__HIP_DEVICE_COMPILE__)
++    union{uint16_t u; __half h;} vv; vv.u=lo; return __half2float(vv.h);
++#else
++    uint32_t sign=((uint32_t)lo & 0x8000)<<16; int32_t exp=(lo>>10)&0x1F; uint32_t mant=lo&0x3FF; uint32_t f;
++    if(exp==0){ if(mant==0) f=sign; else{exp=1; while((mant&0x400)==0){mant<<=1;exp--;} mant&=0x3FF; f=sign|((uint32_t)(exp+112)<<23)|(mant<<13);} }
++    else if(exp==31) f=sign|0x7F800000|(mant<<13); else f=sign|((uint32_t)(exp+112)<<23)|(mant<<13);
++    float res; __builtin_memcpy(&res,&f,sizeof(res)); return res;
++#endif
++}
++static __host__ __device__ __forceinline__ uint32_t coop_pack_half2(float lo_f,float hi_f){
++    auto f2h=[](float v)->uint16_t{uint32_t x=__builtin_bit_cast(uint32_t,v); uint32_t sign=(x>>16)&0x8000; int32_t exp=((x>>23)&0xFF)-127+15; uint32_t mant=(x>>13)&0x3FF; if(exp<=0){if(exp<-10) return (uint16_t)sign; mant=(mant|0x400)>>(1-exp); return (uint16_t)(sign|mant);} else if(exp>=31) return (uint16_t)(sign|0x7C00); return (uint16_t)(sign|(exp<<10)|mant);};
++    return (uint32_t)f2h(lo_f)|((uint32_t)f2h(hi_f)<<16);
++}
++static __device__ __forceinline__ int coop_dp4a(int a,int b,int c){
++#if defined(__HIP_DEVICE_COMPILE__)
++#if defined(__gfx1100__)||defined(__gfx1101__)||defined(__gfx1102__)||defined(__gfx1150__)||defined(__gfx1151__)
++    c=__builtin_amdgcn_sudot4(true,a,true,b,c,false); return c;
++#else
++    const int8_t* ap=(const int8_t*)&a; const int8_t* bp=(const int8_t*)&b; c+=(int)ap[0]*(int)bp[0]+(int)ap[1]*(int)bp[1]+(int)ap[2]*(int)bp[2]+(int)ap[3]*(int)bp[3]; return c;
++#endif
++#else
++    const int8_t* ap=(const int8_t*)&a; const int8_t* bp=(const int8_t*)&b; c+=(int)ap[0]*(int)bp[0]+(int)ap[1]*(int)bp[1]+(int)ap[2]*(int)bp[2]+(int)ap[3]*(int)bp[3]; return c;
++#endif
++}
++static __device__ __forceinline__ int coop_get_int_b4(const void* x,int i32){ return ((const int*)x)[i32]; }
++static __device__ __forceinline__ int2 coop_get_int_from_table16(int q4,const int8_t* table){
++#if defined(__HIP_DEVICE_COMPILE__)
++    const uint32_t* v=(const uint32_t*)table; uint32_t qe=(uint32_t)q4; uint32_t qo=(uint32_t)(q4>>4);
++    uint32_t ve_low=__builtin_amdgcn_perm(v[1],v[0],qe & 0x07070707u); uint32_t vo_low=__builtin_amdgcn_perm(v[1],v[0],qo & 0x07070707u);
++    uint32_t ve_hi=__builtin_amdgcn_perm(v[3],v[2],qe & 0x07070707u); uint32_t vo_hi=__builtin_amdgcn_perm(v[3],v[2],qo & 0x07070707u);
++    uint32_t me=0x03020100u|((qe & 0x08080808u)>>1); uint32_t mo=0x03020100u|((qo & 0x08080808u)>>1);
++    uint32_t rx=__builtin_amdgcn_perm(ve_hi,ve_low,me); uint32_t ry=__builtin_amdgcn_perm(vo_hi,vo_low,mo); return make_int2((int)rx,(int)ry);
++#else
++    int q0=(q4>>0)&0x0F0F0F0F; int q1=(q4>>4)&0x0F0F0F0F; int8_t* a0=(int8_t*)&q0; int8_t* a1=(int8_t*)&q1; union{int8_t b[4]; int i;} v0,v1;
++    v0.b[0]=table[a0[0]&0xF]; v0.b[1]=table[a0[1]&0xF]; v0.b[2]=table[a0[2]&0xF]; v0.b[3]=table[a0[3]&0xF];
++    v1.b[0]=table[a1[0]&0xF]; v1.b[1]=table[a1[1]&0xF]; v1.b[2]=table[a1[2]&0xF]; v1.b[3]=table[a1[3]&0xF]; return make_int2(v0.i,v1.i);
++#endif
++}
++__global__ void quantize_row_q8_1_coop_kernel_gemv(const float* __restrict__ x, block_q8_1_coop* __restrict__ y, int64_t K){
++    int64_t ib=blockIdx.x; int64_t nb=K/QK8_1; if(ib>=nb) return; int tid=threadIdx.x; int64_t idx=ib*QK8_1+tid; float xi=0.0f; if(tid<QK8_1) xi=x[idx];
++    float amax=fabsf(xi); float sum=xi;
++    for(int off=16;off>0;off>>=1){ float o_max=__shfl_xor(amax,off); amax=fmaxf(amax,o_max); float o_sum=__shfl_xor(sum,off); sum+=o_sum; }
++    float d=amax/127.0f; int8_t q=0; if(amax!=0.0f) q=(int8_t)roundf(xi/d); if(tid<QK8_1) y[ib].qs[tid]=q; if(tid==0) y[ib].ds=coop_pack_half2(d,sum);
++}
++static hipError_t quantize_coop_gpu_gemv(const float* d_x, block_q8_1_coop* d_y, int64_t K, hipStream_t s=0){
++    int64_t nb=K/QK8_1; if(K%QK8_1!=0||nb<=0) return hipErrorInvalidValue; dim3 grid((unsigned)nb); dim3 block(QK8_1);
++    hipLaunchKernelGGL(quantize_row_q8_1_coop_kernel_gemv,grid,block,0,s,d_x,d_y,K); return hipGetLastError();
++}
++template<int WarpSize=WARP_SIZE>
++__global__ __launch_bounds__(256,4) __attribute__((amdgpu_flat_work_group_size(256,256)))
++void gemv_iq4xs_dp4a_coop_kernel_gfx(const block_iq4_xs* __restrict__ W, const block_q8_1_coop* __restrict__ AQ, float* __restrict__ y, int64_t K, int64_t N){
++    static_assert(WarpSize==32,"Wave32");
++    constexpr int THREADS_PER_ROW=8; constexpr int ROWS_PER_BLOCK=256/THREADS_PER_ROW;
++    int tid=threadIdx.x; int group_id=tid/THREADS_PER_ROW; int lane=tid%THREADS_PER_ROW;
++    int64_t row=(int64_t)blockIdx.x*ROWS_PER_BLOCK+group_id; bool valid=row<N;
++    __shared__ float sh_coop[32][33];
++    float local=0.0f;
++    if(valid){
++        int64_t blocks_per_row=K/QK_K; const block_iq4_xs* row_blocks=W+row*blocks_per_row;
++        for(int64_t b=0;b<blocks_per_row;++b){
++            const block_iq4_xs* bq4=row_blocks+b; const block_q8_1_coop* aq_chunk=AQ+b*(QK_K/QK8_1); int ib=lane;
++            int ls=((bq4->scales_l[ib>>1]>>(4*(ib&1)))&0x0F)|(((bq4->scales_h>>(2*ib))&0x03)<<4); int scale=ls-32;
++            float d=custom_fp16_to_fp32(bq4->d)*coop_low2float(aq_chunk[ib].ds);
++            ulong2 q4_vec=*reinterpret_cast<const ulong2*>(bq4->qs+ib*16);
++            int sumi=0;
++            for(int j=0;j<4;++j){ int aux_q4=((const int*)&q4_vec)[j]; int2 v=coop_get_int_from_table16(aux_q4,kvalues_iq4nl_dev); int u0=coop_get_int_b4(aq_chunk[ib].qs,j+0); int u1=coop_get_int_b4(aq_chunk[ib].qs,j+4); sumi=coop_dp4a(v.x,u0,sumi); sumi=coop_dp4a(v.y,u1,sumi); }
++            sumi*=scale; local+=d*(float)sumi;
 +        }
 +    }
-+
-+    __shared__ double sh[256];
-+    sh[tid] = thread_sum;
-+    __syncthreads();
-+
-+    if (row < N && lane_in_group == 0) {
-+        double acc = 0.0;
-+        #pragma unroll
-+        for (int t = 0; t < THREADS_PER_ROW; ++t) {
-+            acc += sh[group_id * THREADS_PER_ROW + t];
-+        }
-+        y[row] = static_cast<float>(acc);
-+    }
++    sh_coop[group_id][lane]=local; __syncthreads();
++    if(valid && lane==0){ float acc=0.0f; for(int t=0;t<THREADS_PER_ROW;++t) acc+=sh_coop[group_id][t]; y[row]=acc; }
 +}
-+
-+inline bool custom_gemv_iq4xs_can_handle(int64_t K, int64_t N, int64_t M, ggml_type type) {
-+    if (type != GGML_TYPE_IQ4_XS) return false;
-+    if (M != 1) return false;
-+    if (K <= 0 || N <= 0 || K % 256 != 0) return false;
-+    if (K != 5120 && K != 17408) return false;
-+    if (N != 5120 && N != 6144 && N != 17408) return false;
-+    return true;
++static hipError_t gemv_prequantized_cuh(const block_iq4_xs* d_W,const block_q8_1_coop* d_AQ,float* d_y,int64_t K,int64_t N,hipStream_t stream=0){
++    if(!d_W||!d_AQ||!d_y) return hipErrorInvalidValue; if(K<=0||N<=0||K%QK_K!=0||K%QK8_1!=0) return hipErrorInvalidValue;
++    constexpr int BLOCK=256; constexpr int THREADS_PER_ROW=8; constexpr int ROWS_PER_BLOCK=BLOCK/THREADS_PER_ROW;
++    int64_t grid=(N+ROWS_PER_BLOCK-1)/ROWS_PER_BLOCK; if(grid>2147483647) return hipErrorInvalidConfiguration;
++    hipLaunchKernelGGL((gemv_iq4xs_dp4a_coop_kernel_gfx<WARP_SIZE>),dim3((unsigned)grid),dim3(BLOCK),0,stream,d_W,d_AQ,d_y,K,N); return hipGetLastError();
 +}
-+
-+inline hipError_t custom_gemv_iq4xs_dispatch(
-+    const block_iq4_xs* W,
-+    const float* x,
-+    float* y,
-+    int64_t K,
-+    int64_t N,
-+    hipStream_t stream
-+) {
-+    constexpr int BLOCK = 256;
-+    constexpr int THREADS_PER_ROW = 8;
-+    constexpr int ROWS_PER_BLOCK = BLOCK / THREADS_PER_ROW;
-+    int64_t grid = (N + ROWS_PER_BLOCK - 1) / ROWS_PER_BLOCK;
-+    if (grid > 2147483647) return hipErrorInvalidConfiguration;
-+
-+    hipLaunchKernelGGL(gemv_iq4xs_gfx1100_kernel, dim3((unsigned)grid), dim3(BLOCK), 0, stream, W, x, y, K, N);
-+    return hipGetLastError();
++static hipError_t gemv_gpu_cuh(const block_iq4_xs* d_W,const float* d_x,float* d_y,int64_t K,int64_t N,hipStream_t stream=0){
++    if(!d_W||!d_x||!d_y) return hipErrorInvalidValue; if(K<=0||N<=0||K%QK_K!=0||K%QK8_1!=0) return hipErrorInvalidValue;
++    int64_t nb=K/QK8_1; block_q8_1_coop* d_AQ=nullptr; hipError_t err=hipMalloc(&d_AQ,nb*sizeof(block_q8_1_coop)); if(err!=hipSuccess) return err;
++    err=quantize_coop_gpu_gemv(d_x,d_AQ,K,stream); if(err!=hipSuccess){(void)hipFree(d_AQ); return err;}
++    err=gemv_prequantized_cuh(d_W,d_AQ,d_y,K,N,stream); (void)hipFree(d_AQ); return err;
 +}
-+
++inline bool custom_gemv_iq4xs_can_handle(int64_t K,int64_t N,int64_t M,ggml_type type){
++    if(type!=GGML_TYPE_IQ4_XS) return false; if(M!=1) return false; if(K<=0||N<=0||K%256!=0) return false;
++    if(K!=5120 && K!=17408) return false; if(N!=5120 && N!=6144 && N!=17408) return false; return true;
++}
++inline hipError_t custom_gemv_iq4xs_dispatch(const block_iq4_xs* W,const float* x,float* y,int64_t K,int64_t N,hipStream_t stream){
++    return gemv_gpu_cuh(W,x,y,K,N,stream);
++}
 +#endif
 diff --git a/ggml/src/ggml-cuda/mmq.cu b/ggml/src/ggml-cuda/mmq.cu
 index 707437e..fe82721 100644

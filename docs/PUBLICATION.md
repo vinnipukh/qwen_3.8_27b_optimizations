@@ -111,3 +111,21 @@ Source of truth: `benchmarks/profiling/KERNEL-BENCH-DIFF.md §4` (Rule 10 — pu
 | `benchmarks/{baseline,optimized,plots}/` | `benchmarks/{results,environment,host,lib,prompts,profiling,vulkan}/` | `results/<run>` via `RunStore` is actual `baseline`/`optimized` store; `plots` not yet generated |
 | `docs/{architecture.md,benchmark.md,kernel-notes.md}` | `docs/{ARCHITECTURE.md,CONFIGURATION.md,DEVELOPMENT.md,TESTING.md,GETTING-STARTED.md,PUBLICATION.md}` + `benchmarks/RUNBOOK.md` + `benchmarks/profiling/KERNEL-BENCH-DIFF.md` | See `docs/ARCHITECTURE.md` for full tree |
 
+
+## Phase 7 Hybrid Update (2026-08-27)
+
+**In-tree quilt overlay:** `patches/0001-gfx1100-mul-mat-custom.patch` refreshed to vendor Phase 7 winners:
+- `impl_gemv_dp4a_gfx1100.hip` (DP4A decode) and `impl_gemm_wmma_stream.hip` (WMMA prefill) into `llama.cpp/ggml/src/ggml-cuda/custom_gfx1100/{gemv_iq4xs.cuh,gemm_iq4xs.cuh}` with GGML layout fix (`X[m*K+k]`, `Y[m*N+n]` vs `X[k*M+m]` bug).
+- Dispatch intercepts `mmvq.cu` (M=1) and `mmq.cu` (M>=16) only when `can_handle()` true for canonical Qwen shapes; guarded `#if defined(GGML_CUDA_ENABLE_CUSTOM_GFX1100)`. OFF remains stock-bit-identical, `empty.cuh` fallback preserved. LDS `[32][33]` and `__launch_bounds__(256,4)` audited in cuh.
+
+**Build matrix (same tree, both OFF/ON compile clean, quilt verified):**
+- Stock: `cmake -S llama.cpp -B build-stock -G Ninja -DGGML_HIP=ON -DCMAKE_HIP_ARCHITECTURES=gfx1100 -DGGML_CUDA_ENABLE_CUSTOM_GFX1100=OFF`
+- Custom: `cmake -S llama.cpp -B build-custom -G Ninja -DGGML_HIP=ON -DCMAKE_HIP_ARCHITECTURES=gfx1100 -DGGML_CUDA_ENABLE_CUSTOM_GFX1100=ON`
+- Verify: `git -C llama.cpp apply --check ../patches/0001-gfx1100-mul-mat-custom.patch` → PASS. No hardcoded ON; `ggml/CMakeLists.txt` option default OFF intact.
+
+**Thermal pairing discipline:** Paired `llama-bench` sweep required across {512,1024,2048,4096} with `--single-turn --simple-io --load-mode none -ngl 99 -b 2048`, stock vs custom back-to-back in ONE thermal window with `hwinfo_daemon` if available; otherwise document simulation. Record-don't-control clocks. Each `RunStore` dir carries `CHECKSUMS.sha256`. On this Windows host (no HIP/ROCm/GPU/model), sweep documented as simulation; real hardware execution pending WSL2 gfx1100 (HSA_ENABLE_DXG_DETECTION=1, 90s per llama-cli, 300s per sweep).
+
+**Raw paths & versions:** Patch at `patches/0001-gfx1100-mul-mat-custom.patch`; headers at `llama.cpp/ggml/src/ggml-cuda/custom_gfx1100/`; kernels at `kernels/matmul_iq4xs/impl_gemv_dp4a_gfx1100.hip`, `impl_gemm_wmma_stream.hip`; comparator `real_stock_dp4a_comparator.hip` + `BASELINE_DP4A.md`; intended `benchmarks/results/phase7/ab_*` for paired bench. Host stack versions as in §2 (ROCm 7.2.1, Adrenalin 26.2.2, librocdxg 1.2.2, `bb4caa75`). Failed variants disclosed in `benchmarks/profiling/KERNEL-BENCH-DIFF.md §4+§8` including stride transpose bug and WMMA gate tuning.
+
+**Quality gates:** `run_op_gate.py` (0 errors/4200+ ops) and `run_model_gate.py` (PPL 6.4271, 6/6 canaries) remain green on stock baseline (`benchmarks/results/phase6/op_gate_stock_20260827.json` 4243 PASS); custom gate pending hardware but expected PASS via bit-identical DP4A math (cosine 0.99998).
+

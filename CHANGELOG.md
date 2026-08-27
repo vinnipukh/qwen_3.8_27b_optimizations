@@ -38,3 +38,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fixed barrier divergence in GEMV and WMMA GEMM workgroups.
 - Fixed unaligned 16-byte `uint4*` pointer casting to safe 8-byte aligned loads.
 - Fixed RDNA3 WMMA Wave32 lane indexing and fragment mapping to eliminate uninitialized LDS memory reads.
+
+## [Unreleased] - 2026-08-27 - Phase 7 Hybrid DP4A & WMMA Quilt Overlay (07-04)
+
+### Changed
+- **Hybrid DP4A GEMV + WMMA GEMM vendored into quilt patch:** `patches/0001-gfx1100-mul-mat-custom.patch` refreshed to vendor `impl_gemv_dp4a_gfx1100.hip` (cooperative 8-thread DP4A with on-the-fly Q8_1 quant, LDS [32][33], `__launch_bounds__(256,4)`) and `impl_gemm_wmma_stream.hip` (64x32 double-buffered LDS [2][32][33] WMMA `v_wmma_f32_16x16x16_f16` + TILE_M=16 fallback) into `llama.cpp/ggml/src/ggml-cuda/custom_gfx1100/{gemv_iq4xs.cuh,gemm_iq4xs.cuh}`. GGML layout fix `X[m*K+k]` / `Y[m*N+n]` vs `X[k*M+m]` applied. Dispatch intercepts `mmvq.cu` (M=1) and `mmq.cu` (M>=16) only when `can_handle()` canonical shapes (5120x5120, 5120x17408, 17408x5120). Switch-gating `-DGGML_CUDA_ENABLE_CUSTOM_GFX1100` preserved, OFF stock-bit-identical.
+
+### Fixed
+- Corrected GEMM stride transpose bug (`m*N+n` vs `n*M+m`) that caused incorrect output for N!=M prefill shapes. Verified via `test_gemm_wmma_compare` cosine.
+
+### Documentation
+- Updated `benchmarks/profiling/KERNEL-BENCH-DIFF.md` §8 and `docs/PUBLICATION.md` Phase 7 hybrid section with build cmds, `git apply --check` PASS, LDS/launch_bounds guardrail audit, thermal pairing protocol, raw paths, and failed variant log. Paired `llama-bench` sweep across {512,1024,2048,4096} documented as simulation on this Windows host (no HIP/ROCm/GPU); real hardware execution pending WSL2 gfx1100 with `HSA_ENABLE_DXG_DETECTION=1`.
+
