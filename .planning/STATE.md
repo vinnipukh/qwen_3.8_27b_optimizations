@@ -1,18 +1,18 @@
 ---
 gsd_state_version: 1.0
-current_phase: 6
-current_phase_name: Integration, Full Validation & Publication
-status: completed
-stopped_at: Project execution 100% complete — Phase 6 fully executed, all 6 phases and 24 plans verified, custom gfx1100 IQ4_XS kernels integrated, quality gates green, publication package and release hygiene delivered.
+current_phase: 7
+current_phase_name: Hybrid DP4A & WMMA Matrix Core Optimization
+status: planned
+stopped_at: Phase 7 planned — 4 plans drafted (07-01 real stock DP4A comparator, 07-02 cooperative Wave32 DP4A GEMV, 07-03 streaming WMMA GEMM, 07-04 e2e A/B verification).
 last_updated: "2026-08-25T23:59:00.000Z"
 last_activity: 2026-08-25
-last_activity_desc: Phase 6 executed — 5/5 plans complete: 06-05 thermos remediation & kernel guards, 06-01 empty-flag switch proof, 06-02 winner patch behind switch with git diff provenance, 06-03 baseline preservation guard, 06-04 publication package + release hygiene + tag v1.0.0-gfx1100.
+last_activity_desc: Phase 7 planned to fuse Q8_1 integer activation quantization and RDNA3 hardware matrix cores to beat real production stock llama.cpp end-to-end.
 progress:
-  total_phases: 6
+  total_phases: 7
   completed_phases: 6
-  total_plans: 24
+  total_plans: 28
   completed_plans: 24
-  percent: 100
+  percent: 86
 ---
 
 # Project State
@@ -23,14 +23,14 @@ See: .planning/PROJECT.md
 
 **Core value:** Beat stock llama.cpp HIP on at least one important Qwen3.8-27B workload on the RX 7900 XT with a custom gfx1100 kernel, within agreed numerical tolerance — measured, reproducible, bisectable.
 
-**Status:** COMPLETE (6 of 6 phases, 24 of 24 plans, 100% progress).
+**Current focus:** Phase 7: Hybrid DP4A & WMMA Matrix Core Optimization (beating real production stock end-to-end).
 
-## Final Position
+## Current Position
 
-Phase: 6 (Integration, Full Validation & Publication) — COMPLETE
-Status: Project Delivered — INTEG-01, PUB-01, KERN-01..03, ENV-01..04, BENCH-01..04, QUAL-01..02, PROF-01..02 all satisfied.
+Phase: 7 (Hybrid DP4A & WMMA Matrix Core Optimization) — PLANNED
+Status: Planned — 4 plans defined in `.planning/phases/07-hybrid-dp4a-wmma-kernel-optimization/`
 
-Progress: [██████████] 100% (6 of 6 phases)
+Progress: [████████░░] 86% (6 of 7 phases)
 
 ## What Phase 6 Delivered
 
@@ -56,3 +56,11 @@ Progress: [██████████] 100% (6 of 6 phases)
   - `CHANGELOG.md` created with full release history.
   - `NOTICE` attribution and `LICENSE` (Apache 2.0) delivered.
   - Tagged `v1.0.0-gfx1100`.
+
+## Next Step
+
+Execute Phase 7:
+1. `07-01`: Build direct microbenchmark comparator against real upstream DP4A `vec_dot_iq4_xs_q8_1`.
+2. `07-02`: Author cooperative Wave32 DP4A GEMV kernel (`impl_gemv_dp4a_gfx1100.hip`) for decode.
+3. `07-03`: Author streaming WMMA matrix core GEMM kernel (`impl_gemm_wmma_stream.hip`) for prefill.
+4. `07-04`: Update quilt patch and execute paired end-to-end benchmark in `llama-bench`.

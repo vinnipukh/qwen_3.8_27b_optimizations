@@ -52,6 +52,7 @@ Inherited verbatim from the original roadmap; planners and executors apply them 
 - [x] **Phase 4: Kernel Playground Scaffold** - Standalone CPU-reference → HIP → numerical-compare → microbenchmark pipeline operating outside llama.cpp (completed 2026-08-25)
 - [x] **Phase 5: First Custom Kernel (Bottleneck Attack)** - GEMV 1.26–2.13× / GEMM 1.7–7.5× vs stock HIP (cosine 1.0), 30/32 wins, WMMA `v_wmma` in disasm, provisional quilt patch (completed 2026-08-25)
 - [x] **Phase 6: Integration, Full Validation & Publication** - Winners behind ON/OFF flags via quilt patches; stock baseline intact forever; complete before/after matrix published (completed 2026-08-25)
+- [ ] **Phase 7: Hybrid DP4A & WMMA Matrix Core Optimization** - Fuse Q8_1 integer activation quantization and RDNA3 hardware matrix cores to beat real production stock llama.cpp end-to-end in llama-bench
 
 ## Phase Details
 
@@ -196,6 +197,25 @@ All 17 v1 requirements mapped to exactly one phase:
 | Kernels | KERN-01 | 4 |
 | Kernels | KERN-02..03 | 5 |
 | Integration | INTEG-01 | 6 |
-| Publication | PUB-01 | 6 |
+### Phase 7: Hybrid DP4A & WMMA Matrix Core Optimization
 
-**Mapped: 17/17 ✓ — no orphans, no duplicates.**
+**Mode**: standard (horizontal layers)
+**Goal**: Fuse `Q8_1` integer activation quantization and RDNA3 hardware matrix cores (`v_dot4_i32_i8` / `v_wmma`) with our Wave32 cooperative workgroups to outperform real production stock llama.cpp end-to-end in `llama-bench`.
+**Depends on**: Phase 6
+**Requirements**: KERN-04 (Hybrid DP4A GEMV), KERN-05 (WMMA Streaming GEMM), INTEG-02 (End-to-End Uplift)
+**Success Criteria**:
+  1. Microbenchmark comparator in `kernels/matmul_iq4xs/` tests directly against real upstream `vec_dot_iq4_xs_q8_1` DP4A implementation.
+  2. Custom cooperative 8-thread DP4A GEMV kernel (`impl_gemv_dp4a_gfx1100.hip`) achieves >1.2× speedup over stock MMVQ in microbenchmarks and >38 t/s decode in `llama-bench`.
+  3. Custom WMMA streaming GEMM kernel (`impl_gemm_wmma_stream.hip`) executes hardware matrix cores on quantized inputs achieving >950 t/s prefill in `llama-bench`.
+  4. Quilt patch `patches/0001-gfx1100-mul-mat-custom.patch` updated; `QUAL-01` op-gate (0 errors) and `QUAL-02` model-gate (PPL 6.4271) remain green.
+
+**Plans**: 4 plans drafted in `.planning/phases/07-hybrid-dp4a-wmma-kernel-optimization/`:
+- 07-01: True upstream DP4A microbenchmark comparator
+- 07-02: Cooperative Wave32 DP4A GEMV kernel (decode)
+- 07-03: RDNA3 WMMA hardware matrix core GEMM kernel (prefill)
+- 07-04: In-tree patch integration & paired end-to-end benchmark verification
+
+| Publication | PUB-01 | 6 |
+| Hybrid DP4A Optimization | KERN-04, KERN-05, INTEG-02 | 7 |
+
+**Mapped: 20/20 ✓ — no orphans, no duplicates.**
