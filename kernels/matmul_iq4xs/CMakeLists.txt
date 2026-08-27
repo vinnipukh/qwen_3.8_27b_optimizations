@@ -92,6 +92,24 @@ add_executable(bench_gemv_dp4a
 )
 target_link_libraries(bench_gemv_dp4a PRIVATE matmul_ref_cpu matmul_common_iface)
 
+# --- Streaming WMMA GEMM (gfx1100 prefill, 07-03) ---
+# 64x32 per block, double-buffered LDS [2][32][33], on-the-fly dequant -> WMMA, fallback tiled TILE_M=16
+add_library(matmul_gemm_wmma_stream_hip OBJECT impl_gemm_wmma_stream.hip)
+target_link_libraries(matmul_gemm_wmma_stream_hip PRIVATE matmul_common_iface)
+
+add_executable(test_gemm_wmma_compare
+    test_gemm_wmma_compare.cpp
+    $<TARGET_OBJECTS:matmul_gemm_wmma_stream_hip>
+)
+target_link_libraries(test_gemm_wmma_compare PRIVATE matmul_ref_cpu matmul_common_iface)
+
+add_executable(bench_gemm_wmma
+    bench_gemm_wmma.cpp
+    $<TARGET_OBJECTS:matmul_gemm_wmma_stream_hip>
+    $<TARGET_OBJECTS:matmul_real_stock_hip>
+)
+target_link_libraries(bench_gemm_wmma PRIVATE matmul_ref_cpu matmul_common_iface)
+
 # --- Unified sweep benchmark ---
 add_executable(bench_matmul
     bench_matmul.cpp
