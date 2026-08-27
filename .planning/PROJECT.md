@@ -19,12 +19,11 @@ Beat stock llama.cpp HIP on at least one important Qwen3.8-27B workload on the R
 - [x] Profiling of real workloads producing a ranked bottleneck table (kernel → % runtime → bound type naming MUL_MAT Target #1) (PROF-01..02, Phase 3)
 - [x] Standalone HIP kernel playground with CPU reference → HIP implementation → numerical comparison → microbenchmark pipeline with negative test (KERN-01, Phase 4)
 - [x] First custom kernel attacking Optimization Target #1 (`MUL_MAT` IQ4_XS) — GEMV 1.26–2.13× / GEMM 1.7–7.5× vs stock, cosine 1.0 (KERN-02, KERN-03, Phase 5 completed 2026-08-25)
+- [x] Runtime integration behind a switchable flag (custom kernels ON/OFF) without destroying the baseline (INTEG-01, Phase 6 completed 2026-08-25)
+- [x] End-to-end before/after benchmark results published against stock with release hygiene and v1.0.0-gfx1100 tag (PUB-01, Phase 6 completed 2026-08-25)
 
 ### Active
 
-- [ ] Runtime integration behind a switchable flag (custom kernels ON/OFF) without destroying the baseline (INTEG-01, Phase 6)
-- [ ] Runtime integration behind a switchable flag (custom kernels ON/OFF) without destroying the baseline (INTEG-01, Phase 6)
-- [ ] End-to-end before/after benchmark results published against stock (PUB-01, Phase 6)
 - [ ] Context scaling track: measured max-context ceiling per backend (32k→256k ladder) with KV quantization quality gates, host-tiered KV prototype for ≥128k under WSL2, and long-context prefill strategy — see REQUIREMENTS.md CTX-01..05
 
 ### Out of Scope
