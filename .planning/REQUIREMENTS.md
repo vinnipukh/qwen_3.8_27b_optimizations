@@ -32,9 +32,9 @@
 
 ### Kernels & Integration
 
-- [ ] **KERN-01**: Kernel playground scaffold operating the full pipeline: CPU reference → HIP implementation → numerical comparison → microbenchmark
-- [ ] **KERN-02**: First custom gfx1100 kernel attacks the #1 profiled bottleneck (expected candidates: Gated DeltaNet scan or IQ4_XS quantized matmul); numerically correct vs reference within tolerance
-- [ ] **KERN-03**: Winning kernel beats stock in microbenchmark AND end-to-end A/B with correctness gates intact
+- [x] **KERN-01**: Kernel playground scaffold operating the full pipeline: CPU reference → HIP implementation → numerical comparison → microbenchmark (demo op `dequant_iq4_xs` only per owner lock D4-00-1; vendored `block_iq4_xs.h` D4-00-2; reuse `benchmarks/lib/store.py` D4-00-3; tight gate max_abs 1e-5/mean 1e-6/cosine 0.99999 +10× D4-00-4; templated `WARP_SIZE` D4-00-5 — see `.planning/phases/04-kernel-playground-scaffold/04-CONTEXT.md`) — **DONE 2026-08-25**
+- [x] **KERN-02**: Custom gfx1100 `MUL_MAT` IQ4_XS GEMV (Wave32, 128-bit uint4, 8-thread/row) + GEMM (TILE_M=16 + WMMA `__builtin_amdgcn_wmma_f32_16x16x16_f16_w32`, B_lds[2][32][33]) in `kernels/matmul_iq4xs/` — numerically correct `cosine=1.0, max_rel=0` vs FP64 `ref_cpu` (10/10 GEMV, 11/11 GEMM) — **DONE 2026-08-25**
+- [x] **KERN-03**: Microbenchmark win: GEMV 8/8 1.26–2.13× vs stock HIP (512–54 GB/s), GEMM 7/9 1.47–7.50× for M≥128 (6.7× @512 WMMA), 2× M=16 losses logged per Rule #10; unified 32× sweep archived via `RunStore` (`kernels_mul_mat_iq4xs*`); provisional `patches/phase5_mul_mat_custom.patch` (ON/OFF) ready for e2e A/B with QUAL-01/02 green — **DONE 2026-08-25**
 - [ ] **INTEG-01**: Winning kernel integrated behind ON/OFF compile/runtime switch via quilt patch series over pinned upstream; stock baseline build remains permanently available
 - [ ] **PUB-01**: Final deliverable published: complete stock-vs-optimized result matrix, raw data, methodology, known limitations
 
@@ -86,9 +86,9 @@ Feasibility + math: `.planning/research/CONTEXT-SCALING.md`. Model natively supp
 | QUAL-02 | Phase 3 | Complete |
 | PROF-01 | Phase 3 | Complete |
 | PROF-02 | Phase 3 | Complete |
-| KERN-01 | Phase 4 | Pending |
-| KERN-02 | Phase 5 | Pending |
-| KERN-03 | Phase 5 | Pending |
+| KERN-01 | Phase 4 | Complete (2026-08-25) |
+| KERN-02 | Phase 5 | Complete (2026-08-25) |
+| KERN-03 | Phase 5 | Complete (2026-08-25) |
 | INTEG-01 | Phase 6 | Pending |
 | PUB-01 | Phase 6 | Pending |
 

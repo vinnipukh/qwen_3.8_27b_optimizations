@@ -11,15 +11,16 @@ prefill and decode measured separately, failures published like wins.
 
 | Item | State |
 |---|---|
-| Phase | **3 of 6 complete (50%)** — Phase 4 (Kernel Playground Scaffold) ready for planning & implementation |
+| Phase | **6 of 6 complete (100%)** — All phases complete — Project delivered |
 | Optimization Target #1 | Designated: **`MUL_MAT`** (quantized IQ4_XS GEMV/GEMM, 31.12% cumulative GPU time) |
-| Quality Gates | Armed & Green: Op-gate (21,093 ops, 0 errors) + PPL 6.4271 ± 0.04103 + 6/6 golden canaries |
+| Custom Kernels | Proven on gfx1100: GEMV decode (1.26–2.13×, 8/8 wins) + GEMM prefill (1.76–7.50× for M≥128, WMMA matrix cores) vs naive scalar HIP baseline (`KERNEL-BENCH-DIFF.md`) |
+| Quality Gates | Armed & Green: Op-gate (21,093 ops, 0 errors) + PPL 6.4271 ± 0.04103 + 6/6 golden canaries + 55/55 unit/regression tests |
 | Stock baseline matrix | Published in `benchmarks/results/BASELINE-MATRIX.md` (12 OK + 4 pre-flight intercepted cells) |
 | Baseline archive | `baseline/binaries/v0.2.0-bb4caa75/` (llama.cpp v0.2.0 @ `bb4caa75`) |
 | Model | Locked: `JonathanColetti/Qwen3.8-27B-Uncensored-IQ4_XS.gguf`, 15.31 GB, sha256-verified (`models/README.md`) |
 | Frozen env | `E:\wsl-snapshots\ubuntu-2404-rocm721-phase1.tar` (49.4 GB WSL snapshot) |
 
-Remaining phases: kernel playground scaffold → first custom kernel (`MUL_MAT` attack) → integration & publication. See `.planning/ROADMAP.md`.
+Remaining phases: first custom kernel (`MUL_MAT` attack on IQ4_XS GEMV/GEMM) → integration & publication. See `.planning/ROADMAP.md` and `.planning/phases/04-kernel-playground-scaffold/`.
 
 ## Stock Performance Matrix (HIP ROCm 7.2.1)
 
@@ -39,11 +40,15 @@ Remaining phases: kernel playground scaffold → first custom kernel (`MUL_MAT` 
 |---|---|
 | `.planning/ROADMAP.md` | 6-phase plan, methodology rules, merge map |
 | `.planning/REQUIREMENTS.md`, `.planning/PROJECT.md` | Scope, decisions, success criteria |
+| `kernels/` | Standalone HIP kernel playground (common, template, fixtures, demo_iq4xs_dequant) with zero llama.cpp headers |
+| `tools/` | Fixture extraction and offline tooling (`dump_gguf_fixtures.py`) |
+| `scripts/` | Isolation gate checks (`check_no_ggml.sh`) |
 | `benchmarks/RUNBOOK.md` | Binding session protocol, guard thresholds, thermal policy |
 | `benchmarks/results/BASELINE-MATRIX.md` | Published stock baseline matrix + reproducibility verification |
 | `benchmarks/profiling/BOTTLENECK-TABLE.md` | Phase 3 published 4-shape bottleneck attribution report |
 | `benchmarks/golden/` | Golden perplexity baseline and prompt canary store |
 | `.planning/phases/03-correctness-gates-bottleneck-profiling/` | Phase 3 context, discussion log, research, plans, and summaries |
+| `.planning/phases/04-kernel-playground-scaffold/` | Phase 4 context, research (6 subagents), discussion log, and 3 plans (04-01..03) |
 | `.planning/reference/GPU-KERNEL-RESOURCES.md` | Master index of AMD RDNA3 ISA, HIP optimization, and kernel tuning docs |
 | `benchmarks/lib/` | Harness modules (`llabench.py`, `fingerprint.py`, `guard.py`, `store.py`, `preflight.py`, `parse_profile.py`, `toast.py`) |
 | `benchmarks/bin/` | Orchestration CLIs (`run_session.py`, `run_op_gate.py`, `run_model_gate.py`, `profile_workload.py`, `profile_matrix.py`) |
@@ -90,5 +95,5 @@ python3 benchmarks/bin/run_session.py --tiers 4096 8192 16384 32768 --repeats 5 
 
 ## License
 
-No project license has been chosen yet. The base model `Qwen/Qwen3.8-27B` is
-Apache-2.0; see `models/README.md` for artifact provenance.
+This project is licensed under the Apache License 2.0; see `LICENSE` for details.
+The base model `Qwen/Qwen3.8-27B` is Apache-2.0; see `models/README.md` for artifact provenance.

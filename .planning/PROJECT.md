@@ -12,19 +12,19 @@ Beat stock llama.cpp HIP on at least one important Qwen3.8-27B workload on the R
 
 ### Validated
 
-(None yet — ship to validate)
+- [x] Reproducible ROCm/HIP environment on RX 7900 XT (gfx1100) under WSL2, with recorded tool versions (ENV-01..04, Phase 1)
+- [x] Stock llama.cpp HIP build targeting gfx1100 as permanent reference baseline (ENV-02, Phase 1)
+- [x] Baseline benchmark suite for Qwen3.8-27B IQ4_XS covering prompt tok/s, generation tok/s, and VRAM breakdown with RSS guard (BENCH-01..04, Phase 2)
+- [x] Fixed quality evaluation set (perplexity + deterministic prompt canary store + test-backend-ops) to guard numerical correctness (QUAL-01..02, Phase 3)
+- [x] Profiling of real workloads producing a ranked bottleneck table (kernel → % runtime → bound type naming MUL_MAT Target #1) (PROF-01..02, Phase 3)
+- [x] Standalone HIP kernel playground with CPU reference → HIP implementation → numerical comparison → microbenchmark pipeline with negative test (KERN-01, Phase 4)
+- [x] First custom kernel attacking Optimization Target #1 (`MUL_MAT` IQ4_XS) — GEMV 1.26–2.13× / GEMM 1.7–7.5× vs stock, cosine 1.0 (KERN-02, KERN-03, Phase 5 completed 2026-08-25)
 
 ### Active
 
-- [ ] Reproducible ROCm/HIP environment on RX 7900 XT (gfx1100) under WSL2, with recorded tool versions
-- [ ] Stock llama.cpp HIP build targeting gfx1100 as permanent reference baseline
-- [ ] Baseline benchmark suite for Qwen3.8-27B quantizations (Q4_K_S / Q4_K_M / Q5_K_M) covering prompt tok/s, generation tok/s, and VRAM breakdown
-- [ ] Fixed quality evaluation set (perplexity + deterministic coding/reasoning prompts) to guard numerical correctness
-- [ ] Profiling of real workloads producing a bottleneck table (kernel → % runtime → bound type)
-- [ ] Standalone HIP kernel playground with CPU reference → HIP implementation → numerical comparison → microbenchmark pipeline
-- [ ] First custom fused dequant+matmul kernel for Q4_K beating the stock llama.cpp kernel in a microbenchmark
-- [ ] Runtime integration behind a switchable flag (custom kernels ON/OFF) without destroying the baseline
-- [ ] End-to-end before/after benchmark results published against stock
+- [ ] Runtime integration behind a switchable flag (custom kernels ON/OFF) without destroying the baseline (INTEG-01, Phase 6)
+- [ ] Runtime integration behind a switchable flag (custom kernels ON/OFF) without destroying the baseline (INTEG-01, Phase 6)
+- [ ] End-to-end before/after benchmark results published against stock (PUB-01, Phase 6)
 - [ ] Context scaling track: measured max-context ceiling per backend (32k→256k ladder) with KV quantization quality gates, host-tiered KV prototype for ≥128k under WSL2, and long-context prefill strategy — see REQUIREMENTS.md CTX-01..05
 
 ### Out of Scope
@@ -65,12 +65,12 @@ Beat stock llama.cpp HIP on at least one important Qwen3.8-27B workload on the R
 
 | Decision | Rationale | Outcome |
 |----------|-----------|---------|
-| Build on llama.cpp instead of custom engine | Reuse working HIP backend; replace one bottleneck at a time; always have a baseline | — Pending |
-| Dev environment: WSL2 (Hyper-V available) | User's machine is Windows; ROCm tooling is Linux-first | — Pending |
-| Drop Turkish output quality evals | User decision — not part of actual workload | — Pending |
+| Build on llama.cpp instead of custom engine | Reuse working HIP backend; replace one bottleneck at a time; always have a baseline | ✓ Done (frozen @ bb4caa75) |
+| Dev environment: WSL2 (Hyper-V available) | User's machine is Windows; ROCm tooling is Linux-first | ✓ Done (ROCm 7.2.1 cleared) |
+| Drop Turkish output quality evals | User decision — not part of actual workload | ✓ Done |
 | Archive original ROADMAP.md to .planning/reference/ | Preserved as source material; GSD roadmap merges its phases/milestones | ✓ Done |
-| Primary artifact: JonathanColetti IQ4_XS (15.31 GB), context-headroom rationale | User locked 2026-08-21 after repo comparison vs HauhauCS Aggressive (patched-runtime/custom-quant variants rejected for baseline contamination) | ✓ Done |
-| GSD roadmap merges original 18 phases + 7 milestones | User explicitly requested merge, not replacement | — Pending |
+| Primary artifact: JonathanColetti IQ4_XS (15.31 GB), context-headroom rationale | User locked 2026-08-21 after repo comparison vs HauhauCS Aggressive (patched-runtime/custom-quant variants rejected for baseline contamination) | ✓ Done (sha256 53adc4bb…) |
+| GSD roadmap merges original 18 phases + 7 milestones | User explicitly requested merge, not replacement | ✓ Done |
 
 ## Evolution
 

@@ -1,0 +1,12 @@
+Qwen3.8-27B gfx1100 Optimizations
+Copyright (c) 2026
+
+This product includes software developed by the Qwen Team, Alibaba Cloud.
+Model: Qwen/Qwen3.8-27B (Apache License 2.0)
+https://github.com/QwenLM/Qwen
+
+This product includes software and data structures derived from llama.cpp / ggml
+Copyright (c) 2023-2026 Georgi Gerganov and llama.cpp authors (MIT License / Apache License 2.0)
+Pinned commit: bb4caa7540188872173c44d161602d9271386413
+File: kernels/common/block_iq4_xs.h derived from ggml-common.h
+https://github.com/ggml-org/llama.cpp

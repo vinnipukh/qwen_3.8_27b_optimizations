@@ -23,11 +23,25 @@ with correctness gates enforced before any integration.
 │   │                               #   store.py, preflight.py, toast.py
 │   ├── prompts/                    # Deterministic 6-prompt corpus (short/long x code/prose)
 │   ├── results/                    # Append-only run journals (rows.jsonl, manifest.json, CHECKSUMS.sha256)
-│   ├── tests/                      # Pytest suite (35 tests) + fixtures + smoke/gate shell scripts
+│   │                               #   + kernels_mul_mat_iq4xs* (3 runs: GEMV/GEMM vs stock)
+│   ├── profiling/                  # KERNEL-BENCH-DIFF.md — Phase 5 GEMV/GEMM vs stock diff (prefill/decode)
+│   ├── tests/                      # Pytest suite (55 tests) + fixtures + smoke/gate shell scripts
 │   ├── vulkan/                     # Native Vulkan comparator arm build scripts and coverage gate report
 │   └── RUNBOOK.md                  # Binding session protocol, guard thresholds, and thermal policy
 ├── models/                         # GGUF artifact (gitignored) + README.md provenance
-├── src/                            # custom kernel work lands here (empty pre-Phase 4)
+├── kernels/                        # Standalone gfx1100 HIP kernel playground (zero llama.cpp headers)
+│   ├── common/                     # Shared headers: block_iq4_xs.h (vendored 136B), hip_helpers.h, bench.h
+│   ├── template/                   # Op quartet skeleton (ref_cpu, impl.hip, test_compare, bench_sweep)
+│   ├── fixtures/                   # Model-extracted & synthetic IQ4_XS tensor fixtures + manifest.json
+│   │                               #   + matmul_* (32 fixtures) via dump_matmul_fixtures.py (manifest_matmul.json)
+│   ├── demo_iq4xs_dequant/         # Worked example: CPU oracle, GPU kernel, mutant, comparator, sweep
+│   ├── matmul_iq4xs/               # Phase 5 MUL_MAT: ref_cpu.h/cpp, stock_hip_comparator.hip,
+│   │                               #   impl_gemv_gfx1100.hip, impl_gemm_wmma.hip, test_*/bench_*.cpp, CMakeLists
+│   └── CMakeLists.txt              # Top-level standalone HIP build (CMAKE_HIP_ARCHITECTURES=gfx1100)
+├── tools/                          # Offline tools (dump_gguf_fixtures.py, dump_matmul_fixtures.py)
+├── patches/                        # Quilt patches over pinned upstream (phase5_mul_mat_custom.patch)
+├── scripts/                        # Isolation and verification scripts (check_no_ggml.sh)
+├── src/                            # placeholder — custom kernels land in kernels/, not src/
 ├── logs/                           # run logs
 ├── freetoken-rocm-probe/           # early ROCm probe tooling
 └── .planning/                      # ROADMAP.md, REQUIREMENTS.md, PROJECT.md, STATE.md,
@@ -74,15 +88,15 @@ first. See `.planning/ROADMAP.md` for details and the merge map to the original 
 |---|---|---|
 | 1 | Environment validation & stock baseline | done — ROCm 7.2.1 cleared, 132/132 GPU layers verified |
 | 2 | Benchmark harness & baseline matrix | done — 16-cell baseline published, guard & preflight active |
-| 3 | Correctness gates & bottleneck profiling | pending |
-| 4 | Kernel playground scaffold | pending |
-| 5 | First custom kernel (bottleneck attack) | pending |
+| 3 | Correctness gates & bottleneck profiling | done — op-gate 21,093/0, PPL 6.4271, bottleneck `MUL_MAT` 31.12% |
+| 4 | Kernel playground scaffold | done — standalone gfx1100 playground, zero llama headers, demo `dequant_iq4_xs` passing GREEN/RED |
+| 5 | First custom kernel (bottleneck attack) | done 2026-08-25 — custom gfx1100 GEMV (2.05x) + WMMA GEMM (6.7x) beat stock, cosine 1.0 |
 | 6 | Integration, full validation & publication | pending |
 
 Binding methodology rules: benchmark before optimize; one change at a time; keep the stock
 baseline forever; prefill (M≫1) and decode (M≈1) measured separately; publish failures too.
 
-## Kernel playground pipeline (Phase 4 concept)
+## Kernel playground pipeline (Phase 4 — delivered)
 
 Each candidate kernel runs through a four-stage standalone pipeline outside llama.cpp:
 
@@ -94,7 +108,12 @@ CPU reference -> HIP implementation -> numerical compare    -> microbenchmark sw
 ```
 
 A kernel advances only if it passes `test_compare` and wins in `bench_sweep`; failures are
-recorded like successes.
+recorded like successes. Phase 4 delivered: standalone `kernels/` build (`CMAKE_HIP_ARCHITECTURES=gfx1100`,
+zero llama headers, vendored `block_iq4_xs.h` 136B), fixture dumper (`tools/dump_gguf_fixtures.py`
+via `gguf-py` + synthetic edge cases), and worked example `kernels/demo_iq4xs_dequant/` traversing the
+quartet with tight gate max_abs 1e-5 / mean 1e-6 / cosine 0.99999 and ≥10× broken discrimination (315.91 GB/s wave32).
+(owner locks D4-00-1..5). Wave32 and wave64 variants are templated (`template<int WarpSize>`) and benched
+separately. See `.planning/phases/04-kernel-playground-scaffold/04-CONTEXT.md` and `04-01..03-PLAN.md`.
 
 ## Integration strategy
 

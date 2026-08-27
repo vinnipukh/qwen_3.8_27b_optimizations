@@ -33,7 +33,7 @@ Inherited verbatim from the original roadmap; planners and executors apply them 
 | Orig Phase 14 (numerical validation) | Cross-cutting: gates armed in **Phase 3**, enforced per-kernel in **Phases 4–6** |
 | Orig Phase 4 (HIP kernel playground) | **Phase 4** |
 | Orig Phases 5–7 (dequant, quantized GEMM, decode-specific paths) · Milestones 4–5 | **Phase 5** (first winning kernel attacks profiled #1; prefill/decode split as design goal from day one) |
-| Orig Phase 10 (Qwen-specific specialization) | **Phase 5** (graph-aware target choice); tensor-report deep-dive → v2 |
+| Orig Phase 10 (Qwen-specific specialization) | **Phase 5** (light graph-aware report landed as `docs/QWEN-GRAPH.md`); deep tensor dump → v2 |
 | Orig Phase 12 (runtime integration behind flags) · Milestone 6 | **Phase 6** |
 | Orig Phases 15–16 (e2e suite, compare against real baselines) · Milestone 7 | **Phase 2** (harness/profiles built early) + **Phase 6** (final matrix) |
 | Orig Phase 17 (package & publish) | **Phase 6** |
@@ -49,9 +49,9 @@ Inherited verbatim from the original roadmap; planners and executors apply them 
 - [x] **Phase 1: Environment Validation & Stock Baseline** - Validated WSL2 ROCm/HIP stack, pinned stock llama.cpp gfx1100 build, locked IQ4_XS artifact running fully on GPU (completed 2026-08-23)
 - [x] **Phase 2: Benchmark Harness & Baseline Matrix** - Fingerprinted reproducible pp/tg-split harness with RSS-guarded VRAM ledger publishing the stock baseline matrix (completed 2026-08-23)
 - [x] **Phase 3: Correctness Gates & Bottleneck Profiling** - Two-tier quality gates armed; rocprofv3/eval profiler validated over dxg under WSL2; ranked bottleneck table names Target #1 (completed 2026-08-24)
-- [ ] **Phase 4: Kernel Playground Scaffold** - Standalone CPU-reference → HIP → numerical-compare → microbenchmark pipeline operating outside llama.cpp
-- [ ] **Phase 5: First Custom Kernel (Bottleneck Attack)** - Custom gfx1100 kernel for profiled bottleneck #1: numerically correct, beats stock in microbenchmark and e2e A/B
-- [ ] **Phase 6: Integration, Full Validation & Publication** - Winners behind ON/OFF flags via quilt patches; stock baseline intact forever; complete before/after matrix published
+- [x] **Phase 4: Kernel Playground Scaffold** - Standalone CPU-reference → HIP → numerical-compare → microbenchmark pipeline operating outside llama.cpp (completed 2026-08-25)
+- [x] **Phase 5: First Custom Kernel (Bottleneck Attack)** - GEMV 1.26–2.13× / GEMM 1.7–7.5× vs stock HIP (cosine 1.0), 30/32 wins, WMMA `v_wmma` in disasm, provisional quilt patch (completed 2026-08-25)
+- [x] **Phase 6: Integration, Full Validation & Publication** - Winners behind ON/OFF flags via quilt patches; stock baseline intact forever; complete before/after matrix published (completed 2026-08-25)
 
 ## Phase Details
 
@@ -124,11 +124,11 @@ Inherited verbatim from the original roadmap; planners and executors apply them 
   2. A candidate op traverses the full quartet pipeline (`ref_cpu.cpp` → `impl_gfx1100.hip` → `test_compare.cpp` → `bench_sweep.cpp`) producing recorded error metrics (max-abs / mean-abs / relative / cosine) and timing tables (KERN-01).
   3. A deliberately broken implementation is caught red by the comparison stage, and its corrected version passes green — proving the pipeline discriminates, not just runs (KERN-01).
 
-**Key deliverables**: `kernels/` scaffold (common/dequant/matmul/benchmarks); fixture dumper from GGUF tensors; per-op quartet template; worked example op.
+**Key deliverables**: `kernels/` scaffold (common/dequant/matmul/benchmarks); fixture dumper from GGUF tensors; per-op quartet template; worked example `dequant_iq4_xs` op traversing the full pipeline with recorded error tables.
 **Original-roadmap lineage**: orig Phase 4 (kernel playground), including its debugging rationale.
-**RDNA3 risk notes**: Template kernels on `warpSize` — never literal 32/64; benchmark wave32 vs wave64 per kernel later. No CUDA assumptions (rule 6).
-**Plans**: TBD (indicative: 3 plans — scaffold + standalone build; fixture dumper; demo-op walkthrough incl. negative test)
-**Parallelization**: Scaffold/build and fixture-dumper plans are independent and concurrent; walkthrough depends on both but can start on stubs. Whole phase overlaps Phases 2–3 by design.
+**RDNA3 risk notes**: Template kernels on `warpSize` — never literal 32/64; benchmark wave32 vs wave64 per kernel later. No CUDA assumptions (rule 6). Owner locks (2026-08-25): dequant-only demo, vendored `block_iq4_xs.h` copy, reuse `benchmarks/lib/store.py`, tight gate 1e-5/1e-6/0.99999 +10× discrimination, templated `WARP_SIZE` — see `04-CONTEXT.md` D4-00-1..5.
+**Plans**: 3 plans (executed and verified) — 04-01 (scaffold + standalone gfx1100 build, vendored `block_iq4_xs.h` + `WARP_SIZE` templating), 04-02 (GGUF + synthetic fixture dumper), 04-03 (demo `dequant_iq4_xs` walkthrough with negative test) — see `.planning/phases/04-kernel-playground-scaffold/`
+**Parallelization**: 04-01 ∥ 04-02, 04-03 depends on both stubs. Whole phase is model-independent and may run concurrently with Phases 2–3 (sanctioned overlap, now complete; toolchain proven `bb4caa75`).
 
 ### Phase 5: First Custom Kernel (Bottleneck Attack)
 
@@ -149,7 +149,7 @@ Inherited verbatim from the original roadmap; planners and executors apply them 
 **Key deliverables**: winning kernel source + correctness tests co-located; archived microbenchmark diffs across shapes; e2e A/B evidence; explicit prefill-path and decode-path variants (separate paths are a design goal, not an afterthought).
 **Original-roadmap lineage**: orig Phases 5–7 (fused dequant+matmul, quantized GEMM, decode-specific split); Milestones 4–5; orig Phase 10 target-selection discipline.
 **RDNA3 risk notes**: One optimization at a time (rule 2) — no parallel variant chaos; read-only benchmark sweeps may parallelize, code changes serialize. Include a rocBLAS comparison arm per shape (large-M only — small-M decode routes through ggml MMVQ kernels, verified in ggml-cuda.cu dispatch); check Tensile coverage before trusting warmup crashes as kernel bugs. hipBLASLt is EXCLUDED as an arm (AMD excludes gfx1100; incomplete TensileLite). MMA/rocWMMA stays out of v1 (flag-only experiment deferred to v2).
-**Plans**: TBD (indicative: 4 plans — target deep-study + reference extraction; kernel implementation + correctness; shape-sweep microbenchmark; provisional-integration e2e A/B)
+**Plans**: 4 plans drafted — 05-01 (target study & stock reference extraction), 05-02 (custom GEMV for decode M=1), 05-03 (custom WMMA GEMM for prefill M>>1), 05-04 (shape-sweep microbenchmarks & e2e A/B integration) — see `.planning/phases/05-first-custom-kernel-bottleneck-attack/`
 **Parallelization**: Strictly serial by rule 2 through implementation/correctness; microbenchmark sweep variants are parallelizable as measurement-only subagent jobs once the kernel compiles; e2e A/B runs only after the winner is selected.
 
 ### Phase 6: Integration, Full Validation & Publication
@@ -164,10 +164,10 @@ Inherited verbatim from the original roadmap; planners and executors apply them 
   2. The pristine stock baseline remains buildable and runnable from the same tree at any time — demonstrated by rebuilding it and re-running a baseline sanity bench mid-phase (rule 3) (INTEG-01).
   3. The final deliverable is published with the complete stock-vs-optimized matrix (pp/tg × context × flash-attn), raw data files, exact build commands, all recorded versions, benchmark methodology, kernel source, known limitations, and failed-experiment log (PUB-01).
 
-**Key deliverables**: patch series (`patches/*.patch`) + paired baseline/optimized binaries from one tree; final e2e result matrix with temps/power columns from Windows telemetry; packaged repo layout per orig Phase 17; publication writeup.
+**Key deliverables**: patch series (`patches/*.patch`) + paired baseline/optimized binaries from one tree; final e2e result matrix with temps/power columns from Windows telemetry; packaged repo layout per orig Phase 17; publication writeup; **release hygiene** (LICENSE Apache 2.0 + NOTICE for Qwen/base, `README.md` license section, `models/README.md` provenance, stray build artifact cleanup `test_wmma*`, `benchmarks/results/tmp_*` removal, `check_no_ggml.sh` PASS, `CHANGELOG`/`v1.0.0-gfx1100` tag per `config.json`).
 **Original-roadmap lineage**: orig Phases 12 (integration), 15–16 (e2e suite + honest comparison), 17 (packaging/publish); Milestones 6–7. "Publish the complete matrix, not just the best number."
 **Integration risk notes**: Anti-fork discipline — quilt overlay keeps delta-from-stock reviewable and bisectable; no drifting hard fork. Re-run the env version gate after any forced driver/ROCm change (Pitfall: silent pairing breakage). Final numbers must come from paired runs within one thermal window.
-**Plans**: TBD (indicative: 4 plans — empty-flag plumbing proof; winner patches behind switch; baseline-preservation guard verification; publication package + final matrix)
+**Plans**: 5 plans — 06-01 empty-flag plumbing proof (OFF=stock bit-identical, compiles clean); 06-02 winner patches behind `GGML_CUDA_ENABLE_CUSTOM_GFX1100` switch (real `git diff`-generated, `git apply --check` verified); 06-03 baseline-preservation guard (rebuild stock + `run_op_gate` + bench sanity + env version gate); 06-04 publication package + paired final matrix (pp/tg × {4096,8192,16384} × flash-attn {on,off} × HIP stock/custom + Vulkan arm, smoke-first gate, thermal pairing, variance published, `RunStore` + `CHECKSUMS.sha256`, full 145-chunk QUAL-02, hygiene incl. LICENSE/NOTICE/CHANGELOG/tag); 06-05 thermos remediation (gitignore staging trap, deterministic fixture seed, WMMA coverage + uninitialized-LDS fix, barrier/misaligned-load guards, dead code, doc drift) — see `.planning/phases/06-integration-full-validation-publication/`
 **Parallelization**: Flag-plumbing/patch work and documentation/publication drafting are concurrent subagent-friendly tracks; the final matrix execution is serial and last (thermal pairing requirement).
 
 ## Progress
@@ -179,8 +179,8 @@ Inherited verbatim from the original roadmap; planners and executors apply them 
 | 1. Environment Validation & Stock Baseline | 4/3 | Complete    | 2026-08-23 |
 | 2. Benchmark Harness & Baseline Matrix | 5/5 | Complete    | 2026-08-23 |
 | 3. Correctness Gates & Bottleneck Profiling | 4/4 | Complete    | 2026-08-24 |
-| 4. Kernel Playground Scaffold | 0/TBD | Ready for planning | - |
-| 5. First Custom Kernel (Bottleneck Attack) | 0/TBD | Not started | - |
+| 4. Kernel Playground Scaffold | 3/3 | Complete    | 2026-08-25 |
+| 5. First Custom Kernel (Bottleneck Attack) | 4/4 | Complete    | 2026-08-25 |
 | 6. Integration, Full Validation & Publication | 0/TBD | Not started | - |
 
 ## Coverage Validation

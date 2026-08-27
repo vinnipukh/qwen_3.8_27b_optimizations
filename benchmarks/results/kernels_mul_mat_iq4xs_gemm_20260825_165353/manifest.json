@@ -1,0 +1,13 @@
+{
+  "run_id": "kernels_mul_mat_iq4xs_gemm_20260825_165353",
+  "created_utc": "2026-08-25T16:53:53Z",
+  "op": "mul_mat_iq4xs_gemm",
+  "gpu": "AMD Radeon RX 7900 XT (gfx1100)",
+  "rocm": "7.2.1",
+  "commit": "bb4caa75",
+  "shapes": 9,
+  "backend_arm": "HIP",
+  "note": "Phase 5 custom kernel microbenchmark vs stock HIP (and Vulkan comparator reported alongside per KERN-03)",
+  "git_rev": "31a40fd69658e72ded4608c94523ca5dd39fb2e1",
+  "model_sha256": "53adc4bb... (verified in models/README.md)"
+}

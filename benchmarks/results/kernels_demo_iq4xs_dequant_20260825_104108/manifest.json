@@ -1,0 +1,8 @@
+{
+  "run_id": "kernels_demo_iq4xs_dequant_20260825_104108",
+  "created_utc": "2026-08-25T10:41:08Z",
+  "op": "demo_iq4xs_dequant",
+  "gpu": "AMD Radeon RX 7900 XT (gfx1100)",
+  "rocm": "7.2.1",
+  "commit": "bb4caa75"
+}

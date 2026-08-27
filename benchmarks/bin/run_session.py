@@ -165,6 +165,7 @@ def run_session(
             # Spawn child with setsid detachment
             bin_dir = str(Path(bin_path).parent)
             env = dict(os.environ)
+            env["HSA_ENABLE_DXG_DETECTION"] = "1"
             curr_ld = env.get("LD_LIBRARY_PATH", "")
             env["LD_LIBRARY_PATH"] = f"{bin_dir}:{curr_ld}" if curr_ld else bin_dir
 

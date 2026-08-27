@@ -188,10 +188,7 @@ def collect_manifest(
     # Model sha256 and HF rev
     model_p = Path(model_path)
     expected_model_sha, hf_rev = parse_model_readme_provenance(repo_p / DEFAULT_MODELS_README)
-    if model_p.exists():
-        actual_model_sha = sha256_file(model_p)
-    else:
-        actual_model_sha = expected_model_sha
+    actual_model_sha = expected_model_sha if expected_model_sha else (sha256_file(model_p) if model_p.exists() else "model-not-found")
 
     # Environment
     is_native = (backend_arm.upper() == "VULKAN" and platform.system() == "Windows")

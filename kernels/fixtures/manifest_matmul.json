@@ -1,0 +1,898 @@
+[
+  {
+    "name": "attn_q",
+    "K": 5120,
+    "N": 5120,
+    "M": 1,
+    "W_shape": [
+      5120,
+      5120
+    ],
+    "W_blocks": 102400,
+    "W_source": "blk.3.attn_q.weight",
+    "W_sha256": "a35ca4b17710ce042467e9dbde379b2fa0c7b06801ae4372fc2868632c8014fb",
+    "W_npz": "matmul_attn_q_5120x5120_W.npz",
+    "W_bin": "matmul_attn_q_5120x5120_W.bin",
+    "X_shape": [
+      5120,
+      1
+    ],
+    "Y_shape": [
+      5120,
+      1
+    ],
+    "npz": "matmul_attn_q_5120x5120_M1.npz",
+    "x_bin": "matmul_attn_q_5120x5120_M1_x.bin",
+    "y_ref_bin": "matmul_attn_q_5120x5120_M1_y_ref.bin",
+    "dtype": "IQ4_XS",
+    "seed": 42
+  },
+  {
+    "name": "attn_q",
+    "K": 5120,
+    "N": 5120,
+    "M": 16,
+    "W_shape": [
+      5120,
+      5120
+    ],
+    "W_blocks": 102400,
+    "W_source": "blk.3.attn_q.weight",
+    "W_sha256": "a35ca4b17710ce042467e9dbde379b2fa0c7b06801ae4372fc2868632c8014fb",
+    "W_npz": "matmul_attn_q_5120x5120_W.npz",
+    "W_bin": "matmul_attn_q_5120x5120_W.bin",
+    "X_shape": [
+      5120,
+      16
+    ],
+    "Y_shape": [
+      5120,
+      16
+    ],
+    "npz": "matmul_attn_q_5120x5120_M16.npz",
+    "X_bin": "matmul_attn_q_5120x5120_M16_X.bin",
+    "Y_ref_bin": "matmul_attn_q_5120x5120_M16_Y_ref.bin",
+    "dtype": "IQ4_XS",
+    "seed": 42
+  },
+  {
+    "name": "attn_q",
+    "K": 5120,
+    "N": 5120,
+    "M": 128,
+    "W_shape": [
+      5120,
+      5120
+    ],
+    "W_blocks": 102400,
+    "W_source": "blk.3.attn_q.weight",
+    "W_sha256": "a35ca4b17710ce042467e9dbde379b2fa0c7b06801ae4372fc2868632c8014fb",
+    "W_npz": "matmul_attn_q_5120x5120_W.npz",
+    "W_bin": "matmul_attn_q_5120x5120_W.bin",
+    "X_shape": [
+      5120,
+      128
+    ],
+    "Y_shape": [
+      5120,
+      128
+    ],
+    "npz": "matmul_attn_q_5120x5120_M128.npz",
+    "X_bin": "matmul_attn_q_5120x5120_M128_X.bin",
+    "Y_ref_bin": "matmul_attn_q_5120x5120_M128_Y_ref.bin",
+    "dtype": "IQ4_XS",
+    "seed": 42
+  },
+  {
+    "name": "attn_q",
+    "K": 5120,
+    "N": 5120,
+    "M": 512,
+    "W_shape": [
+      5120,
+      5120
+    ],
+    "W_blocks": 102400,
+    "W_source": "blk.3.attn_q.weight",
+    "W_sha256": "a35ca4b17710ce042467e9dbde379b2fa0c7b06801ae4372fc2868632c8014fb",
+    "W_npz": "matmul_attn_q_5120x5120_W.npz",
+    "W_bin": "matmul_attn_q_5120x5120_W.bin",
+    "X_shape": [
+      5120,
+      512
+    ],
+    "Y_shape": [
+      5120,
+      512
+    ],
+    "npz": "matmul_attn_q_5120x5120_M512.npz",
+    "X_bin": "matmul_attn_q_5120x5120_M512_X.bin",
+    "Y_ref_bin": "matmul_attn_q_5120x5120_M512_Y_ref.bin",
+    "dtype": "IQ4_XS",
+    "seed": 42
+  },
+  {
+    "name": "attn_k",
+    "K": 5120,
+    "N": 5120,
+    "M": 1,
+    "W_shape": [
+      5120,
+      5120
+    ],
+    "W_blocks": 102400,
+    "W_source": "blk.0.attn_gate.weight",
+    "W_sha256": "e762bc7ce9baa52016360daea2fc505a693e170baf3bfb6e5fb477b0659ca062",
+    "W_npz": "matmul_attn_k_5120x5120_W.npz",
+    "W_bin": "matmul_attn_k_5120x5120_W.bin",
+    "X_shape": [
+      5120,
+      1
+    ],
+    "Y_shape": [
+      5120,
+      1
+    ],
+    "npz": "matmul_attn_k_5120x5120_M1.npz",
+    "x_bin": "matmul_attn_k_5120x5120_M1_x.bin",
+    "y_ref_bin": "matmul_attn_k_5120x5120_M1_y_ref.bin",
+    "dtype": "IQ4_XS",
+    "seed": 42
+  },
+  {
+    "name": "attn_k",
+    "K": 5120,
+    "N": 5120,
+    "M": 16,
+    "W_shape": [
+      5120,
+      5120
+    ],
+    "W_blocks": 102400,
+    "W_source": "blk.0.attn_gate.weight",
+    "W_sha256": "e762bc7ce9baa52016360daea2fc505a693e170baf3bfb6e5fb477b0659ca062",
+    "W_npz": "matmul_attn_k_5120x5120_W.npz",
+    "W_bin": "matmul_attn_k_5120x5120_W.bin",
+    "X_shape": [
+      5120,
+      16
+    ],
+    "Y_shape": [
+      5120,
+      16
+    ],
+    "npz": "matmul_attn_k_5120x5120_M16.npz",
+    "X_bin": "matmul_attn_k_5120x5120_M16_X.bin",
+    "Y_ref_bin": "matmul_attn_k_5120x5120_M16_Y_ref.bin",
+    "dtype": "IQ4_XS",
+    "seed": 42
+  },
+  {
+    "name": "attn_k",
+    "K": 5120,
+    "N": 5120,
+    "M": 128,
+    "W_shape": [
+      5120,
+      5120
+    ],
+    "W_blocks": 102400,
+    "W_source": "blk.0.attn_gate.weight",
+    "W_sha256": "e762bc7ce9baa52016360daea2fc505a693e170baf3bfb6e5fb477b0659ca062",
+    "W_npz": "matmul_attn_k_5120x5120_W.npz",
+    "W_bin": "matmul_attn_k_5120x5120_W.bin",
+    "X_shape": [
+      5120,
+      128
+    ],
+    "Y_shape": [
+      5120,
+      128
+    ],
+    "npz": "matmul_attn_k_5120x5120_M128.npz",
+    "X_bin": "matmul_attn_k_5120x5120_M128_X.bin",
+    "Y_ref_bin": "matmul_attn_k_5120x5120_M128_Y_ref.bin",
+    "dtype": "IQ4_XS",
+    "seed": 42
+  },
+  {
+    "name": "attn_k",
+    "K": 5120,
+    "N": 5120,
+    "M": 512,
+    "W_shape": [
+      5120,
+      5120
+    ],
+    "W_blocks": 102400,
+    "W_source": "blk.0.attn_gate.weight",
+    "W_sha256": "e762bc7ce9baa52016360daea2fc505a693e170baf3bfb6e5fb477b0659ca062",
+    "W_npz": "matmul_attn_k_5120x5120_W.npz",
+    "W_bin": "matmul_attn_k_5120x5120_W.bin",
+    "X_shape": [
+      5120,
+      512
+    ],
+    "Y_shape": [
+      5120,
+      512
+    ],
+    "npz": "matmul_attn_k_5120x5120_M512.npz",
+    "X_bin": "matmul_attn_k_5120x5120_M512_X.bin",
+    "Y_ref_bin": "matmul_attn_k_5120x5120_M512_Y_ref.bin",
+    "dtype": "IQ4_XS",
+    "seed": 42
+  },
+  {
+    "name": "attn_v",
+    "K": 5120,
+    "N": 5120,
+    "M": 1,
+    "W_shape": [
+      5120,
+      5120
+    ],
+    "W_blocks": 102400,
+    "W_source": "blk.0.ssm_out.weight",
+    "W_sha256": "c53f8bab6eb13dfd9f0f6bad0032d08d573ea9554c659edfbaecb4352503a7ca",
+    "W_npz": "matmul_attn_v_5120x5120_W.npz",
+    "W_bin": "matmul_attn_v_5120x5120_W.bin",
+    "X_shape": [
+      5120,
+      1
+    ],
+    "Y_shape": [
+      5120,
+      1
+    ],
+    "npz": "matmul_attn_v_5120x5120_M1.npz",
+    "x_bin": "matmul_attn_v_5120x5120_M1_x.bin",
+    "y_ref_bin": "matmul_attn_v_5120x5120_M1_y_ref.bin",
+    "dtype": "IQ4_XS",
+    "seed": 42
+  },
+  {
+    "name": "attn_v",
+    "K": 5120,
+    "N": 5120,
+    "M": 16,
+    "W_shape": [
+      5120,
+      5120
+    ],
+    "W_blocks": 102400,
+    "W_source": "blk.0.ssm_out.weight",
+    "W_sha256": "c53f8bab6eb13dfd9f0f6bad0032d08d573ea9554c659edfbaecb4352503a7ca",
+    "W_npz": "matmul_attn_v_5120x5120_W.npz",
+    "W_bin": "matmul_attn_v_5120x5120_W.bin",
+    "X_shape": [
+      5120,
+      16
+    ],
+    "Y_shape": [
+      5120,
+      16
+    ],
+    "npz": "matmul_attn_v_5120x5120_M16.npz",
+    "X_bin": "matmul_attn_v_5120x5120_M16_X.bin",
+    "Y_ref_bin": "matmul_attn_v_5120x5120_M16_Y_ref.bin",
+    "dtype": "IQ4_XS",
+    "seed": 42
+  },
+  {
+    "name": "attn_v",
+    "K": 5120,
+    "N": 5120,
+    "M": 128,
+    "W_shape": [
+      5120,
+      5120
+    ],
+    "W_blocks": 102400,
+    "W_source": "blk.0.ssm_out.weight",
+    "W_sha256": "c53f8bab6eb13dfd9f0f6bad0032d08d573ea9554c659edfbaecb4352503a7ca",
+    "W_npz": "matmul_attn_v_5120x5120_W.npz",
+    "W_bin": "matmul_attn_v_5120x5120_W.bin",
+    "X_shape": [
+      5120,
+      128
+    ],
+    "Y_shape": [
+      5120,
+      128
+    ],
+    "npz": "matmul_attn_v_5120x5120_M128.npz",
+    "X_bin": "matmul_attn_v_5120x5120_M128_X.bin",
+    "Y_ref_bin": "matmul_attn_v_5120x5120_M128_Y_ref.bin",
+    "dtype": "IQ4_XS",
+    "seed": 42
+  },
+  {
+    "name": "attn_v",
+    "K": 5120,
+    "N": 5120,
+    "M": 512,
+    "W_shape": [
+      5120,
+      5120
+    ],
+    "W_blocks": 102400,
+    "W_source": "blk.0.ssm_out.weight",
+    "W_sha256": "c53f8bab6eb13dfd9f0f6bad0032d08d573ea9554c659edfbaecb4352503a7ca",
+    "W_npz": "matmul_attn_v_5120x5120_W.npz",
+    "W_bin": "matmul_attn_v_5120x5120_W.bin",
+    "X_shape": [
+      5120,
+      512
+    ],
+    "Y_shape": [
+      5120,
+      512
+    ],
+    "npz": "matmul_attn_v_5120x5120_M512.npz",
+    "X_bin": "matmul_attn_v_5120x5120_M512_X.bin",
+    "Y_ref_bin": "matmul_attn_v_5120x5120_M512_Y_ref.bin",
+    "dtype": "IQ4_XS",
+    "seed": 42
+  },
+  {
+    "name": "attn_gate",
+    "K": 5120,
+    "N": 6144,
+    "M": 1,
+    "W_shape": [
+      6144,
+      5120
+    ],
+    "W_blocks": 122880,
+    "W_source": "blk.0.attn_gate.weight",
+    "W_sha256": "4d68c1ff18a856743f999f45197a8ef30f68bc027a6e1de71a8fd7a1fcf2a4eb",
+    "W_npz": "matmul_attn_gate_5120x6144_W.npz",
+    "W_bin": "matmul_attn_gate_5120x6144_W.bin",
+    "X_shape": [
+      5120,
+      1
+    ],
+    "Y_shape": [
+      6144,
+      1
+    ],
+    "npz": "matmul_attn_gate_5120x6144_M1.npz",
+    "x_bin": "matmul_attn_gate_5120x6144_M1_x.bin",
+    "y_ref_bin": "matmul_attn_gate_5120x6144_M1_y_ref.bin",
+    "dtype": "IQ4_XS",
+    "seed": 42
+  },
+  {
+    "name": "attn_gate",
+    "K": 5120,
+    "N": 6144,
+    "M": 16,
+    "W_shape": [
+      6144,
+      5120
+    ],
+    "W_blocks": 122880,
+    "W_source": "blk.0.attn_gate.weight",
+    "W_sha256": "4d68c1ff18a856743f999f45197a8ef30f68bc027a6e1de71a8fd7a1fcf2a4eb",
+    "W_npz": "matmul_attn_gate_5120x6144_W.npz",
+    "W_bin": "matmul_attn_gate_5120x6144_W.bin",
+    "X_shape": [
+      5120,
+      16
+    ],
+    "Y_shape": [
+      6144,
+      16
+    ],
+    "npz": "matmul_attn_gate_5120x6144_M16.npz",
+    "X_bin": "matmul_attn_gate_5120x6144_M16_X.bin",
+    "Y_ref_bin": "matmul_attn_gate_5120x6144_M16_Y_ref.bin",
+    "dtype": "IQ4_XS",
+    "seed": 42
+  },
+  {
+    "name": "attn_gate",
+    "K": 5120,
+    "N": 6144,
+    "M": 128,
+    "W_shape": [
+      6144,
+      5120
+    ],
+    "W_blocks": 122880,
+    "W_source": "blk.0.attn_gate.weight",
+    "W_sha256": "4d68c1ff18a856743f999f45197a8ef30f68bc027a6e1de71a8fd7a1fcf2a4eb",
+    "W_npz": "matmul_attn_gate_5120x6144_W.npz",
+    "W_bin": "matmul_attn_gate_5120x6144_W.bin",
+    "X_shape": [
+      5120,
+      128
+    ],
+    "Y_shape": [
+      6144,
+      128
+    ],
+    "npz": "matmul_attn_gate_5120x6144_M128.npz",
+    "X_bin": "matmul_attn_gate_5120x6144_M128_X.bin",
+    "Y_ref_bin": "matmul_attn_gate_5120x6144_M128_Y_ref.bin",
+    "dtype": "IQ4_XS",
+    "seed": 42
+  },
+  {
+    "name": "attn_gate",
+    "K": 5120,
+    "N": 6144,
+    "M": 512,
+    "W_shape": [
+      6144,
+      5120
+    ],
+    "W_blocks": 122880,
+    "W_source": "blk.0.attn_gate.weight",
+    "W_sha256": "4d68c1ff18a856743f999f45197a8ef30f68bc027a6e1de71a8fd7a1fcf2a4eb",
+    "W_npz": "matmul_attn_gate_5120x6144_W.npz",
+    "W_bin": "matmul_attn_gate_5120x6144_W.bin",
+    "X_shape": [
+      5120,
+      512
+    ],
+    "Y_shape": [
+      6144,
+      512
+    ],
+    "npz": "matmul_attn_gate_5120x6144_M512.npz",
+    "X_bin": "matmul_attn_gate_5120x6144_M512_X.bin",
+    "Y_ref_bin": "matmul_attn_gate_5120x6144_M512_Y_ref.bin",
+    "dtype": "IQ4_XS",
+    "seed": 42
+  },
+  {
+    "name": "attn_out",
+    "K": 5120,
+    "N": 5120,
+    "M": 1,
+    "W_shape": [
+      5120,
+      5120
+    ],
+    "W_blocks": 102400,
+    "W_source": "blk.3.attn_output.weight",
+    "W_sha256": "20ae07fcedf930cd006519fb21c90a4dba4e71357d2da44a4dd9d25a62e8e30e",
+    "W_npz": "matmul_attn_out_5120x5120_W.npz",
+    "W_bin": "matmul_attn_out_5120x5120_W.bin",
+    "X_shape": [
+      5120,
+      1
+    ],
+    "Y_shape": [
+      5120,
+      1
+    ],
+    "npz": "matmul_attn_out_5120x5120_M1.npz",
+    "x_bin": "matmul_attn_out_5120x5120_M1_x.bin",
+    "y_ref_bin": "matmul_attn_out_5120x5120_M1_y_ref.bin",
+    "dtype": "IQ4_XS",
+    "seed": 42
+  },
+  {
+    "name": "attn_out",
+    "K": 5120,
+    "N": 5120,
+    "M": 16,
+    "W_shape": [
+      5120,
+      5120
+    ],
+    "W_blocks": 102400,
+    "W_source": "blk.3.attn_output.weight",
+    "W_sha256": "20ae07fcedf930cd006519fb21c90a4dba4e71357d2da44a4dd9d25a62e8e30e",
+    "W_npz": "matmul_attn_out_5120x5120_W.npz",
+    "W_bin": "matmul_attn_out_5120x5120_W.bin",
+    "X_shape": [
+      5120,
+      16
+    ],
+    "Y_shape": [
+      5120,
+      16
+    ],
+    "npz": "matmul_attn_out_5120x5120_M16.npz",
+    "X_bin": "matmul_attn_out_5120x5120_M16_X.bin",
+    "Y_ref_bin": "matmul_attn_out_5120x5120_M16_Y_ref.bin",
+    "dtype": "IQ4_XS",
+    "seed": 42
+  },
+  {
+    "name": "attn_out",
+    "K": 5120,
+    "N": 5120,
+    "M": 128,
+    "W_shape": [
+      5120,
+      5120
+    ],
+    "W_blocks": 102400,
+    "W_source": "blk.3.attn_output.weight",
+    "W_sha256": "20ae07fcedf930cd006519fb21c90a4dba4e71357d2da44a4dd9d25a62e8e30e",
+    "W_npz": "matmul_attn_out_5120x5120_W.npz",
+    "W_bin": "matmul_attn_out_5120x5120_W.bin",
+    "X_shape": [
+      5120,
+      128
+    ],
+    "Y_shape": [
+      5120,
+      128
+    ],
+    "npz": "matmul_attn_out_5120x5120_M128.npz",
+    "X_bin": "matmul_attn_out_5120x5120_M128_X.bin",
+    "Y_ref_bin": "matmul_attn_out_5120x5120_M128_Y_ref.bin",
+    "dtype": "IQ4_XS",
+    "seed": 42
+  },
+  {
+    "name": "attn_out",
+    "K": 5120,
+    "N": 5120,
+    "M": 512,
+    "W_shape": [
+      5120,
+      5120
+    ],
+    "W_blocks": 102400,
+    "W_source": "blk.3.attn_output.weight",
+    "W_sha256": "20ae07fcedf930cd006519fb21c90a4dba4e71357d2da44a4dd9d25a62e8e30e",
+    "W_npz": "matmul_attn_out_5120x5120_W.npz",
+    "W_bin": "matmul_attn_out_5120x5120_W.bin",
+    "X_shape": [
+      5120,
+      512
+    ],
+    "Y_shape": [
+      5120,
+      512
+    ],
+    "npz": "matmul_attn_out_5120x5120_M512.npz",
+    "X_bin": "matmul_attn_out_5120x5120_M512_X.bin",
+    "Y_ref_bin": "matmul_attn_out_5120x5120_M512_Y_ref.bin",
+    "dtype": "IQ4_XS",
+    "seed": 42
+  },
+  {
+    "name": "ffn_gate",
+    "K": 5120,
+    "N": 17408,
+    "M": 1,
+    "W_shape": [
+      17408,
+      5120
+    ],
+    "W_blocks": 348160,
+    "W_source": "blk.0.ffn_gate.weight",
+    "W_sha256": "73f00202c3e3e75a5fdc19c46a5388b5759f5f3f520383c82085d8ec71ab0b66",
+    "W_npz": "matmul_ffn_gate_5120x17408_W.npz",
+    "W_bin": "matmul_ffn_gate_5120x17408_W.bin",
+    "X_shape": [
+      5120,
+      1
+    ],
+    "Y_shape": [
+      17408,
+      1
+    ],
+    "npz": "matmul_ffn_gate_5120x17408_M1.npz",
+    "x_bin": "matmul_ffn_gate_5120x17408_M1_x.bin",
+    "y_ref_bin": "matmul_ffn_gate_5120x17408_M1_y_ref.bin",
+    "dtype": "IQ4_XS",
+    "seed": 42
+  },
+  {
+    "name": "ffn_gate",
+    "K": 5120,
+    "N": 17408,
+    "M": 16,
+    "W_shape": [
+      17408,
+      5120
+    ],
+    "W_blocks": 348160,
+    "W_source": "blk.0.ffn_gate.weight",
+    "W_sha256": "73f00202c3e3e75a5fdc19c46a5388b5759f5f3f520383c82085d8ec71ab0b66",
+    "W_npz": "matmul_ffn_gate_5120x17408_W.npz",
+    "W_bin": "matmul_ffn_gate_5120x17408_W.bin",
+    "X_shape": [
+      5120,
+      16
+    ],
+    "Y_shape": [
+      17408,
+      16
+    ],
+    "npz": "matmul_ffn_gate_5120x17408_M16.npz",
+    "X_bin": "matmul_ffn_gate_5120x17408_M16_X.bin",
+    "Y_ref_bin": "matmul_ffn_gate_5120x17408_M16_Y_ref.bin",
+    "dtype": "IQ4_XS",
+    "seed": 42
+  },
+  {
+    "name": "ffn_gate",
+    "K": 5120,
+    "N": 17408,
+    "M": 128,
+    "W_shape": [
+      17408,
+      5120
+    ],
+    "W_blocks": 348160,
+    "W_source": "blk.0.ffn_gate.weight",
+    "W_sha256": "73f00202c3e3e75a5fdc19c46a5388b5759f5f3f520383c82085d8ec71ab0b66",
+    "W_npz": "matmul_ffn_gate_5120x17408_W.npz",
+    "W_bin": "matmul_ffn_gate_5120x17408_W.bin",
+    "X_shape": [
+      5120,
+      128
+    ],
+    "Y_shape": [
+      17408,
+      128
+    ],
+    "npz": "matmul_ffn_gate_5120x17408_M128.npz",
+    "X_bin": "matmul_ffn_gate_5120x17408_M128_X.bin",
+    "Y_ref_bin": "matmul_ffn_gate_5120x17408_M128_Y_ref.bin",
+    "dtype": "IQ4_XS",
+    "seed": 42
+  },
+  {
+    "name": "ffn_gate",
+    "K": 5120,
+    "N": 17408,
+    "M": 512,
+    "W_shape": [
+      17408,
+      5120
+    ],
+    "W_blocks": 348160,
+    "W_source": "blk.0.ffn_gate.weight",
+    "W_sha256": "73f00202c3e3e75a5fdc19c46a5388b5759f5f3f520383c82085d8ec71ab0b66",
+    "W_npz": "matmul_ffn_gate_5120x17408_W.npz",
+    "W_bin": "matmul_ffn_gate_5120x17408_W.bin",
+    "X_shape": [
+      5120,
+      512
+    ],
+    "Y_shape": [
+      17408,
+      512
+    ],
+    "npz": "matmul_ffn_gate_5120x17408_M512.npz",
+    "X_bin": "matmul_ffn_gate_5120x17408_M512_X.bin",
+    "Y_ref_bin": "matmul_ffn_gate_5120x17408_M512_Y_ref.bin",
+    "dtype": "IQ4_XS",
+    "seed": 42
+  },
+  {
+    "name": "ffn_up",
+    "K": 5120,
+    "N": 17408,
+    "M": 1,
+    "W_shape": [
+      17408,
+      5120
+    ],
+    "W_blocks": 348160,
+    "W_source": "blk.0.ffn_up.weight",
+    "W_sha256": "264d3d26d26c30db2314aff96124690b669e9fa66379abd9976ccd7f6682d163",
+    "W_npz": "matmul_ffn_up_5120x17408_W.npz",
+    "W_bin": "matmul_ffn_up_5120x17408_W.bin",
+    "X_shape": [
+      5120,
+      1
+    ],
+    "Y_shape": [
+      17408,
+      1
+    ],
+    "npz": "matmul_ffn_up_5120x17408_M1.npz",
+    "x_bin": "matmul_ffn_up_5120x17408_M1_x.bin",
+    "y_ref_bin": "matmul_ffn_up_5120x17408_M1_y_ref.bin",
+    "dtype": "IQ4_XS",
+    "seed": 42
+  },
+  {
+    "name": "ffn_up",
+    "K": 5120,
+    "N": 17408,
+    "M": 16,
+    "W_shape": [
+      17408,
+      5120
+    ],
+    "W_blocks": 348160,
+    "W_source": "blk.0.ffn_up.weight",
+    "W_sha256": "264d3d26d26c30db2314aff96124690b669e9fa66379abd9976ccd7f6682d163",
+    "W_npz": "matmul_ffn_up_5120x17408_W.npz",
+    "W_bin": "matmul_ffn_up_5120x17408_W.bin",
+    "X_shape": [
+      5120,
+      16
+    ],
+    "Y_shape": [
+      17408,
+      16
+    ],
+    "npz": "matmul_ffn_up_5120x17408_M16.npz",
+    "X_bin": "matmul_ffn_up_5120x17408_M16_X.bin",
+    "Y_ref_bin": "matmul_ffn_up_5120x17408_M16_Y_ref.bin",
+    "dtype": "IQ4_XS",
+    "seed": 42
+  },
+  {
+    "name": "ffn_up",
+    "K": 5120,
+    "N": 17408,
+    "M": 128,
+    "W_shape": [
+      17408,
+      5120
+    ],
+    "W_blocks": 348160,
+    "W_source": "blk.0.ffn_up.weight",
+    "W_sha256": "264d3d26d26c30db2314aff96124690b669e9fa66379abd9976ccd7f6682d163",
+    "W_npz": "matmul_ffn_up_5120x17408_W.npz",
+    "W_bin": "matmul_ffn_up_5120x17408_W.bin",
+    "X_shape": [
+      5120,
+      128
+    ],
+    "Y_shape": [
+      17408,
+      128
+    ],
+    "npz": "matmul_ffn_up_5120x17408_M128.npz",
+    "X_bin": "matmul_ffn_up_5120x17408_M128_X.bin",
+    "Y_ref_bin": "matmul_ffn_up_5120x17408_M128_Y_ref.bin",
+    "dtype": "IQ4_XS",
+    "seed": 42
+  },
+  {
+    "name": "ffn_up",
+    "K": 5120,
+    "N": 17408,
+    "M": 512,
+    "W_shape": [
+      17408,
+      5120
+    ],
+    "W_blocks": 348160,
+    "W_source": "blk.0.ffn_up.weight",
+    "W_sha256": "264d3d26d26c30db2314aff96124690b669e9fa66379abd9976ccd7f6682d163",
+    "W_npz": "matmul_ffn_up_5120x17408_W.npz",
+    "W_bin": "matmul_ffn_up_5120x17408_W.bin",
+    "X_shape": [
+      5120,
+      512
+    ],
+    "Y_shape": [
+      17408,
+      512
+    ],
+    "npz": "matmul_ffn_up_5120x17408_M512.npz",
+    "X_bin": "matmul_ffn_up_5120x17408_M512_X.bin",
+    "Y_ref_bin": "matmul_ffn_up_5120x17408_M512_Y_ref.bin",
+    "dtype": "IQ4_XS",
+    "seed": 42
+  },
+  {
+    "name": "ffn_down",
+    "K": 17408,
+    "N": 5120,
+    "M": 1,
+    "W_shape": [
+      5120,
+      17408
+    ],
+    "W_blocks": 348160,
+    "W_source": "blk.0.ffn_down.weight",
+    "W_sha256": "b190e3ebdd93862b5f50cb6a94558a4f5bd2fcebbc45e0121775c26907e7d33c",
+    "W_npz": "matmul_ffn_down_17408x5120_W.npz",
+    "W_bin": "matmul_ffn_down_17408x5120_W.bin",
+    "X_shape": [
+      17408,
+      1
+    ],
+    "Y_shape": [
+      5120,
+      1
+    ],
+    "npz": "matmul_ffn_down_17408x5120_M1.npz",
+    "x_bin": "matmul_ffn_down_17408x5120_M1_x.bin",
+    "y_ref_bin": "matmul_ffn_down_17408x5120_M1_y_ref.bin",
+    "dtype": "IQ4_XS",
+    "seed": 42
+  },
+  {
+    "name": "ffn_down",
+    "K": 17408,
+    "N": 5120,
+    "M": 16,
+    "W_shape": [
+      5120,
+      17408
+    ],
+    "W_blocks": 348160,
+    "W_source": "blk.0.ffn_down.weight",
+    "W_sha256": "b190e3ebdd93862b5f50cb6a94558a4f5bd2fcebbc45e0121775c26907e7d33c",
+    "W_npz": "matmul_ffn_down_17408x5120_W.npz",
+    "W_bin": "matmul_ffn_down_17408x5120_W.bin",
+    "X_shape": [
+      17408,
+      16
+    ],
+    "Y_shape": [
+      5120,
+      16
+    ],
+    "npz": "matmul_ffn_down_17408x5120_M16.npz",
+    "X_bin": "matmul_ffn_down_17408x5120_M16_X.bin",
+    "Y_ref_bin": "matmul_ffn_down_17408x5120_M16_Y_ref.bin",
+    "dtype": "IQ4_XS",
+    "seed": 42
+  },
+  {
+    "name": "ffn_down",
+    "K": 17408,
+    "N": 5120,
+    "M": 128,
+    "W_shape": [
+      5120,
+      17408
+    ],
+    "W_blocks": 348160,
+    "W_source": "blk.0.ffn_down.weight",
+    "W_sha256": "b190e3ebdd93862b5f50cb6a94558a4f5bd2fcebbc45e0121775c26907e7d33c",
+    "W_npz": "matmul_ffn_down_17408x5120_W.npz",
+    "W_bin": "matmul_ffn_down_17408x5120_W.bin",
+    "X_shape": [
+      17408,
+      128
+    ],
+    "Y_shape": [
+      5120,
+      128
+    ],
+    "npz": "matmul_ffn_down_17408x5120_M128.npz",
+    "X_bin": "matmul_ffn_down_17408x5120_M128_X.bin",
+    "Y_ref_bin": "matmul_ffn_down_17408x5120_M128_Y_ref.bin",
+    "dtype": "IQ4_XS",
+    "seed": 42
+  },
+  {
+    "name": "ffn_down",
+    "K": 17408,
+    "N": 5120,
+    "M": 512,
+    "W_shape": [
+      5120,
+      17408
+    ],
+    "W_blocks": 348160,
+    "W_source": "blk.0.ffn_down.weight",
+    "W_sha256": "b190e3ebdd93862b5f50cb6a94558a4f5bd2fcebbc45e0121775c26907e7d33c",
+    "W_npz": "matmul_ffn_down_17408x5120_W.npz",
+    "W_bin": "matmul_ffn_down_17408x5120_W.bin",
+    "X_shape": [
+      17408,
+      512
+    ],
+    "Y_shape": [
+      5120,
+      512
+    ],
+    "npz": "matmul_ffn_down_17408x5120_M512.npz",
+    "X_bin": "matmul_ffn_down_17408x5120_M512_X.bin",
+    "Y_ref_bin": "matmul_ffn_down_17408x5120_M512_Y_ref.bin",
+    "dtype": "IQ4_XS",
+    "seed": 42
+  }
+]

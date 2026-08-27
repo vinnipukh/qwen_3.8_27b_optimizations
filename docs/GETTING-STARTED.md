@@ -59,11 +59,79 @@ to running the full benchmark harness against Qwen3.8-27B.
 2. **Run Pytest Suite:**
    ```bash
    cd /mnt/e/Projects/qwen_3.8_27b_optimizations
-   python3 -m pytest benchmarks/tests/ -q
+   PYTHONPATH=. python3 -m pytest benchmarks/tests/ -q
    ```
-   All 35 tests should pass.
+   All 55 tests should pass.
 
-## 5. Execute Smoke Test & Baseline Session
+## 5. Kernel Playground (Phase 4)
+
+The standalone HIP playground builds with zero llama.cpp headers:
+
+```bash
+cmake -S kernels -B kernels/build -G Ninja -DCMAKE_HIP_ARCHITECTURES=gfx1100 -DCMAKE_BUILD_TYPE=Release
+cmake --build kernels/build
+
+# Run correct kernel (GREEN):
+export HSA_ENABLE_DXG_DETECTION=1
+./kernels/build/demo_iq4xs_dequant/demo_test
+
+# Run mutant kernel (RED, >1000x error discrimination):
+./kernels/build/demo_iq4xs_dequant/demo_test_broken
+
+# Run sweep benchmark:
+./kernels/build/demo_iq4xs_dequant/demo_bench
+```
+
+Fixtures combine real IQ4_XS super-blocks (136 B / 256 weights via `gguf-py`) and deterministic synthetic edge cases (zero, min/max scale, nibble extremes, split-half `lo@i` vs `hi@i+16`). The worked example `kernels/demo_iq4xs_dequant/` runs `test_compare` (correct GREEN, broken RED by ≥10×) and `bench_sweep` (50 warmup / 200 measure per shape × wave32/wave64).
+
+## 6. Matmul IQ4_XS Kernels (Phase 5)
+
+Standalone IQ4_XS matmul playground (`kernels/matmul_iq4xs/`) — GEMV (M=1 decode) and GEMM (M≫1 prefill) against 8 canonical Qwen3.8-27B shapes (5120×5120, 5120×6144, 5120×17408, 17408×5120).
+
+1. **Dump matmul fixtures (32 fixtures: 8 shapes × M {1,16,128,512}, seed 42):**
+   ```bash
+   python tools/dump_matmul_fixtures.py --model /root/models/Qwen3.8-27B-Uncensored-IQ4_XS.gguf --out kernels/fixtures
+   ```
+   Extracts real `W` from GGUF tensors (`blk.0.ffn_gate.weight`, `blk.0.ffn_down.weight`, `blk.0.attn_gate.weight`, etc.), generates activations `x`/`X` (Gaussian N(0,1)) and `y_ref` via CPU dequant+Gemm oracle. Outputs `kernels/fixtures/matmul_*_M*.npz` + `.bin` pairs and `kernels/fixtures/manifest_matmul.json`. Requires `gguf-py` and `numpy`; falls back to synthetic weights if the model file is absent.
+
+2. **Build matmul targets:**
+   ```bash
+   cmake -S kernels -B kernels/build -G Ninja -DCMAKE_HIP_ARCHITECTURES=gfx1100 -DCMAKE_BUILD_TYPE=Release
+   cmake --build kernels/build
+   ```
+   Produces `matmul_test_baseline` (stock baseline), `test_gemv_compare` / `test_gemm_compare` (custom vs oracle), and `bench_gemv` / `bench_gemm` / `bench_matmul` (microbenchmarks). Build is gfx1100-only, no fat binary.
+
+3. **Run stock baseline test (validates naive HIP comparator vs CPU oracle):**
+   ```bash
+   export HSA_ENABLE_DXG_DETECTION=1
+   ./kernels/build/matmul_iq4xs/matmul_test_baseline
+   ```
+   Covers GEMV (M=1) and GEMM (M=16,128) for canonical + synthetic shapes. Pass criteria: `cosine ≥0.999`, `max_rel ≤1e-3`, no NaN/Inf. Expected: 16/16 PASS (`cosine=1.0`, `max_abs=0`).
+
+4. **Run GEMV/GEMM custom tests (custom gfx1100 kernels vs CPU oracle and stock):**
+   ```bash
+   export HSA_ENABLE_DXG_DETECTION=1
+   ./kernels/build/matmul_iq4xs/test_gemv_compare
+   ./kernels/build/matmul_iq4xs/test_gemm_compare
+   ```
+   `test_gemv_compare` validates `impl_gemv_gfx1100.hip` (decode M=1, 128-bit loads, 8-thread/row cooperative) — expected 16/16 PASS. `test_gemm_compare` validates `impl_gemm_wmma.hip` (prefill M≫1, TILE_M=16 + WMMA `v_wmma_f32_16x16x16_f16`) — expected 18/18 PASS (M=1,16,128 variants). Both gate on `cosine ≥0.999`, `max_rel ≤1e-3`.
+
+5. **Run microbenchmarks (hipEvent tracer, median/p95/stdev):**
+   ```bash
+   export HSA_ENABLE_DXG_DETECTION=1
+   ./kernels/build/matmul_iq4xs/bench_gemv   # GEMV decode: 50 warmup / 200 measure, 8 shapes × M=1
+   ./kernels/build/matmul_iq4xs/bench_gemm   # GEMM prefill: 5 warmup / 20 measure, 9 shapes × M {16,128,512}
+   ./kernels/build/matmul_iq4xs/bench_matmul # Unified 32-shape sweep: 8 shapes × M {1,16,128,512}, 5/20
+   ```
+   Compare Custom gfx1100 vs Stock HIP (naive per-row/per-element dequant+dot). GEMV expected 1.26–2.13× win (8/8 shapes); GEMM expected 1.76–7.50× win at M≥128 (6/6), with 0.82× losses at M=16 for two small-M shapes (pre-wired, not hidden). Full sweeps archived via `benchmarks/lib/store.py` with `CHECKSUMS.sha256`.
+
+6. **View KERNEL-BENCH-DIFF.md:**
+   ```bash
+   cat benchmarks/profiling/KERNEL-BENCH-DIFF.md
+   ```
+   Contains methodology (pp/tg split, tracer config), GEMV/GEMM tables (median µs, GB/s/TFLOPS, speedup), failed/sub-optimal variants, microarchitectural notes (LDS `[32][33]` padding, `__launch_bounds__(256,4)`, WMMA disassembly), and archived RunStore paths (`benchmarks/results/kernels_mul_mat_iq4xs_*_20260825_165353/`).
+
+## 7. Execute Smoke Test & Baseline Session
 
 1. **Run Smoke Matrix:**
    ```bash

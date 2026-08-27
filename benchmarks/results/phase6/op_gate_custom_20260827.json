@@ -1,0 +1,90 @@
+{
+  "timestamp_start": "2026-08-27T14:16:57.820010+00:00",
+  "timestamp_end": "2026-08-27T14:19:11.858218+00:00",
+  "status": "PASS",
+  "exit_code": 0,
+  "backend": "ROCm0",
+  "bin_path": "/root/llama.cpp/build-custom/bin/test-backend-ops",
+  "total_cases": 6835,
+  "supported_cases": 4243,
+  "unsupported_cases": 2592,
+  "error_cases": 0,
+  "unique_ops_tested": 6,
+  "core_ops_status": {
+    "GATED_DELTA_NET": {
+      "status": "PASS",
+      "total": 36,
+      "supported": 36,
+      "errors": 0
+    },
+    "SOLVE_TRI": {
+      "status": "PASS",
+      "total": 24,
+      "supported": 24,
+      "errors": 0
+    },
+    "SSM_CONV": {
+      "status": "PASS",
+      "total": 45,
+      "supported": 45,
+      "errors": 0
+    },
+    "SSM_SCAN": {
+      "status": "PASS",
+      "total": 9,
+      "supported": 9,
+      "errors": 0
+    },
+    "FLASH_ATTN_EXT": {
+      "status": "PASS",
+      "total": 5158,
+      "supported": 2936,
+      "errors": 0
+    },
+    "MUL_MAT": {
+      "status": "PASS",
+      "total": 1563,
+      "supported": 1193,
+      "errors": 0
+    }
+  },
+  "errors": [],
+  "op_summary": {
+    "SSM_CONV": {
+      "total": 45,
+      "supported": 45,
+      "unsupported": 0,
+      "errors": 0
+    },
+    "SSM_SCAN": {
+      "total": 9,
+      "supported": 9,
+      "unsupported": 0,
+      "errors": 0
+    },
+    "MUL_MAT": {
+      "total": 1563,
+      "supported": 1193,
+      "unsupported": 370,
+      "errors": 0
+    },
+    "SOLVE_TRI": {
+      "total": 24,
+      "supported": 24,
+      "unsupported": 0,
+      "errors": 0
+    },
+    "FLASH_ATTN_EXT": {
+      "total": 5158,
+      "supported": 2936,
+      "unsupported": 2222,
+      "errors": 0
+    },
+    "GATED_DELTA_NET": {
+      "total": 36,
+      "supported": 36,
+      "unsupported": 0,
+      "errors": 0
+    }
+  }
+}

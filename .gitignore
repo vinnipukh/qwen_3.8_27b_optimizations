@@ -20,6 +20,7 @@ logs/
 .planning/tmp/
 arhan-masaustu/
 scrape_sahibinden.sh
+benchmarks/results/*_smoke_hip/
 
 # --- large model artifacts (provenance lives in models/README.md instead) ---
 models/*.gguf
@@ -27,6 +28,25 @@ baseline/**/*.exe
 baseline/**/*.so
 baseline/**/*.a
 baseline/binaries/
+
+# --- Kernel playground artifacts ---
+kernels/build/
+*.hip.o
+*.isa
+*.livereg
+kernels/fixtures/*
+!kernels/fixtures/manifest*.json
+kernels/results
+
+# --- Intermediate compiler probes and scratch ---
+/llama.cpp
+/test_wmma*
+*.bc
+*.hipi
+*.hipfb
+*.out.resolution.txt
+scratch/
+benchmarks/results/tmp_bench_*
 
 # --- OS / editor junk ---
 Thumbs.db
