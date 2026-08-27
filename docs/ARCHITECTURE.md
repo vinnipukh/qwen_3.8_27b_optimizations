@@ -79,10 +79,9 @@ Key constraints:
 | Headless runs: `setsid --simple-io --single-turn --load-mode none` | `llama-cli` hangs in `n_tty_write` on dead PTY otherwise |
 | Pre-flight VRAM Gate | Allocations > 18.25 GB free VRAM intercepted to prevent silent memory thrashing or DXG panic |
 
-## Roadmap summary (6 phases)
+## Roadmap summary (7 phases)
 
-Phases 1–4 produce zero optimizations; they build measurement and validation infrastructure
-first. See `.planning/ROADMAP.md` for details and the merge map to the original plan.
+Phases 1–4 produce measurement and validation infrastructure; Phase 5 attacked `MUL_MAT` against naive scalar references; Phase 6 delivered integration and release `v1.0.0-gfx1100`; Phase 7 optimizes against real upstream DP4A and WMMA tensor pipelines. See `.planning/ROADMAP.md`.
 
 | Phase | Focus | Status |
 |---|---|---|
@@ -90,8 +89,9 @@ first. See `.planning/ROADMAP.md` for details and the merge map to the original 
 | 2 | Benchmark harness & baseline matrix | done — 16-cell baseline published, guard & preflight active |
 | 3 | Correctness gates & bottleneck profiling | done — op-gate 21,093/0, PPL 6.4271, bottleneck `MUL_MAT` 31.12% |
 | 4 | Kernel playground scaffold | done — standalone gfx1100 playground, zero llama headers, demo `dequant_iq4_xs` passing GREEN/RED |
-| 5 | First custom kernel (bottleneck attack) | done 2026-08-25 — custom gfx1100 GEMV (2.05x) + WMMA GEMM (6.7x) beat stock, cosine 1.0 |
-| 6 | Integration, full validation & publication | done 2026-08-25 — Winners behind switch, baseline preserved, published v1.0.0-gfx1100 |
+| 5 | First custom kernel (bottleneck attack) | done — custom gfx1100 GEMV (2.05x) + WMMA GEMM (6.7x) beat naive stock, cosine 1.0 |
+| 6 | Integration, full validation & publication | done — Winners behind switch, baseline preserved, published v1.0.0-gfx1100 |
+| 7 | Hybrid DP4A & WMMA Matrix Core Optimization | planned — Fuse Q8_1 integer quantization with cooperative Wave32 DP4A and RDNA3 WMMA matrix cores to beat real stock end-to-end |
 
 Binding methodology rules: benchmark before optimize; one change at a time; keep the stock
 baseline forever; prefill (M≫1) and decode (M≈1) measured separately; publish failures too.

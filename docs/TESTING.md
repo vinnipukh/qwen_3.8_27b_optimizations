@@ -16,6 +16,7 @@ Level 4: Vulkan Coverage Gate (D2-04, vulkan_gate.sh 6-part check)
 Level 5: Numerical Correctness Gates — Phase 14 doctrine (per-op max_abs / mean_abs / relative error / cosine similarity; full-model same prompt / same seed / same sampling — see ROADMAP-original.md Phase 14) via QUAL-01 test-backend-ops and QUAL-02 perplexity + canaries; per-kernel thresholds: demo `dequant_iq4_xs` tight gate max_abs < 1e-5 / mean_abs < 1e-6 / cosine > 0.99999 (+10× broken discrimination) and matmul gate cosine >= 0.999 / max_rel <= 1e-3 / no NaN/Inf (test_gemv 10/10, test_gemm 11/11, cosine 1.0)
 Level 6: Kernel Numerical Comparison (test_compare vs CPU golden ref, KERN-01 — demo `dequant_iq4_xs` tight gate max_abs < 1e-5 / mean < 1e-6 / cosine > 0.99999 +10× broken discrimination; see `.planning/phases/04-kernel-playground-scaffold/`)
 Level 7: Matmul Numerical Comparison (test_gemv_compare, test_gemm_compare, cosine 1.0) — custom gfx1100 GEMV/GEMM vs CPU FP64 oracle (`kernels/matmul_iq4xs/ref_cpu.*`), gate cosine >=0.999 / max_rel <=1e-3 / no NaN/Inf (achieved cosine 1.0, max_abs 0 on all cases); see `.planning/phases/05-first-custom-kernel-bottleneck-attack/`
+Level 8: Phase 7 DP4A & WMMA True-Stock Comparator Gate — Direct microbenchmark vs real upstream `vec_dot_iq4_xs_q8_1` DP4A implementation with fused `Q8_1` integer activation quantization.
 ```
 
 ## Running the Unit Test Suite

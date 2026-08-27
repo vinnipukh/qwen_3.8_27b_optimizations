@@ -273,3 +273,11 @@ store.write_checksums()
 ```
 
 In either case, verify archived output with `sha256sum -c benchmarks/results/<run_id>/CHECKSUMS.sha256`.
+
+## Phase 7 Hybrid DP4A & WMMA Optimization Workflow
+
+For Phase 7 kernel development targeting real upstream `llama.cpp` performance:
+1. **Benchmark Comparator:** Direct microbenchmarking against upstream `vec_dot_iq4_xs_q8_1` with fused `Q8_1` integer quantization.
+2. **Decode GEMV ($M=1$):** Implement 8-thread cooperative Wave32 workgroups using native `__builtin_amdgcn_sudot4` (`v_dot4_i32_iu8`).
+3. **Prefill GEMM ($M \ge 128$):** Implement 128-bit coalesced LDS staging with double buffering and `__builtin_amdgcn_wmma_f32_16x16x16_f16_w32` matrix core intrinsics.
+4. **End-to-End Validation:** Update quilt patch `patches/0001-gfx1100-mul-mat-custom.patch` and run paired `llama-bench` sweeps asserting $>40\text{ t/s}$ decode and $>1000\text{ t/s}$ prefill.
