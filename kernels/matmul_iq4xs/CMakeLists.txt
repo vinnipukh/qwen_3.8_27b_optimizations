@@ -74,6 +74,24 @@ target_link_libraries(test_gemm_compare PRIVATE matmul_ref_cpu matmul_common_ifa
 add_executable(bench_gemm bench_gemm.cpp $<TARGET_OBJECTS:matmul_gemm_hip> $<TARGET_OBJECTS:matmul_stock_hip>)
 target_link_libraries(bench_gemm PRIVATE matmul_ref_cpu matmul_common_iface)
 
+# --- Cooperative DP4A GEMV (gfx1100 decode, 07-02) ---
+add_library(matmul_gemv_dp4a_hip OBJECT impl_gemv_dp4a_gfx1100.hip)
+target_link_libraries(matmul_gemv_dp4a_hip PRIVATE matmul_common_iface)
+
+add_executable(test_gemv_dp4a_compare
+    test_gemv_dp4a_compare.cpp
+    $<TARGET_OBJECTS:matmul_gemv_dp4a_hip>
+    $<TARGET_OBJECTS:matmul_real_stock_hip>
+)
+target_link_libraries(test_gemv_dp4a_compare PRIVATE matmul_ref_cpu matmul_common_iface)
+
+add_executable(bench_gemv_dp4a
+    bench_gemv_dp4a.cpp
+    $<TARGET_OBJECTS:matmul_gemv_dp4a_hip>
+    $<TARGET_OBJECTS:matmul_real_stock_hip>
+)
+target_link_libraries(bench_gemv_dp4a PRIVATE matmul_ref_cpu matmul_common_iface)
+
 # --- Unified sweep benchmark ---
 add_executable(bench_matmul
     bench_matmul.cpp
