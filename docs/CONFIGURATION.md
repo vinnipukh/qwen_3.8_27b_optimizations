@@ -72,11 +72,32 @@ cmake -S kernels -B kernels/build -G Ninja \
 
 Python dependencies for fixtures and test runners: `gguf` (`gguf-py`), `numpy`, `pytest`.
 
-## Phase 5 Matmul Kernels
+## Custom Kernel Integration Build Flags (Phase 6)
 
-Custom IQ4_XS GEMV (M=1, decode) and GEMM (M>>1, prefill) kernels in `kernels/matmul_iq4xs/` targeting
-RDNA3 gfx1100 Wave32. Verified against `kernels/CMakeLists.txt`, `kernels/matmul_iq4xs/impl_gemv_gfx1100.hip`,
-`kernels/matmul_iq4xs/impl_gemm_wmma.hip`, and `kernels/common/bench.h`.
+When integrating custom kernels into `llama.cpp` using `patches/0001-gfx1100-mul-mat-custom.patch`:
+
+```bash
+# Build custom optimized binary (ON):
+cmake -B build-custom -S . \
+  -DGGML_HIP=ON \
+  -DGPU_TARGETS=gfx1100 \
+  -DGGML_CUDA_ENABLE_CUSTOM_GFX1100=ON \
+  -DCMAKE_BUILD_TYPE=Release \
+  -DLLAMA_BUILD_SERVER=ON
+
+# Build stock baseline binary (OFF):
+cmake -B build-stock -S . \
+  -DGGML_HIP=ON \
+  -DGPU_TARGETS=gfx1100 \
+  -DGGML_CUDA_ENABLE_CUSTOM_GFX1100=OFF \
+  -DCMAKE_BUILD_TYPE=Release \
+  -DLLAMA_BUILD_SERVER=ON
+```
+
+| Flag | Why |
+|---|---|
+| `-DGGML_CUDA_ENABLE_CUSTOM_GFX1100=ON` | Enables custom `gemv_iq4xs.cuh` and `gemm_iq4xs.cuh` dispatch hooks |
+| `-DGGML_CUDA_ENABLE_CUSTOM_GFX1100=OFF` | Compiles stock HIP implementation bit-identically |
 
 ### Compiler and CMake flags
 

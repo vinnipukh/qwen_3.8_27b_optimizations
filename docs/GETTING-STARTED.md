@@ -145,3 +145,30 @@ Standalone IQ4_XS matmul playground (`kernels/matmul_iq4xs/`) — GEMV (M=1 deco
 
 3. **Check Results:**
    Results land in `benchmarks/results/<timestamp>_baseline_hip/` with `manifest.json`, `rows.jsonl`, and `CHECKSUMS.sha256`. The published aggregate table is generated in `benchmarks/results/BASELINE-MATRIX.md`.
+
+## 8. Integrated Custom Kernel Deployment (Phase 6)
+
+1. **Apply Quilt Patch against upstream `bb4caa75`:**
+   ```bash
+   cd /root/llama.cpp
+   git apply /mnt/e/Projects/qwen_3.8_27b_optimizations/patches/0001-gfx1100-mul-mat-custom.patch
+   ```
+
+2. **Build Custom Binary (Switch ON):**
+   ```bash
+   cmake -B build-custom -S . \
+     -DGGML_HIP=ON -DGPU_TARGETS=gfx1100 \
+     -DGGML_CUDA_ENABLE_CUSTOM_GFX1100=ON \
+     -DCMAKE_BUILD_TYPE=Release -DLLAMA_BUILD_SERVER=ON
+   cmake --build build-custom -j8
+   ```
+
+3. **Run Correctness Gates (QUAL-01 & QUAL-02):**
+   ```bash
+   export HSA_ENABLE_DXG_DETECTION=1
+   # Op gate (0 errors across 4200+ ops):
+   python3 benchmarks/bin/run_op_gate.py --bin /root/llama.cpp/build-custom/bin/test-backend-ops
+
+   # Model gate (WikiText-2 PPL 6.4271 and 6/6 canaries):
+   python3 benchmarks/bin/run_model_gate.py --cli-bin /root/llama.cpp/build-custom/bin/llama-cli
+   ```

@@ -39,7 +39,7 @@ with correctness gates enforced before any integration.
 │   │                               #   impl_gemv_gfx1100.hip, impl_gemm_wmma.hip, test_*/bench_*.cpp, CMakeLists
 │   └── CMakeLists.txt              # Top-level standalone HIP build (CMAKE_HIP_ARCHITECTURES=gfx1100)
 ├── tools/                          # Offline tools (dump_gguf_fixtures.py, dump_matmul_fixtures.py)
-├── patches/                        # Quilt patches over pinned upstream (phase5_mul_mat_custom.patch)
+├── patches/                        # Quilt patches over pinned upstream (0001-gfx1100-mul-mat-custom.patch)
 ├── scripts/                        # Isolation and verification scripts (check_no_ggml.sh)
 ├── src/                            # placeholder — custom kernels land in kernels/, not src/
 ├── logs/                           # run logs
@@ -91,7 +91,7 @@ first. See `.planning/ROADMAP.md` for details and the merge map to the original 
 | 3 | Correctness gates & bottleneck profiling | done — op-gate 21,093/0, PPL 6.4271, bottleneck `MUL_MAT` 31.12% |
 | 4 | Kernel playground scaffold | done — standalone gfx1100 playground, zero llama headers, demo `dequant_iq4_xs` passing GREEN/RED |
 | 5 | First custom kernel (bottleneck attack) | done 2026-08-25 — custom gfx1100 GEMV (2.05x) + WMMA GEMM (6.7x) beat stock, cosine 1.0 |
-| 6 | Integration, full validation & publication | pending |
+| 6 | Integration, full validation & publication | done 2026-08-25 — Winners behind switch, baseline preserved, published v1.0.0-gfx1100 |
 
 Binding methodology rules: benchmark before optimize; one change at a time; keep the stock
 baseline forever; prefill (M≫1) and decode (M≈1) measured separately; publish failures too.
