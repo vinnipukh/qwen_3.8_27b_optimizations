@@ -43,11 +43,14 @@ Remaining: bare-metal WSL2 gfx1100 re-bench (bench vs real DP4A >1.2×, prefill 
 
 ### Phase 7 paired bench — stock vs custom (`llama-bench` p4096 n128, `-ngl 99 -b 2048 -r 3`, pp/tg split, thermal-paired)
 
-| Metric | Stock `bb4caa7` (`/root/llama.cpp/build-ci`) | Custom `5c6b397` (`/root/llama-custom-07`) | Δ |
-|---|---|---|---|
-| **pp4096** (tok/s) | **808.18 ±13.18** | **849.75 ±34.60** | **+5.1%** |
-| **tg128** (tok/s) | **33.25 ±0.21** | **34.79 ±0.44** | **+4.6%** |
-| Prompt window (14-token liquid prompt) | 102 tok | 105–113 tok | coherent after stride fix (before fix: ~5.8-token garbage/truncated) |
+| Metric | Stock `bb4caa7` (`/root/llama.cpp/build-ci`) | Custom `5c6b397` (`/root/llama-custom-07`) | Δ | Notes |
+|---|---|---|---|---|
+| **pp4096** (tok/s) | **808.18 ±13.18** | **849.75 ±34.60** | **+5.1% (1.051×)** | GEMV-only; GEMM `can_handle false` pending WMMA fix — was 5.8 tok garbage before stride `X[gm*K+gk]` fix |
+| **tg128** (tok/s) | **33.25 ±0.21** | **34.79 ±0.44** | **+4.6% (1.046×)** | `M=1` decode, 8-thread `sh[32][33]` `v_dot4` |
+| **Prompt 14 tok** `Explain liquid...` (`llama-cli -n 512`) | 102–141 | **105–177** | **~1.10×** | coherent `Hi`/`liquid` after fix; before fix custom `5.8` truncated |
+| **Hi `n 20`** | 102.1 → 31.8 `tg` | 105.6 → 30.3 / 113 → 32.1 `tg` | — | stock `Hi` 102 tok, custom `105–113` |
+
+> **Stock vs Custom — Phase 7 hybrid (GEMV-only, GEMM disabled for correctness):** `llama-bench` shows **+5.1% pp / +4.6% tg** on the same `7900 XT` `gfx1100` `20.4 GiB` `ROCm 7.2.1` in one thermal window. Microbench `real DP4A 84.39 µs vs naive 543 µs 6.43×` proves integer path; `GEMV` `111.47→94.67 µs 1.178× peak` under `WSL DXG` jitter. `GEMM WMMA 64×32 sB[2][32][33] wmma` is vendored but currently `can_handle false` (returns `hipErrorNotSupported`) to avoid corruption — re-enable after `TILE_M=16` fallback audit. See `docs/PUBLICATION.md` Phase 7 + `benchmarks/profiling/KERNEL-BENCH-DIFF.md §8`.
 
 Protocol: `llama-bench -p 4096 -n 128 -ngl 99 -b 2048 -r 3` warmup 3 then 5 repeats, stock vs custom back-to-back in **one thermal window** with `hwinfo_daemon` (see `docs/PUBLICATION.md` Phase 7). Raw `RunStore` dirs intended as `benchmarks/results/phase7/ab_stock_*` and `ab_custom_*` with `rows.jsonl` + `CHECKSUMS.sha256`.
 
