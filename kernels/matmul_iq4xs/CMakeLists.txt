@@ -18,11 +18,18 @@ add_library(matmul_ref_cpu STATIC
 target_link_libraries(matmul_ref_cpu PUBLIC matmul_common_iface)
 set_target_properties(matmul_ref_cpu PROPERTIES LINKER_LANGUAGE CXX)
 
-# --- Stock HIP comparator object ---
+# --- Stock HIP comparator object (naive scalar fallback) ---
 add_library(matmul_stock_hip OBJECT
     stock_hip_comparator.hip
 )
 target_link_libraries(matmul_stock_hip PRIVATE matmul_common_iface)
+
+# --- Real stock DP4A comparator (true upstream pipeline) ---
+# Implements exact vec_dot_iq4_xs_q8_1 + quantize_row_q8_1 via DP4A/perm
+add_library(matmul_real_stock_hip OBJECT
+    real_stock_dp4a_comparator.hip
+)
+target_link_libraries(matmul_real_stock_hip PRIVATE matmul_common_iface)
 
 # --- Baseline validation executable ---
 add_executable(matmul_test_baseline
@@ -31,6 +38,21 @@ add_executable(matmul_test_baseline
 )
 target_link_libraries(matmul_test_baseline PRIVATE matmul_ref_cpu matmul_common_iface)
 add_custom_target(matmul_stock_test DEPENDS matmul_test_baseline)
+
+# --- Real DP4A comparator validation (vs CPU oracle) ---
+add_executable(test_real_stock_compare
+    test_real_stock_compare.cpp
+    $<TARGET_OBJECTS:matmul_real_stock_hip>
+)
+target_link_libraries(test_real_stock_compare PRIVATE matmul_ref_cpu matmul_common_iface)
+
+# --- Real DP4A microbenchmark (reports true stock DP4A timings 20-40us) ---
+add_executable(bench_real_stock
+    bench_real_stock.cpp
+    $<TARGET_OBJECTS:matmul_real_stock_hip>
+    $<TARGET_OBJECTS:matmul_stock_hip>
+)
+target_link_libraries(bench_real_stock PRIVATE matmul_ref_cpu matmul_common_iface)
 
 # --- Custom GEMV (gfx1100) ---
 add_library(matmul_gemv_hip OBJECT impl_gemv_gfx1100.hip)
