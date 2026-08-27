@@ -52,7 +52,8 @@ Inherited verbatim from the original roadmap; planners and executors apply them 
 - [x] **Phase 4: Kernel Playground Scaffold** - Standalone CPU-reference → HIP → numerical-compare → microbenchmark pipeline operating outside llama.cpp (completed 2026-08-25)
 - [x] **Phase 5: First Custom Kernel (Bottleneck Attack)** - GEMV 1.26–2.13× / GEMM 1.7–7.5× vs stock HIP (cosine 1.0), 30/32 wins, WMMA `v_wmma` in disasm, provisional quilt patch (completed 2026-08-25)
 - [x] **Phase 6: Integration, Full Validation & Publication** - Winners behind ON/OFF flags via quilt patches; stock baseline intact forever; complete before/after matrix published (completed 2026-08-25)
-- [ ] **Phase 7: Hybrid DP4A & WMMA Matrix Core Optimization** - Fuse Q8_1 integer activation quantization and RDNA3 hardware matrix cores to beat real production stock llama.cpp end-to-end in llama-bench
+- [x] **Phase 7: Hybrid DP4A & WMMA Matrix Core Optimization** - Fuse Q8_1 integer activation quantization and RDNA3 hardware matrix cores to beat real production stock llama.cpp end-to-end in llama-bench (28/28 plans, 2/5 verifier gaps, stock 808 vs custom 849 pp4096)
+- [ ] **Phase 8: Refactor to Windows Native** - Strip bloat to pure C++/HIP, prune kernels to IQ4_XS winners, provide foolproof build_windows.bat for gfx1100 via HIP SDK, and serve llama-server.exe at localhost:8000
 
 ## Phase Details
 
@@ -218,5 +219,32 @@ All 17 v1 requirements mapped to exactly one phase:
 
 | Publication | PUB-01 | 6 |
 | Hybrid DP4A Optimization | KERN-04, KERN-05, INTEG-02 | 7 |
+| Windows Native Refactor | REQ-WIN-01, REQ-WIN-02, REQ-WIN-03, REQ-WIN-04 | 8 |
 
-**Mapped: 20/20 ✓ — no orphans, no duplicates.**
+**Mapped: 24/24 ✓ — no orphans, no duplicates.**
+
+### Phase 8: Refactor to Windows Native
+
+**Mode**: standard (horizontal layers)
+**Goal**: Repository builds and runs natively on Windows 11 for RX 7900 XT gfx1100 via AMD HIP SDK + VS Build Tools — bloat-free pure C++/HIP + minimal CMake, llama-server.exe serves OpenAI API at localhost:8000.
+**Depends on**: Phase 7
+**Requirements**: REQ-WIN-01 (Eliminate bloat & unnecessary languages), REQ-WIN-02 (Retain core kernels only), REQ-WIN-03 (Windows build pipeline), REQ-WIN-04 (Output & usage)
+**Success Criteria**:
+  1. No Python/JS remains (no benchmarks/, freetoken-rocm-probe/qstar.mjs, .planning phases 01-07, JSON/JSONL harnesses); `find -name "*.py" ! -path "./llama.cpp/*"` == 0.
+  2. `kernels/` pruned to essentials: `block_iq4_xs.h`, `hip_helpers.h`, `impl_gemv_dp4a_gfx1100.hip`, `impl_gemm_wmma_stream.hip` (+ minimal bench/util/ref_cpu), patch clean `git apply --check` PASS.
+  3. `build_windows.bat` compiles clean on Windows 11 + VS Build Tools + HIP SDK via `clang++.exe --offload-arch=gfx1100` (not cl) with Ninja, intrinsics `__builtin_amdgcn_sudot4/perm/wmma` compile without MSVC errors.
+  4. `build-windows/bin/llama-server.exe` runs and serves `curl http://127.0.0.1:8000/v1/chat/completions` → 200 with `choices[0].message.content`; kernels still pass cosine >=0.999; tree is `kernels/`, `patches/`, `CMakeLists.txt`, `build_windows.bat`.
+
+**Plans**: 4 plans in `.planning/phases/08-refactor-windows-native/`:
+- 08-01: Inventory & deletion allowlist (REQ-WIN-01)
+- 08-02: Minimal kernels/CMake prune (REQ-WIN-02)
+- 08-03: build_windows.bat + Windows HIP toolchain validation (REQ-WIN-03)
+- 08-04: Patch integration smoke + server run verification (REQ-WIN-04)
+
+**Risks**: HIP SDK Windows vs WSL path divergence (HIP_PATH vs /opt/rocm), clang vs msbuild (Ninja mandated), gfx1100 vs amdgpu-arch, intrinsic portability, llama-server vs llama-cli naming, Windows model path handling, VRAM 20GB, driver 32.0.31041.1004.
+
+Plans:
+- [ ] 08-01-PLAN.md — Inventory & bloat deletion (REQ-WIN-01)
+- [ ] 08-02-PLAN.md — Minimal kernels & root CMake (REQ-WIN-02)
+- [ ] 08-03-PLAN.md — build_windows.bat + HIP toolchain probe (REQ-WIN-03)
+- [ ] 08-04-PLAN.md — Patch smoke + llama-server at localhost:8000 (REQ-WIN-04)
