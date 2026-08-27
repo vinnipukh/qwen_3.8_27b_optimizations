@@ -165,6 +165,26 @@ Phase 8 is refactor, not new kernel research. No tracer prototype; plans are hor
 - **REQ-WIN-03** Simplify Windows build pipeline (OBJ-3): `build_windows.bat` compiles clean on Windows 11 + VS Build Tools + HIP SDK targeting gfx1100, intrinsics compile via hipcc not cl. (Maps to OBJ-3)
 - **REQ-WIN-04** Output & usage (OBJ-4): clean minimal tree (`kernels/`, `patches/`, `CMakeLists.txt`, `build_windows.bat`), `llama-server.exe` serves OpenAI API at `localhost:8000`. (Maps to OBJ-4, extends INTEG-02)
 
+## Thermos Review Amendments (2026-08-28 — unified verdict REQUEST CHANGES, quality review)
+
+Applied before execution to eliminate plan-structure drift and over-pruning (see 07-VERIFICATION.md gaps):
+
+1. **Single source of truth `allowlist.yaml`** — replaces 5 prose copies of keep/delete lists (CONTEXT table + 08-01 Task1 + 08-02 keep list + 08-04 `find` allowlist). Format:
+   ```yaml
+   keep: [README.md, LICENSE, CMakeLists.txt, build_windows.bat, kernels/common/block_iq4_xs.h, ...]
+   delete: [benchmarks/, freetoken-rocm-probe/, .planning/phases/0[1-7]/, ...]
+   vars: { gfx_arch: gfx1100, hip_path_default: "C:/Program Files/AMD/ROCm/6.2" }
+   ```
+   `scripts/prune_bloat.sh` becomes `yq '.delete[]' allowlist.yaml | xargs git rm -rf`; `CMakeLists.txt` + `build_windows.bat` read `vars`; verification is `diff <(find ... | sort) <(yq .keep[])` — no hand-maintained `grep -c`.
+
+2. **Unify HIP toolchain to one file** — `cmake/toolchain-hip-gfx1100.cmake` (or root `CMakeLists.txt` only) owns `HIP_PATH` quoted, `find_package(hip REQUIRED CONFIG PATHS "$ENV{HIP_PATH}/lib/cmake/hip")`, `--offload-arch=gfx1100`, `-G Ninja` mandate, `CMAKE_HIP_COMPILER`. `build_windows.bat` only passes `-DCMAKE_TOOLCHAIN_FILE=cmake/toolchain-hip-gfx1100.cmake`. Deletes duplication between `08-02 Task2` (CMake) and `08-03 Task1` (bat).
+
+3. **Keep minimal verification harness** — do NOT delete entire `benchmarks/lib/store.py` (117L) + `guard.py` (244L) with no replacement. Keep a 30-line `benchmarks/lib/store_minimal.py` (or `kernels/common/bench.h` CSV logger) as append-only `RunStore` + `CHECKSUMS` replacement. Gate `08-04` on `cosine >=0.999` + `curl 200` + this logger, not `find` + `curl` alone. Prevents harness-less regression (Phase 6/7 `849 vs 808` had ledger).
+
+4. **Ephemeral planning artifacts + `.gitignore` hygiene** — `INVENTORY.md` and `scripts/prune_bloat.*` are **not** committed; they are generated under `build-*/` from `allowlist.yaml` (`yq`). `/.planning/` is gitignored after `archive/pre-windows-08` tag (or moved to `archive/` branch). Collapse `prune_bloat.{sh,ps1}` dual into one manifest-driven `prune_bloat.py` + thin wrappers. Removes 3 sources of truth for one `rm -rf`.
+
+5. **Patch line endings + single helper** — add `.gitattributes: *.patch text eol=lf` once. Collapse `08-02 Task3` + `08-03 Task2` + `08-04 Task1` `core.autocrlf=false`/`--whitespace=fix`/`patch -p1` three-way branch into one `scripts/apply_patch.sh` (`git -C llama.cpp apply --check ../patches/0001...` with `core.autocrlf false`), called from all plans. Delete per-plan CRLF prose.
+
 KERN-04/05 and INTEG-02 proven on WSL remain provenance; Phase 8 re-validates via cosine + server smoke on Windows.
 
 ## Traceability
