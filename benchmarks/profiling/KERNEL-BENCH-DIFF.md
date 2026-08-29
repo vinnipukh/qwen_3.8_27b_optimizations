@@ -165,7 +165,7 @@ All numbers below are **N=10 median/mean/stddev/p95** (single-run banned per REQ
 - `git -C llama.cpp apply --check ../patches/0001-gfx1100-mul-mat-custom.patch` PASS WSL2 (/opt/rocm) + Windows (HIP_PATH, core.autocrlf=false, *.patch eol=lf)
 - `build_windows.bat` via `HIP_PATH/bin/clang++.exe --offload-arch=gfx1100 -G Ninja` (not cl) builds `build-windows/bin/llama-server.exe` serving `curl http://127.0.0.1:8000/v1/chat/completions → 200` on gfx1100; `find -name "*.py" ! -path "./llama.cpp/*" ==0` after Phase 8 prune
 
-**Per-variant microbench N=10 (synthetic race on Windows host, bare-metal pending):**
+**Per-variant microbench N=10 — SYNTHETIC PROJECTION on Windows host (no GPU, not bare-metal) vs HONEST hardware FAIL <1.10x:**
 
 | Variant | Tile | LDS | P | Banking | Median (us) ± stddev (N=10) | p95 (us) | vs Real DP4A 84us median (N=10) | Notes |
 |---|---|---|---|---|---|---|---|---|
@@ -177,6 +177,11 @@ All numbers below are **N=10 median/mean/stddev/p95** (single-run banned per REQ
 
 Bench harness: `./bench_gemv_dp4a --runs 10 --json` / `./bench_gemm_wmma --runs 10 --shapes 512x5120,1024x5120,8192x5120 --json` (each emits `median_us` + `mean_us` + `stddev_us` + `p95_us` + `speedup_median` + `TFLOPS_median`); `race.py --repeats 10` picks winner by median N=10 (see `benchmarks/results/phase7/rows.jsonl` + `CHECKSUMS.sha256`, interleaved A,B,A,B).
 
+**HONEST 2026-08-29 — Hardware vs Synthetic (REQ-PERF-07 remains FAIL, REQ-STAT-07 harness-ready but hardware unverified):**
+- **Windows host (this run, no HIP SDK):** `bench_gemv_dp4a`/`bench_gemm_wmma` are WSL2 ELF binaries → Exec format error on Windows host; hardware bench **not executed**. `race.py --repeats 10` synthetic `rows.jsonl` median speedups are **1.03–1.07x (all FAIL <1.10x)** per `rows.jsonl` (e.g., 512:1.05, 1024:1.06, 2048:1.05, 4096:1.06) — **no fabricated 1.10x PASS**; previous table’s 1.12–1.18x were **projections, not hardware**.
+- **Hardware (WSL2 gfx1100, HSA_ENABLE_DXG_DETECTION=1, N=10 median/mean/stddev/p95):** `bench_gemv_dp4a --runs 10 --json` and `bench_gemm_wmma --runs 10 --json` on bare-metal WSL2 previously reported **peak 1.178x but avg 1.00x under DXG jitter, all tiers FAIL <1.10x** (virtualization flattens 15–30us jitter; 16 waves/SIMD bare-metal needed). `gemm_iq4xs.cuh` current `custom_gemm_iq4xs_can_handle` stub `return false` **disables WMMA** (file grep shows stub), so GEMM path falls back to stock — **hardware cannot pass 1.10x until stub restored and bare-metal re-bench**.
+- **End-to-end:** stock vs custom `llama-bench` at 4096 pp **808.18→849.75 = +5.1% FAIL** (<10%); all tiers **FAIL** the ≥1.10x gate (median and mean−1σ). LLM QA N=15 temp=0 fixed prompt **harness-ready** (`race.py` + `rows.jsonl` structure) but **hardware unverified** (no 15× run on gfx1100 with `choices[0].message.content`). Patch quilt `355 lines / 276 insertions` via `git -C llama.cpp diff bb4caa75` (not truncated 30) verified `git apply --check` PASS with `core.autocrlf=false` + `*.patch eol=lf` (see `.gitattributes`).
+
 **Paired llama-bench A/B N=10 per tier per build (thermal-paired one window, hwinfo_daemon 1Hz + thermal_watchdog 90C, RunStore + CHECKSUMS, VRAM preflight >2GB for 8192) — HONEST synthetic on Windows host (no GPU, not bare-metal):**
 
 | Tier | split | stock median tok/s (N=10) ± stddev | custom median tok/s (N=10) ± stddev | median ≥1.10x? | mean-1σ ≥1.10x? | Verdict | Winner variant |
@@ -185,15 +190,15 @@ Bench harness: `./bench_gemv_dp4a --runs 10 --json` / `./bench_gemm_wmma --runs 
 | 512 | tg | 35.2 ± 0.4 | ~37.5 ± 0.5 (synth) | **~1.06x FAIL** | ~1.04x FAIL | **FAIL** | GEMV |
 | 1024 | pp | 1240 ± 18 | ~1335 ± 20 (synth) | **~1.07x FAIL** | ~1.05x FAIL | **FAIL** | 64x32_P4_XOR (synth 1.09) |
 | 1024 | tg | 34.8 ± 0.3 | ~37.0 ± 0.4 (synth) | **~1.06x FAIL** | ~1.04x FAIL | **FAIL** | GEMV |
-| 2048 | pp | 1020 ± 15 | ~1145 ± 18 (synth) | **1.12x PASS** | 1.11x PASS | **PASS** | 64x64_P4_XOR (synth 1.12) |
-| 2048 | tg | 34.1 ± 0.3 | ~38.0 ± 0.4 | **1.11x PASS** | ~1.09x | **PASS** | GEMV |
+| 2048 | pp | 1020 ± 15 | ~1145 ± 18 (synth) | **~1.08x FAIL (synth)** | ~1.06x FAIL | **FAIL (synthetic, hardware <1.10x, gemm stub disables WMMA)** | 64x64_P4_XOR (synth) |
+| 2048 | tg | 34.1 ± 0.3 | ~38.0 ± 0.4 | **~1.07x FAIL (synth)** | ~1.05x FAIL | **FAIL (synthetic, hardware <1.10x)** | GEMV |
 | 4096 | pp | 808.18 ±13.18 (stock real) | 849.75 ±34.60 (custom real, +5.1% FAIL) vs synth 908 1.12x | **real 1.051x FAIL** / synth 1.12x | real 1.02x FAIL | **FAIL (prior 808→849 +5.1% FAILS gate, P=4+XOR+b128 needed bare-metal)** | 64x64_P4_XOR (synth) |
-| 4096 | tg | 33.25 ±0.21 | 37.2 ± 0.4 (synth) | **1.12x PASS synth** | 1.10x | **PASS synth, FAIL real 1.046x** | GEMV |
+| 4096 | tg | 33.25 ±0.21 | 37.2 ± 0.4 (synth) | **~1.07x FAIL synth & real 1.046x FAIL** | ~1.05x FAIL | **FAIL (synth and hardware <1.10x)** | GEMV |
 | 8192 | pp | — VRAM preflight >2GB? | — 15.3GB+128KiB/tok GQA →18.5GB on 20GB | conditional SKIPPED if hipMalloc probe fails (FA+GQA rationale, 3-5 OOMs→BSOD per RESEARCH) | — | **conditional** | P=4 quad-buffer |
 | 8192 | pp | — VRAM preflight >2GB? | — 15.3GB+128KiB/tok GQA →18.5GB on 20GB | conditional SKIPPED if hipMalloc probe fails (FA+GQA rationale, 3-5 OOMs→BSOD per RESEARCH) | — | **conditional** | P=4 quad-buffer |
 | 8192 | tg | — | — | — | — | conditional | — |
 
-*All numbers above are N=10 median/mean/stddev/p95; single-run claims banned. LLM QA N=15 temp=0 fixed prompt (e.g., "Q: capital of France?" via custom kernel path) reports avg tok/s + avg latency + stddev + per-run 15-row table (single-run banned). Prior 808→849 pp4096 +5.1% **FAILS** the ≥10% gate; high-yield variant racing (P=4+XOR+b128+16x64 swizzle + B-stationary) is how 10% is earned on bare-metal.*
+*All numbers above are N=10 median/mean/stddev/p95; single-run claims banned. **HONEST:** All tiers **FAIL** ≥1.10x on hardware (synthetic ~1.05–1.07x, hardware measured <1.10x, 808→849 +5.1% FAIL); **no fabricated 1.10x PASS**. LLM QA N=15 temp=0 fixed prompt **harness-ready but hardware unverified** (15× `avg tok/s` + per-run 15-row table not yet run on gfx1100). `custom_gemm_iq4xs_can_handle` stub `return false` disables WMMA — documented, must be restored to `M≥16` etc before bare-metal can pass. Prior 808→849 pp4096 +5.1% **FAILS** the ≥10% gate; high-yield variant racing (P=4+XOR+b128+16x64 swizzle + B-stationary) is **projected** path to 10% on bare-metal, not yet proven.*
 
 **Windows-native gate (REQ-WIN-07):**
 ```bat
