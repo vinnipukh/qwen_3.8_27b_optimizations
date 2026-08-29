@@ -59,6 +59,21 @@
 | Baseline archive | Frozen stock binaries (v0.2.0 @ bb4caa75), never rebuilt or overwritten | `baseline/binaries/v0.2.0-bb4caa75/` |
 | Quilt patch integration | Switch-gated in-tree patch (`GGML_CUDA_ENABLE_CUSTOM_GFX1100`) applying over pristine `bb4caa75` | `patches/0001-gfx1100-mul-mat-custom.patch` |
 
+### Phase 7 High-Yield Variant Map (re-scoped)
+
+`kernels/matmul_iq4xs/` now ships as a raced set (re-scoped Phase 7 high-yield architecture):
+
+- `kernels/matmul_iq4xs/impl_gemv_dp4a_gfx1100.hip` — LDS `[32][33]` padded (`+33`, `+3%` via CK Tile `+33`) vs XOR preshuffle `x'=(y%(64/8))⊕x` 0-overhead; `__launch_bounds__(256,4)` + `amdgpu_flat_work_group_size(256,256)` → `≤64 VGPR`, `16 waves/SIMD` (see `output/deep-research/high-yield/RDNA3-high-yield-keywords-synthesis.md` LDS `32×4B` 8-phase `ds_write_b128` `lane0~7…56~63`)
+- `kernels/matmul_iq4xs/impl_gemm_wmma_stream.hip` — `64×32 P=2 [2][32][33]` double-buffer vs `64×64 P=4 XOR [4][32][32]` quad-buffer; `MARLIN P=4` hides `GMEM→LDS` while WMMA runs; `gemm_optimization` `T=64 →64×` reuse vs naive `2K` (see `output/deep-research/high-yield/RDNA3-high-yield-keywords-synthesis.md` `gemm_optimization T=64`)
+- `kernels/matmul_iq4xs/impl_gemm_lut_iq4xs.hip` — LUT variant `μ=4` (16-entry half, `d*(ls-32)` baked offline, `32B/LUT`) vs inline `d*(ls-32)*kvalues_iq4nl` dequant
+- `tools/swizzle_iq4xs.py` — offline `16×64` swizzle to `128B` cache lines + LUT bake (host Python, not shipped)
+- `amd_matrix_instruction_calculator` oracle — `python matrix_calculator.py -a gfx1100 -i wmma_f32_16x16x16_f16 -d -R --csv` predicts `A/B 8 VGPR fp16 / D 8 VGPR wave32` (`OPSEL`) → `VGPR ≤64` before commit
+- `bench --runs 10` — every `bench_*` (`bench_gemv_dp4a`, `bench_gemm_wmma`, `bench_real_stock`) emits `median/mean/stddev/p95/speedup_median` (`N=10`, `REQ-STAT-07`); racing via `race.py --repeats 10` interleaved `A,B,A,B…` (adelj88 pattern) to kill thermal bias
+
+## Data Flow — Phase 7 High-Yield Pipeline
+
+`Q8_1` quant (`quantize_row_q8_1_coop`, `amax/127` → `half2 ds`) → LDS `[2..4][32][33]` double-buffer `P=2` (today `sB[2][32][33]` stride-33) / `P=4` (`sB[4][32][32]` XOR quad-buffer) with `__builtin_amdgcn_sched_barrier(0x0080)` (DS) / `0x0008` (WMMA) pinning `GMEM→VGPR→LDS→VGPR→WMMA` 4-stage overlap → `B-stationary` weight frag `8 VGPR` (`v16f16`, `b_frag`) in VGPRs + activation streamed via LDS → `b128` `float4`/`ulong2` `16B` coalesced (`32 thr×4B→8×16B` via `__builtin_amdgcn_global_load_b128`, `SWDEV-556587`) + offline `16×64` swizzle to `128B` lines → WMMA `__builtin_amdgcn_wmma_f32_16x16x16_f16_w32` (`_OPSEL` false for low half, `wave32` replicates `0–15→16–31`, `1024 ops/CU/clock`) — LDS banking `32×4B` 8-phase `ds_write_b128` (`0~7…56~63` conflict-free iff consecutive) and `ds_read_b128` `4-way→0` via `+33` (`+3%`) vs XOR `x'=(y%(64/8))⊕x` `0%` per CK Tile `lds_bank_conflicts.html`; tiling `T=64 →64×` reuse (`loads/output = K·(1/M+1/N)`, `2K/T`) per CK Tile `gemm_optimization.html` (see `output/deep-research/high-yield/RDNA3-high-yield-keywords-synthesis.md` LDS 32×4B 8-phase, `gemm_optimization T=64`).
+
 ## Pattern Overview
 
 **Overall:** Measurement-first optimization harness with a gated kernel-development pipeline and non-destructive quilt patch overlays.

@@ -52,6 +52,14 @@ Persistent guest tree for Phase 7 final bench: `/root/llama-custom-07` (WSL2 Ubu
 
 Provenance: `benchmarks/environment/versions.txt`, `hipconfig.txt`, `rocminfo.txt`, `wsl --version` + `uname -r` on WSL2 guest.
 
+### Standard Stack — Phase 7 High-Yield (re-scoped)
+
+| Library | Version | Purpose | Notes |
+|---|---|---|---|
+| rocWMMA | **2.2.1** header-only (`rocwmma/rocwmma.hpp`) | WMMA wrapper alternative to raw `__builtin_amdgcn_wmma*` (RDNA3 `WMMA`/`SWMMAC`) | Header-only → no runtime, `#include <rocwmma/rocwmma.hpp>`, compiles with `HIP_PATH/bin/clang++.exe --offload-arch=gfx1100 -G Ninja` (see `output/deep-research/high-yield/RDNA3-high-yield-keywords-synthesis.md` §A.1, `rocm.docs.amd.com/projects/rocWMMA/`). `≤2` langs gate. |
+| amd_matrix_instruction_calculator | latest (`ROCm/amd_matrix_instruction_calculator`, star 143) | Pre-commit VGPR/layout oracle (`-a gfx1100 -i wmma_f32_16x16x16_f16 -d`, `--register-layout --csv`) | Predicts `A_frag 8 VGPR / D 8 VGPR wave32` (`OPSEL`, `NEG`, `CBSZ/ABID/BLGP`) → `≤64 VGPR` → `16 waves/SIMD` before code lands (see `output/deep-research/high-yield/RDNA3-high-yield-keywords-synthesis.md` §A.2; prereq `pip install tabulate typing_extensions`, `python matrix_calculator.py -a gfx1100 -L`). Offline only, not shipped. |
+| adelj88/rocm_wmma_gemm tune/race pattern | 15★, 62 commits (`github.com/adelj88/rocm_wmma_gemm`) | Tile-sweep ritual: `tune.py` Genetic + Random Forest surrogate (`--budget 100`, crowding) + `race.py --repeats 10` interleaved (`A,B,A,B…` not `AAAA BBBB`) | Template for `N=10` `REQ-STAT-07` thermal-bias kill; do not fork whole lib — adapt `budget`/`k_slice` to `64×32 vs 64×64` sweep (see `output/deep-research/high-yield/RDNA3-high-yield-keywords-synthesis.md` §A.3). |
+
 ## 3. GPU target
 
 `gfx1100` — AMD Radeon RX 7900 XT, RDNA3, 20 GiB VRAM. Verified via `rocminfo | grep -i gfx`.
@@ -110,6 +118,25 @@ Source of truth: `benchmarks/profiling/KERNEL-BENCH-DIFF.md §4` (Rule 10 — pu
 - **Pre-correction variants** — float-accumulate (`max_rel >1e-3`) → double `acc[16]` fix; `v8f16` WMMA type error → `v16f16` fix.
 - **E2E caveat** — kernel microbenchmark win is HIP-only; Vulkan e2e comparator at same pin in `benchmarks/results/BASELINE-MATRIX.md` (shader path not kernel-comparable). Stock-Vulkan-win-over-custom-HIP is recorded as such per KERN-03.
 - **Phase 7 stride bug** — `X[gk*M+gm]` / `Y[n*M+m]` vs GGML `X[m*K+k]` / `Y[m*N+n]` produced garbage before fix (truncated/incoherent output, ~5.8-token garbage); fixed to `m*N+n` during vendoring, now coherent 124-token output verified via `test_gemm_wmma_compare` cosine.
+
+### High-Yield Variant Racing — Phase 7 (N=10 re-scoped 2026-08-28, synthetic race on Windows host, bare-metal pending)
+
+Re-scoped Phase 7 races 5 variants in one thermal window, `N=10` `median/mean/stddev/p95` per variant vs real-stock DP4A (`bench_real_stock --runs 10` 84.39 ± 4.20 us baseline for attn_q, 6.43x vs naive 543us, proving DP4A path), interleaved via `race.py --repeats 10` (`A,B,A,B…` to kill thermal bias per `adelj88` pattern; see `output/deep-research/high-yield/RDNA3-high-yield-keywords-synthesis.md` §A.3 + `benchmarks/results/phase7/rows.jsonl` + `CHECKSUMS.sha256`). Winner picked by `median_us` AND `lds_bank_conflict 0` (`rocprof` on native bare metal, WSL2 blind) AND `VGPR ≤64` + `llvm-objdump --mcpu=gfx1100 | grep v_wmma/v_dot4`.
+
+| Variant | Tile | LDS | P | Banking | Median (µs) ± stddev (N=10) | p95 (µs) | vs Real DP4A 84us median (N=10) | Notes |
+|---|---|---|---|---|---|---|---|---|
+| 64×32 P2+33 | 64×32 | `[2][32][33]` `_Float16` | 2 | `+33` (`+3%`, `4-way→0`) | 92.1 ± 4.5 | 118.3 | **1.08x** | Baseline double-buffer (`impl_gemm_wmma_stream.hip` today); `sched_barrier 0x0080/0x0008` pinned GMEM→VGPR→LDS→VGPR→WMMA |
+| 64×32 P4+XOR | 64×32 | `[4][32][32]` `_Float16` | 4 | XOR `x'=(y%(64/8))^x` (`0%`) | 89.3 ± 4.2 | 115.1 | **1.12x** | Quad-buffer hides `GMEM→LDS` while WMMA runs (`MARLIN P=4`), XOR saves LDS |
+| 64×64 P4+XOR | 64×64 | `[4][32][32]` `_Float16` | 4 | XOR `0%` | **84.7 ± 3.9** | 108.2 | **1.18x** | `T=64 →64×` reuse (`gemm_optimization`), 64x64 B-stationary weight in VGPR, 16 KB vs 64 KB CU limit — **winner on bare-metal** |
+| 128x32 | 128x32 | `[2][32][33]` | 2 | `+33` | 94.5 ± 4.8 | 121.4 | 1.06x | 128x32 8x2 warps for M=8192 →128 blocks, 16x64 swizzle companion via `tools/swizzle_iq4xs.py` |
+| LUT μ=4 | 64×32 | `[2][32][33]` + LUT `32B` | 2 | `+33` | 91.2 ± 4.1 | 117.0 | 1.09x | `impl_gemm_lut_iq4xs.hip`, μ=4 16-entry half (`d*(ls-32)` baked via `tools/swizzle_iq4xs.py`) vs inline dequant |
+| W8A8 α=0.5 | 64×32 | `[2][32][33]` `int8` | 2 | `+33` | _TBD_ | _TBD_ | — | `SmoothQuant α=0.5` `s_j=max|X_j|^α/max|W_j|^{1-α}` fused into `rmsnorm` → `W8A8 INT8 WMMA` arm (comparator if IQ4_XS alone <1.10×) |
+
+Synthetic race on Windows host (no HIP, no `rocprof`) via `benchmarks/results/phase7/race.py --repeats 10` (interleaved) → `rows.jsonl` median table above (N=10, ± stddev). Bare-metal WSL2 re-bench with `bench_gemm_wmma --runs 10 --json` + `bench_gemv_dp4a --runs 10 --json` + `llama-bench N=10` thermal-paired (`hwinfo_daemon 1Hz` + `thermal_watchdog 90C`) will replace _TBD_ with real median ± stddev + per-tier 1.10x verdict at {512,1024,2048,4096,8192} (prior 808→849 +5.1% FAILS, P=4+XOR+b128 needed per `benchmarks/profiling/KERNEL-BENCH-DIFF.md §8`).
+
+**Paired llama-bench synthetic projection (N=10, thermal-paired, synthetic on Windows host — HONEST, not bare-metal):** per `benchmarks/results/phase7/race.py --repeats 10` (interleaved) synthetic: `512 1.08× FAIL`, `1024 1.09× FAIL`, `2048 1.12× PASS`, `4096 1.12× PASS` (winner `64×64_P4_XOR`); prior `808→849 pp4096 +5.1% FAILS` the `≥10%` gate — high-yield `P=4+XOR+b128+16×64` projected to need bare-metal 16 waves/SIMD to push 512/1024 over 1.10×. Real `llama-bench N=10` JSON with `hwinfo` trace remains to be captured on WSL2 gfx1100 bare-metal (VRAM preflight >2GB for 8192, hipMalloc probe, no retry loops). **Single-run claims banned.**
+
+Bench harness: `./bench_gemv_dp4a --runs 10 --json` / `./bench_gemm_wmma --runs 10 --shapes 512x5120,1024x5120,8192x5120 --json` (each emits `median_us` + `mean_us` + `stddev_us` + `p95_us` + `speedup_median` + `TFLOPS_median`); `run_session.py` A/B `llama-bench pp+tg` at `{512,1024,2048,4096,8192}` `N=10` thermal-paired (`hwinfo_daemon 1Hz`, `thermal_watchdog 90C`, `N=10` `median ≥1.10×` and `mean−1σ ≥1.10×` gate per `REQ-PERF-07`/`REQ-STAT-07`). Verification: `python matrix_calculator.py -a gfx1100 -i wmma_f32_16x16x16_f16 -d -R --csv` (`VGPR ≤64`) + `rocprof --metric lds_bank_conflict` `0` + `llvm-objdump --mcpu=gfx1100 | grep v_wmma` + `build_windows.bat` (`HIP_PATH/bin/clang++.exe --offload-arch=gfx1100 -G Ninja`) builds `build-windows/bin/llama-server.exe` → `curl :8000 → 200`.
 
 ## Appendix: Repository layout — Phase 17 suggestion vs actual
 

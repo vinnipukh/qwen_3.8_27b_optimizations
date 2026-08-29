@@ -52,8 +52,8 @@ Inherited verbatim from the original roadmap; planners and executors apply them 
 - [x] **Phase 4: Kernel Playground Scaffold** - Standalone CPU-reference → HIP → numerical-compare → microbenchmark pipeline operating outside llama.cpp (completed 2026-08-25)
 - [x] **Phase 5: First Custom Kernel (Bottleneck Attack)** - GEMV 1.26–2.13× / GEMM 1.7–7.5× vs stock HIP (cosine 1.0), 30/32 wins, WMMA `v_wmma` in disasm, provisional quilt patch (completed 2026-08-25)
 - [x] **Phase 6: Integration, Full Validation & Publication** - Winners behind ON/OFF flags via quilt patches; stock baseline intact forever; complete before/after matrix published (completed 2026-08-25)
-- [x] **Phase 7: Hybrid DP4A & WMMA Matrix Core Optimization** - Fuse Q8_1 integer activation quantization and RDNA3 hardware matrix cores to beat real production stock llama.cpp end-to-end in llama-bench (28/28 plans, 2/5 verifier gaps, stock 808 vs custom 849 pp4096)
-- [ ] **Phase 8: Refactor to Windows Native** - Strip bloat to pure C++/HIP, prune kernels to IQ4_XS winners, provide foolproof build_windows.bat for gfx1100 via HIP SDK, and serve llama-server.exe at localhost:8000
+- [x] **Phase 7: Hybrid DP4A & WMMA Matrix Core Optimization — RE-SCOPED 2026-08-28** - Fuse Q8_1 + RDNA3 WMMA to beat **real production stock llama.cpp by ≥10% end-to-end** in `llama-bench`, **Windows-native (≤2 langs, no Python/JS servers, `build_windows.bat`)**, and **10× averaged (15× LLM QA)** — see `output/deep-research/1000t-s-at-8k-gfx1100.md`. (Status: 28/28 plans artifact-complete, verifier 2/5 — gaps pending bare-metal + Windows + 10% + 10× re-bench; stock 808 vs custom 849 pp4096 = +5.1% — *not yet* the required +10%.)
+- [ ] **Phase 8: Refactor to Windows Native (now landing the Phase 7 must-have #1)** - Strip bloat to pure C++/HIP, prune kernels to IQ4_XS winners, provide foolproof build_windows.bat for gfx1100 via HIP SDK, and serve llama-server.exe at localhost:8000 — **Phase 7 now declares this as mandatory; Phase 8 is the execution phase that closes REQ-WIN-07.**
 
 ## Phase Details
 
@@ -199,27 +199,30 @@ All 17 v1 requirements mapped to exactly one phase:
 | Kernels | KERN-01 | 4 |
 | Kernels | KERN-02..03 | 5 |
 | Integration | INTEG-01 | 6 |
-### Phase 7: Hybrid DP4A & WMMA Matrix Core Optimization
+### Phase 7: Hybrid DP4A & WMMA Matrix Core Optimization — RE-SCOPED 2026-08-28 (owner 3 wishes + deep-research `output/deep-research/1000t-s-at-8k-gfx1100.md`)
 
 **Mode**: standard (horizontal layers)
-**Goal**: Fuse `Q8_1` integer activation quantization and RDNA3 hardware matrix cores (`v_dot4_i32_i8` / `v_wmma`) with our Wave32 cooperative workgroups to outperform real production stock llama.cpp end-to-end in `llama-bench`.
+**Goal**: Fuse `Q8_1` integer activation quantization and RDNA3 hardware matrix cores (`v_dot4_i32_i8` / `v_wmma`) with our Wave32 cooperative workgroups to **beat real production stock llama.cpp by ≥10% end-to-end in `llama-bench`, Windows-native (≤2 langs), and with 10× (15× LLM QA) statistical rigour** — addressing the deep-research findings: `8k` quadratic cliff, `800 GB/s` roof, `KV≈128 KiB/tok` budget (`GQA`), WSL2 DXG jitter/lack of `rocprofv3`.
 **Depends on**: Phase 6
-**Requirements**: KERN-04 (Hybrid DP4A GEMV), KERN-05 (WMMA Streaming GEMM), INTEG-02 (End-to-End Uplift)
-**Success Criteria**:
-  1. Microbenchmark comparator in `kernels/matmul_iq4xs/` tests directly against real upstream `vec_dot_iq4_xs_q8_1` DP4A implementation.
-  2. Custom cooperative 8-thread DP4A GEMV kernel (`impl_gemv_dp4a_gfx1100.hip`) achieves >1.2× speedup over stock MMVQ in microbenchmarks and >38 t/s decode in `llama-bench`.
-  3. Custom WMMA streaming GEMM kernel (`impl_gemm_wmma_stream.hip`) executes hardware matrix cores on quantized inputs achieving >950 t/s prefill in `llama-bench`.
-  4. Quilt patch `patches/0001-gfx1100-mul-mat-custom.patch` updated; `QUAL-01` op-gate (0 errors) and `QUAL-02` model-gate (PPL 6.4271) remain green.
+**Requirements**: KERN-04 (Hybrid DP4A GEMV), KERN-05 (WMMA Streaming GEMM), INTEG-02 (End-to-End Uplift) **plus new must-haves 2026-08-28: REQ-WIN-07 (Windows-native ≤2 langs), REQ-PERF-07 (≥1.10× pp+tg), REQ-STAT-07 (N≥10, LLM QA N≥15), BENCH-01 amended**
+**Success Criteria** (all must be TRUE; `≥10` / `≥15` averaging is a gate, not a suggestion):
+  1. Microbenchmark comparator in `kernels/matmul_iq4xs/` tests directly against real upstream `vec_dot_iq4_xs_q8_1` DP4A implementation — reported as `median` + `mean` + `stddev` + `p95` over **`N=10`** runs per shape (REQ-STAT-07).
+  2. Custom cooperative 8-thread DP4A GEMV kernel (`impl_gemv_dp4a_gfx1100.hip`) achieves **>1.2× median** over stock MMVQ in `N=10` microbenchmarks and **>38 t/s decode** in `llama-bench` **`N=10` averaged** (not single-run).
+  3. Custom WMMA streaming GEMM kernel (`impl_gemm_wmma_stream.hip`) executes hardware matrix cores on quantized inputs achieving **>950 t/s prefill** in `llama-bench` **`N=10` averaged**.
+  4. Quilt patch `patches/0001-gfx1100-mul-mat-custom.patch` updated; `QUAL-01` op-gate (0 errors) and `QUAL-02` model-gate (PPL 6.4271) remain green — **each gate reported over `N=10` runs** (or `N≥10` for stochastic canaries).
+  5. **[NEW — must-have #1, REQ-WIN-07]** Repo builds & runs **natively on Windows 11** via `build_windows.bat` (`HIP_PATH` + `clang++.exe --offload-arch=gfx1100`, `-G Ninja`) with **pure C++/HIP + CMake only** (`find -name "*.py" ! -path "./llama.cpp/*" == 0`), and `build-windows/bin/llama-server.exe` serves `curl http://127.0.0.1:8000/v1/chat/completions → 200` on gfx1100. No `3+` language-server stack.
+  6. **[NEW — must-have #2, REQ-PERF-07]** Paired `llama-bench` A/B (`stock OFF` vs `custom ON`, same `bb4caa75`, `-ngl 99 -b 2048`) at **`{512,1024,2048,4096,8192}`** (if VRAM pre-flight passes) shows **custom median `tok/s` ≥1.10× stock** for **both** `pp` and `tg` at every tier, with `mean−1σ ≥1.10×` over `N=10` in one thermal window (microbench `>1.2×` alone is not sufficient). Current `808→849 pp4096` (+5.1%) does **not** yet pass.
+  7. **[NEW — must-have #3, REQ-STAT-07]** All Phase 7 numbers are **`N≥10` averaged** (microbench + `llama-bench` + quality gates) with `median`/`mean`/`stddev`/`p95` tables, and every **LLM question test via the custom kernel is `N≥15`** (`temp=0`, fixed prompt, `avg tok/s` + `avg latency` + `stddev` + per-run table). Single-run claims are rejected.
 
-**Plans**: 4 plans drafted in `.planning/phases/07-hybrid-dp4a-wmma-kernel-optimization/`:
-- 07-01: True upstream DP4A microbenchmark comparator
-- 07-02: Cooperative Wave32 DP4A GEMV kernel (decode)
-- 07-03: RDNA3 WMMA hardware matrix core GEMM kernel (prefill)
-- 07-04: In-tree patch integration & paired end-to-end benchmark verification
+**Plans**: 4 plans in `.planning/phases/07-hybrid-dp4a-wmma-kernel-optimization/` — **amended 2026-08-28 to carry the 3 new must-haves**:
+- 07-01: True upstream DP4A microbenchmark comparator — **now `N=10` averaged + `stddev` table**
+- 07-02: Cooperative Wave32 DP4A GEMV kernel (decode) — **must prove `>1.2×` median + `10×` table, LLM QA `15×` slice**
+- 07-03: RDNA3 WMMA hardware matrix core GEMM kernel (prefill) — **must prove `10×` table + `>950 t/s` median, Windows `hipcc` compile probe**
+- 07-04: In-tree patch integration & paired end-to-end benchmark verification — **now adds `build_windows.bat` Windows-native gate (REQ-WIN-07), `≥1.10×` `pp+tg` gate (REQ-PERF-07), and `10×`/`15×` rigour (REQ-STAT-07) across `{512,1024,2048,4096,8192}`**
 
 | Publication | PUB-01 | 6 |
-| Hybrid DP4A Optimization | KERN-04, KERN-05, INTEG-02 | 7 |
-| Windows Native Refactor | REQ-WIN-01, REQ-WIN-02, REQ-WIN-03, REQ-WIN-04 | 8 |
+| Hybrid DP4A Optimization (re-scoped 2026-08-28) | KERN-04, KERN-05, INTEG-02 **+ REQ-WIN-07, REQ-PERF-07, REQ-STAT-07, BENCH-01 amended** | 7 |
+| Windows Native Refactor (now Phase 7 must-have #1 landing) | REQ-WIN-01..04 (Phase 7 REQ-WIN-07 is the umbrella) | 8 |
 
 **Mapped: 24/24 ✓ — no orphans, no duplicates.**
 

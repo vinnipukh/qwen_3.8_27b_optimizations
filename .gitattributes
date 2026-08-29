@@ -1,0 +1,7 @@
+# Phase 7 quilt patch must be LF on both WSL2 and Windows (core.autocrlf=false + eol=lf)
+*.patch text eol=lf
+*.hip text eol=lf
+*.cuh text eol=lf
+*.cpp text eol=lf
+*.h text eol=lf
+*.hpp text eol=lf

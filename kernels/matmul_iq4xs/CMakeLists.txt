@@ -92,10 +92,13 @@ add_executable(bench_gemv_dp4a
 )
 target_link_libraries(bench_gemv_dp4a PRIVATE matmul_ref_cpu matmul_common_iface)
 
-# --- Streaming WMMA GEMM (gfx1100 prefill, 07-03) ---
-# 64x32 per block, double-buffered LDS [2][32][33], on-the-fly dequant -> WMMA, fallback tiled TILE_M=16
+# --- Streaming WMMA GEMM (gfx1100 prefill, 07-03 re-scoped high-yield: tile sweeps 64x32/64x64/128x32, P=2 vs P=4, XOR vs +33, B-stationary, LUT mu=4, b128, swizzle) ---
+# 64x32 base + tile sweeps via template<TILE_M,TILE_N>, double-buffered LDS [2][32][33] vs [4][32][32] XOR quad-buffer P=4 with sched_barrier 0x0080/0x0008
 add_library(matmul_gemm_wmma_stream_hip OBJECT impl_gemm_wmma_stream.hip)
 target_link_libraries(matmul_gemm_wmma_stream_hip PRIVATE matmul_common_iface)
+# --- LUT GEMM secondary kernel (μ=4 16-entry half 32B bake, B-stationary) ---
+add_library(matmul_gemm_lut_hip OBJECT impl_gemm_lut_iq4xs.hip)
+target_link_libraries(matmul_gemm_lut_hip PRIVATE matmul_common_iface)
 
 add_executable(test_gemm_wmma_compare
     test_gemm_wmma_compare.cpp
@@ -106,6 +109,7 @@ target_link_libraries(test_gemm_wmma_compare PRIVATE matmul_ref_cpu matmul_commo
 add_executable(bench_gemm_wmma
     bench_gemm_wmma.cpp
     $<TARGET_OBJECTS:matmul_gemm_wmma_stream_hip>
+    $<TARGET_OBJECTS:matmul_gemm_lut_hip>
     $<TARGET_OBJECTS:matmul_real_stock_hip>
 )
 target_link_libraries(bench_gemm_wmma PRIVATE matmul_ref_cpu matmul_common_iface)

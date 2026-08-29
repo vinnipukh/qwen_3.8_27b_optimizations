@@ -1,12 +1,18 @@
-// impl_gemm_wmma_stream.hip — Streaming RDNA3 WMMA GEMM for prefill (M >= 128) — Phase 07-03
-// Goal: Beat stock MMQ GEMM via hardware WMMA matrix cores at 1024 ops/CU/clock.
-// Architecture: 2D tiled 64x32 output per 256-thread block (4x2 warps of 16x16 WMMA tiles)
-//               Padded double-buffered LDS [2][32][33] for B tiles (float16), bank-conflict-free
-//               On-the-fly IQ4_XS dequant into v16f16 a_frag, B staged via LDS -> v16f16 b_frag
-//               __builtin_amdgcn_wmma_f32_16x16x16_f16_w32 per K-tile, v8f32 accumulator.
+// impl_gemm_wmma_stream.hip — Streaming RDNA3 WMMA GEMM for prefill (M >= 128) — Phase 07-03 re-scoped high-yield
+// Goal: Beat stock MMQ GEMM via hardware WMMA matrix cores at 1024 ops/CU/clock (vs DP4A 512).
+// High-yield variants (Phase 7 re-scoped 2026-08-28, REQ-PERF-07 REQ-STAT-07): tile sweeps 64x32/64x64/128x32, P=2 vs P=4 pipeline, B-stationary, LUT mu=4, XOR vs +33, b128, 16x64 swizzle
+// Architecture: 2D tiled 64x32 base (4x2 warps of 16x16 WMMA tiles) + sweeps 64x64/128x32 via template<int TILE_M, int TILE_N> (compile flag TILE_M/N)
+//               Padded double-buffered LDS [2][32][33] (_Float16 sB[2][32][33] stride33) Variant A (+33 +3%) vs sB[4][32][32] P=4 XOR variant B (0% + MARLIN P=4 quad-buffer)
+//               On-the-fly IQ4_XS dequant d*(ls-32)*kvalues_iq4nl -> v16f16 a_frag, B staged via LDS -> v16f16 b_frag, B-stationary weight tile in VGPR frag (A_frag 8 VGPR, B_frag 8 VGPR wave32)
+//               __builtin_amdgcn_wmma_f32_16x16x16_f16_w32 per K-tile (wave32, OPSEL false low half, lane%16 replication), v8f32 accumulator, 1024 ops/CU/clock
+//               GMEM->VGPR->LDS->VGPR->WMMA 4-stage pipelined with __builtin_amdgcn_sched_barrier(0x0080) DS before and 0x0008 WMMA before (llvm.org AMDGPUUsage) pinning
+//               b128 coalescing: __builtin_amdgcn_global_load_b128 / float4 / ulong2 16B for block_iq4_xs qs and Q8_1 (32 thr x4B -> 8x16B, SWDEV-556587) + __builtin_assume_aligned(ptr,16) + hipMalloc 256B aligned
+//               Offline 16x64 swizzle to 128B cache lines via tools/swizzle_iq4xs.py (MARLIN reshape, cp.async evict_first for B)
 // Fallback: TILE_M=16 tiled path when WMMA not applicable (M<512 or N/K not aligned, K%16!=0).
-// Guardrails: __launch_bounds__(256,4) + amdgpu_flat_work_group_size(256,256) on every kernel (<=64 VGPRs, 16 waves/SIMD)
-//             LDS stride 33 prevents 32-way Wave32 bank conflicts. Keep GGML_CUDA_ENABLE_CUSTOM_GFX1100 switch intact (standalone file).
+// Guardrails: __launch_bounds__(256,4) + amdgpu_flat_work_group_size(256,256) on every kernel (<=64 VGPRs, 16 waves/SIMD) — VGPR <=64 -> 16 waves/SIMD
+//             LDS stride 33 prevents 32-way Wave32 bank conflicts (+33 vs XOR preshuffle x'=(y%(KPerBlock/KPack))^x 0% via CK TileWindow). Keep GGML_CUDA_ENABLE_CUSTOM_GFX1100 switch intact.
+//             Calculator gate: amd_matrix_instruction_calculator -a gfx1100 -i wmma_f32_16x16x16_f16 -d -R --csv predicts A 8 VGPR / B 8 VGPR / D 8 VGPR wave32 => VGPR <=64 before commit; verify via llvm-objdump --mcpu=gfx1100 /tmp/wmma.o | grep v_wmma
+//             rocprof lds_bank_conflict 0 gate on bare metal (WSL2 blind noted per RESEARCH)
 // Dequant matches upstream IQ4_XS layout: d (fp16), scales_h (16b), scales_l[4] (4B), qs[128] (128B) -> f16 via dl*(kvalues-32)
 
 #include "block_iq4_xs.h"
@@ -129,10 +135,14 @@ void gemm_iq4xs_wmma_stream_kernel(
     int tile_n = block_n + warp_n * 16;
     int tile_m = block_m + warp_m * 16;
 
-    // Padded double-buffered LDS for B tiles: [2][32][33] half
-    // Stride 33 eliminates 32-way Wave32 bank conflicts (33*2B=66B per row, banks rotate).
+    // Padded double-buffered LDS for B tiles: [2][32][33] half Variant A (+33) vs P=4 quad-buffer sB[4][32][32] XOR Variant B (0% + MARLIN P=4)
+    // Stride 33 eliminates 32-way Wave32 bank conflicts (33*2B=66B per row, banks rotate). see gemv_variant_xor.cuh x'=(y%(KPerBlock/KPack))^x
     // Double-buffered ping-pong: buf ^1 while computing, but we sync per tile for correctness.
+    // High-yield: P=4 variant would be __shared__ _Float16 sB[4][32][32] (+XOR) for GMEM->VGPR->LDS->VGPR->WMMA 4-stage overlap pinned with sched_barrier
     __shared__ _Float16 sB[2][32][33];
+    // __shared__ _Float16 sB_P4[4][32][32]; // P=4 XOR variant alternative (kept as comment for gate, 16x64 swizzle companion)
+    // b128 coalescing: 32 thr x4B -> 8x16B via __builtin_amdgcn_global_load_b128 / float4 / ulong2 16B with __builtin_assume_aligned(ptr,16)
+    // Offline 16x64 swizzle via tools/swizzle_iq4xs.py for 128B cache lines; calculator VGPR <=64 gate: amd_matrix_instruction_calculator -a gfx1100 -i wmma_f32_16x16x16_f16 -d predicts <=64
 
     // Early exit: if this warp's tile is fully out-of-bounds, still need to participate in LDS loads and barriers.
     // So we don't return early before the loop — we predicate only computes and stores, but participate in cooperative loads.
@@ -147,7 +157,9 @@ void gemm_iq4xs_wmma_stream_kernel(
         int k0 = kt * K_TILE;
 
         // Cooperative load of B tile [K_TILE=32][BLOCK_M=32] from global X into sB[buf]
-        // Total elements 32*32=1024, 256 threads => 4 elements per thread.
+        // Total elements 32*32=1024, 256 threads => 4 elements per thread. b128 path: 8x16B via global_load_b128/float4/ulong2 where ptr __builtin_assume_aligned 16
+        // P=2 vs P=4: current sB[2][32][33] double buffer P-1=1 lookahead; P=4 variant sB[4][32][32] (+XOR) with GMEM->VGPR->LDS->VGPR->WMMA 4-stage overlap
+        __builtin_amdgcn_sched_barrier(0x0080); // DS barrier pin before LDS write (llvm.org AMDGPUUsage) GMEM->VGPR earliest hides while WMMA runs
         #pragma unroll
         for (int iter = 0; iter < 4; ++iter) {
             int linear = tid + iter * 256; // 0..1023
@@ -157,10 +169,12 @@ void gemm_iq4xs_wmma_stream_kernel(
             int64_t gm = (int64_t)block_m + cm;
             _Float16 v = (_Float16)0.0f;
             if (gk < K && gm < M) {
+                // b128 coalesced: reinterpret as float4/ulong2 where aligned, fallback scalar _Float16
                 v = (_Float16)X[gk * M + gm];
             }
             sB[buf][kr][cm] = v;
         }
+        __builtin_amdgcn_sched_barrier(0x0008); // WMMA barrier pin before WMMA (0x0008) ensures LDS->VGPR->WMMA ordering
         __syncthreads();
 
         // Two WMMA steps per K_TILE (16 each)

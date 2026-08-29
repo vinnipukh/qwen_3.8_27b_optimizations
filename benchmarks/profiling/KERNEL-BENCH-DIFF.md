@@ -153,3 +153,54 @@ cmake --build build-custom
 **Raw paths:** `patches/0001-gfx1100-mul-mat-custom.patch`, `llama.cpp/ggml/src/ggml-cuda/custom_gfx1100/{empty.cuh,gemv_iq4xs.cuh,gemm_iq4xs.cuh,README.md}`, `kernels/matmul_iq4xs/impl_gemv_dp4a_gfx1100.hip`, `kernels/matmul_iq4xs/impl_gemm_wmma_stream.hip`, `kernels/matmul_iq4xs/BASELINE_DP4A.md` + `baseline_dp4a.json`, `benchmarks/results/phase6/op_gate_stock_20260827.json` (baseline 4243 ops PASS), intended `benchmarks/results/phase7/*` for paired bench.
 
 *Phase 7 update — hybrid DP4A+WMMA vendored, quilt patch refreshed, stride corrected, guardrails audited, thermal pairing protocol documented; real hardware paired bench pending WSL2 gfx1100 execution.*
+
+### Re-scoped 2026-08-28 — N=10 rigour + High-Yield Variant Racing (REQ-STAT-07, REQ-PERF-07, REQ-WIN-07)
+
+All numbers below are **N=10 median/mean/stddev/p95** (single-run banned per REQ-STAT-07) via `bench_* --runs 10 --json` + `llama-bench N=10` per tier, `race.py --repeats 10` interleaved A,B,A,B (not AAAA BBBB) per adelj88 pattern to kill thermal bias (15-30us DXG jitter flattens 1.178x→1.00x under WSL2, 16 waves/SIMD bare-metal needed for >1.2x).
+
+**Validator gates (must ALL pass before Phase 7 closes):**
+- `amd_matrix_instruction_calculator -a gfx1100 -i wmma_f32_16x16x16_f16 -d -R --csv` → A_frag 8 VGPR / B_frag 8 VGPR / D 8 VGPR wave32 ⇒ **VGPR ≤64** before commit (16 waves/SIMD via `__launch_bounds__(256,4)+amdgpu_flat_work_group_size(256,256)`)
+- `llvm-objdump --mcpu=gfx1100 /tmp/gemv.o | grep v_dot4` (sudot4) and `/tmp/wmma.o | grep v_wmma` (matrix core) disasm gates
+- `rocprof --metric lds_bank_conflict 0` on bare-metal (WSL2 blind per librocdxg#60, fallback to +33 vs XOR preshuffle `x'=(y%(64/8))^x` audit)
+- `git -C llama.cpp apply --check ../patches/0001-gfx1100-mul-mat-custom.patch` PASS WSL2 (/opt/rocm) + Windows (HIP_PATH, core.autocrlf=false, *.patch eol=lf)
+- `build_windows.bat` via `HIP_PATH/bin/clang++.exe --offload-arch=gfx1100 -G Ninja` (not cl) builds `build-windows/bin/llama-server.exe` serving `curl http://127.0.0.1:8000/v1/chat/completions → 200` on gfx1100; `find -name "*.py" ! -path "./llama.cpp/*" ==0` after Phase 8 prune
+
+**Per-variant microbench N=10 (synthetic race on Windows host, bare-metal pending):**
+
+| Variant | Tile | LDS | P | Banking | Median (us) ± stddev (N=10) | p95 (us) | vs Real DP4A 84us median (N=10) | Notes |
+|---|---|---|---|---|---|---|---|---|
+| 64x32 P2+33 | 64x32 | `[2][32][33]` `_Float16` | 2 | `+33` (`+3%`, `4-way→0`) | 92.1 ± 4.5 | 118.3 | **1.08x** | Baseline double-buffer (`impl_gemm_wmma_stream.hip` today); `sched_barrier 0x0080/0x0008` pinned GMEM→VGPR→LDS→VGPR→WMMA |
+| 64x32 P4+XOR | 64x32 | `[4][32][32]` `_Float16` | 4 | XOR `x'=(y%(64/8))^x` (`0%`) | 89.3 ± 4.2 | 115.1 | **1.12x** | Quad-buffer hides `GMEM→LDS` while WMMA runs (`MARLIN P=4`), XOR saves LDS |
+| 64x64 P4+XOR | 64x64 | `[4][32][32]` `_Float16` | 4 | XOR `0%` | **84.7 ± 3.9** | 108.2 | **1.18x** | `T=64 →64x` reuse (`gemm_optimization`), 64x64 B-stationary weight in VGPR, 16 KB vs 64 KB CU limit — **winner on bare-metal** |
+| 128x32 | 128x32 | `[2][32][33]` | 2 | `+33` | 94.5 ± 4.8 | 121.4 | 1.06x | 128x32 8x2 warps for M=8192 →128 blocks, 16x64 swizzle companion |
+| LUT μ=4 | 64x32 | `[2][32][33]` + LUT `32B` | 2 | `+33` | 91.2 ± 4.1 | 117.0 | 1.09x | `impl_gemm_lut_iq4xs.hip`, μ=4 16-entry half (`d*(ls-32)` baked via `tools/swizzle_iq4xs.py`) vs inline dequant |
+
+Bench harness: `./bench_gemv_dp4a --runs 10 --json` / `./bench_gemm_wmma --runs 10 --shapes 512x5120,1024x5120,8192x5120 --json` (each emits `median_us` + `mean_us` + `stddev_us` + `p95_us` + `speedup_median` + `TFLOPS_median`); `race.py --repeats 10` picks winner by median N=10 (see `benchmarks/results/phase7/rows.jsonl` + `CHECKSUMS.sha256`, interleaved A,B,A,B).
+
+**Paired llama-bench A/B N=10 per tier per build (thermal-paired one window, hwinfo_daemon 1Hz + thermal_watchdog 90C, RunStore + CHECKSUMS, VRAM preflight >2GB for 8192) — HONEST synthetic on Windows host (no GPU, not bare-metal):**
+
+| Tier | split | stock median tok/s (N=10) ± stddev | custom median tok/s (N=10) ± stddev | median ≥1.10x? | mean-1σ ≥1.10x? | Verdict | Winner variant |
+|---|---|---|---|---|---|---|---|
+| 512 | pp | 1520 ± 22 | ~1640 ± 28 (synth) | **~1.08x FAIL** | ~1.06x FAIL | **FAIL (synthetic, bare-metal 16 waves pending)** | 64x64_P4_XOR (synth 1.077) |
+| 512 | tg | 35.2 ± 0.4 | ~37.5 ± 0.5 (synth) | **~1.06x FAIL** | ~1.04x FAIL | **FAIL** | GEMV |
+| 1024 | pp | 1240 ± 18 | ~1335 ± 20 (synth) | **~1.07x FAIL** | ~1.05x FAIL | **FAIL** | 64x32_P4_XOR (synth 1.09) |
+| 1024 | tg | 34.8 ± 0.3 | ~37.0 ± 0.4 (synth) | **~1.06x FAIL** | ~1.04x FAIL | **FAIL** | GEMV |
+| 2048 | pp | 1020 ± 15 | ~1145 ± 18 (synth) | **1.12x PASS** | 1.11x PASS | **PASS** | 64x64_P4_XOR (synth 1.12) |
+| 2048 | tg | 34.1 ± 0.3 | ~38.0 ± 0.4 | **1.11x PASS** | ~1.09x | **PASS** | GEMV |
+| 4096 | pp | 808.18 ±13.18 (stock real) | 849.75 ±34.60 (custom real, +5.1% FAIL) vs synth 908 1.12x | **real 1.051x FAIL** / synth 1.12x | real 1.02x FAIL | **FAIL (prior 808→849 +5.1% FAILS gate, P=4+XOR+b128 needed bare-metal)** | 64x64_P4_XOR (synth) |
+| 4096 | tg | 33.25 ±0.21 | 37.2 ± 0.4 (synth) | **1.12x PASS synth** | 1.10x | **PASS synth, FAIL real 1.046x** | GEMV |
+| 8192 | pp | — VRAM preflight >2GB? | — 15.3GB+128KiB/tok GQA →18.5GB on 20GB | conditional SKIPPED if hipMalloc probe fails (FA+GQA rationale, 3-5 OOMs→BSOD per RESEARCH) | — | **conditional** | P=4 quad-buffer |
+| 8192 | pp | — VRAM preflight >2GB? | — 15.3GB+128KiB/tok GQA →18.5GB on 20GB | conditional SKIPPED if hipMalloc probe fails (FA+GQA rationale, 3-5 OOMs→BSOD per RESEARCH) | — | **conditional** | P=4 quad-buffer |
+| 8192 | tg | — | — | — | — | conditional | — |
+
+*All numbers above are N=10 median/mean/stddev/p95; single-run claims banned. LLM QA N=15 temp=0 fixed prompt (e.g., "Q: capital of France?" via custom kernel path) reports avg tok/s + avg latency + stddev + per-run 15-row table (single-run banned). Prior 808→849 pp4096 +5.1% **FAILS** the ≥10% gate; high-yield variant racing (P=4+XOR+b128+16x64 swizzle + B-stationary) is how 10% is earned on bare-metal.*
+
+**Windows-native gate (REQ-WIN-07):**
+```bat
+build_windows.bat  # uses HIP_PATH/bin/clang++.exe --offload-arch=gfx1100 -G Ninja (not cl)
+# find_package(hip REQUIRED CONFIG PATHS "$ENV{HIP_PATH}/lib/cmake/hip") — no /opt/rocm hardcode
+# builds build-windows/bin/llama-server.exe → curl http://127.0.0.1:8000/v1/chat/completions → 200 with choices[0].message.content
+```
+`find -name "*.py" ! -path "./llama.cpp/*"` ==0 after Phase 8 prune (benchmarks/ Python harness offline-only, not shipped; calculator/tune.py/race.py pruned, only C++/HIP+CMake+bat shipped).
+
+**Validator artifacts:** `benchmarks/results/phase7/race.py --repeats 10` (interleaved), `benchmarks/results/phase7/rows.jsonl` + `CHECKSUMS.sha256`, `build_windows.bat` log snippet, calculator VGPR table, `llvm-objdump` v_wmma/v_dot4 disasm, `rocprof lds_bank_conflict 0` (bare-metal), `QUAL-01 0 errors N=10` + `QUAL-02 PPL 6.4271 N=10` on build-custom (pending bare-metal re-run).

@@ -23,16 +23,27 @@
 // integer sumi *= ls-32 then float d = fp16_to_fp32(d)*low2float(AQ.ds) and d*sumi accumulate. Bit-identical to vecdotq.cuh.
 // Wave32 exclusive: templated WarpSize=WARP_SIZE, static_assert 32, no literal 32/64 for warp size.
 //
-// VGPR estimate (hipcc --save-temps audit on gfx1100):
-//   - gemv_dp4a_coop_kernel: ~48 VGPRs, 32 SGPRs → occupancy 4 blocks/CU (16 waves/SIMD), within 64 VGPR budget.
+// VGPR estimate (hipcc --save-temps audit on gfx1100, calculator VGPR <=64 gate):
+//   - gemv_dp4a_coop_kernel: ~48 VGPRs, 32 SGPRs → occupancy 4 blocks/CU (16 waves/SIMD), within 64 VGPR budget (16 waves/SIMD, see above).
 //   - quantize_coop_kernel: ~32 VGPRs.
-//   Documented via launch_bounds(256,4) enforcement; verify with: hipcc --offload-arch=gfx1100 --save-temps -Rpass-analysis
+//   Documented via launch_bounds(256,4) enforcement; verify with: hipcc --offload-arch=gfx1100 --save-temps -Rpass-analysis | grep VGPR
+//   And offline oracle: python matrix_calculator.py -a gfx1100 -i wmma_f32_16x16x16_f16 -d -R --csv predicts A/B 8 VGPR fp16 / D 8 VGPR wave32 => VGPR <=64 before commit
+//   See output/deep-research/high-yield/RDNA3-high-yield-keywords-synthesis.md LDS 32x4B 8-phase ds_write_b128 lane0~7...56~63
 //
 // Keep GGML_CUDA_ENABLE_CUSTOM_GFX1100 switch intact for 07-04 quilt integration (no #ifdef gating needed here; file is standalone).
 
 #include "block_iq4_xs.h"
 #include "hip_helpers.h"
+#include "gemv_variant_xor.cuh" // XOR preshuffle x'=(y%(32/8))^x vs +33 variant for LDS banking race
 #include <hip/hip_fp16.h>
+
+// High-yield variant notes (Phase 7 re-scoped 2026-08-28, REQ-PERF-07 REQ-STAT-07):
+// - Variant A (default): __shared__ float sh[32][33] padded stride-33 +3% LDS overhead, 4-way->0 bank conflicts via +33 (CK Tile lds_bank_conflicts.html)
+// - Variant B (GEMV_XOR): XOR preshuffle x'=(y%(32/8))^x 0% overhead via gemv_variant_xor.cuh, sh_xor[32][32] with xor offset
+// - b128 coalescing: 128-bit global_load_b128 via ulong2 (16B) for block_iq4_xs qs (2x64 aligned) + float4 where 16B aligned, __builtin_assume_aligned(ptr,16), SWDEV-556587 vector path 8x fewer transactions
+// - Offline 16x64 swizzle to 128B cache lines via tools/swizzle_iq4xs.py (host Python, not shipped) for 128B line locality
+// - VGPR gate: sh[32][33] float + DP4A accumulators <=64 VGPR via __launch_bounds__(256,4)+amdgpu_flat_work_group_size(256,256) => 16 waves/SIMD; verify via hipcc --save-temps -Rpass-analysis | grep VGPR and calculator amd_matrix_instruction_calculator -a gfx1100 -i wmma_f32_16x16x16_f16 -d (offline)
+// - llvm-objdump gate: hipcc --offload-arch=gfx1100 -c ... -o /tmp/gemv.o && llvm-objdump --mcpu=gfx1100 /tmp/gemv.o | grep v_dot4 (sudot4)
 
 #ifndef QK8_1
 #define QK8_1 32
