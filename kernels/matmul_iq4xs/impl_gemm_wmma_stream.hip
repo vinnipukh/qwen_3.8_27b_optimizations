@@ -350,7 +350,7 @@ hipError_t WMMA_GPU_NAME(
 }
 
 // Explicit tiled launch for benchmarking (bypass WMMA)
-hipError_t gemm_iq4xs_stream_tiled_gpu(
+__attribute__((weak)) hipError_t gemm_iq4xs_stream_tiled_gpu(
     const block_iq4_xs* d_W,
     const float* d_X,
     float* d_Y,
