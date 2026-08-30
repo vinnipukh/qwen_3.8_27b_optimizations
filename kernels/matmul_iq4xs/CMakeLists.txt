@@ -77,6 +77,10 @@ target_link_libraries(bench_gemm PRIVATE matmul_ref_cpu matmul_common_iface)
 # --- Cooperative DP4A GEMV (gfx1100 decode, 07-02) ---
 add_library(matmul_gemv_dp4a_hip OBJECT impl_gemv_dp4a_gfx1100.hip)
 target_link_libraries(matmul_gemv_dp4a_hip PRIVATE matmul_common_iface)
+# XOR preshuffle variant — 0% LDS overhead vs +33 padding (real binary race, not synthetic jitter)
+add_library(matmul_gemv_dp4a_xor_hip OBJECT impl_gemv_dp4a_gfx1100.hip)
+target_compile_definitions(matmul_gemv_dp4a_xor_hip PRIVATE GEMV_XOR)
+target_link_libraries(matmul_gemv_dp4a_xor_hip PRIVATE matmul_common_iface)
 
 add_executable(test_gemv_dp4a_compare
     test_gemv_dp4a_compare.cpp
@@ -91,6 +95,13 @@ add_executable(bench_gemv_dp4a
     $<TARGET_OBJECTS:matmul_real_stock_hip>
 )
 target_link_libraries(bench_gemv_dp4a PRIVATE matmul_ref_cpu matmul_common_iface)
+# XOR bench binary — real second binary for median race (no synthetic jitter)
+add_executable(bench_gemv_dp4a_xor
+    bench_gemv_dp4a.cpp
+    $<TARGET_OBJECTS:matmul_gemv_dp4a_xor_hip>
+    $<TARGET_OBJECTS:matmul_real_stock_hip>
+)
+target_link_libraries(bench_gemv_dp4a_xor PRIVATE matmul_ref_cpu matmul_common_iface)
 
 # --- Streaming WMMA GEMM (gfx1100 prefill, 07-03 re-scoped high-yield: tile sweeps 64x32/64x64/128x32, P=2 vs P=4, XOR vs +33, B-stationary, LUT mu=4, b128, swizzle) ---
 # 64x32 base + tile sweeps via template<TILE_M,TILE_N>, double-buffered LDS [2][32][33] vs [4][32][32] XOR quad-buffer P=4 with sched_barrier 0x0080/0x0008
