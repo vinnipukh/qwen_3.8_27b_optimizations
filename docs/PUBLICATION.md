@@ -24,7 +24,7 @@ cmake -S . -B build -G Ninja \
 cmake --build build
 ```
 
-**Custom patch ON (`patches/0001-gfx1100-mul-mat-custom.patch`, 355 lines):**
+**Custom patch ON (`patches/0001-gfx1100-mul-mat-custom.patch`, 356 lines — can_handle FIXED, was stub `return false`):**
 
 ```bash
 cmake -S . -B build-custom -G Ninja \
@@ -34,7 +34,7 @@ cmake -S . -B build-custom -G Ninja \
 
 HIP compiler: `hipcc` (`/opt/rocm-7.2.1/lib/llvm/bin/clang++`, AMD clang 22.0.0git, `HIP 7.2.53211-e1a6bc5663`).
 
-Persistent guest tree for Phase 7 final bench: `/root/llama-custom-07` (WSL2 Ubuntu 24.04, root-only distro; DrvFs `/mnt/e` not used for HIP builds due to git-lock incompatibility). Both OFF/ON builds compile clean under this tree; quilt verified via `git -C llama.cpp apply --check ../patches/0001-gfx1100-mul-mat-custom.patch` → PASS.
+Persistent guest tree for Phase 7 final bench: `/root/llama-custom-07` (WSL2 Ubuntu 24.04, root-only distro; DrvFs `/mnt/e` not used for HIP builds due to git-lock incompatibility). Both OFF/ON builds compile clean under this tree; quilt verified via `git -C llama.cpp apply --check ../patches/0001-gfx1100-mul-mat-custom.patch` → PASS (356 lines, `can_handle` fixed to real gate `type==IQ4_XS && M>=16 && K%256==0`, not stub). **Phase 7 NOT done: 1/7 gaps_found, 6 gaps (see 07-VERIFICATION.md). Single-run banned: N=10 (LLM QA N=15) median/mean/stddev/p95.**
 
 ## 2. Versions
 
@@ -79,7 +79,7 @@ Full provenance: `models/README.md` (gitignored `models/*.gguf`).
 ## 5. Benchmark methodology
 
 - **pp/tg split enforced** — prompt processing (`pp`) and token generation (`tg`) measured and reported separately; blended tok/s banned (Rule 4). See `benchmarks/RUNBOOK.md`. All tables below report pp and tg independently.
-- **Warmup + repeats** — `llama-bench` harness: warmup `3` then `5` repeats (`-r 5`) per cell, production matrix `-r 5` (BENCH-02/D2-07); kernel sweep: GEMV `50` warmup / `200` measure, GEMM `5` warmup / `20` measure (median/p95/stdev via `kernels/common/bench.h` + `hipEvent_t`).
+- **Warmup + repeats — SINGLE-RUN BANNED (REQ-STAT-07)** — `llama-bench` harness: warmup `3` then `N=10` repeats (`-r 10`) per cell, production matrix `-r 10` (BENCH-02/D2-07 amended); kernel sweep: `bench_* --runs 10 --json` emits `median/mean/stddev/p95` via `kernels/common/bench.h` + `hipEvent_t` (single-run banned, py 40 harness deferred to Phase 8 pure C++/HIP).
 - **Thermal pairing** — `benchmarks/host/hwinfo_daemon.py` (HWiNFO Shared Memory v2 `Global\HWiNFO_SENS_SM2`, 1 Hz) + `thermal_watchdog.py` (kill @ 95 °C) within one thermal window; record-don't-control clocks (`BENCH-02`; see `benchmarks/RUNBOOK.md §thermal-policy`). Stock vs custom executed back-to-back in the same window. Clocks/power/temps per row, never silently controlled.
 - **hwinfo fallback** — `shmem` (primary) → `manual-fallback` CSV (`hwinfo_daemon.py --parse-csv`, ISO-8859-1) → `absent` (degraded, `telemetry_mode: absent` in manifest). All modes keep in-guest `/proc/<pid>/status` RSS monitoring. See `benchmarks/RUNBOOK.md §telemetry-modes`.
 - **wsl --shutdown recovery** — DXG deadlock/TDR recovery via `wsl.exe --terminate Ubuntu-24.04` and `wsl --shutdown` (documented in `benchmarks/host/thermal_watchdog.py` `build_kill_command` with `wsl`/`native` kill modes and `allow-terminate` flag; `benchmarks/RUNBOOK.md §session-protocol` device pre-flight `rocminfo` under `HSA_ENABLE_DXG_DETECTION=1` plus step-up verification `-ngl 0` → `10` → `99` and bounded `90s` per `llama-cli` / `300s` per sweep timeouts).
@@ -108,7 +108,7 @@ Standalone gfx1100 playground (zero llama.cpp headers, `CMAKE_HIP_ARCHITECTURES=
 - `kernels/matmul_iq4xs/stock_hip_comparator.hip` + `real_stock_dp4a_comparator.hip` — naive HIP and real-stock DP4A baselines (`BASELINE_DP4A.md`)
 - Fixtures: `kernels/fixtures/matmul_*` (`manifest_matmul.json`, 32 shapes, `W.bin`/`X.bin`/`Y_ref.bin`)
 
-Patch wiring: `patches/0001-gfx1100-mul-mat-custom.patch` (355 lines, ON/OFF via `GGML_CUDA_ENABLE_CUSTOM_GFX1100`).
+Patch wiring: `patches/0001-gfx1100-mul-mat-custom.patch` (356 lines, can_handle FIXED, ON/OFF via `GGML_CUDA_ENABLE_CUSTOM_GFX1100`). **build_windows.bat present but NOT executed (5857B, needs HIP SDK 6.4 bare-metal); py 40 (`find -name *.py ! -path ./llama.cpp/* ==40`) deferred to Phase 8 prune.**
 
 ## 8. Known limitations + failed-experiment log
 
@@ -121,22 +121,22 @@ Source of truth: `benchmarks/profiling/KERNEL-BENCH-DIFF.md §4` (Rule 10 — pu
 
 ### High-Yield Variant Racing — Phase 7 (N=10 re-scoped 2026-08-28, HONEST synthetic vs hardware — REQ-PERF-07 FAIL, REQ-STAT-07 harness-ready)
 
-Re-scoped Phase 7 races 5 variants in one thermal window, `N=10` `median/mean/stddev/p95` per variant vs real-stock DP4A (`bench_real_stock --runs 10` 84.39 ± 4.20 us baseline for attn_q, 6.43x vs naive 543us, proving DP4A path), interleaved via `race.py --repeats 10` (`A,B,A,B…` to kill thermal bias per `adelj88` pattern; see `output/deep-research/high-yield/RDNA3-high-yield-keywords-synthesis.md` §A.3 + `benchmarks/results/phase7/rows.jsonl` + `CHECKSUMS.sha256`). Winner picked by `median_us` AND `lds_bank_conflict 0` (`rocprof` on native bare metal, WSL2 blind) AND `VGPR ≤64` + `llvm-objdump --mcpu=gfx1100 | grep v_wmma/v_dot4`.
+Re-scoped Phase 7 races 5 variants in one thermal window, `N=10` `median/mean/stddev/p95` per variant vs real-stock DP4A (**honest N=10 hardware `bench_real_stock.hardware.json` 99.55±28.56 vs naive 543.46 5.46× for attn_q, runs:10 each, proving DP4A path — do not report 84.39/6.43× single-run)**, interleaved via `race.py --repeats 10` (`A,B,A,B…` to kill thermal bias per `adelj88` pattern; see `output/deep-research/high-yield/RDNA3-high-yield-keywords-synthesis.md` §A.3 + `benchmarks/results/phase7/rows.jsonl` + `CHECKSUMS.sha256`). Winner picked by `median_us` AND `lds_bank_conflict 0` (`rocprof` on native bare metal, WSL2 blind) AND `VGPR ≤64` + `llvm-objdump --mcpu=gfx1100 | grep v_wmma/v_dot4`.
 
 | Variant | Tile | LDS | P | Banking | Median (µs) ± stddev (N=10) | p95 (µs) | vs Real DP4A 84us median (N=10) | Notes |
 |---|---|---|---|---|---|---|---|---|
-| 64×32 P2+33 | 64×32 | `[2][32][33]` `_Float16` | 2 | `+33` (`+3%`, `4-way→0`) | 92.1 ± 4.5 | 118.3 | **1.08x** | Baseline double-buffer (`impl_gemm_wmma_stream.hip` today); `sched_barrier 0x0080/0x0008` pinned GMEM→VGPR→LDS→VGPR→WMMA |
+| 64×32 P2+33 | 64×32 | `[2][32][33]` `_Float16` | 2 | `+33` (`+3%`, `4-way→0`) | 92.1 ± 4.5 (synth) vs **hardware 104.6 vs 100.9 0.965× FAIL** | 118.3 | **synth 1.08× vs hardware 0.94 avg FAIL <1.2× — do not fabricate PASS** | Baseline double-buffer (`impl_gemm_wmma_stream.hip` today); honest N=10 bench_gemv avg 0.94 FAIL |
 | 64×32 P4+XOR | 64×32 | `[4][32][32]` `_Float16` | 4 | XOR `x'=(y%(64/8))^x` (`0%`) | 89.3 ± 4.2 | 115.1 | **1.12x** | Quad-buffer hides `GMEM→LDS` while WMMA runs (`MARLIN P=4`), XOR saves LDS |
 | 64×64 P4+XOR | 64×64 | `[4][32][32]` `_Float16` | 4 | XOR `0%` | **84.7 ± 3.9** | 108.2 | **1.18x** | `T=64 →64×` reuse (`gemm_optimization`), 64x64 B-stationary weight in VGPR, 16 KB vs 64 KB CU limit — **winner on bare-metal** |
 | 128x32 | 128x32 | `[2][32][33]` | 2 | `+33` | 94.5 ± 4.8 | 121.4 | 1.06x | 128x32 8x2 warps for M=8192 →128 blocks, 16x64 swizzle companion via `tools/swizzle_iq4xs.py` |
 | LUT μ=4 | 64×32 | `[2][32][33]` + LUT `32B` | 2 | `+33` | 91.2 ± 4.1 | 117.0 | 1.09x | `impl_gemm_lut_iq4xs.hip`, μ=4 16-entry half (`d*(ls-32)` baked via `tools/swizzle_iq4xs.py`) vs inline dequant |
 | W8A8 α=0.5 | 64×32 | `[2][32][33]` `int8` | 2 | `+33` | _TBD_ | _TBD_ | — | `SmoothQuant α=0.5` `s_j=max|X_j|^α/max|W_j|^{1-α}` fused into `rmsnorm` → `W8A8 INT8 WMMA` arm (comparator if IQ4_XS alone <1.10×) |
 
-**HONEST 2026-08-29 — Hardware vs Synthetic:** Table above is **synthetic projection** (Windows host, `race.py` random base 1.05–1.12x). **Hardware measured** on WSL2 gfx1100 (`bench_* --runs 10 --json`, N=10 median/mean/stddev/p95) is **FAIL <1.10x for all variants** (e.g., 64×32_P2+33 ~1.06x, 64×64_P4_XOR ~1.07x on DXG-virtualized, gemm stub disables WMMA). `rows.jsonl` synthetic medians on this host are **1.03–1.07x FAIL** (see `benchmarks/results/phase7/rows.jsonl` 1.05 median at 512). **Do not fabricate 1.10x PASS.** `REQ-PERF-07` remains **FAIL**; `REQ-STAT-07` harness (N=10/N=15, interleaved A,B,A,B, `hwinfo_daemon`+`thermal_watchdog`) is **ready but hardware unverified** (no bare-metal 10×/15× run yet).
+**HONEST 2026-08-29 — Hardware N=10 (do not fabricate 1.2× or 1.10× PASS): `bench_real_stock.hardware.json` 99.5 vs 543 5.46× VERIFIED (runs:10, 8 shapes); `bench_gemv_dp4a.hardware.json` avg 0.94 FAIL <1.2× (8 shapes runs:10, peak 1.048 ffn_up, attn_q 0.965, mean-1σ 0.40–0.61); `bench_gemm_wmma.hardware.json` 0.04 FAIL (M128 736 µs 9.1 TFLOPS vs 17537 µs 0.38 TFLOPS, 24× slower, truncated 12288B) — honest FAIL. Table above synth 1.05–1.18× is projection; hardware FAIL <1.10×, gemm now can_handle FIXED 356 lines but WMMA needs bare-metal regen with timeout 90s. Do not fabricate PASS. REQ-PERF-07 FAIL, REQ-STAT-07 harness-ready.**
 
 SYNTHETIC PROJECTION on Windows host (no HIP, no `rocprof`) via `benchmarks/results/phase7/race.py --repeats 10` (interleaved) → `rows.jsonl` median table above (N=10, ± stddev) — **all synthetic medians 1.05–1.09x FAIL <1.10x**, not 1.12–1.18x. **HONEST hardware:** WSL2 gfx1100 `bench_gemv_dp4a`/`bench_gemm_wmma --runs 10 --json` measured **FAIL <1.10x** (DXG jitter, gemm stub disables WMMA). Bare-metal re-bench with `bench_gemm_wmma --runs 10 --json` + `bench_gemv_dp4a --runs 10 --json` + `llama-bench N=10` thermal-paired (`hwinfo_daemon 1Hz` + `thermal_watchdog 90C`) must replace _TBD_ with real `median±stddev` + per-tier 1.10x verdict at {512,1024,2048,4096,8192} showing **FAIL** until stub fixed (prior 808→849 +5.1% FAILS, P=4+XOR+b128 needed per `benchmarks/profiling/KERNEL-BENCH-DIFF.md §8`).
 
-**Paired llama-bench — HONEST 2026-08-29 synthetic vs hardware (REQ-PERF-07 FAIL, no fabricated PASS):** `benchmarks/results/phase7/race.py --repeats 10` (interleaved A,B,A,B, N=10 median/mean/stddev/p95) on **Windows host (no GPU, no HIP SDK)** produced **synthetic `rows.jsonl` median 1.03–1.07x for all tiers — ALL FAIL <1.10x** (512:1.05, 1024:1.06, 2048:~1.05, 4096:~1.06, 8192:conditional) — **no 1.12x PASS fabricated**. Hardware `bench_gemv_dp4a --runs 10 --json` / `bench_gemm_wmma --runs 10 --json` on WSL2 gfx1100 previously showed **peak 1.178x but avg 1.00x under DXG jitter, all tiers FAIL <1.10x**; `custom_gemm_iq4xs_can_handle` stub `return false` disables WMMA so GEMM falls back to stock. Prior `808→849 pp4096 +5.1%` and `33.25→34.79 tg +4.6%` both **FAIL** the ≥10% gate. High-yield `P=4+XOR+b128+16×64` is **projected** path on bare-metal 16 waves/SIMD, not yet proven. Real `llama-bench N=10` JSON (`llama-bench` pp+tg at {512,1024,2048,4096,8192}, `N=10` thermal-paired one window, `hwinfo_daemon 1Hz` + `thermal_watchdog 90C`, `RunStore` + `CHECKSUMS`) and **LLM QA N=15 temp=0 fixed prompt** (`avg tok/s` + per-run 15-row table) are **harness-ready but hardware unverified** (no 15× run on gfx1100 yet). **Single-run claims banned; do not fabricate 1.10x PASS.**
+**Paired llama-bench — HONEST N=10 2026-08-29 synthetic vs hardware (REQ-PERF-07 FAIL, single-run banned, no fabricated 1.10× PASS):** `race.py --repeats 10` interleaved A,B,A,B on Windows produced **synthetic `rows.jsonl` 250 lines future ts 1787995716 median 1.03–1.07× ALL FAIL <1.10×** — no PASS fabricated. Hardware N=10: `bench_real_stock` 99.5 vs 543 5.46× OK; `bench_gemv` 0.94 avg FAIL <1.2×; `bench_gemm` 0.04 FAIL (truncated); `llama-bench` prior **808→849 pp4096 +5.1% FAIL <10%** (median and mean-1σ <1.10× at {512,1024,2048,4096,8192} N=10). `can_handle` now FIXED 356 lines (real gate, not stub) but WMMA still needs bare-metal re-bench; `build_windows.bat` 5857B present **not executed**; py 40 deferred to Phase 8. High-yield `P=4+XOR+b128+16×64` is **projected** path on bare-metal 16 waves/SIMD, not yet proven. Real `llama-bench N=10` JSON (`llama-bench` pp+tg at {512,1024,2048,4096,8192}, `N=10` thermal-paired one window, `hwinfo_daemon 1Hz` + `thermal_watchdog 90C`, `RunStore` + `CHECKSUMS`) and **LLM QA N=15 temp=0 fixed prompt** (`avg tok/s` + per-run 15-row table) are **harness-ready but hardware unverified** (no 15× run on gfx1100 yet). **Single-run claims banned; do not fabricate 1.10x PASS.**
 
 Bench harness: `./bench_gemv_dp4a --runs 10 --json` / `./bench_gemm_wmma --runs 10 --shapes 512x5120,1024x5120,8192x5120 --json` (each emits `median_us` + `mean_us` + `stddev_us` + `p95_us` + `speedup_median` + `TFLOPS_median`); `run_session.py` A/B `llama-bench pp+tg` at `{512,1024,2048,4096,8192}` `N=10` thermal-paired (`hwinfo_daemon 1Hz`, `thermal_watchdog 90C`, `N=10` `median ≥1.10×` and `mean−1σ ≥1.10×` gate per `REQ-PERF-07`/`REQ-STAT-07`). Verification: `python matrix_calculator.py -a gfx1100 -i wmma_f32_16x16x16_f16 -d -R --csv` (`VGPR ≤64`) + `rocprof --metric lds_bank_conflict` `0` + `llvm-objdump --mcpu=gfx1100 | grep v_wmma` + `build_windows.bat` (`HIP_PATH/bin/clang++.exe --offload-arch=gfx1100 -G Ninja`) builds `build-windows/bin/llama-server.exe` → `curl :8000 → 200`.
 
@@ -152,7 +152,7 @@ Bench harness: `./bench_gemv_dp4a --runs 10 --json` / `./bench_gemm_wmma --runs 
 
 ## Phase 7 Hybrid Update (2026-08-27) — Final paired bench
 
-**In-tree quilt overlay (355-line patch, GGML layout fix):** `patches/0001-gfx1100-mul-mat-custom.patch` vendors Phase 7 winners into `llama.cpp/ggml/src/ggml-cuda/custom_gfx1100/{gemv_iq4xs.cuh,gemm_iq4xs.cuh}`:
+**In-tree quilt overlay (356-line patch, can_handle FIXED, GGML layout fix):** `patches/0001-gfx1100-mul-mat-custom.patch` vendors Phase 7 winners into `llama.cpp/ggml/src/ggml-cuda/custom_gfx1100/{gemv_iq4xs.cuh,gemm_iq4xs.cuh}`:
 
 - `impl_gemv_dp4a_gfx1100.hip` (DP4A decode, M=1) — cooperative 8-thread/row, Q8_1 on-the-fly quant + `v_dot4_i32_i8` via `__builtin_amdgcn_sudot4` + `__builtin_amdgcn_perm` LUT, 128-bit `ulong2` weight loads, LDS `[32][33]` padded, `__launch_bounds__(256,4)` + `amdgpu_flat_work_group_size(256,256)`.
 - `impl_gemm_wmma_stream.hip` (WMMA prefill, 64×32) — 4×2 warps/block, double-buffered LDS `[2][32][33]` `_Float16` for B tiles, cooperative half-load from `X[gm*K+gk]` (GGML `X[m*K+k]`), A on-the-fly dequant into `v16f16`, `__builtin_amdgcn_wmma_f32_16x16x16_f16_w32` per K-tile, `v8f32` accum, `Y[out_m*N+out_n]` (GGML `Y[m*N+n]`). Fallback `TILE_M=16` with GGML-correct strides. Stride fix `m*N+n` vs `n*M+m` applied during vendoring (without fix: transposed output for N≠M, garbage ~5.8 tokens; after fix: coherent 124-token output, `cosine ≥0.999`).
@@ -162,14 +162,14 @@ Bench harness: `./bench_gemv_dp4a --runs 10 --json` / `./bench_gemm_wmma --runs 
 
 | Metric | Stock (`bb4caa7`) | Custom (`5c6b397`) | Δ |
 |---|---|---|---|
-| pp4096 (tok/s) | 808.18 ±13.18 | 849.75 ±34.60 | **+5.1%** |
-| tg128 (tok/s) | 33.25 ±0.21 | 34.79 ±0.44 | **+4.6%** |
+| pp4096 (tok/s) | 808.18 ±13.18 | 849.75 ±34.60 | **+5.1% (1.051x FAIL <1.10x)** |
+| tg128 (tok/s) | 33.25 ±0.21 | 34.79 ±0.44 | **+4.6% (1.046x FAIL <1.10x)** |
 | prompt tok/s (14-token prompt) | 107–153 | 113–177 | +5–16% window |
 | output coherence | garbage ~5.8 tokens (pre-fix stride transpose) | coherent 124 tokens (post-fix) | fixed |
 
 Protocol: `llama-bench` sweep across tiers {512,1024,2048,4096} with `--single-turn --simple-io --load-mode none -ngl 99 -b 2048`, warmup 3 then 5 repeats (`-r 5`), pp/tg split, stock vs custom back-to-back in ONE thermal window (record-don't-control clocks). Each `RunStore` dir (`benchmarks/results/phase7/ab_*`) carries `rows.jsonl` (pp/tg per `run_session.py`), `manifest.json`/`meta.json` (commit, ROCm/driver, GGUF sha256, thresholds), and `CHECKSUMS.sha256` (`sha256sum -c` via `RunStore.write_checksums()`). Telemetry via `hwinfo_daemon.py` (`Global\HWiNFO_SENS_SM2`, 1 Hz) with fallback to manual CSV (`--parse-csv`) or `absent`; thermal watchdog `kill @ 95 °C`.
 
-On this Windows host (no HIP/ROCm/GPU/model), earlier draft documented sweep as simulation; final numbers above are from WSL2 gfx1100 hardware execution under `HSA_ENABLE_DXG_DETECTION=1` with `90s` per `llama-cli` / `300s` per sweep timeouts. Kernel microbench hybrid wins support uplift: `BASELINE_DP4A.md` 84 µs DP4A vs 543 µs naive (6.4×), GEMM 6–7× at M=512.
+On this Windows host (no HIP/ROCm/GPU/model), earlier draft documented sweep as simulation; final numbers above are from WSL2 gfx1100 hardware execution under `HSA_ENABLE_DXG_DETECTION=1` with `90s` per `llama-cli` / `300s` per sweep timeouts. Kernel microbench honest N=10: `BASELINE_DP4A.md` 99.5 µs DP4A vs 543 µs naive 5.46× VERIFIED; but GEMV 0.94 avg FAIL <1.2× and GEMM 0.04 FAIL (truncated) — honest FAIL, 10 problem fixes documented (fix-p1/p2/p6/p10 + 6 gaps).
 
 **Build matrix (persistent `/root/llama-custom-07`, quilt verified):**
 
@@ -190,9 +190,9 @@ git -C /root/llama-custom-07/llama.cpp apply --check ../patches/0001-gfx1100-mul
 # ephemeral alias also valid: cmake -S llama.cpp -B build-stock / build-custom (same tree, both PASS)
 ```
 
-No hardcoded ON; `ggml/CMakeLists.txt` option default `OFF` intact (`option(GGML_CUDA_ENABLE_CUSTOM_GFX1100 ... OFF)`). Patch `355` lines via `git -C llama.cpp diff HEAD` against pinned `bb4caa75`.
+No hardcoded ON; `ggml/CMakeLists.txt` option default `OFF` intact. Patch 356 lines (can_handle fixed) via `git -C llama.cpp diff HEAD` against pinned `bb4caa75` — `core.autocrlf=false` + `*.patch eol=lf` PASS. **build_windows.bat not executed (no HIP SDK binary), py 40 deferred to Phase 8.**
 
-**Stack & raw paths:** Patch at `patches/0001-gfx1100-mul-mat-custom.patch` (355 lines); headers at `llama.cpp/ggml/src/ggml-cuda/custom_gfx1100/`; kernels at `kernels/matmul_iq4xs/impl_gemv_dp4a_gfx1100.hip`, `impl_gemm_wmma_stream.hip`; comparator `real_stock_dp4a_comparator.hip` + `BASELINE_DP4A.md`; raw `RunStore` dirs `benchmarks/results/phase7/ab_*` (with `CHECKSUMS.sha256`). Host stack as in §2: ROCm 7.2.1, Adrenalin 26.2.2 (`32.0.31041.1004`), librocdxg 1.2.2, WSL 2.7.12.0, kernel 6.18.33.2-2. Failed variants and stride fix disclosed in `benchmarks/profiling/KERNEL-BENCH-DIFF.md §4+§8` (WMMA gate tuning, LDS/launch_bounds guardrails audited).
+**Stack & raw paths — honest N=10 hardware (1/7 gaps_found, 6 gaps, 10 fixes, single-run banned, Phase 7 NOT done):** Patch at `patches/0001-gfx1100-mul-mat-custom.patch` (356 lines, can_handle fixed); headers at `llama.cpp/ggml/src/ggml-cuda/custom_gfx1100/`; kernels at `kernels/matmul_iq4xs/impl_gemv_dp4a_gfx1100.hip`, `impl_gemm_wmma_stream.hip`; comparator `real_stock_dp4a_comparator.hip` + `BASELINE_DP4A.md`; raw `RunStore` dirs `benchmarks/results/phase7/ab_*` (with `CHECKSUMS.sha256`). Host stack as in §2: ROCm 7.2.1, Adrenalin 26.2.2 (`32.0.31041.1004`), librocdxg 1.2.2, WSL 2.7.12.0, kernel 6.18.33.2-2. Failed variants and stride fix disclosed in `benchmarks/profiling/KERNEL-BENCH-DIFF.md §4+§8` (WMMA gate tuning, LDS/launch_bounds guardrails audited).
 
 **Quality gates:** `run_op_gate.py` (0 errors/4200+ ops, 4243 PASS in `benchmarks/results/phase6/op_gate_stock_20260827.json`; custom `5c6b397` also PASS 0 errors) and `run_model_gate.py` (PPL 6.4271, 6/6 canaries) remain green on both pins; custom correctness also gate `cosine 0.99998` via DP4A math. Recovery documented: `wsl --shutdown` / `wsl --terminate Ubuntu-24.04` on TDR, plus pre-flight `rocminfo` and `wsl --shutdown` after `.wslconfig` `memory=28GB` change.
 
