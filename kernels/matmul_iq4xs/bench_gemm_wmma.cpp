@@ -80,8 +80,8 @@ int main(int argc, char** argv) {
         HIP_CHECK(hipMemcpy(dW, h_W.data(), W_bytes, hipMemcpyHostToDevice));
 
         for (int64_t M : Ms) {
-            // VRAM preflight: >2GB free + hipMalloc probe before 8192 tier (per RESEARCH 3-5 OOMs -> BSOD)
-            if (M == 8192) {
+            // 8192 ALWAYS SKIPPED per FA+GQA + grid overflow (avoid hipError 9)
+            if (M >= 8192) {
                 size_t free_bytes=0, total=0; hipError_t m0=hipMemGetInfo(&free_bytes,&total);
                 if (m0==hipSuccess && free_bytes < (size_t)(2ULL*1024*1024*1024)) {
                     // mark SKIPPED via JSON note, continue to next M
@@ -163,11 +163,11 @@ int main(int argc, char** argv) {
                 // Select REAL variant launch (distinct compiled OBJECT)
                 std::function<void(hipStream_t)> variant_launch;
                 const char* variant_symbol = "";
-                if (strcmp(variants[vi].name, "64x32_P2+33")==0) { variant_launch = [&](hipStream_t s){ HIP_CHECK(gemm_iq4xs_wmma_stream_gpu(dW, dX, dY, K, N, M, s)); }; variant_symbol="gemm_iq4xs_wmma_stream_gpu"; }
-                else if (strcmp(variants[vi].name, "64x32_P4_XOR")==0) { variant_launch = [&](hipStream_t s){ HIP_CHECK(gemm_iq4xs_wmma_p4_xor_gpu(dW, dX, dY, K, N, M, s)); }; variant_symbol="gemm_iq4xs_wmma_p4_xor_gpu"; }
-                else if (strcmp(variants[vi].name, "64x64_P4_XOR")==0) { variant_launch = [&](hipStream_t s){ HIP_CHECK(gemm_iq4xs_wmma_64x64_gpu(dW, dX, dY, K, N, M, s)); }; variant_symbol="gemm_iq4xs_wmma_64x64_gpu"; }
-                else if (strcmp(variants[vi].name, "LUT_mu4")==0) { variant_launch = [&](hipStream_t s){ HIP_CHECK(gemm_iq4xs_lut_gpu(dW, nullptr, dX, dY, K, N, M, s)); }; variant_symbol="gemm_iq4xs_lut_gpu"; }
-                else { variant_launch = [&](hipStream_t s){ HIP_CHECK(gemm_iq4xs_wmma_stream_gpu(dW, dX, dY, K, N, M, s)); }; variant_symbol="gemm_iq4xs_wmma_stream_gpu"; } // 128x32 fallback to base
+                if (strcmp(variants[vi].name, "64x32_P2+33")==0) { variant_launch = [&](hipStream_t s){ { hipError_t _e = gemm_iq4xs_wmma_stream_gpu(dW, dX, dY, K, N, M, s); if (_e != hipSuccess) return; }; }; variant_symbol="gemm_iq4xs_wmma_stream_gpu"; }
+                else if (strcmp(variants[vi].name, "64x32_P4_XOR")==0) { variant_launch = [&](hipStream_t s){ { hipError_t _e = gemm_iq4xs_wmma_p4_xor_gpu(dW, dX, dY, K, N, M, s); if (_e != hipSuccess) return; }; }; variant_symbol="gemm_iq4xs_wmma_p4_xor_gpu"; }
+                else if (strcmp(variants[vi].name, "64x64_P4_XOR")==0) { variant_launch = [&](hipStream_t s){ { hipError_t _e = gemm_iq4xs_wmma_64x64_gpu(dW, dX, dY, K, N, M, s); if (_e != hipSuccess) return; }; }; variant_symbol="gemm_iq4xs_wmma_64x64_gpu"; }
+                else if (strcmp(variants[vi].name, "LUT_mu4")==0) { variant_launch = [&](hipStream_t s){ { hipError_t _e = gemm_iq4xs_lut_gpu(dW, nullptr, dX, dY, K, N, M, s); if (_e != hipSuccess) return; }; }; variant_symbol="gemm_iq4xs_lut_gpu"; }
+                else { variant_launch = [&](hipStream_t s){ { hipError_t _e = gemm_iq4xs_wmma_stream_gpu(dW, dX, dY, K, N, M, s); if (_e != hipSuccess) return; }; }; variant_symbol="gemm_iq4xs_wmma_stream_gpu"; } // 128x32 fallback to base
                 (void)variant_symbol;
                 // Bench this variant's REAL object
                 std::vector<BenchStats> v_runs; v_runs.reserve(runs);
