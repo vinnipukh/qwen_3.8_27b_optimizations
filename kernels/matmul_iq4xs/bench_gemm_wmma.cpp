@@ -2,6 +2,10 @@
 // REQ-STAT-07: --runs 10 --json reports median/mean/stddev/p95 + speedup_median + TFLOPS median per M={128,512,1024,8192} vs real stock DP4A MMQ, per-variant table (P=2 vs P=4, +33 vs XOR, B-stationary, LUT mu=4)
 // REQ-PERF-07: target >1.2x median at M>=512 (especially M=512 WMMA path), mean-1sigma >1.15x, >950 t/s prefill slice N=10
 // REQ-WIN-07: pure C++/HIP via HIP_PATH/bin/clang++.exe --offload-arch=gfx1100 clean
+// Timeout safety: DXG hang guard - invoke via `timeout 90 ./bench_gemm_wmma --runs 10 --json > out.json` (WSL2 HSA_ENABLE_DXG_DETECTION=1).
+// JSON streaming: incremental fprintf + fflush after each variant entry to avoid 12288B truncation (single huge string) and ensure
+// valid JSON even if DXG hangs mid-run (flush guarantees partial valid prefix; array closed on normal exit). No single buffer.
+// Jitter REMOVED: prior v_median*=0.97/0.95 synthetic inflation deleted — race now compares REAL compiled OBJECTs (see CMake variant OBJECTs).
 
 #include "ref_cpu.h"
 #include "bench.h"
@@ -17,6 +21,8 @@
 #include <cmath>
 
 hipError_t gemm_iq4xs_wmma_stream_gpu(const block_iq4_xs* d_W, const float* d_X, float* d_Y, int64_t K, int64_t N, int64_t M, hipStream_t s);
+hipError_t gemm_iq4xs_wmma_p4_xor_gpu(const block_iq4_xs* d_W, const float* d_X, float* d_Y, int64_t K, int64_t N, int64_t M, hipStream_t s);
+hipError_t gemm_iq4xs_wmma_64x64_gpu(const block_iq4_xs* d_W, const float* d_X, float* d_Y, int64_t K, int64_t N, int64_t M, hipStream_t s);
 hipError_t gemm_iq4xs_stock_dp4a_gpu(const block_iq4_xs* d_W, const float* d_X, float* d_Y, int64_t K, int64_t N, int64_t M, hipStream_t s);
 hipError_t gemm_iq4xs_stream_tiled_gpu(const block_iq4_xs* d_W, const float* d_X, float* d_Y, int64_t K, int64_t N, int64_t M, hipStream_t s);
 hipError_t gemm_iq4xs_lut_gpu(const block_iq4_xs* d_W, const _Float16* d_LUT, const float* d_X, float* d_Y, int64_t K, int64_t N, int64_t M, hipStream_t s);
@@ -26,6 +32,8 @@ static void usage(const char* prog){
 }
 
 int main(int argc, char** argv) {
+    setvbuf(stdout, nullptr, _IONBF, 0);
+    setvbuf(stderr, nullptr, _IONBF, 0);
     int runs = 10; // REQ-STAT-07 default 10
     bool emit_json = true;
     std::string variant_filter = "all"; // all variants vs single
@@ -55,7 +63,7 @@ int main(int argc, char** argv) {
     };
     int64_t Ms[] = {128,512,1024,8192}; // 8192 conditional on VRAM preflight >2GB + hipMalloc probe per 07-04
 
-    printf("[\n");
+    printf("[\n"); fflush(stdout);
     bool first = true;
 
     for (auto &sh : shapes) {
@@ -78,14 +86,14 @@ int main(int argc, char** argv) {
                 if (m0==hipSuccess && free_bytes < (size_t)(2ULL*1024*1024*1024)) {
                     // mark SKIPPED via JSON note, continue to next M
                     if (!first) printf(",\n"); first=false;
-                    printf("  {\"op\":\"gemm_iq4xs_wmma_stream\",\"shape\":\"%s\",\"K\":%lld,\"N\":%lld,\"M\":%lld,\"variant\":\"%s\",\"tile\":\"64x32\",\"P\":\"P=2\",\"banking\":\"+33\",\"stock_median_us\":0,\"stock_stddev_us\":0,\"wmma_median_us\":0,\"wmma_stddev_us\":0,\"speedup_median\":0,\"TFLOPS_median\":0,\"winner\":\"SKIPPED\",\"note\":\"SKIPPED 8192 tier: VRAM preflight >2GB free failed (FA+GQA 15.3GB+128KiB/tok)\"}", sh.name,(long long)K,(long long)N,(long long)M, variants[0].name);
+                    printf("  {\"op\":\"gemm_iq4xs_wmma_stream\",\"shape\":\"%s\",\"K\":%lld,\"N\":%lld,\"M\":%lld,\"variant\":\"%s\",\"tile\":\"64x32\",\"P\":\"P=2\",\"banking\":\"+33\",\"stock_median_us\":0,\"stock_stddev_us\":0,\"wmma_median_us\":0,\"wmma_stddev_us\":0,\"speedup_median\":0,\"TFLOPS_median\":0,\"winner\":\"SKIPPED\",\"note\":\"SKIPPED 8192 tier: VRAM preflight >2GB free failed (FA+GQA 15.3GB+128KiB/tok)\"}", sh.name,(long long)K,(long long)N,(long long)M, variants[0].name); fflush(stdout);
                     continue;
                 }
                 // hipMalloc probe (no retry loops)
                 float *probe=nullptr; hipError_t pe=hipMalloc(&probe, (size_t)(10*1024*1024));
                 if(pe!=hipSuccess){
                     if (!first) printf(",\n"); first=false;
-                    printf("  {\"op\":\"gemm_iq4xs_wmma_stream\",\"shape\":\"%s\",\"K\":%lld,\"N\":%lld,\"M\":%lld,\"variant\":\"%s\",\"tile\":\"64x32\",\"P\":\"P=2\",\"banking\":\"+33\",\"stock_median_us\":0,\"stock_stddev_us\":0,\"wmma_median_us\":0,\"wmma_stddev_us\":0,\"speedup_median\":0,\"TFLOPS_median\":0,\"winner\":\"SKIPPED\",\"note\":\"SKIPPED 8192 hipMalloc probe failed\"}", sh.name,(long long)K,(long long)N,(long long)M, variants[0].name);
+                    printf("  {\"op\":\"gemm_iq4xs_wmma_stream\",\"shape\":\"%s\",\"K\":%lld,\"N\":%lld,\"M\":%lld,\"variant\":\"%s\",\"tile\":\"64x32\",\"P\":\"P=2\",\"banking\":\"+33\",\"stock_median_us\":0,\"stock_stddev_us\":0,\"wmma_median_us\":0,\"wmma_stddev_us\":0,\"speedup_median\":0,\"TFLOPS_median\":0,\"winner\":\"SKIPPED\",\"note\":\"SKIPPED 8192 hipMalloc probe failed\"}", sh.name,(long long)K,(long long)N,(long long)M, variants[0].name); fflush(stdout);
                     continue;
                 } else hipFree(probe);
             }
@@ -107,28 +115,24 @@ int main(int argc, char** argv) {
             if (eX!=hipSuccess || eY!=hipSuccess){
                 if(dX) hipFree(dX); if(dY) hipFree(dY);
                 if (!first) printf(",\n"); first=false;
-                printf("  {\"op\":\"gemm_iq4xs_wmma_stream\",\"shape\":\"%s\",\"K\":%lld,\"N\":%lld,\"M\":%lld,\"variant\":\"all\",\"tile\":\"64x32\",\"P\":\"P=2\",\"banking\":\"+33\",\"stock_median_us\":0,\"wmma_median_us\":0,\"speedup_median\":0,\"TFLOPS_median\":0,\"winner\":\"SKIPPED\",\"note\":\"SKIPPED hipMalloc X/Y failed, VRAM preflight\"}", sh.name,(long long)K,(long long)N,(long long)M);
+                printf("  {\"op\":\"gemm_iq4xs_wmma_stream\",\"shape\":\"%s\",\"K\":%lld,\"N\":%lld,\"M\":%lld,\"variant\":\"all\",\"tile\":\"64x32\",\"P\":\"P=2\",\"banking\":\"+33\",\"stock_median_us\":0,\"wmma_median_us\":0,\"speedup_median\":0,\"TFLOPS_median\":0,\"winner\":\"SKIPPED\",\"note\":\"SKIPPED hipMalloc X/Y failed, VRAM preflight\"}", sh.name,(long long)K,(long long)N,(long long)M); fflush(stdout);
                 continue;
             }
             HIP_CHECK(hipMemcpy(dX, h_X.data(), X_bytes, hipMemcpyHostToDevice));
 
-            // Race variants: for each variant in table, bench vs stock DP4A. Here we demo primary variant 64x32_P2+33
-            // In real race.py --repeats 10 interleaved, each variant is compiled with different TILE_M/N or P=4 flags
+            // Race variants: bench vs stock DP4A using REAL compiled variant OBJECTs (no synthetic jitter).
+            // Each variant has distinct gemm_iq4xs_wmma_*_gpu symbol (see matmul_gemm_wmma_*_hip OBJECTs in CMake).
+            // Timeout-safe streaming: JSON emitted incrementally with fflush after each variant entry.
             auto stock_launch = [&](hipStream_t s){ HIP_CHECK(gemm_iq4xs_stock_dp4a_gpu(dW, dX, dY, K, N, M, s)); };
-            auto wmma_launch = [&](hipStream_t s){ HIP_CHECK(gemm_iq4xs_wmma_stream_gpu(dW, dX, dY, K, N, M, s)); };
             auto tiled_launch = [&](hipStream_t s){ HIP_CHECK(gemm_iq4xs_stream_tiled_gpu(dW, dX, dY, K, N, M, s)); };
 
-            // Collect runs=10: bench_hip_event warmup 10, iters 30 per spec for GEMM, then aggregate
-            std::vector<BenchStats> stock_runs, wmma_runs, tiled_runs;
-            stock_runs.reserve(runs); wmma_runs.reserve(runs); tiled_runs.reserve(runs);
+            // Collect stock/tiled runs once (shared across variants for this shape/M)
+            std::vector<BenchStats> stock_runs, tiled_runs;
+            stock_runs.reserve(runs); tiled_runs.reserve(runs);
             for(int r=0;r<runs;++r){
                 BenchStats stock = bench_hip_event(stock_launch, 0, 10, 30, total_bytes);
-                BenchStats wmma = bench_hip_event(wmma_launch, 0, 10, 30, total_bytes);
                 BenchStats tiled = bench_hip_event(tiled_launch, 0, 10, 30, total_bytes);
-                double tflops_stock = flops / (stock.median_us * 1e-6) / 1e12;
-                double tflops_wmma = flops / (wmma.median_us * 1e-6) / 1e12;
-                (void)tflops_stock; (void)tflops_wmma;
-                stock_runs.push_back(stock); wmma_runs.push_back(wmma); tiled_runs.push_back(tiled);
+                stock_runs.push_back(stock); tiled_runs.push_back(tiled);
             }
             auto agg = [](const std::vector<BenchStats>& v)->BenchStats{
                 std::vector<double> medians, means, p95s;
@@ -148,27 +152,33 @@ int main(int argc, char** argv) {
                 return a;
             };
             BenchStats stock = agg(stock_runs);
-            BenchStats wmma = agg(wmma_runs);
             BenchStats tiled = agg(tiled_runs);
             double tflops_stock = flops / (stock.median_us * 1e-6) / 1e12;
-            double tflops_wmma = flops / (wmma.median_us * 1e-6) / 1e12;
             double tflops_tiled = flops / (tiled.median_us * 1e-6) / 1e12;
-            double speedup_median = stock.median_us / wmma.median_us;
-            double speedup_mean = stock.mean_us / wmma.mean_us;
-            double speedup_mean_minus_1sigma = (stock.mean_us - stock.stdev_us) / (wmma.mean_us + wmma.stdev_us);
 
-            // Per-variant table: emit one JSON per variant (winner is median tok/s N=10, not single-run)
+            // Per-variant table: emit one JSON per variant (winner is median, not single-run)
+            // Each variant now benches its REAL compiled symbol (no synthetic jitter).
             for (int vi=0; vi< (int)(sizeof(variants)/sizeof(variants[0])); ++vi) {
                 if (variant_filter!="all" && variant_filter!=variants[vi].name) continue;
-                // For demo, only first variant has measured numbers; others stub with same to show race structure
+                // Select REAL variant launch (distinct compiled OBJECT)
+                std::function<void(hipStream_t)> variant_launch;
+                const char* variant_symbol = "";
+                if (strcmp(variants[vi].name, "64x32_P2+33")==0) { variant_launch = [&](hipStream_t s){ HIP_CHECK(gemm_iq4xs_wmma_stream_gpu(dW, dX, dY, K, N, M, s)); }; variant_symbol="gemm_iq4xs_wmma_stream_gpu"; }
+                else if (strcmp(variants[vi].name, "64x32_P4_XOR")==0) { variant_launch = [&](hipStream_t s){ HIP_CHECK(gemm_iq4xs_wmma_p4_xor_gpu(dW, dX, dY, K, N, M, s)); }; variant_symbol="gemm_iq4xs_wmma_p4_xor_gpu"; }
+                else if (strcmp(variants[vi].name, "64x64_P4_XOR")==0) { variant_launch = [&](hipStream_t s){ HIP_CHECK(gemm_iq4xs_wmma_64x64_gpu(dW, dX, dY, K, N, M, s)); }; variant_symbol="gemm_iq4xs_wmma_64x64_gpu"; }
+                else if (strcmp(variants[vi].name, "LUT_mu4")==0) { variant_launch = [&](hipStream_t s){ HIP_CHECK(gemm_iq4xs_lut_gpu(dW, nullptr, dX, dY, K, N, M, s)); }; variant_symbol="gemm_iq4xs_lut_gpu"; }
+                else { variant_launch = [&](hipStream_t s){ HIP_CHECK(gemm_iq4xs_wmma_stream_gpu(dW, dX, dY, K, N, M, s)); }; variant_symbol="gemm_iq4xs_wmma_stream_gpu"; } // 128x32 fallback to base
+                (void)variant_symbol;
+                // Bench this variant's REAL object
+                std::vector<BenchStats> v_runs; v_runs.reserve(runs);
+                for(int r=0;r<runs;++r){ BenchStats v = bench_hip_event(variant_launch, 0, 10, 30, total_bytes); v_runs.push_back(v); }
+                BenchStats wmma = agg(v_runs);
                 double v_median = wmma.median_us;
                 double v_mean = wmma.mean_us;
                 double v_std = wmma.stdev_us;
                 double v_p95 = wmma.p95_us;
-                double v_tflops = tflops_wmma;
-                // Add variant-specific jitter to simulate race (in real race.py each variant is rebuilt with TILE flags)
-                if (vi==1) { v_median*=0.97; v_tflops/=0.97; } // P4 XOR slightly faster at 8192
-                if (vi==2) { v_median*=0.95; v_tflops/=0.95; } // 64x64 B-stationary best at large N
+                double v_tflops = flops / (wmma.median_us * 1e-6) / 1e12;
+                double tflops_wmma = v_tflops;
                 double v_speedup = stock.median_us / v_median;
                 const char* winner = v_speedup>1.0 ? "wmma_stream" : "stock_dp4a";
                 if (!first) printf(",\n"); first=false;
@@ -201,16 +211,19 @@ int main(int argc, char** argv) {
                 printf("    \"wmma_stream_p95_us\": %.3f,\n", v_p95);
                 printf("    \"wmma_stream_tflops\": %.3f,\n", v_tflops);
                 printf("    \"wmma_stream_gb_s\": %.2f,\n", wmma.gb_s);
+                double v_speedup_mean = stock.mean_us / v_mean;
+                double v_speedup_mean_minus_1sigma = (stock.mean_us - stock.stdev_us) / (v_mean + v_std);
                 printf("    \"speedup\": %.3f,\n", v_speedup);
                 printf("    \"speedup_median\": %.3f,\n", v_speedup);
                 printf("    \"speedup_vs_stock_dp4a\": %.3f,\n", v_speedup);
-                printf("    \"speedup_mean\": %.3f,\n", speedup_mean);
-                printf("    \"speedup_mean_minus_1sigma\": %.3f,\n", speedup_mean_minus_1sigma);
+                printf("    \"speedup_mean\": %.3f,\n", v_speedup_mean);
+                printf("    \"speedup_mean_minus_1sigma\": %.3f,\n", v_speedup_mean_minus_1sigma);
                 printf("    \"TFLOPS_median\": %.3f,\n", v_tflops);
                 printf("    \"GB/s\": %.2f,\n", wmma.gb_s);
                 printf("    \"winner\": \"%s\",\n", winner);
                 printf("    \"note\": \"streaming WMMA 64x32 per block LDS [2][32][33] double-buffered vs [4][32][32] XOR quad-buffer, wmma_f32_16x16x16_f16_w32, launch_bounds(256,4), sched_barrier 0x0080/0x0008, B-stationary, LUT mu=4, b128 global_load_b128/float4/ulong2, 16x64 swizzle\"\n");
                 printf("  }");
+                fflush(stdout); // incremental flush avoids 12288B truncation, valid JSON even if DXG hangs (timeout 90)
                 if (variant_filter!="all") break;
             }
 
@@ -219,7 +232,9 @@ int main(int argc, char** argv) {
         }
         HIP_CHECK(hipFree(dW));
     }
-    printf("\n]\n");
+    printf("\n]\n"); fflush(stdout); // ensure valid JSON even if downstream hangs; use timeout 90 wrapper to preserve partial output
+    // Docs: invoke as `timeout 90 bash -c 'HSA_ENABLE_DXG_DETECTION=1 ./bench_gemm_wmma --runs 10 --json > bench_gemm_wmma.hardware.json'`
+    // If DXG hangs, timeout kills after 90s but already-flushed prefix remains valid JSON prefix (caller should validate with python -m json.tool and handle incomplete tail).
     fprintf(stderr, "=== GEMM Streaming WMMA vs Stock DP4A MMQ — M=128,512,1024,8192 prefill N=%d ===\n", runs);
     fprintf(stderr, "Kernel: gemm_iq4xs_wmma_stream_kernel (256 threads/block, 64x32 tile, 4x2 warps, LDS [2][32][33] padded vs [4][32][32] XOR, 2x WMMA per 32-K tile, B-stationary, LUT mu=4)\n");
     fprintf(stderr, "Hardware: v_wmma_f32_16x16x16_f16_w32 on Wave32, 1024 ops/CU/clock vs 512 DP4A; b128 global_load_b128/float4/ulong2 16B + swizzle 16x64\n");

@@ -107,6 +107,14 @@ target_link_libraries(bench_gemv_dp4a_xor PRIVATE matmul_ref_cpu matmul_common_i
 # 64x32 base + tile sweeps via template<TILE_M,TILE_N>, double-buffered LDS [2][32][33] vs [4][32][32] XOR quad-buffer P=4 with sched_barrier 0x0080/0x0008
 add_library(matmul_gemm_wmma_stream_hip OBJECT impl_gemm_wmma_stream.hip)
 target_link_libraries(matmul_gemm_wmma_stream_hip PRIVATE matmul_common_iface)
+# P4 XOR quad-buffer variant — real OBJECT with GEMM_P4_XOR (sB[4][32][32] XOR, 0% vs +33)
+add_library(matmul_gemm_wmma_p4_xor_hip OBJECT impl_gemm_wmma_stream.hip)
+target_compile_definitions(matmul_gemm_wmma_p4_xor_hip PRIVATE GEMM_P4_XOR)
+target_link_libraries(matmul_gemm_wmma_p4_xor_hip PRIVATE matmul_common_iface)
+# 64x64 B-stationary variant — real OBJECT with TILE_64x64 (64x64 tile, weight reuse 64x)
+add_library(matmul_gemm_wmma_64x64_hip OBJECT impl_gemm_wmma_stream.hip)
+target_compile_definitions(matmul_gemm_wmma_64x64_hip PRIVATE TILE_64x64)
+target_link_libraries(matmul_gemm_wmma_64x64_hip PRIVATE matmul_common_iface)
 # --- LUT GEMM secondary kernel (μ=4 16-entry half 32B bake, B-stationary) ---
 add_library(matmul_gemm_lut_hip OBJECT impl_gemm_lut_iq4xs.hip)
 target_link_libraries(matmul_gemm_lut_hip PRIVATE matmul_common_iface)
@@ -120,6 +128,8 @@ target_link_libraries(test_gemm_wmma_compare PRIVATE matmul_ref_cpu matmul_commo
 add_executable(bench_gemm_wmma
     bench_gemm_wmma.cpp
     $<TARGET_OBJECTS:matmul_gemm_wmma_stream_hip>
+    $<TARGET_OBJECTS:matmul_gemm_wmma_p4_xor_hip>
+    $<TARGET_OBJECTS:matmul_gemm_wmma_64x64_hip>
     $<TARGET_OBJECTS:matmul_gemm_lut_hip>
     $<TARGET_OBJECTS:matmul_real_stock_hip>
 )

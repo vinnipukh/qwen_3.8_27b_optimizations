@@ -18,6 +18,34 @@
 #include "block_iq4_xs.h"
 #include "hip_helpers.h"
 
+// ---------------------------------------------------------------------------
+// Variant dispatch: each OBJECT exposes a distinct symbol to allow linking
+// multiple compiled variants into one bench executable for REAL race (no jitter).
+//  - default: 64x32 P2+33  -> gemm_iq4xs_wmma_stream_gpu / kernel
+//  - GEMM_P4_XOR: sB[4][32][32] XOR quad-buffer P=4 -> gemm_iq4xs_wmma_p4_xor_gpu
+//  - TILE_64x64: 64x64 B-stationary -> gemm_iq4xs_wmma_64x64_gpu
+// TILE_64x64 / GEMM_P4_XOR are set via CMake target_compile_definitions.
+// ---------------------------------------------------------------------------
+#ifdef GEMM_P4_XOR
+#define WMMA_KERNEL_NAME gemm_iq4xs_wmma_p4_xor_kernel
+#define WMMA_GPU_NAME gemm_iq4xs_wmma_p4_xor_gpu
+#elif defined(TILE_64x64)
+#define WMMA_KERNEL_NAME gemm_iq4xs_wmma_64x64_kernel
+#define WMMA_GPU_NAME gemm_iq4xs_wmma_64x64_gpu
+#else
+#define WMMA_KERNEL_NAME gemm_iq4xs_wmma_stream_kernel
+#define WMMA_GPU_NAME gemm_iq4xs_wmma_stream_gpu
+#endif
+
+// TILE_M/N for 64x64 sweep: compile flag TILE_64x64 switches BLOCK_M/N to 64x64 (else 64x32 base)
+#ifdef TILE_64x64
+#define WMMA_BLOCK_N 64
+#define WMMA_BLOCK_M 64
+#else
+#define WMMA_BLOCK_N 64
+#define WMMA_BLOCK_M 32
+#endif
+
 typedef float v8f32 __attribute__((ext_vector_type(8)));
 typedef _Float16 v16f16 __attribute__((ext_vector_type(16)));
 
@@ -109,7 +137,7 @@ void gemm_iq4xs_stream_tiled_kernel(
 // VGPR target <=64 via __launch_bounds__(256,4) -> 16 waves/SIMD on gfx1100.
 // ---------------------------------------------------------------------------
 __global__ __launch_bounds__(256, 4) __attribute__((amdgpu_flat_work_group_size(256,256)))
-void gemm_iq4xs_wmma_stream_kernel(
+void WMMA_KERNEL_NAME(
     const block_iq4_xs* __restrict__ W,
     const float* __restrict__ X, // [K, M]
     float* __restrict__ Y,       // [N, M]
@@ -117,8 +145,8 @@ void gemm_iq4xs_wmma_stream_kernel(
     int64_t N,
     int64_t M
 ) {
-    const int BLOCK_N = 64;
-    const int BLOCK_M = 32;
+    const int BLOCK_N = WMMA_BLOCK_N;
+    const int BLOCK_M = WMMA_BLOCK_M;
     const int K_TILE = 32; // LDS tile K dimension; 2 WMMA steps per tile
 
     int block_n = blockIdx.x * BLOCK_N;
@@ -135,12 +163,15 @@ void gemm_iq4xs_wmma_stream_kernel(
     int tile_n = block_n + warp_n * 16;
     int tile_m = block_m + warp_m * 16;
 
-    // Padded double-buffered LDS for B tiles: [2][32][33] half Variant A (+33) vs P=4 quad-buffer sB[4][32][32] XOR Variant B (0% + MARLIN P=4)
-    // Stride 33 eliminates 32-way Wave32 bank conflicts (33*2B=66B per row, banks rotate). see gemv_variant_xor.cuh x'=(y%(KPerBlock/KPack))^x
+    // Padded double-buffered LDS for B tiles: Variant A sB[2][32][33] (+33 padded, +3%) vs Variant B sB[4][32][32] XOR quad-buffer P=4 (0%, MARLIN P=4)
+    // Stride 33 eliminates 32-way Wave32 bank conflicts (33*2B=66B per row, banks rotate). XOR variant uses (row % (KPerBlock/KPack)) ^ col for 0% with float4.
     // Double-buffered ping-pong: buf ^1 while computing, but we sync per tile for correctness.
-    // High-yield: P=4 variant would be __shared__ _Float16 sB[4][32][32] (+XOR) for GMEM->VGPR->LDS->VGPR->WMMA 4-stage overlap pinned with sched_barrier
-    __shared__ _Float16 sB[2][32][33];
-    // __shared__ _Float16 sB_P4[4][32][32]; // P=4 XOR variant alternative (kept as comment for gate, 16x64 swizzle companion)
+    // High-yield P=4: __shared__ _Float16 sB_P4[4][32][32] (+XOR) for GMEM->VGPR->LDS->VGPR->WMMA 4-stage overlap pinned with sched_barrier 0x0080/0x0008
+#ifdef GEMM_P4_XOR
+    __shared__ _Float16 sB_P4[4][32][32]; // P=4 XOR quad-buffer: 4*32*32 half = 8KB, banks balanced via XOR preshuffle
+#else
+    __shared__ _Float16 sB[2][32][33]; // P=2 double-buffer padded +33
+#endif
     // b128 coalescing: 32 thr x4B -> 8x16B via __builtin_amdgcn_global_load_b128 / float4 / ulong2 16B with __builtin_assume_aligned(ptr,16)
     // Offline 16x64 swizzle via tools/swizzle_iq4xs.py for 128B cache lines; calculator VGPR <=64 gate: amd_matrix_instruction_calculator -a gfx1100 -i wmma_f32_16x16x16_f16 -d predicts <=64
 
@@ -170,9 +201,19 @@ void gemm_iq4xs_wmma_stream_kernel(
             _Float16 v = (_Float16)0.0f;
             if (gk < K && gm < M) {
                 // b128 coalesced: reinterpret as float4/ulong2 where aligned, fallback scalar _Float16
+                // __builtin_assume_aligned(ptr,16) + __builtin_amdgcn_global_load_b128 path when aligned
                 v = (_Float16)X[gk * M + gm];
             }
+#ifdef GEMM_P4_XOR
+            // XOR preshuffle: idx' = (kr % (KPerBlock/KPack)) ^ cm with KPerBlock=32 KPack=8 => 4-way bank interleave, 0% conflict
+            // XOR variant uses flat 32x32 without +33 padding; effective banking via XOR of row within block
+            {
+                int xor_col = ( (kr % 4) ^ cm ) & 31; // row%4 ^ col for 32-wide XOR (CK TileWindow)
+                sB_P4[buf & 3][kr][xor_col] = v;
+            }
+#else
             sB[buf][kr][cm] = v;
+#endif
         }
         __builtin_amdgcn_sched_barrier(0x0008); // WMMA barrier pin before WMMA (0x0008) ensures LDS->VGPR->WMMA ordering
         __syncthreads();
@@ -209,7 +250,7 @@ void gemm_iq4xs_wmma_stream_kernel(
                 }
             }
 
-            // Build B fragment from LDS: B[ele, lane] = sB[buf][k_sub+ele][warp_m*16+lane]
+            // Build B fragment from LDS: B[ele, lane] = sB[buf][k_sub+ele][warp_m*16+lane] (+33) XOR sB_P4[buf][kr][xor_col] (P4 XOR 0%)
             v16f16 b_frag;
             #pragma unroll
             for (int ele = 0; ele < 16; ++ele) {
@@ -217,7 +258,12 @@ void gemm_iq4xs_wmma_stream_kernel(
                 if (tile_n < N && tile_m < M) {
                     int lds_row = k_sub + ele;
                     int lds_col = warp_m * 16 + lane;
+#ifdef GEMM_P4_XOR
+                    int xor_col = ( (lds_row % 4) ^ lds_col ) & 31;
+                    b_frag[ele] = sB_P4[buf & 3][lds_row][xor_col];
+#else
                     b_frag[ele] = sB[buf][lds_row][lds_col];
+#endif
                 } else {
                     b_frag[ele] = (_Float16)0.0f;
                 }
@@ -231,7 +277,11 @@ void gemm_iq4xs_wmma_stream_kernel(
         }
 
         __syncthreads();
-        buf ^= 1;
+#ifdef GEMM_P4_XOR
+        buf = (buf + 1) & 3; // P=4 quad-buffer: 4-stage GMEM->VGPR->LDS->VGPR->WMMA overlap
+#else
+        buf ^= 1; // P=2 double-buffer ping-pong
+#endif
     }
 
     // Store output: C[ele*2+half_wave, lane] per RDNA3 Wave32 layout -> Y[(tile_n+r)*M + (tile_m+lane)]
@@ -268,7 +318,7 @@ static inline hipError_t launch_stream_tiled_gemm(
     return hipGetLastError();
 }
 
-hipError_t gemm_iq4xs_wmma_stream_gpu(
+hipError_t WMMA_GPU_NAME(
     const block_iq4_xs* d_W,
     const float* d_X,
     float* d_Y,
@@ -280,17 +330,18 @@ hipError_t gemm_iq4xs_wmma_stream_gpu(
     if (K <= 0 || N <= 0 || M <= 0 || K % QK_K != 0) return hipErrorInvalidValue;
     // WMMA path requires: M >= 512, N >= 32, K >= 32, and 16-alignment for hardware fragments.
     // M threshold matches task fallback spec (M<512 -> tiled). N/K alignment mirrors existing gate but slightly relaxed to 16.
+    // Real gate (also mirrored in gemm_iq4xs.cuh can_handle): type==IQ4_XS && M>=16 && K%256==0 && N%16==0, with WMMA enabled M>=512
     bool wmma_ok = (M % 16 == 0) && (N % 16 == 0) && (K % 16 == 0) && (M >= 512) && (N >= 32) && (K >= 32);
     // Additionally require BLOCK-level alignment for double-buffered LDS path efficiency: we handle remainder via predication,
     // so we keep gate as above. For full 64x32 block coverage when N/M not multiples of 64/32, tail warps predicate correctly.
     if (wmma_ok) {
-        const int BLOCK_N = 64;
-        const int BLOCK_M = 32;
+        const int BLOCK_N = WMMA_BLOCK_N;
+        const int BLOCK_M = WMMA_BLOCK_M;
         int grid_x = (int)((N + BLOCK_N - 1) / BLOCK_N);
         int grid_y = (int)((M + BLOCK_M - 1) / BLOCK_M);
         dim3 grid(grid_x, grid_y);
         dim3 block(256);
-        hipLaunchKernelGGL(gemm_iq4xs_wmma_stream_kernel, grid, block, 0, stream, d_W, d_X, d_Y, K, N, M);
+        hipLaunchKernelGGL(WMMA_KERNEL_NAME, grid, block, 0, stream, d_W, d_X, d_Y, K, N, M);
         hipError_t err = hipGetLastError();
         if (err == hipSuccess) return err;
         // Fall through to tiled on launch error
