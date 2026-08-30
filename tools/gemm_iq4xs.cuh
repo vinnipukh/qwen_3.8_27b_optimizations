@@ -178,11 +178,12 @@ static void gemm_iq4xs_wmma_kernel(
 }
 
 inline bool custom_gemm_iq4xs_can_handle(int64_t K, int64_t N, int64_t M, ggml_type type) {
+    // Real gate: type==IQ4_XS && M>=16 && K%256==0 && N%16==0 (plus K>0,N>0)
     if (type != GGML_TYPE_IQ4_XS) return false;
     if (M < 16) return false;
-    if (K <= 0 || N <= 0 || K % 256 != 0) return false;
-    if (K != 5120 && K != 17408) return false;
-    if (N != 5120 && N != 6144 && N != 17408) return false;
+    if (K <= 0 || N <= 0) return false;
+    if (K % 256 != 0) return false;
+    if (N % 16 != 0) return false;
     return true;
 }
 

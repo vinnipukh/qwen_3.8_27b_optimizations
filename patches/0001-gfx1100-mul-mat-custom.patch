@@ -55,10 +55,10 @@ index 0000000..049967d
 +#endif
 diff --git a/ggml/src/ggml-cuda/custom_gfx1100/gemm_iq4xs.cuh b/ggml/src/ggml-cuda/custom_gfx1100/gemm_iq4xs.cuh
 new file mode 100644
-index 0000000..19bda33
+index 0000000..46dc189
 --- /dev/null
 +++ b/ggml/src/ggml-cuda/custom_gfx1100/gemm_iq4xs.cuh
-@@ -0,0 +1,93 @@
+@@ -0,0 +1,94 @@
 +// Vendored from kernels/matmul_iq4xs/impl_gemm_wmma_stream.hip -- gfx1100 WMMA GEMM (Phase 07-03)
 +// 64x32 per block, double-buffered LDS [2][32][33], __launch_bounds__(256,4), GGML layouts [K,M] and [N,M] fixed
 +#pragma once
@@ -146,7 +146,8 @@ index 0000000..19bda33
 +    if(K<=0||N<=0||M<=0||K%QK_K!=0) return hipErrorInvalidValue; return launch_stream_tiled_gemm_cuh(d_W,d_X,d_Y,K,N,M,stream);
 +}
 +inline bool custom_gemm_iq4xs_can_handle(int64_t K,int64_t N,int64_t M,ggml_type type){
-+    (void)K;(void)N;(void)M;(void)type; return false;
++    if(type!=GGML_TYPE_IQ4_XS) return false; if(M<16) return false; if(K<=0||N<=0) return false;
++    if(K%256!=0) return false; if(N%16!=0) return false; return true;
 +}
 +inline hipError_t custom_gemm_iq4xs_dispatch(const block_iq4_xs* W,const float* X,float* Y,int64_t K,int64_t N,int64_t M,hipStream_t stream){
 +    return gemm_iq4xs_wmma_stream_gpu_cuh(W,X,Y,K,N,M,stream);
