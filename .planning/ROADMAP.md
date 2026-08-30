@@ -52,7 +52,7 @@ Inherited verbatim from the original roadmap; planners and executors apply them 
 - [x] **Phase 4: Kernel Playground Scaffold** - Standalone CPU-reference → HIP → numerical-compare → microbenchmark pipeline operating outside llama.cpp (completed 2026-08-25)
 - [x] **Phase 5: First Custom Kernel (Bottleneck Attack)** - GEMV 1.26–2.13× / GEMM 1.7–7.5× vs stock HIP (cosine 1.0), 30/32 wins, WMMA `v_wmma` in disasm, provisional quilt patch (completed 2026-08-25)
 - [x] **Phase 6: Integration, Full Validation & Publication** - Winners behind ON/OFF flags via quilt patches; stock baseline intact forever; complete before/after matrix published (completed 2026-08-25)
-- [x] **Phase 7: Hybrid DP4A & WMMA Matrix Core Optimization — RE-SCOPED 2026-08-28** - Fuse Q8_1 + RDNA3 WMMA to beat **real production stock llama.cpp by ≥10% end-to-end** in `llama-bench`, **Windows-native (≤2 langs, no Python/JS servers, `build_windows.bat`)**, and **10× averaged (15× LLM QA)** — see `output/deep-research/1000t-s-at-8k-gfx1100.md`. (Status: 28/28 plans artifact-complete, verifier 2/5 — gaps pending bare-metal + Windows + 10% + 10× re-bench; stock 808 vs custom 849 pp4096 = +5.1% — *not yet* the required +10%.)
+- [x] **Phase 7: Hybrid DP4A & WMMA Matrix Core Optimization — RE-SCOPED 2026-08-28, REPLANNED 2026-08-30** - Fuse Q8_1 + RDNA3 WMMA to beat **real production stock llama.cpp by ≥10% end-to-end** in `llama-bench`, **Windows-native (≤2 langs, no Python/JS servers, `build_windows.bat`)**, and **10× averaged (15× LLM QA)** — ways-to-achieve in `output/deep-research/phase7-3must-haves-exhaustive.md` + `docs/PUBLICATION.md §8`. (Status: 3 closure plans — 07-01 REQ-WIN-07 Windows ≤2 langs, 07-02 REQ-PERF-07 ≥1.10×, 07-03 REQ-STAT-07 N≥10/15; bare-metal N=10 committed `d414c552`/`6e46d2e`: 87.8µs DP4A 6.24× PASS, gemv 0.976 FAIL, gemm M1024 1.08 avg/1.89 peak, llama-bench n=10 512/1024/2048/4096 pp 1.079/0.996/1.003/0.978 all FAIL, tg 0.993 — *not yet* the required +10%; HIP SDK install pending.)
 - [ ] **Phase 8: Refactor to Windows Native (now landing the Phase 7 must-have #1)** - Strip bloat to pure C++/HIP, prune kernels to IQ4_XS winners, provide foolproof build_windows.bat for gfx1100 via HIP SDK, and serve llama-server.exe at localhost:8000 — **Phase 7 now declares this as mandatory; Phase 8 is the execution phase that closes REQ-WIN-07.**
 
 ## Phase Details
@@ -184,7 +184,7 @@ Inherited verbatim from the original roadmap; planners and executors apply them 
 | 4. Kernel Playground Scaffold | 3/3 | Complete    | 2026-08-25 |
 | 5. First Custom Kernel (Bottleneck Attack) | 4/4 | Complete    | 2026-08-25 |
 | 6. Integration, Full Validation & Publication | 5/5 | Complete    | 2026-08-25 |
-| 7. Hybrid DP4A & WMMA Matrix Core Optimization | 1/4 | In Progress | 2026-08-27 (07-01) |
+| 7. Hybrid DP4A & WMMA Matrix Core Optimization | 3/3 replanned | In Progress (0/3 must-haves closed) | 2026-08-30 (07-01..03 closure replan) |
 
 ## Coverage Validation
 
@@ -214,11 +214,10 @@ All 17 v1 requirements mapped to exactly one phase:
   6. **[NEW — must-have #2, REQ-PERF-07]** Paired `llama-bench` A/B (`stock OFF` vs `custom ON`, same `bb4caa75`, `-ngl 99 -b 2048`) at **`{512,1024,2048,4096,8192}`** (if VRAM pre-flight passes) shows **custom median `tok/s` ≥1.10× stock** for **both** `pp` and `tg` at every tier, with `mean−1σ ≥1.10×` over `N=10` in one thermal window (microbench `>1.2×` alone is not sufficient). Current `808→849 pp4096` (+5.1%) does **not** yet pass.
   7. **[NEW — must-have #3, REQ-STAT-07]** All Phase 7 numbers are **`N≥10` averaged** (microbench + `llama-bench` + quality gates) with `median`/`mean`/`stddev`/`p95` tables, and every **LLM question test via the custom kernel is `N≥15`** (`temp=0`, fixed prompt, `avg tok/s` + `avg latency` + `stddev` + per-run table). Single-run claims are rejected.
 
-**Plans**: 4 plans in `.planning/phases/07-hybrid-dp4a-wmma-kernel-optimization/` — **amended 2026-08-28 to carry the 3 new must-haves**:
-- 07-01: True upstream DP4A microbenchmark comparator — **now `N=10` averaged + `stddev` table**
-- 07-02: Cooperative Wave32 DP4A GEMV kernel (decode) — **must prove `>1.2×` median + `10×` table, LLM QA `15×` slice**
-- 07-03: RDNA3 WMMA hardware matrix core GEMM kernel (prefill) — **must prove `10×` table + `>950 t/s` median, Windows `hipcc` compile probe**
-- 07-04: In-tree patch integration & paired end-to-end benchmark verification — **now adds `build_windows.bat` Windows-native gate (REQ-WIN-07), `≥1.10×` `pp+tg` gate (REQ-PERF-07), and `10×`/`15×` rigour (REQ-STAT-07) across `{512,1024,2048,4096,8192}`**
+**Plans**: 3 closure plans in `.planning/phases/07-hybrid-dp4a-wmma-kernel-optimization/` — **replanned 2026-08-30: old 07-01..07-04 deleted, one closure plan per must-have; all 3 carry the required objectives and the ways to achieve them (see `output/deep-research/phase7-3must-haves-exhaustive.md` + `docs/PUBLICATION.md §8`)**:
+- 07-01: **REQ-WIN-07 Windows-native ≤2 langs closure** — `build_windows.bat` HIP_PATH quoting + `find_package(hip via HIP_PATH)` + `-G Ninja` (not `cl`) + `safe.directory`/`*.patch eol=lf` + prune `py 40→0` + `llama-server.exe :8000 → 200` on gfx1100 (HIP SDK 6.4 install = blocking human gate). Ways: `winget install Ninja CMake`, `Verify clang++.exe --offload-arch=gfx1100 --version`, `Phase 8` prune per `08-refactor-windows-native/08-01..04`.
+- 07-02: **REQ-PERF-07 `≥1.10×` pp+tg closure** — race 5 GEMM variants (`64x32 P2+33 / P4_XOR 0% / 64x64 B-stationary 64× reuse / LUT μ=4 / 128x32`) + 2 GEMV (`+33` vs `XOR`) as distinct OBJECTs, `soft HIP_CHECK` + `weak` ODR + `8192 SKIPPED`, `P=4 XOR` + `b128` + `16x64 swizzle` + `sched_barrier 0x0080/0x0008` + `VGPR ≤64 →16 waves`, `race.py --repeats 10 A,B,A,B` interleaved, `bench --runs 10`, paired `llama-bench N=10` one thermal window (`hwinfo 1Hz` + `watchdog 90C` + `RunStore+CHECKSUMS`); current honest N=10 `512 pp 1.079x FAIL`, `M1024 1.08 avg 1.89 peak` — ways per `07-RESEARCH.md` high-yield + MARLIN/SmoothQuant α=0.5.
+- 07-03: **REQ-STAT-07 N≥10/15 closure** — `bench_* --runs 10` 45/45 valid JSON `median/mean/stddev/p95`, `llama-bench -r 10` 4-tier N=10 ×5 entries, LLM QA **N=15** `temp=0` fixed prompt `-n 128` per-run 15-row table, `QUAL-01/02` N=10 green, `race.py` interleaved, honest `1.05-1.07 FAIL` tables in `KERNEL-BENCH-DIFF.md §8`/`PUBLICATION.md` (single-run banned).
 
 | Publication | PUB-01 | 6 |
 | Hybrid DP4A Optimization (re-scoped 2026-08-28) | KERN-04, KERN-05, INTEG-02 **+ REQ-WIN-07, REQ-PERF-07, REQ-STAT-07, BENCH-01 amended** | 7 |
@@ -247,6 +246,9 @@ All 17 v1 requirements mapped to exactly one phase:
 **Risks**: HIP SDK Windows vs WSL path divergence (HIP_PATH vs /opt/rocm), clang vs msbuild (Ninja mandated), gfx1100 vs amdgpu-arch, intrinsic portability, llama-server vs llama-cli naming, Windows model path handling, VRAM 20GB, driver 32.0.31041.1004.
 
 Plans:
+- [x] 07-01-PLAN.md — REQ-WIN-07 Windows-native ≤2 langs closure (`build_windows.bat` HIP_PATH `-G Ninja`, `py 40→0`, `:8000 → 200`)
+- [x] 07-02-PLAN.md — REQ-PERF-07 `≥1.10×` closure (5 GEMM + 2 GEMV variants, P=4 XOR/b128/swizzle/LUT, `race.py --repeats 10`, paired `llama-bench N=10` thermal-paired)
+- [x] 07-03-PLAN.md — REQ-STAT-07 `N≥10/15` closure (`bench 45/45`, `llama-bench N=10×5`, LLM QA N=15, QUAL-01/02 N=10, honest FAIL tables)
 - [ ] 08-01-PLAN.md — Inventory & bloat deletion (REQ-WIN-01)
 - [ ] 08-02-PLAN.md — Minimal kernels & root CMake (REQ-WIN-02)
 - [ ] 08-03-PLAN.md — build_windows.bat + HIP toolchain probe (REQ-WIN-03)

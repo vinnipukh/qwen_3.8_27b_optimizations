@@ -1,8 +1,9 @@
 ---
 phase: 07-hybrid-dp4a-wmma-kernel-optimization
 verified: 2026-08-29T14:45:00Z
+# REPLAND 2026-08-30: plans 07-01..07-04 deleted; closure plans 07-01 (REQ-WIN-07 Windows), 07-02 (REQ-PERF-07 ≥1.10×), 07-03 (REQ-STAT-07 N≥10/15) carry objectives + ways-to-achieve. Bare-metal N=10 evidence committed d414c552/6e46d2e supersedes gaps below: bench_real_stock 6.24× PASS, gemv 0.976 FAIL, gemm M1024 peak 1.89× avg 1.08×, llama-bench 4-tier 1.079/0.996/1.003/0.978/tg 0.993 FAIL. 0/3 must-haves closed; ways in output/deep-research/phase7-3must-haves-exhaustive.md + docs/PUBLICATION.md §8.
 status: gaps_found
-score: 1/7 must-haves verified
+score: 1/7 must-haves verified (pre-replan; see replan note)
 behavior_unverified: 1
 overrides_applied: 0
 gaps:

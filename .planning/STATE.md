@@ -3,7 +3,7 @@ gsd_state_version: 1.0
 current_phase: 7
 current_phase_name: Hybrid DP4A & WMMA Matrix Core Optimization — RE-SCOPED 2026-08-28 (≥10% + Windows + 10×/15×)
 status: gaps_found
-stopped_at: Phase 7 artifacts complete 07-01..07-04 (DP4A 84us vs 543us, GEMV peak 1.178x avg 1.00 under WSL DXG jitter, WMMA [2][32][33]+wmma builtin, quilt 355 lines) — verifier 2/5 on OLD 5-truth set; RE-SCOPED 2026-08-28 to 7 truths (added REQ-WIN-07 Windows ≤2 langs, REQ-PERF-07 ≥1.10× pp+tg at {512,1024,2048,4096,8192}, REQ-STAT-07 N≥10 / LLM QA N≥15) per deep-research report + owner 3 wishes — 5 gaps now pending (Windows build + 10% gate + 10× rigour) before Phase 7 can close (see ROADMAP.md Phase 7 2026-08-28).
+stopped_at: Phase 7 REPLANNED 2026-08-30 — old 07-01..07-04 deleted, replaced by 3 must-have closure plans: 07-01 REQ-WIN-07 (Windows ≤2 langs), 07-02 REQ-PERF-07 (≥1.10× pp+tg 512..8192, 5 GEMM + 2 GEMV high-yield variants P4-XOR/b128/swizzle/LUT/64x64), 07-03 REQ-STAT-07 (N≥10 / LLM QA N≥15). Bare-metal N=10 WSL2 gfx1100 evidence committed d414c552/6e46d2e: bench_real_stock 87.8us vs 548us naive 6.24x PASS; gemv +33 0.968 / XOR 0.976 peak 1.161 FAIL <1.2x; gemm M128 12.5x M512 0.70 1.22 peak M1024 1.08 avg 1.89 peak M8192 SKIPPED; llama-bench 4-tier N=10 512 pp 1.079 / 1024 0.996 / 2048 1.003 / 4096 0.978 / tg 0.993 all FAIL <1.10x — honest, not fabricated. Ways to achieve written in 07-01/02/03-PLAN.md + output/deep-research/phase7-3must-haves-exhaustive.md + docs/PUBLICATION.md §8.
 last_updated: "2026-08-29T00:00:00.000Z"
 last_activity: 2026-08-27
 last_activity_desc: Phase 7 full auto 07-01->07-04 + gsd-verify complete; thermal monitor no 90C aborts (fallback polling WinError5, no HWiNFO daemon).
@@ -28,7 +28,7 @@ See: .planning/PROJECT.md
 ## Current Position
 
 Phase: 7 (Hybrid DP4A & WMMA Matrix Core Optimization — RE-SCOPED 2026-08-28) — ARTIFACTS COMPLETE on OLD scope, **RE-SCOPED to 7 truths (2/7 passed)**
-Status: All 4 plans executed (45m+60m+45m+2h) — guardrails 1-4 PASS via grep on OLD 5-truth set; **3 NEW must-have gaps** added 2026-08-28: REQ-WIN-07 Windows-native (`build_windows.bat` + `llama-server.exe` @ `localhost:8000`, `≤2` langs), REQ-PERF-07 `≥1.10× pp+tg` at `{512,1024,2048,4096,8192}` (current `808→849` pp4096 = +5.1% **fails**), REQ-STAT-07 `N≥10` (`15×` LLM QA) rigour — all 5 gaps require **Windows bare-metal HIP SDK + WSL2 gfx1100 re-bench** (see ROADMAP.md Phase 7 2026-08-28 + `output/deep-research/1000t-s-at-8k-gfx1100.md`).
+Status: **REPLANNED 2026-08-30** — old 07-01..07-04 PLAN/SUMMARY deleted; 3 closure plans written (07-01 Windows, 07-02 perf, 07-03 stats) each carrying must-have objective + ways-to-achieve; docs-update (README/PUBLICATION/ARCHITECTURE) + map-codebase refresh committed (4692912a, 57c6cc34, d09ec629). Bare-metal N=10 evidence committed d414c552/6e46d2e — 0/3 must-haves closed honestly: REQ-WIN-07 bat correct but HIP SDK 6.4 not installed; REQ-PERF-07 best 1.079x FAIL (<1.10x), M1024 gemm peak 1.89x (>1.2x first PASS, avg 1.08x); REQ-STAT-07 harness ready (bench --runs 10 + llama-bench -r 10 valid JSON) but N=15 LLM QA + QUAL-01/02 N=10 not yet run.
 
 Progress: [█████████▉] 100% artifacts (6 of 7 phases verified, 28/28 plans) — verifier says 2/5 truths, 3 missing bare-metal benches
 
@@ -79,7 +79,7 @@ Progress: [█████████▉] 100% artifacts (6 of 7 phases verifie
 
 ## Next Step — READY FOR EXECUTION (re-planned 2026-08-28, NOT STARTED — awaiting execution agent)
 
-**State:** Re-scoped to 7 truths (2/7 passed, 3 new must-haves REQ-WIN-07/REQ-PERF-07/REQ-STAT-07). Execution has **NOT started** — awaiting another agent (`/gsd-execute-phase 7` or equivalent plan runner). Do not re-plan — plans 07-01..07-04 are amended and ready. Bare-metal WSL2 gfx1100 required; all benches `N=10`, LLM QA `N=15`.
+**State:** Replanned 2026-08-30 — 3 closure plans 07-01/02/03 (old 07-01..07-04 deleted). Execution next: `07-01` Windows wave 1 (HIP SDK install = blocking human gate) then `07-02` perf + `07-03` stats wave 2 (bare-metal WSL2 gfx1100 required; all benches `N=10`, LLM QA `N=15`).
 
 **Executable wave order:**
 
