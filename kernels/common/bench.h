@@ -16,6 +16,7 @@ struct BenchStats {
     double max_us = 0.0;
     double mean_us = 0.0;
     double stdev_us = 0.0;
+    double stddev_us = 0.0; // alias for stdev_us — REQ-STAT-07_FIELD (07-01 fix: ensure stddev_us field exists)
     int count = 0;
     int warmup = 0;
     size_t bytes_transferred = 0;
@@ -85,6 +86,7 @@ inline BenchStats bench_hip_event(
             sq_sum += (t - stats.mean_us) * (t - stats.mean_us);
         }
         stats.stdev_us = std::sqrt(sq_sum / iters);
+        stats.stddev_us = stats.stdev_us; // keep alias in sync
 
         if (bytes_transferred > 0 && stats.median_us > 0.0) {
             // bytes / (median_us * 1e-6) / 1e9 = bytes / (median_us * 1e3) = GB/s

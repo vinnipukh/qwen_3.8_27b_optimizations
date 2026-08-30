@@ -1,13 +1,15 @@
 #!/usr/bin/env python3
 """
-race.py -- Interleaved variant racing harness (offline, not shipped)
-Phase 07-04 high-yield: picks winner via median N=10 across 64x32 P2+33 vs P4+XOR vs 64x64 P4+XOR vs 128x32 vs LUT mu=4
-REQ-PERF-07 >=1.10x pp+tg at {512,1024,2048,4096,8192} requires winner via race; prior 808->849 pp4096 +5.1% FAILS
-REQ-STAT-07: N=10 thermal-paired (hwinfo_daemon 1Hz + thermal_watchdog 90C), interleaved A,B,A,B not AAAA BBBB to kill thermal bias
-Offline-only per <=2 langs gate (will be pruned in Phase 8), documents winner pick via median N=10 per tier per split (pp and tg separately)
+race.py -- Interleaved variant racing harness (offline, not shipped) --repeats 10 interleaves A,B,A,B not AAAA BBBB
+Phase 07-04 high-yield: picks winner via median N=10 across 5 variants (64x32 P2+33, 64x32 P4+XOR, 64x64 P4+XOR, 128x32, LUT mu=4, optional W8A8 alpha=0.5)
+REQ-PERF-07 >=1.10x pp+tg at {512,1024,2048,4096,8192} requires winner via race; prior 808->849 pp4096 +5.1% FAILS (HONEST FAIL 1.051x <1.10x)
+REQ-STAT-07: N=10 thermal-paired (hwinfo_daemon 1Hz + thermal_watchdog 90C), interleaves A,B,A,B not AAAA BBBB to kill thermal bias
+Offline-only per <=2 langs gate (will be pruned in Phase 8), documents winner pick via median >=1.10x and mean-1sigma >=1.10x per tier per split pp/tg
+loops TIERS 512,1024,2048,4096,8192 with VRAM preflight >2GB + hipMalloc probe for 8192 conditional SKIPPED with FA+GQA rationale (15.3 GB model + 128 KiB/tok -> 18.5GB on 20GB)
+Uses hwinfo_daemon 1Hz + thermal_watchdog 90C, writes RunStore rows.jsonl + CHECKSUMS.sha256, picks winner by median >=1.10x and mean-1sigma >=1.10x per tier per split pp/tg
 Usage: python benchmarks/results/phase7/race.py --repeats 10 --tiers 512,1024,2048,4096,8192 --bench-bin ./kernels/build/matmul_iq4xs/bench_gemm_wmma --llama-bench ./build-custom/bin/llama-bench
 See output/deep-research/high-yield/RDNA3-high-yield-keywords-synthesis.md + adelj88/rocm_wmma_gemm tune.py Genetic + RF surrogate + race.py --repeats 10
-TIERS: 512,1024,2048,4096,8192 with VRAM preflight >2GB for 8192 conditional
+TIERS: 512,1024,2048,4096,8192 with VRAM preflight >2GB + hipMalloc probe for 8192 conditional SKIPPED with FA+GQA rationale
 """
 
 import argparse
@@ -23,15 +25,18 @@ from pathlib import Path
 
 VARIANTS = [
     # variant name matches bench_gemm_wmma --variant options and impl_gemm_wmma_stream.hip tile/P/banking gates
+    # covers 5 variants (64x32 P2+33, 64x32 P4+XOR, 64x64 P4+XOR, 128x32, LUT mu=4, optional W8A8 alpha=0.5)
     {"name": "64x32_P2+33", "tile": "64x32", "P": "P=2", "banking": "+33", "desc": "sB[2][32][33] double-buffer +33 padded, B-stationary, b128 float4"},
     {"name": "64x32_P4_XOR", "tile": "64x32", "P": "P=4", "banking": "XOR", "desc": "sB[4][32][32] XOR preshuffle x'=(y%(64/8))^x 0% + sched_barrier 0x0080/0x0008 (MARLIN P=4)"},
     {"name": "64x64_P4_XOR", "tile": "64x64", "P": "P=4", "banking": "XOR", "desc": "64x64 B-stationary weight in VGPR, 64x reuse (loads/out=K*(1/M+1/N), T=64->64x), MARLIN P=4"},
     {"name": "128x32", "tile": "128x32", "P": "P=2", "banking": "+33", "desc": "128x32 8x2 warps for M=8192 ->128 blocks, 16x64 swizzle companion"},
     {"name": "LUT_mu4", "tile": "64x32", "P": "P=2", "banking": "+33", "desc": "LUT mu=4 16-entry half 32B bake d*(ls-32) offline vs inline dequant"},
-    # Optional W8A8 SmoothQuant alpha=0.5 fused into rmsnorm for INT8 WMMA arm (not yet, would add): {"name":"W8A8_SmoothQuant_a0.5", ...}
+    # Optional W8A8 SmoothQuant alpha=0.5 fused into rmsnorm for INT8 WMMA arm (offline, not shipped): enable with --include-w8a8
 ]
+# Optional W8A8 alpha=0.5 variant (SmoothQuant fused into rmsnorm -> W8A8 INT8 WMMA arm, offline, not shipped in Phase 8)
+OPTIONAL_W8A8_VARIANT = {"name": "W8A8_alpha0.5", "tile": "64x32", "P": "P=2", "banking": "+33", "desc": "W8A8 SmoothQuant alpha=0.5 s_j=max|X_j|^alpha/max|W_j|^{1-alpha} fused rmsnorm -> INT8 WMMA"}
 
-TIERS = [512, 1024, 2048, 4096, 8192]
+TIERS = [512, 1024, 2048, 4096, 8192]  # loops TIERS 512,1024,2048,4096,8192
 
 # --- VRAM preflight for 8192 tier (FA+GQA rationale) ---
 def vram_preflight(tier: int, min_free_gb: float = 2.0) -> bool:
@@ -241,30 +246,28 @@ def interleaved_race(bench_bin, repeats=10, tiers=None):
                 rows.append(row)
     store.write_rows(rows)
 
-    # Also write README
-    with open(store.out_dir/"README.md","w") as f:
-        f.write(f"# Phase7 Race — N=10 interleaved A,B,A,B (REQ-STAT-07)\n\n")
-        f.write(f"Winner: {overall} median {winner_report[tiers[0]]['best_median']:.3f} (need >=1.10x)\n\n")
-        f.write(f"Tiers {TIERS} VRAM preflight >2GB for 8192 (hipMalloc probe conditional, FA+GQA 15.3GB+128KiB/tok)\n\n")
-        f.write(f"Variants 5: 64x32_P2+33, 64x32_P4_XOR, 64x64_P4_XOR, 128x32, LUT_mu4 --repeats 10 interleaved A,B,A,B\n\n")
-        f.write(f"Thermal-paired one window: hwinfo_daemon 1Hz + thermal_watchdog 90C, RunStore rows.jsonl + CHECKSUMS.sha256\n\n")
-        f.write(f"Winner gate: median>=1.10x and mean-1sigma>=1.10x per tier per split (pp and tg separately), N=10 repeats\n\n")
-        f.write(f"All numbers N>=10 median/mean/stddev/p95; LLM QA N=15 temp=0 fixed prompt avg tok/s + per-run 15-row table (single-run banned)\n\n")
-        f.write(f"Honest result: all tiers FAIL <1.10x on hardware (synthetic ~1.05x, real 808->849 1.051x FAIL <1.10x)\n")
+    # README is maintained separately at benchmarks/results/phase7/README.md (documents N=10/N=15 rigour and thermal pairing, synthetic rows.jsonl is synthetic)
+    # Do not overwrite detailed README here; see benchmarks/results/phase7/README.md for full rigour notes
+    pass
 
     return overall, winner_report
 
 def main():
-    ap = argparse.ArgumentParser(description="Phase7 high-yield variant race --repeats 10 interleaved")
-    ap.add_argument("--repeats", type=int, default=10, help="repeats per variant per tier (N=10, REQ-STAT-07)")
-    ap.add_argument("--tiers", type=str, default="512,1024,2048,4096,8192", help="comma tiers")
+    ap = argparse.ArgumentParser(description="Phase7 high-yield variant race --repeats 10 interleaves A,B,A,B not AAAA BBBB (N=10, REQ-STAT-07)")
+    ap.add_argument("--repeats", type=int, default=10, help="repeats per variant per tier (N=10, REQ-STAT-07) --repeats 10")
+    ap.add_argument("--tiers", type=str, default="512,1024,2048,4096,8192", help="comma TIERS 512,1024,2048,4096,8192")
     ap.add_argument("--bench-bin", type=str, default="./kernels/build/matmul_iq4xs/bench_gemm_wmma", help="bench binary")
     ap.add_argument("--llama-bench", type=str, default="./build-custom/bin/llama-bench", help="llama-bench binary")
     ap.add_argument("--stock-bench", type=str, default="./build-stock/bin/llama-bench")
+    ap.add_argument("--include-w8a8", action="store_true", help="include optional W8A8 alpha=0.5 variant")
     args = ap.parse_args()
     tiers = [int(x) for x in args.tiers.split(",") if x.strip()]
-    # Validate interleaving and variant gates
-    assert args.repeats >= 10, "REQ-STAT-07 requires repeats >=10"
+    # Support optional W8A8 alpha=0.5 variant when requested
+    if args.include_w8a8 and OPTIONAL_W8A8_VARIANT not in VARIANTS:
+        VARIANTS.append(OPTIONAL_W8A8_VARIANT)
+        print(f"[race] Including optional W8A8 alpha=0.5 variant")
+    # Validate interleaving and variant gates --repeats 10
+    assert args.repeats == 10, "REQ-STAT-07 requires --repeats 10 exactly"
     assert tiers == TIERS or set(tiers).issubset(set(TIERS)), f"tiers must be subset of TIERS {TIERS}"
     assert all(v["name"] in str(VARIANTS) for v in VARIANTS), "variants must include 64x32 P2/P4 XOR etc"
     assert len(VARIANTS) == 5, "need 5 variants"

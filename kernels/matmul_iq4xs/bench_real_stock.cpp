@@ -113,6 +113,7 @@ int main(int argc, char** argv) {
             avg_within /= v.size();
             // combine: sqrt(avg_within^2 + between_run_variance) approximate
             agg.stdev_us = std::sqrt(avg_within*avg_within + sq / means.size());
+            agg.stddev_us = agg.stdev_us; // alias sync
             size_t p95_idx = (size_t)std::ceil(0.95 * p95s.size()) - 1;
             if (p95_idx >= p95s.size()) p95_idx = p95s.size()-1;
             agg.p95_us = p95s[p95_idx];

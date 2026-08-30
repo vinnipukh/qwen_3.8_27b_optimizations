@@ -1,4 +1,6 @@
 # Phase 7 quilt patch must be LF on both WSL2 and Windows (core.autocrlf=false + eol=lf)
+# Ensure `git config core.autocrlf false` locally (see .git/config) — patch generated via `git -C llama.cpp diff bb4caa75`
+*.patch eol=lf
 *.patch text eol=lf
 *.hip text eol=lf
 *.cuh text eol=lf

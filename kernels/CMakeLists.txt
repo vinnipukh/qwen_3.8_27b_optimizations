@@ -12,9 +12,9 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
-list(APPEND CMAKE_PREFIX_PATH "/opt/rocm" "$ENV{HIP_PATH}")
-# Windows-native gate REQ-WIN-07: also search HIP_PATH (e.g. C:/Program Files/AMD/ROCm/6.4) for Windows HIP SDK
-find_package(hip REQUIRED CONFIG PATHS "$ENV{HIP_PATH}/lib/cmake/hip" /opt/rocm/lib/cmake/hip /opt/rocm "$ENV{HIP_PATH}")
+list(APPEND CMAKE_PREFIX_PATH "$ENV{HIP_PATH}" "/opt/rocm")
+# Windows-native gate REQ-WIN-07: HIP SDK via HIP_PATH (Windows: C:/Program Files/AMD/ROCm/6.4) - no /opt/rocm hardcode in find_package
+find_package(hip REQUIRED CONFIG PATHS "$ENV{HIP_PATH}/lib/cmake/hip")
 
 # Ensure HIP offload arch is passed for HIP language files
 add_compile_options($<$<COMPILE_LANGUAGE:HIP>:--offload-arch=gfx1100>)
