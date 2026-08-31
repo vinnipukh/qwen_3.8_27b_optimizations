@@ -1,0 +1,263 @@
+### Open tabs
+- 0: [flash attention 2 long context 8k 16k 32k prefill throughput scaling at DuckDuckGo](https://duckduckgo.com/?q=flash+attention+2+long+context+8k+16k+32k+prefill+throughput+scaling&kad=en_US)
+- 1: [DuckDuckGo](https://html.duckduckgo.com/html/?q=flash+attention+2+long+context+8k+16k+32k+prefill+throughput+scaling)
+- 2: [DuckDuckGo](https://lite.duckduckgo.com/lite/?q=flash+attention+2+long+context+8k+16k+32k+prefill+throughput+scaling)
+- 3: [Captcha - Brave Search](https://search.brave.com/search?q=flash+attention+2+long+context+8k+16k+32k+prefill+throughput+scaling)
+- 4: [flash attention 2 long context 8k 16k 32k prefill throughput scaling - Arama](https://www.bing.com/search?q=flash+attention+2+long+context+8k+16k+32k+prefill+throughput+scaling&rdr=1&rdrig=40FB2FB12BE247E3A2F87EF294A4CE99)
+- 5: ["FlashAttention-2" prefill throughput 8k 16k scaling - Arama](https://www.bing.com/search?q=%22FlashAttention-2%22+prefill+throughput+8k+16k+scaling&rdr=1&rdrig=76F509D45D02467DA2B1192C40E1BE76)
+- 6: [https://www.google.com/search?q=flash+attention+2+long+context+8k+16k+32k+prefill+throughput+scaling&hl=en&gl=us&sei=vcORaoGTIfKm1fIPsp3PiQ8](https://www.google.com/sorry/index?continue=https://www.google.com/search%3Fq%3Dflash%2Battention%2B2%2Blong%2Bcontext%2B8k%2B16k%2B32k%2Bprefill%2Bthroughput%2Bscaling%26hl%3Den%26gl%3Dus%26sei%3DvcORaoGTIfKm1fIPsp3PiQ8&hl=en&q=EgSw6odMGL2Hx9QGIjBz_JWyuDhFlk0k_9Sd2sOWVij5TcNPo8TWvNLttk3wGaoM0WiPg28pSMdLEGzKOxUyAVJaAUM)
+- 7: [[2307.08691] FlashAttention-2: Faster Attention with Better Parallelism and Work Partitioning](https://arxiv.org/abs/2307.08691)
+- 8: (current) [[2307.08691] FlashAttention-2: Faster Attention with Better Parallelism and Work Partitioning](https://arxiv.org/abs/2307.08691)
+### Page
+- Page URL: https://arxiv.org/abs/2307.08691
+- Page Title: [2307.08691] FlashAttention-2: Faster Attention with Better Parallelism and Work Partitioning
+### Snapshot
+```yaml
+- generic [ref=e2]:
+  - link "Skip to main content" [ref=e3] [cursor=pointer]:
+    - /url: "#content"
+  - banner [ref=e4]:
+    - link [ref=e5] [cursor=pointer]:
+      - /url: https://arxiv.org/IgnoreMe
+    - link "archive home" [ref=e6] [cursor=pointer]:
+      - /url: https://arxiv.org/
+      - img "archive" [ref=e7]
+    - navigation "Main navigation" [ref=e8]:
+      - link "Search" [ref=e9] [cursor=pointer]:
+        - /url: https://arxiv.org/search
+      - link "Submit" [ref=e13] [cursor=pointer]:
+        - /url: https://arxiv.org/user/create
+      - link "Donate" [ref=e14] [cursor=pointer]:
+        - /url: https://info.arxiv.org/about/donate.html
+      - link "Log in" [ref=e16] [cursor=pointer]:
+        - /url: https://arxiv.org/login
+  - main [ref=e17]:
+    - generic [ref=e19]:
+      - generic [ref=e20]:
+        - heading "Computer Science > Machine Learning" [level=1] [ref=e22]
+        - generic [ref=e24]:
+          - generic [ref=e25]: "[Submitted on 17 Jul 2023]"
+          - 'heading "FlashAttention-2: Faster Attention with Better Parallelism and Work Partitioning" [level=1] [ref=e26]'
+          - link "Tri Dao" [ref=e28] [cursor=pointer]:
+            - /url: https://arxiv.org/search/cs?searchtype=author&query=Dao,+T
+          - blockquote [ref=e29]:
+            - text: Scaling Transformers to longer sequence lengths has been a major problem in the last several years, promising to improve performance in language modeling and high-resolution image understanding, as well as to unlock new applications in code, audio, and video generation. The attention layer is the main bottleneck in scaling to longer sequences, as its runtime and memory increase quadratically in the sequence length. FlashAttention exploits the asymmetric GPU memory hierarchy to bring significant memory saving (linear instead of quadratic) and runtime speedup (2-4
+            - generic [ref=e190]: ×
+            - text: compared to optimized baselines), with no approximation. However, FlashAttention is still not nearly as fast as optimized matrix-multiply (GEMM) operations, reaching only 25-40\% of the theoretical maximum FLOPs/s. We observe that the inefficiency is due to suboptimal work partitioning between different thread blocks and warps on the GPU, causing either low-occupancy or unnecessary shared memory reads/writes. We propose FlashAttention-2, with better work partitioning to address these issues. In particular, we (1) tweak the algorithm to reduce the number of non-matmul FLOPs (2) parallelize the attention computation, even for a single head, across different thread blocks to increase occupancy, and (3) within each thread block, distribute the work between warps to reduce communication through shared memory. These yield around 2
+            - generic [ref=e195]: ×
+            - text: speedup compared to FlashAttention, reaching 50-73\% of the theoretical maximum FLOPs/s on A100 and getting close to the efficiency of GEMM operations. We empirically validate that when used end-to-end to train GPT-style models, FlashAttention-2 reaches training speed of up to 225 TFLOPs/s per A100 GPU (72\% model FLOPs utilization).
+          - table "Additional metadata" [ref=e31]:
+            - rowgroup [ref=e32]:
+              - row [ref=e33]:
+                - cell "Subjects:" [ref=e34]
+                - cell "Machine Learning (cs.LG)" [ref=e35]
+              - row [ref=e36]:
+                - cell "Cite as:" [ref=e37]
+                - cell [ref=e38]:
+                  - generic [ref=e39]:
+                    - link "arXiv:2307.08691" [ref=e40] [cursor=pointer]:
+                      - /url: https://arxiv.org/abs/2307.08691
+                    - text: "[cs.LG]"
+              - row [ref=e41]:
+                - cell [ref=e42]
+                - cell [ref=e43]:
+                  - text: (or
+                  - generic [ref=e44]:
+                    - link "arXiv:2307.08691v1" [ref=e45] [cursor=pointer]:
+                      - /url: https://arxiv.org/abs/2307.08691v1
+                    - text: "[cs.LG]"
+                  - text: for this version)
+              - row [ref=e46]:
+                - cell [ref=e47]
+                - cell [ref=e48]:
+                  - link "https://doi.org/10.48550/arXiv.2307.08691" [ref=e49] [cursor=pointer]:
+                    - /url: https://doi.org/10.48550/arXiv.2307.08691
+                  - button "Focus to learn more" [ref=e51]
+        - generic [ref=e54]:
+          - heading "Submission history" [level=2] [ref=e55]
+          - text: "From: Tri Dao ["
+          - link "view email" [ref=e56] [cursor=pointer]:
+            - /url: /show-email/0801f9f4/2307.08691
+          - text: "]"
+          - strong [ref=e57]: "[v1]"
+          - text: Mon, 17 Jul 2023 17:50:36 UTC (1,421 KB)
+      - generic [ref=e58]:
+        - generic [ref=e59]:
+          - heading "Access Paper:" [level=2] [ref=e60]
+          - list [ref=e61]:
+            - listitem [ref=e62]:
+              - link "View PDF" [ref=e63] [cursor=pointer]:
+                - /url: /pdf/2307.08691
+            - listitem [ref=e64]:
+              - link "HTML (experimental)" [ref=e65] [cursor=pointer]:
+                - /url: https://arxiv.org/html/2307.08691v1
+            - listitem [ref=e66]:
+              - link "TeX Source" [ref=e67] [cursor=pointer]:
+                - /url: /src/2307.08691
+          - link "view license" [ref=e69] [cursor=pointer]:
+            - /url: http://arxiv.org/licenses/nonexclusive-distrib/1.0/
+        - generic [ref=e70]:
+          - heading "Current browse context:" [level=3] [ref=e71]
+          - generic [ref=e72]: cs.LG
+          - generic [ref=e73]:
+            - link "< prev" [ref=e75] [cursor=pointer]:
+              - /url: /prevnext?id=2307.08691&function=prev&context=cs.LG
+            - text: "|"
+            - link "next >" [ref=e77] [cursor=pointer]:
+              - /url: /prevnext?id=2307.08691&function=next&context=cs.LG
+          - generic [ref=e78]:
+            - link "new" [ref=e79] [cursor=pointer]:
+              - /url: /list/cs.LG/new
+            - text: "|"
+            - link "recent" [ref=e80] [cursor=pointer]:
+              - /url: /list/cs.LG/recent
+            - text: "|"
+            - link "2023-07" [ref=e81] [cursor=pointer]:
+              - /url: /list/cs.LG/2023-07
+          - generic [ref=e82]:
+            - text: "Change to browse by:"
+            - link "cs" [ref=e84] [cursor=pointer]:
+              - /url: /abs/2307.08691?context=cs
+        - generic [ref=e85]:
+          - heading "References & Citations" [level=3] [ref=e86]
+          - list [ref=e87]:
+            - listitem [ref=e88]:
+              - link "NASA ADS" [ref=e89] [cursor=pointer]:
+                - /url: https://ui.adsabs.harvard.edu/abs/arXiv:2307.08691
+            - listitem [ref=e90]:
+              - link "Google Scholar" [ref=e91] [cursor=pointer]:
+                - /url: https://scholar.google.com/scholar_lookup?arxiv_id=2307.08691
+            - listitem [ref=e92]:
+              - link "Semantic Scholar" [ref=e93] [cursor=pointer]:
+                - /url: https://api.semanticscholar.org/arXiv:2307.08691
+        - button "export BibTeX citation" [ref=e95]
+        - generic [ref=e96]:
+          - heading "Bookmark" [level=3] [ref=e98]
+          - link [ref=e99] [cursor=pointer]:
+            - /url: "http://www.bibsonomy.org/BibtexHandler?requTask=upload&url=https://arxiv.org/abs/2307.08691&description=FlashAttention-2: Faster Attention with Better Parallelism and Work Partitioning"
+            - img "BibSonomy" [ref=e100]
+          - link [ref=e101] [cursor=pointer]:
+            - /url: "https://reddit.com/submit?url=https://arxiv.org/abs/2307.08691&title=FlashAttention-2: Faster Attention with Better Parallelism and Work Partitioning"
+            - img "Reddit" [ref=e102]
+      - tablist "arXivLabs tools" [ref=e104]:
+        - radio "Bibliographic Tools" [checked] [ref=e105]
+        - tab "Bibliographic Tools" [selected] [ref=e106] [cursor=pointer]
+        - tabpanel "Bibliographic Tools" [ref=e107]:
+          - heading "Bibliographic and Citation Tools" [level=1] [ref=e108]
+          - generic [ref=e109]:
+            - generic [ref=e110]:
+              - generic [ref=e112]:
+                - checkbox "Bibliographic Explorer Toggle"
+                - generic [ref=e113] [cursor=pointer]
+                - generic [ref=e114]: Bibliographic Explorer Toggle
+              - generic [ref=e115]:
+                - text: Bibliographic Explorer
+                - emphasis [ref=e116]:
+                  - text: (
+                  - link "What is the Explorer?" [ref=e117] [cursor=pointer]:
+                    - /url: https://info.arxiv.org/labs/showcase.html#arxiv-bibliographic-explorer
+                  - text: )
+            - generic [ref=e118]:
+              - generic [ref=e120]:
+                - checkbox "Connected Papers"
+                - generic [ref=e121] [cursor=pointer]
+                - generic [ref=e122]: Connected Papers Toggle
+              - generic [ref=e123]:
+                - text: Connected Papers
+                - emphasis [ref=e124]:
+                  - text: (
+                  - link "What is Connected Papers?" [ref=e125] [cursor=pointer]:
+                    - /url: https://www.connectedpapers.com/about
+                  - text: )
+            - generic [ref=e126]:
+              - generic [ref=e128]:
+                - checkbox "Litmaps"
+                - generic [ref=e129] [cursor=pointer]
+                - generic [ref=e130]: Litmaps Toggle
+              - generic [ref=e131]:
+                - text: Litmaps
+                - emphasis [ref=e132]:
+                  - text: (
+                  - link "What is Litmaps?" [ref=e133] [cursor=pointer]:
+                    - /url: https://www.litmaps.co/
+                  - text: )
+            - generic [ref=e134]:
+              - generic [ref=e136]:
+                - checkbox "scite Smart Citations"
+                - generic [ref=e137] [cursor=pointer]
+                - generic [ref=e138]: scite.ai Toggle
+              - generic [ref=e139]:
+                - text: scite Smart Citations
+                - emphasis [ref=e140]:
+                  - text: (
+                  - link "What are Smart Citations?" [ref=e141] [cursor=pointer]:
+                    - /url: https://www.scite.ai/
+                  - text: )
+        - radio "Code, Data, Media" [ref=e145]
+        - tab "Code, Data, Media" [ref=e146] [cursor=pointer]
+        - radio "Demos" [ref=e147]
+        - tab "Demos" [ref=e148] [cursor=pointer]
+        - radio "Related Papers" [ref=e149]
+        - tab "Related Papers" [ref=e150] [cursor=pointer]
+        - radio "About arXivLabs" [ref=e151]
+        - tab "About arXivLabs" [ref=e152] [cursor=pointer]
+      - generic [ref=e153]:
+        - link "Which authors of this paper are endorsers?" [ref=e154] [cursor=pointer]:
+          - /url: /auth/show-endorsers/2307.08691
+        - text: "|"
+        - link "Disable MathJax" [ref=e155] [cursor=pointer]:
+          - /url: javascript:setMathjaxCookie()
+        - text: (
+        - link "What is MathJax?" [ref=e156] [cursor=pointer]:
+          - /url: https://info.arxiv.org/help/mathjax.html
+        - text: )
+  - contentinfo [ref=e157]:
+    - generic [ref=e158]:
+      - generic [ref=e159]:
+        - generic [ref=e160]:
+          - text: We gratefully acknowledge support from our
+          - strong [ref=e161]: major funders
+          - text: ","
+          - link [ref=e162] [cursor=pointer]:
+            - /url: https://info.arxiv.org/about/ourmembers.html
+            - strong [ref=e163]: member institutions
+          - text: ", and all contributors."
+        - navigation "Site navigation" [ref=e164]:
+          - link "About" [ref=e165] [cursor=pointer]:
+            - /url: https://info.arxiv.org/about
+          - generic [ref=e166]: ·
+          - link "Help" [ref=e167] [cursor=pointer]:
+            - /url: https://info.arxiv.org/help
+          - generic [ref=e168]: ·
+          - link "Contact" [ref=e169] [cursor=pointer]:
+            - /url: https://info.arxiv.org/help/contact.html
+          - generic [ref=e170]: ·
+          - link "Subscribe" [ref=e171] [cursor=pointer]:
+            - /url: https://info.arxiv.org/help/subscribe
+          - generic [ref=e172]: ·
+          - link "Copyright" [ref=e173] [cursor=pointer]:
+            - /url: https://info.arxiv.org/help/license/index.html
+          - generic [ref=e174]: ·
+          - link "Privacy" [ref=e175] [cursor=pointer]:
+            - /url: https://info.arxiv.org/help/policies/privacy_policy.html
+          - generic [ref=e176]: ·
+          - link "Accessibility" [ref=e177] [cursor=pointer]:
+            - /url: https://info.arxiv.org/help/web_accessibility.html
+          - generic [ref=e178]: ·
+          - link "Operational Status (opens in new tab)" [ref=e179] [cursor=pointer]:
+            - /url: https://status.arxiv.org
+            - text: Operational Status
+            - generic [ref=e180]: (opens in new tab)
+      - generic "Major funders" [ref=e181]:
+        - generic [ref=e182]: Major funding support from
+        - generic [ref=e183]:
+          - link [ref=e184] [cursor=pointer]:
+            - /url: https://www.simonsfoundation.org/
+            - img "Simons Foundation" [ref=e185]
+          - link [ref=e186] [cursor=pointer]:
+            - /url: https://www.sfi.org.bm/
+            - img "Simons Foundation International" [ref=e187]
+          - link [ref=e188] [cursor=pointer]:
+            - /url: https://www.schmidtsciences.org/
+            - img "Schmidt Sciences" [ref=e189]
+```

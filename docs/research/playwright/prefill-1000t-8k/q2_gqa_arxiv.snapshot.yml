@@ -1,0 +1,306 @@
+### Open tabs
+- 0: [flash attention 2 long context 8k 16k 32k prefill throughput scaling at DuckDuckGo](https://duckduckgo.com/?q=flash+attention+2+long+context+8k+16k+32k+prefill+throughput+scaling&kad=en_US)
+- 1: [DuckDuckGo](https://html.duckduckgo.com/html/?q=flash+attention+2+long+context+8k+16k+32k+prefill+throughput+scaling)
+- 2: [DuckDuckGo](https://lite.duckduckgo.com/lite/?q=flash+attention+2+long+context+8k+16k+32k+prefill+throughput+scaling)
+- 3: [Captcha - Brave Search](https://search.brave.com/search?q=flash+attention+2+long+context+8k+16k+32k+prefill+throughput+scaling)
+- 4: [flash attention 2 long context 8k 16k 32k prefill throughput scaling - Arama](https://www.bing.com/search?q=flash+attention+2+long+context+8k+16k+32k+prefill+throughput+scaling&rdr=1&rdrig=40FB2FB12BE247E3A2F87EF294A4CE99)
+- 5: ["FlashAttention-2" prefill throughput 8k 16k scaling - Arama](https://www.bing.com/search?q=%22FlashAttention-2%22+prefill+throughput+8k+16k+scaling&rdr=1&rdrig=76F509D45D02467DA2B1192C40E1BE76)
+- 6: [https://www.google.com/search?q=flash+attention+2+long+context+8k+16k+32k+prefill+throughput+scaling&hl=en&gl=us&sei=vcORaoGTIfKm1fIPsp3PiQ8](https://www.google.com/sorry/index?continue=https://www.google.com/search%3Fq%3Dflash%2Battention%2B2%2Blong%2Bcontext%2B8k%2B16k%2B32k%2Bprefill%2Bthroughput%2Bscaling%26hl%3Den%26gl%3Dus%26sei%3DvcORaoGTIfKm1fIPsp3PiQ8&hl=en&q=EgSw6odMGL2Hx9QGIjBz_JWyuDhFlk0k_9Sd2sOWVij5TcNPo8TWvNLttk3wGaoM0WiPg28pSMdLEGzKOxUyAVJaAUM)
+- 7: [[2307.08691] FlashAttention-2: Faster Attention with Better Parallelism and Work Partitioning](https://arxiv.org/abs/2307.08691)
+- 8: [[2307.08691] FlashAttention-2: Faster Attention with Better Parallelism and Work Partitioning](https://arxiv.org/abs/2307.08691)
+- 9: [GitHub - Dao-AILab/flash-attention: Fast and memory-efficient exact attention · GitHub](https://github.com/Dao-AILab/flash-attention)
+- 10: [[2205.14135] FlashAttention: Fast and Memory-Efficient Exact Attention with IO-Awareness](https://arxiv.org/abs/2205.14135)
+- 11: [Overview · Hugging Face](https://huggingface.co/docs/transformers/v5.15.1/optimization_overview)
+- 12: [Page not found – PyTorch](https://pytorch.org/blog/flash-attention)
+- 13: [AMD ROCm — AMD ROCm 10.0.0](https://rocm.docs.amd.com/en/latest/)
+- 14: (current) [[2305.13245] GQA: Training Generalized Multi-Query Transformer Models from Multi-Head Checkpoints](https://arxiv.org/abs/2305.13245)
+### Page
+- Page URL: https://arxiv.org/abs/2305.13245
+- Page Title: [2305.13245] GQA: Training Generalized Multi-Query Transformer Models from Multi-Head Checkpoints
+### Snapshot
+```yaml
+- generic [ref=e2]:
+  - link "Skip to main content" [ref=e3] [cursor=pointer]:
+    - /url: "#content"
+  - banner [ref=e4]:
+    - link [ref=e5] [cursor=pointer]:
+      - /url: https://arxiv.org/IgnoreMe
+    - link "archive home" [ref=e6] [cursor=pointer]:
+      - /url: https://arxiv.org/
+      - img "archive" [ref=e7]
+    - navigation "Main navigation" [ref=e8]:
+      - link "Search" [ref=e9] [cursor=pointer]:
+        - /url: https://arxiv.org/search
+      - link "Submit" [ref=e13] [cursor=pointer]:
+        - /url: https://arxiv.org/user/create
+      - link "Donate" [ref=e14] [cursor=pointer]:
+        - /url: https://info.arxiv.org/about/donate.html
+      - link "Log in" [ref=e16] [cursor=pointer]:
+        - /url: https://arxiv.org/login
+  - main [ref=e17]:
+    - generic [ref=e19]:
+      - generic [ref=e20]:
+        - heading "Computer Science > Computation and Language" [level=1] [ref=e22]
+        - generic [ref=e24]:
+          - generic [ref=e25]:
+            - text: "[Submitted on 22 May 2023 ("
+            - link "v1" [ref=e26] [cursor=pointer]:
+              - /url: https://arxiv.org/abs/2305.13245v1
+            - text: ), last revised 23 Dec 2023 (this version, v3)]
+          - 'heading "GQA: Training Generalized Multi-Query Transformer Models from Multi-Head Checkpoints" [level=1] [ref=e27]'
+          - generic [ref=e28]:
+            - link "Joshua Ainslie" [ref=e29] [cursor=pointer]:
+              - /url: https://arxiv.org/search/cs?searchtype=author&query=Ainslie,+J
+            - text: ","
+            - link "James Lee-Thorp" [ref=e30] [cursor=pointer]:
+              - /url: https://arxiv.org/search/cs?searchtype=author&query=Lee-Thorp,+J
+            - text: ","
+            - link "Michiel de Jong" [ref=e31] [cursor=pointer]:
+              - /url: https://arxiv.org/search/cs?searchtype=author&query=de+Jong,+M
+            - text: ","
+            - link "Yury Zemlyanskiy" [ref=e32] [cursor=pointer]:
+              - /url: https://arxiv.org/search/cs?searchtype=author&query=Zemlyanskiy,+Y
+            - text: ","
+            - link "Federico Lebrón" [ref=e33] [cursor=pointer]:
+              - /url: https://arxiv.org/search/cs?searchtype=author&query=Lebr%C3%B3n,+F
+            - text: ","
+            - link "Sumit Sanghai" [ref=e34] [cursor=pointer]:
+              - /url: https://arxiv.org/search/cs?searchtype=author&query=Sanghai,+S
+          - blockquote [ref=e35]: Multi-query attention (MQA), which only uses a single key-value head, drastically speeds up decoder inference. However, MQA can lead to quality degradation, and moreover it may not be desirable to train a separate model just for faster inference. We (1) propose a recipe for uptraining existing multi-head language model checkpoints into models with MQA using 5% of original pre-training compute, and (2) introduce grouped-query attention (GQA), a generalization of multi-query attention which uses an intermediate (more than one, less than number of query heads) number of key-value heads. We show that uptrained GQA achieves quality close to multi-head attention with comparable speed to MQA.
+          - table "Additional metadata" [ref=e37]:
+            - rowgroup [ref=e38]:
+              - row [ref=e39]:
+                - cell "Comments:" [ref=e40]
+                - cell "Accepted at EMNLP 2023. Added to related work" [ref=e41]
+              - row [ref=e42]:
+                - cell "Subjects:" [ref=e43]
+                - cell "Computation and Language (cs.CL); Machine Learning (cs.LG)" [ref=e44]
+              - row [ref=e45]:
+                - cell "Cite as:" [ref=e46]
+                - cell [ref=e47]:
+                  - generic [ref=e48]:
+                    - link "arXiv:2305.13245" [ref=e49] [cursor=pointer]:
+                      - /url: https://arxiv.org/abs/2305.13245
+                    - text: "[cs.CL]"
+              - row [ref=e50]:
+                - cell [ref=e51]
+                - cell [ref=e52]:
+                  - text: (or
+                  - generic [ref=e53]:
+                    - link "arXiv:2305.13245v3" [ref=e54] [cursor=pointer]:
+                      - /url: https://arxiv.org/abs/2305.13245v3
+                    - text: "[cs.CL]"
+                  - text: for this version)
+              - row [ref=e55]:
+                - cell [ref=e56]
+                - cell [ref=e57]:
+                  - link "https://doi.org/10.48550/arXiv.2305.13245" [ref=e58] [cursor=pointer]:
+                    - /url: https://doi.org/10.48550/arXiv.2305.13245
+                  - button "Focus to learn more" [ref=e60]
+        - generic [ref=e63]:
+          - heading "Submission history" [level=2] [ref=e64]
+          - text: "From: Joshua Ainslie ["
+          - link "view email" [ref=e65] [cursor=pointer]:
+            - /url: /show-email/d39f67e6/2305.13245
+          - text: "]"
+          - strong [ref=e66]:
+            - link "[v1]" [ref=e67] [cursor=pointer]:
+              - /url: /abs/2305.13245v1
+          - text: Mon, 22 May 2023 17:16:38 UTC (140 KB)
+          - strong [ref=e68]:
+            - link "[v2]" [ref=e69] [cursor=pointer]:
+              - /url: /abs/2305.13245v2
+          - text: Tue, 24 Oct 2023 00:57:50 UTC (139 KB)
+          - strong [ref=e70]: "[v3]"
+          - text: Sat, 23 Dec 2023 17:55:11 UTC (140 KB)
+      - generic [ref=e71]:
+        - generic [ref=e72]:
+          - heading "Access Paper:" [level=2] [ref=e73]
+          - list [ref=e74]:
+            - listitem [ref=e75]:
+              - link "View PDF" [ref=e76] [cursor=pointer]:
+                - /url: /pdf/2305.13245
+            - listitem [ref=e77]:
+              - link "HTML (experimental)" [ref=e78] [cursor=pointer]:
+                - /url: https://arxiv.org/html/2305.13245v3
+            - listitem [ref=e79]:
+              - link "TeX Source" [ref=e80] [cursor=pointer]:
+                - /url: /src/2305.13245
+          - link "view license" [ref=e82] [cursor=pointer]:
+            - /url: http://creativecommons.org/licenses/by/4.0/
+        - generic [ref=e84]:
+          - heading "Current browse context:" [level=3] [ref=e85]
+          - generic [ref=e86]: cs.CL
+          - generic [ref=e87]:
+            - link "< prev" [ref=e89] [cursor=pointer]:
+              - /url: /prevnext?id=2305.13245&function=prev&context=cs.CL
+            - text: "|"
+            - link "next >" [ref=e91] [cursor=pointer]:
+              - /url: /prevnext?id=2305.13245&function=next&context=cs.CL
+          - generic [ref=e92]:
+            - link "new" [ref=e93] [cursor=pointer]:
+              - /url: /list/cs.CL/new
+            - text: "|"
+            - link "recent" [ref=e94] [cursor=pointer]:
+              - /url: /list/cs.CL/recent
+            - text: "|"
+            - link "2023-05" [ref=e95] [cursor=pointer]:
+              - /url: /list/cs.CL/2023-05
+          - generic [ref=e96]:
+            - text: "Change to browse by:"
+            - generic [ref=e97]:
+              - link "cs" [ref=e98] [cursor=pointer]:
+                - /url: /abs/2305.13245?context=cs
+              - link "cs.LG" [ref=e99] [cursor=pointer]:
+                - /url: /abs/2305.13245?context=cs.LG
+        - generic [ref=e100]:
+          - heading "References & Citations" [level=3] [ref=e101]
+          - list [ref=e102]:
+            - listitem [ref=e103]:
+              - link "NASA ADS" [ref=e104] [cursor=pointer]:
+                - /url: https://ui.adsabs.harvard.edu/abs/arXiv:2305.13245
+            - listitem [ref=e105]:
+              - link "Google Scholar" [ref=e106] [cursor=pointer]:
+                - /url: https://scholar.google.com/scholar_lookup?arxiv_id=2305.13245
+            - listitem [ref=e107]:
+              - link "Semantic Scholar" [ref=e108] [cursor=pointer]:
+                - /url: https://api.semanticscholar.org/arXiv:2305.13245
+        - generic [ref=e110]:
+          - heading [level=3] [ref=e111]:
+            - link "2 blog links" [ref=e112] [cursor=pointer]:
+              - /url: /tb/2305.13245
+          - text: (
+          - link "what is this?" [ref=e113] [cursor=pointer]:
+            - /url: https://info.arxiv.org/help/trackback.html
+          - text: )
+        - button "export BibTeX citation" [ref=e115]
+        - generic [ref=e116]:
+          - heading "Bookmark" [level=3] [ref=e118]
+          - link [ref=e119] [cursor=pointer]:
+            - /url: "http://www.bibsonomy.org/BibtexHandler?requTask=upload&url=https://arxiv.org/abs/2305.13245&description=GQA: Training Generalized Multi-Query Transformer Models from Multi-Head Checkpoints"
+            - img "BibSonomy" [ref=e120]
+          - link [ref=e121] [cursor=pointer]:
+            - /url: "https://reddit.com/submit?url=https://arxiv.org/abs/2305.13245&title=GQA: Training Generalized Multi-Query Transformer Models from Multi-Head Checkpoints"
+            - img "Reddit" [ref=e122]
+      - tablist "arXivLabs tools" [ref=e124]:
+        - radio "Bibliographic Tools" [checked] [ref=e125]
+        - tab "Bibliographic Tools" [selected] [ref=e126] [cursor=pointer]
+        - tabpanel "Bibliographic Tools" [ref=e127]:
+          - heading "Bibliographic and Citation Tools" [level=1] [ref=e128]
+          - generic [ref=e129]:
+            - generic [ref=e130]:
+              - generic [ref=e132]:
+                - checkbox "Bibliographic Explorer Toggle"
+                - generic [ref=e133] [cursor=pointer]
+                - generic [ref=e134]: Bibliographic Explorer Toggle
+              - generic [ref=e135]:
+                - text: Bibliographic Explorer
+                - emphasis [ref=e136]:
+                  - text: (
+                  - link "What is the Explorer?" [ref=e137] [cursor=pointer]:
+                    - /url: https://info.arxiv.org/labs/showcase.html#arxiv-bibliographic-explorer
+                  - text: )
+            - generic [ref=e138]:
+              - generic [ref=e140]:
+                - checkbox "Connected Papers"
+                - generic [ref=e141] [cursor=pointer]
+                - generic [ref=e142]: Connected Papers Toggle
+              - generic [ref=e143]:
+                - text: Connected Papers
+                - emphasis [ref=e144]:
+                  - text: (
+                  - link "What is Connected Papers?" [ref=e145] [cursor=pointer]:
+                    - /url: https://www.connectedpapers.com/about
+                  - text: )
+            - generic [ref=e146]:
+              - generic [ref=e148]:
+                - checkbox "Litmaps"
+                - generic [ref=e149] [cursor=pointer]
+                - generic [ref=e150]: Litmaps Toggle
+              - generic [ref=e151]:
+                - text: Litmaps
+                - emphasis [ref=e152]:
+                  - text: (
+                  - link "What is Litmaps?" [ref=e153] [cursor=pointer]:
+                    - /url: https://www.litmaps.co/
+                  - text: )
+            - generic [ref=e154]:
+              - generic [ref=e156]:
+                - checkbox "scite Smart Citations"
+                - generic [ref=e157] [cursor=pointer]
+                - generic [ref=e158]: scite.ai Toggle
+              - generic [ref=e159]:
+                - text: scite Smart Citations
+                - emphasis [ref=e160]:
+                  - text: (
+                  - link "What are Smart Citations?" [ref=e161] [cursor=pointer]:
+                    - /url: https://www.scite.ai/
+                  - text: )
+        - radio "Code, Data, Media" [ref=e165]
+        - tab "Code, Data, Media" [ref=e166] [cursor=pointer]
+        - radio "Demos" [ref=e167]
+        - tab "Demos" [ref=e168] [cursor=pointer]
+        - radio "Related Papers" [ref=e169]
+        - tab "Related Papers" [ref=e170] [cursor=pointer]
+        - radio "About arXivLabs" [ref=e171]
+        - tab "About arXivLabs" [ref=e172] [cursor=pointer]
+      - generic [ref=e173]:
+        - link "Which authors of this paper are endorsers?" [ref=e174] [cursor=pointer]:
+          - /url: /auth/show-endorsers/2305.13245
+        - text: "|"
+        - link "Disable MathJax" [ref=e175] [cursor=pointer]:
+          - /url: javascript:setMathjaxCookie()
+        - text: (
+        - link "What is MathJax?" [ref=e176] [cursor=pointer]:
+          - /url: https://info.arxiv.org/help/mathjax.html
+        - text: )
+  - contentinfo [ref=e177]:
+    - generic [ref=e178]:
+      - generic [ref=e179]:
+        - generic [ref=e180]:
+          - text: We gratefully acknowledge support from our
+          - strong [ref=e181]: major funders
+          - text: ","
+          - link [ref=e182] [cursor=pointer]:
+            - /url: https://info.arxiv.org/about/ourmembers.html
+            - strong [ref=e183]: member institutions
+          - text: ", and all contributors."
+        - navigation "Site navigation" [ref=e184]:
+          - link "About" [ref=e185] [cursor=pointer]:
+            - /url: https://info.arxiv.org/about
+          - generic [ref=e186]: ·
+          - link "Help" [ref=e187] [cursor=pointer]:
+            - /url: https://info.arxiv.org/help
+          - generic [ref=e188]: ·
+          - link "Contact" [ref=e189] [cursor=pointer]:
+            - /url: https://info.arxiv.org/help/contact.html
+          - generic [ref=e190]: ·
+          - link "Subscribe" [ref=e191] [cursor=pointer]:
+            - /url: https://info.arxiv.org/help/subscribe
+          - generic [ref=e192]: ·
+          - link "Copyright" [ref=e193] [cursor=pointer]:
+            - /url: https://info.arxiv.org/help/license/index.html
+          - generic [ref=e194]: ·
+          - link "Privacy" [ref=e195] [cursor=pointer]:
+            - /url: https://info.arxiv.org/help/policies/privacy_policy.html
+          - generic [ref=e196]: ·
+          - link "Accessibility" [ref=e197] [cursor=pointer]:
+            - /url: https://info.arxiv.org/help/web_accessibility.html
+          - generic [ref=e198]: ·
+          - link "Operational Status (opens in new tab)" [ref=e199] [cursor=pointer]:
+            - /url: https://status.arxiv.org
+            - text: Operational Status
+            - generic [ref=e200]: (opens in new tab)
+      - generic "Major funders" [ref=e201]:
+        - generic [ref=e202]: Major funding support from
+        - generic [ref=e203]:
+          - link [ref=e204] [cursor=pointer]:
+            - /url: https://www.simonsfoundation.org/
+            - img "Simons Foundation" [ref=e205]
+          - link [ref=e206] [cursor=pointer]:
+            - /url: https://www.sfi.org.bm/
+            - img "Simons Foundation International" [ref=e207]
+          - link [ref=e208] [cursor=pointer]:
+            - /url: https://www.schmidtsciences.org/
+            - img "Schmidt Sciences" [ref=e209]
+```

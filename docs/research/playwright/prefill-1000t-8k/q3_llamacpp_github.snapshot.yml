@@ -1,0 +1,1508 @@
+### Open tabs
+- 0: [flash attention 2 long context 8k 16k 32k prefill throughput scaling at DuckDuckGo](https://duckduckgo.com/?q=flash+attention+2+long+context+8k+16k+32k+prefill+throughput+scaling&kad=en_US)
+- 1: [DuckDuckGo](https://html.duckduckgo.com/html/?q=flash+attention+2+long+context+8k+16k+32k+prefill+throughput+scaling)
+- 2: [DuckDuckGo](https://lite.duckduckgo.com/lite/?q=flash+attention+2+long+context+8k+16k+32k+prefill+throughput+scaling)
+- 3: [Captcha - Brave Search](https://search.brave.com/search?q=flash+attention+2+long+context+8k+16k+32k+prefill+throughput+scaling)
+- 4: [flash attention 2 long context 8k 16k 32k prefill throughput scaling - Arama](https://www.bing.com/search?q=flash+attention+2+long+context+8k+16k+32k+prefill+throughput+scaling&rdr=1&rdrig=40FB2FB12BE247E3A2F87EF294A4CE99)
+- 5: ["FlashAttention-2" prefill throughput 8k 16k scaling - Arama](https://www.bing.com/search?q=%22FlashAttention-2%22+prefill+throughput+8k+16k+scaling&rdr=1&rdrig=76F509D45D02467DA2B1192C40E1BE76)
+- 6: [https://www.google.com/search?q=flash+attention+2+long+context+8k+16k+32k+prefill+throughput+scaling&hl=en&gl=us&sei=vcORaoGTIfKm1fIPsp3PiQ8](https://www.google.com/sorry/index?continue=https://www.google.com/search%3Fq%3Dflash%2Battention%2B2%2Blong%2Bcontext%2B8k%2B16k%2B32k%2Bprefill%2Bthroughput%2Bscaling%26hl%3Den%26gl%3Dus%26sei%3DvcORaoGTIfKm1fIPsp3PiQ8&hl=en&q=EgSw6odMGL2Hx9QGIjBz_JWyuDhFlk0k_9Sd2sOWVij5TcNPo8TWvNLttk3wGaoM0WiPg28pSMdLEGzKOxUyAVJaAUM)
+- 7: [[2307.08691] FlashAttention-2: Faster Attention with Better Parallelism and Work Partitioning](https://arxiv.org/abs/2307.08691)
+- 8: [[2307.08691] FlashAttention-2: Faster Attention with Better Parallelism and Work Partitioning](https://arxiv.org/abs/2307.08691)
+- 9: [GitHub - Dao-AILab/flash-attention: Fast and memory-efficient exact attention · GitHub](https://github.com/Dao-AILab/flash-attention)
+- 10: [[2205.14135] FlashAttention: Fast and Memory-Efficient Exact Attention with IO-Awareness](https://arxiv.org/abs/2205.14135)
+- 11: [Overview · Hugging Face](https://huggingface.co/docs/transformers/v5.15.1/optimization_overview)
+- 12: [Page not found – PyTorch](https://pytorch.org/blog/flash-attention)
+- 13: [AMD ROCm — AMD ROCm 10.0.0](https://rocm.docs.amd.com/en/latest/)
+- 14: [[2305.13245] GQA: Training Generalized Multi-Query Transformer Models from Multi-Head Checkpoints](https://arxiv.org/abs/2305.13245)
+- 15: [[2112.10752] High-Resolution Image Synthesis with Latent Diffusion Models](https://arxiv.org/abs/2112.10752)
+- 16: [ggml-org/llama.cpp · Discussions · GitHub](https://github.com/ggml-org/llama.cpp/discussions)
+- 17: [Unlocking Longer Generation with Key-Value Cache Quantization](https://huggingface.co/blog/kv-cache-quantization)
+- 18: [404 - Page Not Found — AMD ROCm 10.0.0](https://rocm.docs.amd.com/en/latest/how-to/llm-fine-tuning.html)
+- 19: [www.amd.com](chrome-error://chromewebdata/)
+- 20: (current) [GitHub - ggml-org/llama.cpp: LLM inference in C/C++ · GitHub](https://github.com/ggml-org/llama.cpp)
+### Page
+- Page URL: https://github.com/ggml-org/llama.cpp
+- Page Title: GitHub - ggml-org/llama.cpp: LLM inference in C/C++ · GitHub
+- Console: 1 errors, 0 warnings
+### Snapshot
+```yaml
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - generic [ref=e3]:
+      - link "Skip to content" [ref=e4] [cursor=pointer]:
+        - /url: "#start-of-content"
+      - banner [ref=e9]:
+        - heading "Navigation Menu" [level=2] [ref=e10]
+        - generic [ref=e11]:
+          - link "Homepage" [ref=e13] [cursor=pointer]:
+            - /url: /
+          - generic [ref=e16]:
+            - navigation "Global" [ref=e17]:
+              - list [ref=e18]:
+                - listitem [ref=e19]:
+                  - button "Platform" [ref=e21] [cursor=pointer]
+                - listitem [ref=e24]:
+                  - button "Solutions" [ref=e26] [cursor=pointer]
+                - listitem [ref=e29]:
+                  - button "Resources" [ref=e31] [cursor=pointer]
+                - listitem [ref=e34]:
+                  - button "Open Source" [ref=e36] [cursor=pointer]
+                - listitem [ref=e39]:
+                  - button "Enterprise" [ref=e41] [cursor=pointer]
+                - listitem [ref=e44]:
+                  - link "Pricing" [ref=e45] [cursor=pointer]:
+                    - /url: https://github.com/pricing
+            - generic [ref=e46]:
+              - button "Search or jump to, type / to search" [ref=e48] [cursor=pointer]
+              - link "Sign in" [ref=e55] [cursor=pointer]:
+                - /url: /login?return_to=https%3A%2F%2Fgithub.com%2Fggml-org%2Fllama.cpp
+              - link "Sign up" [ref=e58] [cursor=pointer]:
+                - /url: /signup?ref_cta=Sign+up&ref_loc=header+logged+out&ref_page=%2F%3Cuser-name%3E%2F%3Crepo-name%3E&source=header-repo&source_repo=ggml-org%2Fllama.cpp
+              - button "Appearance settings" [ref=e61] [cursor=pointer]
+    - main [ref=e68]:
+      - generic [ref=e69]:
+        - generic [ref=e70]:
+          - generic [ref=e72]:
+            - link "ggml-org" [ref=e76] [cursor=pointer]:
+              - /url: /ggml-org
+            - generic [ref=e77]: /
+            - strong [ref=e78]:
+              - link "llama.cpp" [ref=e79] [cursor=pointer]:
+                - /url: /ggml-org/llama.cpp
+            - generic [ref=e80]: Public
+          - generic [ref=e81]:
+            - list:
+              - listitem [ref=e82]:
+                - link "You must be signed in to change notification settings" [ref=e83] [cursor=pointer]:
+                  - /url: /login?return_to=%2Fggml-org%2Fllama.cpp
+                  - text: Notifications
+              - listitem [ref=e86]:
+                - link "Fork 22.3k" [ref=e87] [cursor=pointer]:
+                  - /url: /login?return_to=%2Fggml-org%2Fllama.cpp
+                  - text: Fork
+                  - generic "22,339" [ref=e90]: 22.3k
+              - listitem [ref=e91]:
+                - link "You must be signed in to star a repository" [ref=e93] [cursor=pointer]:
+                  - /url: /login?return_to=%2Fggml-org%2Fllama.cpp
+                  - text: Star
+                  - generic "126085 users starred this repository" [ref=e96]: 126k
+        - navigation "Repository" [ref=e97]:
+          - list [ref=e98]:
+            - listitem [ref=e99]:
+              - link "Code" [ref=e100] [cursor=pointer]:
+                - /url: /ggml-org/llama.cpp
+            - listitem [ref=e104]:
+              - link "Issues 854" [ref=e105] [cursor=pointer]:
+                - /url: /ggml-org/llama.cpp/issues
+                - generic [ref=e109]: Issues
+                - generic "854" [ref=e110]
+            - listitem [ref=e111]:
+              - link "Pull requests 1.4k" [ref=e112] [cursor=pointer]:
+                - /url: /ggml-org/llama.cpp/pulls
+                - generic [ref=e115]: Pull requests
+                - generic "1,406" [ref=e116]: 1.4k
+            - listitem [ref=e117]:
+              - link "Discussions" [ref=e118] [cursor=pointer]:
+                - /url: /ggml-org/llama.cpp/discussions
+            - listitem [ref=e122]:
+              - link "Actions" [ref=e123] [cursor=pointer]:
+                - /url: /ggml-org/llama.cpp/actions
+            - listitem [ref=e127]:
+              - link "Projects" [ref=e128] [cursor=pointer]:
+                - /url: /ggml-org/llama.cpp/projects
+            - listitem [ref=e132]:
+              - link "Wiki" [ref=e133] [cursor=pointer]:
+                - /url: /ggml-org/llama.cpp/wiki
+            - listitem [ref=e137]:
+              - link "Security and quality 13" [ref=e138] [cursor=pointer]:
+                - /url: /ggml-org/llama.cpp/security
+                - generic [ref=e141]: Security and quality
+                - generic "13" [ref=e142]
+            - listitem [ref=e143]:
+              - link "Insights" [ref=e144] [cursor=pointer]:
+                - /url: /ggml-org/llama.cpp/pulse
+      - generic [ref=e161]:
+        - generic [ref=e164]:
+          - generic [ref=e165]:
+            - generic [ref=e166]:
+              - button "master branch" [ref=e168] [cursor=pointer]:
+                - generic [ref=e169]: master
+              - generic [ref=e173]:
+                - link [ref=e1409] [cursor=pointer]:
+                  - /url: /ggml-org/llama.cpp/branches
+                  - generic [ref=e1410]:
+                    - strong [ref=e1411]: "736"
+                    - text: Branches
+                - link [ref=e1412] [cursor=pointer]:
+                  - /url: /ggml-org/llama.cpp/tags
+                  - generic [ref=e1413]:
+                    - strong [ref=e1414]: "7221"
+                    - text: Tags
+            - generic [ref=e180]:
+              - combobox "Go to file" [ref=e188]
+              - button "Code" [ref=e189] [cursor=pointer]
+          - generic [ref=e192]:
+            - generic [ref=e193]:
+              - generic [ref=e195]:
+                - heading "Latest commit" [level=2] [ref=e196]
+                - generic [ref=e1415]:
+                  - generic [ref=e1416]:
+                    - generic [ref=e1418]:
+                      - img "Eric-A-Stalee" [ref=e1419]
+                      - img "jeffbolznv" [ref=e1420]
+                    - link "commits by Eric-A-Stalee" [ref=e1422] [cursor=pointer]:
+                      - /url: /ggml-org/llama.cpp/commits?author=Eric-A-Stalee
+                      - text: Eric-A-Stalee
+                    - generic [ref=e1423]: and
+                    - link "commits by jeffbolznv" [ref=e1425] [cursor=pointer]:
+                      - /url: /ggml-org/llama.cpp/commits?author=jeffbolznv
+                      - text: jeffbolznv
+                  - generic [ref=e1426]:
+                    - generic [ref=e1428]:
+                      - 'link "vulkan: fix missing view-alias dependencies in ggml_vk_graph_optimize (" [ref=e1429] [cursor=pointer]':
+                        - /url: /ggml-org/llama.cpp/commit/b387ddfd84b4b1f79a6e09910748195e3320e89e
+                      - link "…" [ref=e1430] [cursor=pointer]:
+                        - /url: https://github.com/ggml-org/llama.cpp/pull/27812
+                    - button "Open commit details" [ref=e1431] [cursor=pointer]
+                    - button "pending" [ref=e1434] [cursor=pointer]
+                - generic [ref=e198]:
+                  - generic [ref=e1438]:
+                    - link "Commit b387ddf" [ref=e1439] [cursor=pointer]:
+                      - /url: /ggml-org/llama.cpp/commit/b387ddfd84b4b1f79a6e09910748195e3320e89e
+                      - text: b387ddf
+                    - text: ·
+                    - generic "Aug 28, 2026, 20:12 GMT+3" [ref=e1440]: Aug 28, 202612 minutes ago
+                  - generic [ref=e199]:
+                    - heading "History" [level=2] [ref=e200]
+                    - link "10,677 Commits" [ref=e201] [cursor=pointer]:
+                      - /url: /ggml-org/llama.cpp/commits/master/
+              - heading "Folders and files" [level=2] [ref=e204]
+              - table "Folders and files" [ref=e205]:
+                - rowgroup:
+                  - row "Name Last commit message Last commit date":
+                    - columnheader "Name"
+                    - columnheader "Last commit message"
+                    - columnheader "Last commit date"
+                - rowgroup [ref=e206]:
+                  - row [ref=e1441]:
+                    - cell [ref=e208]:
+                      - link ".devops, (Directory)" [ref=e215] [cursor=pointer]:
+                        - /url: /ggml-org/llama.cpp/tree/master/.devops
+                        - text: .devops
+                    - cell [ref=e1442]:
+                      - 'link "OpenVINO: Update OV to 2026.3.1, whisper.cpp support, Qwen3.5 on NPU,…" [ref=e1445] [cursor=pointer]':
+                        - /url: /ggml-org/llama.cpp/commit/511f9c1379a52516f328859af86daa124eddc717
+                    - cell "Aug 28, 20265 hours ago" [ref=e1446]
+                  - row [ref=e1447]:
+                    - cell [ref=e222]:
+                      - link ".gemini, (Directory)" [ref=e229] [cursor=pointer]:
+                        - /url: /ggml-org/llama.cpp/tree/master/.gemini
+                        - text: .gemini
+                    - cell [ref=e1448]:
+                      - generic [ref=e1450]:
+                        - 'link "contributing: tighten AI usage policy (" [ref=e1451] [cursor=pointer]':
+                          - /url: /ggml-org/llama.cpp/commit/3595ae5963f1583f53beecf9725c919d309e15da
+                        - link "#18388" [ref=e1452] [cursor=pointer]:
+                          - /url: https://github.com/ggml-org/llama.cpp/pull/18388
+                        - link ")" [ref=e1453] [cursor=pointer]:
+                          - /url: /ggml-org/llama.cpp/commit/3595ae5963f1583f53beecf9725c919d309e15da
+                    - cell "Dec 29, 20258 months ago" [ref=e1454]
+                  - row [ref=e1455]:
+                    - cell [ref=e236]:
+                      - link ".github, (Directory)" [ref=e243] [cursor=pointer]:
+                        - /url: /ggml-org/llama.cpp/tree/master/.github
+                        - text: .github
+                    - cell [ref=e1456]:
+                      - 'link "OpenVINO: Update OV to 2026.3.1, whisper.cpp support, Qwen3.5 on NPU,…" [ref=e1459] [cursor=pointer]':
+                        - /url: /ggml-org/llama.cpp/commit/511f9c1379a52516f328859af86daa124eddc717
+                    - cell "Aug 28, 20265 hours ago" [ref=e1460]
+                  - row [ref=e1461]:
+                    - cell [ref=e250]:
+                      - link ".pi/gg, (Directory)" [ref=e257] [cursor=pointer]:
+                        - /url: /ggml-org/llama.cpp/tree/master/.pi/gg
+                        - text: .pi/gg
+                    - cell [ref=e1462]:
+                      - generic [ref=e1464]:
+                        - 'link "ci : add older, min and dry-run options to ccache-clear (" [ref=e1465] [cursor=pointer]':
+                          - /url: /ggml-org/llama.cpp/commit/3a653fea932e6a026e14cc0fb6507a986679f688
+                        - link "#27504" [ref=e1466] [cursor=pointer]:
+                          - /url: https://github.com/ggml-org/llama.cpp/pull/27504
+                        - link ")" [ref=e1467] [cursor=pointer]:
+                          - /url: /ggml-org/llama.cpp/commit/3a653fea932e6a026e14cc0fb6507a986679f688
+                    - cell "Aug 22, 2026last week" [ref=e1468]
+                  - row [ref=e1469]:
+                    - cell [ref=e264]:
+                      - link "app, (Directory)" [ref=e271] [cursor=pointer]:
+                        - /url: /ggml-org/llama.cpp/tree/master/app
+                        - text: app
+                    - cell [ref=e1470]:
+                      - generic [ref=e1472]:
+                        - 'link "cmake : introduce semantic versioning (" [ref=e1473] [cursor=pointer]':
+                          - /url: /ggml-org/llama.cpp/commit/680a9ae63d60d35c21a0dcd7d3fabdb9c6bfc963
+                        - link "#26839" [ref=e1474] [cursor=pointer]:
+                          - /url: https://github.com/ggml-org/llama.cpp/pull/26839
+                        - link ")" [ref=e1475] [cursor=pointer]:
+                          - /url: /ggml-org/llama.cpp/commit/680a9ae63d60d35c21a0dcd7d3fabdb9c6bfc963
+                    - cell "Aug 12, 20262 weeks ago" [ref=e1476]
+                  - row [ref=e1477]:
+                    - cell [ref=e278]:
+                      - link "benches, (Directory)" [ref=e285] [cursor=pointer]:
+                        - /url: /ggml-org/llama.cpp/tree/master/benches
+                        - text: benches
+                    - cell [ref=e1478]:
+                      - generic [ref=e1480]:
+                        - 'link "benches : add Nemotron 3 Nano on DGX Spark (" [ref=e1481] [cursor=pointer]':
+                          - /url: /ggml-org/llama.cpp/commit/9b342d0a9f2f4892daec065491583ec2be129685
+                        - link "#20652" [ref=e1482] [cursor=pointer]:
+                          - /url: https://github.com/ggml-org/llama.cpp/pull/20652
+                        - link ")" [ref=e1483] [cursor=pointer]:
+                          - /url: /ggml-org/llama.cpp/commit/9b342d0a9f2f4892daec065491583ec2be129685
+                    - cell "Mar 16, 20265 months ago" [ref=e1484]
+                  - row [ref=e1485]:
+                    - cell [ref=e292]:
+                      - link "ci, (Directory)" [ref=e299] [cursor=pointer]:
+                        - /url: /ggml-org/llama.cpp/tree/master/ci
+                        - text: ci
+                    - cell [ref=e1486]:
+                      - 'link "OpenVINO: Update OV to 2026.3.1, whisper.cpp support, Qwen3.5 on NPU,…" [ref=e1489] [cursor=pointer]':
+                        - /url: /ggml-org/llama.cpp/commit/511f9c1379a52516f328859af86daa124eddc717
+                    - cell "Aug 28, 20265 hours ago" [ref=e1490]
+                  - row [ref=e1491]:
+                    - cell [ref=e306]:
+                      - link "cmake, (Directory)" [ref=e313] [cursor=pointer]:
+                        - /url: /ggml-org/llama.cpp/tree/master/cmake
+                        - text: cmake
+                    - cell [ref=e1492]:
+                      - generic [ref=e1494]:
+                        - 'link "CI: Use LLVM''s OpenMP over MSVC_DEBUG_non_redist on Windows (" [ref=e1495] [cursor=pointer]':
+                          - /url: /ggml-org/llama.cpp/commit/bf0040e15fd5b716262658f4d652c9cee959cf91
+                        - link "#26678" [ref=e1496] [cursor=pointer]:
+                          - /url: https://github.com/ggml-org/llama.cpp/pull/26678
+                        - link ")" [ref=e1497] [cursor=pointer]:
+                          - /url: /ggml-org/llama.cpp/commit/bf0040e15fd5b716262658f4d652c9cee959cf91
+                    - cell "Aug 20, 2026last week" [ref=e1498]
+                  - row [ref=e1499]:
+                    - cell [ref=e320]:
+                      - link "common, (Directory)" [ref=e327] [cursor=pointer]:
+                        - /url: /ggml-org/llama.cpp/tree/master/common
+                        - text: common
+                    - cell [ref=e1500]:
+                      - generic [ref=e1502]:
+                        - 'link "model: add DSpark support for Nemotron3.5 (" [ref=e1503] [cursor=pointer]':
+                          - /url: /ggml-org/llama.cpp/commit/ca3d5a3e10d53f7ea672cb9b6178faca3e2807bc
+                        - link "#27804" [ref=e1504] [cursor=pointer]:
+                          - /url: https://github.com/ggml-org/llama.cpp/pull/27804
+                        - link ")" [ref=e1505] [cursor=pointer]:
+                          - /url: /ggml-org/llama.cpp/commit/ca3d5a3e10d53f7ea672cb9b6178faca3e2807bc
+                    - cell "Aug 27, 202617 hours ago" [ref=e1506]
+                  - row [ref=e1507]:
+                    - cell [ref=e334]:
+                      - link "conversion, (Directory)" [ref=e341] [cursor=pointer]:
+                        - /url: /ggml-org/llama.cpp/tree/master/conversion
+                        - text: conversion
+                    - cell [ref=e1508]:
+                      - generic [ref=e1510]:
+                        - 'link "model: add DSpark support for Nemotron3.5 (" [ref=e1511] [cursor=pointer]':
+                          - /url: /ggml-org/llama.cpp/commit/ca3d5a3e10d53f7ea672cb9b6178faca3e2807bc
+                        - link "#27804" [ref=e1512] [cursor=pointer]:
+                          - /url: https://github.com/ggml-org/llama.cpp/pull/27804
+                        - link ")" [ref=e1513] [cursor=pointer]:
+                          - /url: /ggml-org/llama.cpp/commit/ca3d5a3e10d53f7ea672cb9b6178faca3e2807bc
+                    - cell "Aug 27, 202617 hours ago" [ref=e1514]
+                  - row [ref=e1515]:
+                    - cell [ref=e348]:
+                      - link "docs, (Directory)" [ref=e355] [cursor=pointer]:
+                        - /url: /ggml-org/llama.cpp/tree/master/docs
+                        - text: docs
+                    - cell [ref=e1516]:
+                      - 'link "OpenVINO: Update OV to 2026.3.1, whisper.cpp support, Qwen3.5 on NPU,…" [ref=e1519] [cursor=pointer]':
+                        - /url: /ggml-org/llama.cpp/commit/511f9c1379a52516f328859af86daa124eddc717
+                    - cell "Aug 28, 20265 hours ago" [ref=e1520]
+                  - row [ref=e1521]:
+                    - cell [ref=e362]:
+                      - link "examples, (Directory)" [ref=e369] [cursor=pointer]:
+                        - /url: /ggml-org/llama.cpp/tree/master/examples
+                        - text: examples
+                    - cell [ref=e1522]:
+                      - generic [ref=e1524]:
+                        - 'link "build : fix xcframework + cmake clean-up (" [ref=e1525] [cursor=pointer]':
+                          - /url: /ggml-org/llama.cpp/commit/27e345b574dd8c8838e2c06e47699a3135f16ec9
+                        - link "#27304" [ref=e1526] [cursor=pointer]:
+                          - /url: https://github.com/ggml-org/llama.cpp/pull/27304
+                        - link ")" [ref=e1527] [cursor=pointer]:
+                          - /url: /ggml-org/llama.cpp/commit/27e345b574dd8c8838e2c06e47699a3135f16ec9
+                    - cell "Aug 18, 2026last week" [ref=e1528]
+                  - row [ref=e1529]:
+                    - cell [ref=e376]:
+                      - link "ggml, (Directory)" [ref=e383] [cursor=pointer]:
+                        - /url: /ggml-org/llama.cpp/tree/master/ggml
+                        - text: ggml
+                    - cell [ref=e1530]:
+                      - generic [ref=e1532]:
+                        - 'link "vulkan: fix missing view-alias dependencies in ggml_vk_graph_optimize (" [ref=e1533] [cursor=pointer]':
+                          - /url: /ggml-org/llama.cpp/commit/b387ddfd84b4b1f79a6e09910748195e3320e89e
+                        - link "…" [ref=e1534] [cursor=pointer]:
+                          - /url: https://github.com/ggml-org/llama.cpp/pull/27812
+                    - cell "Aug 28, 202612 minutes ago" [ref=e1535]
+                  - row [ref=e1536]:
+                    - cell [ref=e390]:
+                      - link "gguf-py, (Directory)" [ref=e397] [cursor=pointer]:
+                        - /url: /ggml-org/llama.cpp/tree/master/gguf-py
+                        - text: gguf-py
+                    - cell [ref=e1537]:
+                      - generic [ref=e1539]:
+                        - 'link "convert: prevent ndarray conversion in LazyChunkedTensor (" [ref=e1540] [cursor=pointer]':
+                          - /url: /ggml-org/llama.cpp/commit/b19cbe925be361d229f0fe03435affe4a2717f37
+                        - link "#27869" [ref=e1541] [cursor=pointer]:
+                          - /url: https://github.com/ggml-org/llama.cpp/pull/27869
+                        - link ")" [ref=e1542] [cursor=pointer]:
+                          - /url: /ggml-org/llama.cpp/commit/b19cbe925be361d229f0fe03435affe4a2717f37
+                    - cell "Aug 28, 20267 hours ago" [ref=e1543]
+                  - row [ref=e1544]:
+                    - cell [ref=e404]:
+                      - link "grammars, (Directory)" [ref=e411] [cursor=pointer]:
+                        - /url: /ggml-org/llama.cpp/tree/master/grammars
+                        - text: grammars
+                    - cell [ref=e1545]:
+                      - generic [ref=e1547]:
+                        - 'link "docs : fix typos in CUDA-FEDORA.md and grammars/README.md (" [ref=e1548] [cursor=pointer]':
+                          - /url: /ggml-org/llama.cpp/commit/8edaca9034bd6dbe729895315b922bdd90d9766b
+                        - link "#24459" [ref=e1549] [cursor=pointer]:
+                          - /url: https://github.com/ggml-org/llama.cpp/pull/24459
+                        - link ")" [ref=e1550] [cursor=pointer]:
+                          - /url: /ggml-org/llama.cpp/commit/8edaca9034bd6dbe729895315b922bdd90d9766b
+                    - cell "Jun 14, 20262 months ago" [ref=e1551]
+                  - row [ref=e1552]:
+                    - cell [ref=e418]:
+                      - link "include, (Directory)" [ref=e425] [cursor=pointer]:
+                        - /url: /ggml-org/llama.cpp/tree/master/include
+                        - text: include
+                    - cell [ref=e1553]:
+                      - 'link "quantize: cap working memory size to avoid loading big tensors onto R…" [ref=e1556] [cursor=pointer]':
+                        - /url: /ggml-org/llama.cpp/commit/732707dff265be513347b02911e1dd18f7e1f386
+                    - cell "Aug 27, 2026yesterday" [ref=e1557]
+                  - row [ref=e1558]:
+                    - cell [ref=e432]:
+                      - link "licenses, (Directory)" [ref=e439] [cursor=pointer]:
+                        - /url: /ggml-org/llama.cpp/tree/master/licenses
+                        - text: licenses
+                    - cell [ref=e1559]:
+                      - generic [ref=e1561]:
+                        - 'link "refactor : remove libcurl, use OpenSSL when available (" [ref=e1562] [cursor=pointer]':
+                          - /url: /ggml-org/llama.cpp/commit/516a4ca9b5f2fa72c2a71f412929a67cf76a6213
+                        - link "#18828" [ref=e1563] [cursor=pointer]:
+                          - /url: https://github.com/ggml-org/llama.cpp/pull/18828
+                        - link ")" [ref=e1564] [cursor=pointer]:
+                          - /url: /ggml-org/llama.cpp/commit/516a4ca9b5f2fa72c2a71f412929a67cf76a6213
+                    - cell "Jan 14, 20267 months ago" [ref=e1565]
+                  - row [ref=e1566]:
+                    - cell [ref=e446]:
+                      - link "media, (Directory)" [ref=e453] [cursor=pointer]:
+                        - /url: /ggml-org/llama.cpp/tree/master/media
+                        - text: media
+                    - cell [ref=e1567]:
+                      - generic [ref=e1569]:
+                        - 'link "media : add transparent icon svg and png [no ci] (" [ref=e1570] [cursor=pointer]':
+                          - /url: /ggml-org/llama.cpp/commit/2cfef4d117d67ab1dec002915b48a15d11ee1973
+                        - link "#15891" [ref=e1571] [cursor=pointer]:
+                          - /url: https://github.com/ggml-org/llama.cpp/pull/15891
+                        - link ")" [ref=e1572] [cursor=pointer]:
+                          - /url: /ggml-org/llama.cpp/commit/2cfef4d117d67ab1dec002915b48a15d11ee1973
+                    - cell "Sep 10, 202511 months ago" [ref=e1573]
+                  - row [ref=e1574]:
+                    - cell [ref=e460]:
+                      - link "models, (Directory)" [ref=e467] [cursor=pointer]:
+                        - /url: /ggml-org/llama.cpp/tree/master/models
+                        - text: models
+                    - cell [ref=e1575]:
+                      - generic [ref=e1577]:
+                        - 'link "model: add Kimi-K3 text model (" [ref=e1578] [cursor=pointer]':
+                          - /url: /ggml-org/llama.cpp/commit/ad1de39e0708e3ced9c71bb3c82d93a2c046a73f
+                        - link "#26185" [ref=e1579] [cursor=pointer]:
+                          - /url: https://github.com/ggml-org/llama.cpp/pull/26185
+                        - link ")" [ref=e1580] [cursor=pointer]:
+                          - /url: /ggml-org/llama.cpp/commit/ad1de39e0708e3ced9c71bb3c82d93a2c046a73f
+                    - cell "Aug 15, 20262 weeks ago" [ref=e1581]
+                  - row [ref=e1582]:
+                    - cell [ref=e474]:
+                      - link "pocs, (Directory)" [ref=e481] [cursor=pointer]:
+                        - /url: /ggml-org/llama.cpp/tree/master/pocs
+                        - text: pocs
+                    - cell [ref=e1583]:
+                      - generic [ref=e1585]:
+                        - 'link "libs : rename libcommon -> libllama-common (" [ref=e1586] [cursor=pointer]':
+                          - /url: /ggml-org/llama.cpp/commit/6990e2f1f7581d332a6a1f34d6c567be70138184
+                        - link "#21936" [ref=e1587] [cursor=pointer]:
+                          - /url: https://github.com/ggml-org/llama.cpp/pull/21936
+                        - link ")" [ref=e1588] [cursor=pointer]:
+                          - /url: /ggml-org/llama.cpp/commit/6990e2f1f7581d332a6a1f34d6c567be70138184
+                    - cell "Apr 17, 20264 months ago" [ref=e1589]
+                  - row [ref=e1590]:
+                    - cell [ref=e488]:
+                      - link "requirements, (Directory)" [ref=e495] [cursor=pointer]:
+                        - /url: /ggml-org/llama.cpp/tree/master/requirements
+                        - text: requirements
+                    - cell [ref=e1591]:
+                      - generic [ref=e1593]:
+                        - 'link "requirements: use stable torch packages on s390x (" [ref=e1594] [cursor=pointer]':
+                          - /url: /ggml-org/llama.cpp/commit/2468576f241235452013308597e6de1b78866996
+                        - link "#26864" [ref=e1595] [cursor=pointer]:
+                          - /url: https://github.com/ggml-org/llama.cpp/pull/26864
+                        - link ")" [ref=e1596] [cursor=pointer]:
+                          - /url: /ggml-org/llama.cpp/commit/2468576f241235452013308597e6de1b78866996
+                    - cell "Aug 11, 20262 weeks ago" [ref=e1597]
+                  - row [ref=e1598]:
+                    - cell [ref=e502]:
+                      - link "scripts, (Directory)" [ref=e509] [cursor=pointer]:
+                        - /url: /ggml-org/llama.cpp/tree/master/scripts
+                        - text: scripts
+                    - cell [ref=e1599]:
+                      - generic [ref=e1601]:
+                        - 'link "pr2wt : use ssh/https remote in worktree depending on base (" [ref=e1602] [cursor=pointer]':
+                          - /url: /ggml-org/llama.cpp/commit/1a946ec7459f08bb6d8a05ca449586dd091d4fb3
+                        - link "#27800" [ref=e1603] [cursor=pointer]:
+                          - /url: https://github.com/ggml-org/llama.cpp/pull/27800
+                        - link ")" [ref=e1604] [cursor=pointer]:
+                          - /url: /ggml-org/llama.cpp/commit/1a946ec7459f08bb6d8a05ca449586dd091d4fb3
+                    - cell "Aug 27, 2026yesterday" [ref=e1605]
+                  - row [ref=e1606]:
+                    - cell [ref=e516]:
+                      - link "skills, (Directory)" [ref=e523] [cursor=pointer]:
+                        - /url: /ggml-org/llama.cpp/tree/master/skills
+                        - text: skills
+                    - cell [ref=e1607]:
+                      - generic [ref=e1609]:
+                        - 'link "test: move tools/parser to tests (" [ref=e1610] [cursor=pointer]':
+                          - /url: /ggml-org/llama.cpp/commit/4a08fa29705b8177e332b134306566c2c4b95902
+                        - link "#27548" [ref=e1611] [cursor=pointer]:
+                          - /url: https://github.com/ggml-org/llama.cpp/pull/27548
+                        - link ")" [ref=e1612] [cursor=pointer]:
+                          - /url: /ggml-org/llama.cpp/commit/4a08fa29705b8177e332b134306566c2c4b95902
+                    - cell "Aug 23, 20265 days ago" [ref=e1613]
+                  - row [ref=e1614]:
+                    - cell [ref=e530]:
+                      - link "src, (Directory)" [ref=e537] [cursor=pointer]:
+                        - /url: /ggml-org/llama.cpp/tree/master/src
+                        - text: src
+                    - cell [ref=e1615]:
+                      - generic [ref=e1617]:
+                        - 'link "context : disable non-fused GDN and LID ops (" [ref=e1618] [cursor=pointer]':
+                          - /url: /ggml-org/llama.cpp/commit/86632248188c106d749fad34a1dcd237c95863d4
+                        - link "#27877" [ref=e1619] [cursor=pointer]:
+                          - /url: https://github.com/ggml-org/llama.cpp/pull/27877
+                        - link ")" [ref=e1620] [cursor=pointer]:
+                          - /url: /ggml-org/llama.cpp/commit/86632248188c106d749fad34a1dcd237c95863d4
+                    - cell "Aug 28, 20263 hours ago" [ref=e1621]
+                  - row [ref=e1622]:
+                    - cell [ref=e544]:
+                      - link "tests, (Directory)" [ref=e551] [cursor=pointer]:
+                        - /url: /ggml-org/llama.cpp/tree/master/tests
+                        - text: tests
+                    - cell [ref=e1623]:
+                      - generic [ref=e1625]:
+                        - 'link "ggml : fix conv_transpose_2d for multiple batches (" [ref=e1626] [cursor=pointer]':
+                          - /url: /ggml-org/llama.cpp/commit/a43c3986b44225c8633fe938464278d20dff0ec0
+                        - link "#26132" [ref=e1627] [cursor=pointer]:
+                          - /url: https://github.com/ggml-org/llama.cpp/pull/26132
+                        - link ")" [ref=e1628] [cursor=pointer]:
+                          - /url: /ggml-org/llama.cpp/commit/a43c3986b44225c8633fe938464278d20dff0ec0
+                    - cell "Aug 28, 202615 minutes ago" [ref=e1629]
+                  - row [ref=e1630]:
+                    - cell [ref=e558]:
+                      - link "tools, (Directory)" [ref=e565] [cursor=pointer]:
+                        - /url: /ggml-org/llama.cpp/tree/master/tools
+                        - text: tools
+                    - cell [ref=e1631]:
+                      - generic [ref=e1633]:
+                        - 'link "server: add ctx-per-slot (--kv-unified-per-slot) (" [ref=e1634] [cursor=pointer]':
+                          - /url: /ggml-org/llama.cpp/commit/18443257a30c884d5332abb8e7dc43c7ffe42fda
+                        - link "#24124" [ref=e1635] [cursor=pointer]:
+                          - /url: https://github.com/ggml-org/llama.cpp/pull/24124
+                        - link ")" [ref=e1636] [cursor=pointer]:
+                          - /url: /ggml-org/llama.cpp/commit/18443257a30c884d5332abb8e7dc43c7ffe42fda
+                    - cell "Aug 27, 202620 hours ago" [ref=e1637]
+                  - row [ref=e1638]:
+                    - cell [ref=e572]:
+                      - link "vendor, (Directory)" [ref=e579] [cursor=pointer]:
+                        - /url: /ggml-org/llama.cpp/tree/master/vendor
+                        - text: vendor
+                    - cell [ref=e1639]:
+                      - generic [ref=e1641]:
+                        - 'link "vendor : update subprocess.h (" [ref=e1642] [cursor=pointer]':
+                          - /url: /ggml-org/llama.cpp/commit/6657ded4faa3b8450221119fc6b4d002e35104a2
+                        - link "#27409" [ref=e1643] [cursor=pointer]:
+                          - /url: https://github.com/ggml-org/llama.cpp/pull/27409
+                        - link ")" [ref=e1644] [cursor=pointer]:
+                          - /url: /ggml-org/llama.cpp/commit/6657ded4faa3b8450221119fc6b4d002e35104a2
+                    - cell "Aug 23, 20265 days ago" [ref=e1645]
+                  - row [ref=e1646]:
+                    - cell [ref=e586]:
+                      - link ".clang-format, (File)" [ref=e593] [cursor=pointer]:
+                        - /url: /ggml-org/llama.cpp/blob/master/.clang-format
+                        - text: .clang-format
+                    - cell [ref=e1647]:
+                      - generic [ref=e1649]:
+                        - 'link "fix: apply clang-format to CUDA macros (" [ref=e1650] [cursor=pointer]':
+                          - /url: /ggml-org/llama.cpp/commit/f1fbffb5c0b34b2a68febb7da3fd0f8333f1ed4c
+                        - link "#16017" [ref=e1651] [cursor=pointer]:
+                          - /url: https://github.com/ggml-org/llama.cpp/pull/16017
+                        - link ")" [ref=e1652] [cursor=pointer]:
+                          - /url: /ggml-org/llama.cpp/commit/f1fbffb5c0b34b2a68febb7da3fd0f8333f1ed4c
+                    - cell "Sep 16, 202511 months ago" [ref=e1653]
+                  - row [ref=e1654]:
+                    - cell [ref=e600]:
+                      - link ".clang-tidy, (File)" [ref=e607] [cursor=pointer]:
+                        - /url: /ggml-org/llama.cpp/blob/master/.clang-tidy
+                        - text: .clang-tidy
+                    - cell [ref=e1655]:
+                      - generic [ref=e1657]:
+                        - 'link "clang-tidy : disable warning about performance enum size (" [ref=e1658] [cursor=pointer]':
+                          - /url: /ggml-org/llama.cpp/commit/351f3da39c85f59d581fc184f09283da7f099a3b
+                        - link "#16127" [ref=e1659] [cursor=pointer]:
+                          - /url: https://github.com/ggml-org/llama.cpp/pull/16127
+                        - link ")" [ref=e1660] [cursor=pointer]:
+                          - /url: /ggml-org/llama.cpp/commit/351f3da39c85f59d581fc184f09283da7f099a3b
+                    - cell "Sep 22, 202511 months ago" [ref=e1661]
+                  - row [ref=e1662]:
+                    - cell [ref=e614]:
+                      - link ".dockerignore, (File)" [ref=e621] [cursor=pointer]:
+                        - /url: /ggml-org/llama.cpp/blob/master/.dockerignore
+                        - text: .dockerignore
+                    - cell [ref=e1663]:
+                      - generic [ref=e1665]:
+                        - 'link "docker : prebuild web UI for s390x build [no release] (" [ref=e1666] [cursor=pointer]':
+                          - /url: /ggml-org/llama.cpp/commit/67e9fd3b74b7fab3a153161f1942cc2121aa90a3
+                        - link "#24829" [ref=e1667] [cursor=pointer]:
+                          - /url: https://github.com/ggml-org/llama.cpp/pull/24829
+                        - link ")" [ref=e1668] [cursor=pointer]:
+                          - /url: /ggml-org/llama.cpp/commit/67e9fd3b74b7fab3a153161f1942cc2121aa90a3
+                    - cell "Jun 20, 20262 months ago" [ref=e1669]
+                  - row [ref=e1670]:
+                    - cell [ref=e628]:
+                      - link ".ecrc, (File)" [ref=e635] [cursor=pointer]:
+                        - /url: /ggml-org/llama.cpp/blob/master/.ecrc
+                        - text: .ecrc
+                    - cell [ref=e1671]:
+                      - generic [ref=e1673]:
+                        - 'link "common : Update stb_image.h to latest version (" [ref=e1674] [cursor=pointer]':
+                          - /url: /ggml-org/llama.cpp/commit/ad76569f8e78ab6ca921bda25cef25a157361719
+                        - link "#9161" [ref=e1675] [cursor=pointer]:
+                          - /url: https://github.com/ggml-org/llama.cpp/pull/9161
+                        - link ")" [ref=e1676] [cursor=pointer]:
+                          - /url: /ggml-org/llama.cpp/commit/ad76569f8e78ab6ca921bda25cef25a157361719
+                    - cell "Aug 27, 20242 years ago" [ref=e1677]
+                  - row [ref=e1678]:
+                    - cell [ref=e642]:
+                      - link ".editorconfig, (File)" [ref=e649] [cursor=pointer]:
+                        - /url: /ggml-org/llama.cpp/blob/master/.editorconfig
+                        - text: .editorconfig
+                    - cell [ref=e1679]:
+                      - link [ref=e1682] [cursor=pointer]:
+                        - /url: /ggml-org/llama.cpp/commit/59778f0196a82db32580bb649d5d839355d6d7bf
+                        - text: "ui: Restructure repo to use"
+                        - code [ref=e1683]: tools/ui
+                        - text: folder and
+                        - code [ref=e1684]: ui
+                        - text: /
+                        - code [ref=e1685]: UI
+                        - text: "/ `llam…"
+                    - cell "May 16, 20263 months ago" [ref=e1686]
+                  - row [ref=e1687]:
+                    - cell [ref=e656]:
+                      - link ".flake8, (File)" [ref=e663] [cursor=pointer]:
+                        - /url: /ggml-org/llama.cpp/blob/master/.flake8
+                        - text: .flake8
+                    - cell [ref=e1688]:
+                      - generic [ref=e1690]:
+                        - 'link "llama : move end-user examples to tools directory (" [ref=e1691] [cursor=pointer]':
+                          - /url: /ggml-org/llama.cpp/commit/1d36b3670b285e69e58b9d687c770a2a0a192194
+                        - link "#13249" [ref=e1692] [cursor=pointer]:
+                          - /url: https://github.com/ggml-org/llama.cpp/pull/13249
+                        - link ")" [ref=e1693] [cursor=pointer]:
+                          - /url: /ggml-org/llama.cpp/commit/1d36b3670b285e69e58b9d687c770a2a0a192194
+                    - cell "May 2, 2025last year" [ref=e1694]
+                  - row [ref=e1695]:
+                    - cell [ref=e670]:
+                      - link ".gitignore, (File)" [ref=e677] [cursor=pointer]:
+                        - /url: /ggml-org/llama.cpp/blob/master/.gitignore
+                        - text: .gitignore
+                    - cell [ref=e1696]:
+                      - generic [ref=e1698]:
+                        - 'link "ui: PWA support (" [ref=e1699] [cursor=pointer]':
+                          - /url: /ggml-org/llama.cpp/commit/f7ca93d12c523491e9123ee7ce6a881447c20e52
+                        - link "#23871" [ref=e1700] [cursor=pointer]:
+                          - /url: https://github.com/ggml-org/llama.cpp/pull/23871
+                        - link ")" [ref=e1701] [cursor=pointer]:
+                          - /url: /ggml-org/llama.cpp/commit/f7ca93d12c523491e9123ee7ce6a881447c20e52
+                    - cell "Jun 12, 20262 months ago" [ref=e1702]
+                  - row [ref=e1703]:
+                    - cell [ref=e684]:
+                      - link ".gitmodules, (File)" [ref=e691] [cursor=pointer]:
+                        - /url: /ggml-org/llama.cpp/blob/master/.gitmodules
+                        - text: .gitmodules
+                    - cell [ref=e1704]:
+                      - generic [ref=e1706]:
+                        - 'link "ggml : remove kompute backend (" [ref=e1707] [cursor=pointer]':
+                          - /url: /ggml-org/llama.cpp/commit/d4cdd9c1c3cebdafca735958597de4ff7b7c0f54
+                        - link "#14501" [ref=e1708] [cursor=pointer]:
+                          - /url: https://github.com/ggml-org/llama.cpp/pull/14501
+                        - link ")" [ref=e1709] [cursor=pointer]:
+                          - /url: /ggml-org/llama.cpp/commit/d4cdd9c1c3cebdafca735958597de4ff7b7c0f54
+                    - cell "Jul 3, 2025last year" [ref=e1710]
+                  - row [ref=e1711]:
+                    - cell [ref=e698]:
+                      - link ".pre-commit-config.yaml, (File)" [ref=e705] [cursor=pointer]:
+                        - /url: /ggml-org/llama.cpp/blob/master/.pre-commit-config.yaml
+                        - text: .pre-commit-config.yaml
+                    - cell [ref=e1712]:
+                      - generic [ref=e1714]:
+                        - 'link "convert.py : add python logging instead of print() (" [ref=e1715] [cursor=pointer]':
+                          - /url: /ggml-org/llama.cpp/commit/a2ac89d6efb41b535778bfeaecaae8fe295b6ed3
+                        - link "#6511" [ref=e1716] [cursor=pointer]:
+                          - /url: https://github.com/ggml-org/llama.cpp/pull/6511
+                        - link ")" [ref=e1717] [cursor=pointer]:
+                          - /url: /ggml-org/llama.cpp/commit/a2ac89d6efb41b535778bfeaecaae8fe295b6ed3
+                    - cell "May 3, 20242 years ago" [ref=e1718]
+                  - row [ref=e1719]:
+                    - cell [ref=e712]:
+                      - link "AGENTS.md, (File)" [ref=e719] [cursor=pointer]:
+                        - /url: /ggml-org/llama.cpp/blob/master/AGENTS.md
+                        - text: AGENTS.md
+                    - cell [ref=e1720]:
+                      - generic [ref=e1722]:
+                        - 'link "arg: remove -no-cnv from cli [no ci] (" [ref=e1723] [cursor=pointer]':
+                          - /url: /ggml-org/llama.cpp/commit/9fee29e9435f865ec0b811a783a6471a136d9317
+                        - link "#27542" [ref=e1724] [cursor=pointer]:
+                          - /url: https://github.com/ggml-org/llama.cpp/pull/27542
+                        - link ")" [ref=e1725] [cursor=pointer]:
+                          - /url: /ggml-org/llama.cpp/commit/9fee29e9435f865ec0b811a783a6471a136d9317
+                    - cell "Aug 22, 2026last week" [ref=e1726]
+                  - row [ref=e1727]:
+                    - cell [ref=e726]:
+                      - link "AUTHORS, (File)" [ref=e733] [cursor=pointer]:
+                        - /url: /ggml-org/llama.cpp/blob/master/AUTHORS
+                        - text: AUTHORS
+                    - cell [ref=e1728]:
+                      - generic [ref=e1730]:
+                        - 'link "readme : update status badges + regen AUTHORS (" [ref=e1731] [cursor=pointer]':
+                          - /url: /ggml-org/llama.cpp/commit/169e4a7ff201e666c2325bcd35afb64573e39d09
+                        - link "#27317" [ref=e1732] [cursor=pointer]:
+                          - /url: https://github.com/ggml-org/llama.cpp/pull/27317
+                        - link ")" [ref=e1733] [cursor=pointer]:
+                          - /url: /ggml-org/llama.cpp/commit/169e4a7ff201e666c2325bcd35afb64573e39d09
+                    - cell "Aug 18, 2026last week" [ref=e1734]
+                  - row [ref=e1735]:
+                    - cell [ref=e740]:
+                      - link "CLAUDE.md, (File)" [ref=e747] [cursor=pointer]:
+                        - /url: /ggml-org/llama.cpp/blob/master/CLAUDE.md
+                        - text: CLAUDE.md
+                    - cell [ref=e1736]:
+                      - generic [ref=e1738]:
+                        - 'link "contributing: tighten AI usage policy (" [ref=e1739] [cursor=pointer]':
+                          - /url: /ggml-org/llama.cpp/commit/3595ae5963f1583f53beecf9725c919d309e15da
+                        - link "#18388" [ref=e1740] [cursor=pointer]:
+                          - /url: https://github.com/ggml-org/llama.cpp/pull/18388
+                        - link ")" [ref=e1741] [cursor=pointer]:
+                          - /url: /ggml-org/llama.cpp/commit/3595ae5963f1583f53beecf9725c919d309e15da
+                    - cell "Dec 29, 20258 months ago" [ref=e1742]
+                  - row [ref=e1743]:
+                    - cell [ref=e754]:
+                      - link "CMakeLists.txt, (File)" [ref=e761] [cursor=pointer]:
+                        - /url: /ggml-org/llama.cpp/blob/master/CMakeLists.txt
+                        - text: CMakeLists.txt
+                    - cell [ref=e1744]:
+                      - generic [ref=e1746]:
+                        - 'link "ci: Clean up UI builds from releases (" [ref=e1747] [cursor=pointer]':
+                          - /url: /ggml-org/llama.cpp/commit/4d19b287691e8f47fc303be420f630c40ec45684
+                        - link "#27706" [ref=e1748] [cursor=pointer]:
+                          - /url: https://github.com/ggml-org/llama.cpp/pull/27706
+                        - link ")" [ref=e1749] [cursor=pointer]:
+                          - /url: /ggml-org/llama.cpp/commit/4d19b287691e8f47fc303be420f630c40ec45684
+                    - cell "Aug 26, 20262 days ago" [ref=e1750]
+                  - row [ref=e1751]:
+                    - cell [ref=e768]:
+                      - link "CMakePresets.json, (File)" [ref=e775] [cursor=pointer]:
+                        - /url: /ggml-org/llama.cpp/blob/master/CMakePresets.json
+                        - text: CMakePresets.json
+                    - cell [ref=e1752]:
+                      - generic [ref=e1754]:
+                        - 'link "cmake : Add CMake presets for Linux and GCC (" [ref=e1755] [cursor=pointer]':
+                          - /url: /ggml-org/llama.cpp/commit/84b396e0510855a95d591afdf1f21c562cb3712a
+                        - link "#14656" [ref=e1756] [cursor=pointer]:
+                          - /url: https://github.com/ggml-org/llama.cpp/pull/14656
+                        - link ")" [ref=e1757] [cursor=pointer]:
+                          - /url: /ggml-org/llama.cpp/commit/84b396e0510855a95d591afdf1f21c562cb3712a
+                    - cell "Jul 13, 2025last year" [ref=e1758]
+                  - row [ref=e1759]:
+                    - cell [ref=e782]:
+                      - link "CODEOWNERS, (File)" [ref=e789] [cursor=pointer]:
+                        - /url: /ggml-org/llama.cpp/blob/master/CODEOWNERS
+                        - text: CODEOWNERS
+                    - cell [ref=e1760]:
+                      - generic [ref=e1762]:
+                        - 'link "HIP: remove rocWMMA FlashAttention (" [ref=e1763] [cursor=pointer]':
+                          - /url: /ggml-org/llama.cpp/commit/fa72aeccb23947074c12b5fec25f5b6ced28cbfe
+                        - link "#26046" [ref=e1764] [cursor=pointer]:
+                          - /url: https://github.com/ggml-org/llama.cpp/pull/26046
+                        - link ")" [ref=e1765] [cursor=pointer]:
+                          - /url: /ggml-org/llama.cpp/commit/fa72aeccb23947074c12b5fec25f5b6ced28cbfe
+                    - cell "Jul 24, 2026last month" [ref=e1766]
+                  - row [ref=e1767]:
+                    - cell [ref=e796]:
+                      - link "CONTRIBUTING.md, (File)" [ref=e803] [cursor=pointer]:
+                        - /url: /ggml-org/llama.cpp/blob/master/CONTRIBUTING.md
+                        - text: CONTRIBUTING.md
+                    - cell [ref=e1768]:
+                      - generic [ref=e1770]:
+                        - 'link "contrib : recommend waiting for CI before merging (" [ref=e1771] [cursor=pointer]':
+                          - /url: /ggml-org/llama.cpp/commit/a278dcef04f2ce950d3a17d8aa76d4ef86483e0e
+                        - link "#27603" [ref=e1772] [cursor=pointer]:
+                          - /url: https://github.com/ggml-org/llama.cpp/pull/27603
+                        - link ")" [ref=e1773] [cursor=pointer]:
+                          - /url: /ggml-org/llama.cpp/commit/a278dcef04f2ce950d3a17d8aa76d4ef86483e0e
+                    - cell "Aug 23, 20265 days ago" [ref=e1774]
+                  - row [ref=e1775]:
+                    - cell [ref=e810]:
+                      - link "LICENSE, (File)" [ref=e817] [cursor=pointer]:
+                        - /url: /ggml-org/llama.cpp/blob/master/LICENSE
+                        - text: LICENSE
+                    - cell [ref=e1776]:
+                      - generic [ref=e1778]:
+                        - 'link "docs : Minor cleanups (" [ref=e1779] [cursor=pointer]':
+                          - /url: /ggml-org/llama.cpp/commit/7a4ca3cbd905907ac4d12bc14b878fdfbe4fd1d6
+                        - link "#19252" [ref=e1780] [cursor=pointer]:
+                          - /url: https://github.com/ggml-org/llama.cpp/pull/19252
+                        - link ")" [ref=e1781] [cursor=pointer]:
+                          - /url: /ggml-org/llama.cpp/commit/7a4ca3cbd905907ac4d12bc14b878fdfbe4fd1d6
+                    - cell "Feb 2, 20266 months ago" [ref=e1782]
+                  - row [ref=e1783]:
+                    - cell [ref=e824]:
+                      - link "Makefile, (File)" [ref=e831] [cursor=pointer]:
+                        - /url: /ggml-org/llama.cpp/blob/master/Makefile
+                        - text: Makefile
+                    - cell [ref=e1784]:
+                      - generic [ref=e1786]:
+                        - 'link "make : remove make in favor of CMake (" [ref=e1787] [cursor=pointer]':
+                          - /url: /ggml-org/llama.cpp/commit/37f10f955f70e0158d50343d0b9a3f92d194daae
+                        - link "#15449" [ref=e1788] [cursor=pointer]:
+                          - /url: https://github.com/ggml-org/llama.cpp/pull/15449
+                        - link ")" [ref=e1789] [cursor=pointer]:
+                          - /url: /ggml-org/llama.cpp/commit/37f10f955f70e0158d50343d0b9a3f92d194daae
+                    - cell "Aug 20, 2025last year" [ref=e1790]
+                  - row [ref=e1791]:
+                    - cell [ref=e838]:
+                      - link "README.md, (File)" [ref=e845] [cursor=pointer]:
+                        - /url: /ggml-org/llama.cpp/blob/master/README.md
+                        - text: README.md
+                    - cell [ref=e1792]:
+                      - generic [ref=e1794]:
+                        - 'link "readme : update links (" [ref=e1795] [cursor=pointer]':
+                          - /url: /ggml-org/llama.cpp/commit/ccc8fd2baa64ab26c7210b02765d3604069ec7ee
+                        - link "#27617" [ref=e1796] [cursor=pointer]:
+                          - /url: https://github.com/ggml-org/llama.cpp/pull/27617
+                        - link ")" [ref=e1797] [cursor=pointer]:
+                          - /url: /ggml-org/llama.cpp/commit/ccc8fd2baa64ab26c7210b02765d3604069ec7ee
+                    - cell "Aug 23, 20265 days ago" [ref=e1798]
+                  - row [ref=e1799]:
+                    - cell [ref=e852]:
+                      - link "SECURITY.md, (File)" [ref=e859] [cursor=pointer]:
+                        - /url: /ggml-org/llama.cpp/blob/master/SECURITY.md
+                        - text: SECURITY.md
+                    - cell [ref=e1800]:
+                      - generic [ref=e1802]:
+                        - 'link "security : clarify about AI-generated reports (" [ref=e1803] [cursor=pointer]':
+                          - /url: /ggml-org/llama.cpp/commit/9303cdd8d30ae0d37a517366771e0e162d525f95
+                        - link "#26579" [ref=e1804] [cursor=pointer]:
+                          - /url: https://github.com/ggml-org/llama.cpp/pull/26579
+                        - link ")" [ref=e1805] [cursor=pointer]:
+                          - /url: /ggml-org/llama.cpp/commit/9303cdd8d30ae0d37a517366771e0e162d525f95
+                    - cell "Aug 5, 20263 weeks ago" [ref=e1806]
+                  - row [ref=e1807]:
+                    - cell [ref=e866]:
+                      - link "build-xcframework.sh, (File)" [ref=e873] [cursor=pointer]:
+                        - /url: /ggml-org/llama.cpp/blob/master/build-xcframework.sh
+                        - text: build-xcframework.sh
+                    - cell [ref=e1808]:
+                      - generic [ref=e1810]:
+                        - 'link "build : fix xcframework + cmake clean-up (" [ref=e1811] [cursor=pointer]':
+                          - /url: /ggml-org/llama.cpp/commit/27e345b574dd8c8838e2c06e47699a3135f16ec9
+                        - link "#27304" [ref=e1812] [cursor=pointer]:
+                          - /url: https://github.com/ggml-org/llama.cpp/pull/27304
+                        - link ")" [ref=e1813] [cursor=pointer]:
+                          - /url: /ggml-org/llama.cpp/commit/27e345b574dd8c8838e2c06e47699a3135f16ec9
+                    - cell "Aug 18, 2026last week" [ref=e1814]
+                  - row [ref=e1815]:
+                    - cell [ref=e880]:
+                      - link "convert_hf_to_gguf.py, (File)" [ref=e887] [cursor=pointer]:
+                        - /url: /ggml-org/llama.cpp/blob/master/convert_hf_to_gguf.py
+                        - text: convert_hf_to_gguf.py
+                    - cell [ref=e1816]:
+                      - generic [ref=e1818]:
+                        - 'link "convert: add option to create separate dspark GGUF (" [ref=e1819] [cursor=pointer]':
+                          - /url: /ggml-org/llama.cpp/commit/3581ba0cf591b3f772fbb002de0f70e294bc0396
+                        - link "#26452" [ref=e1820] [cursor=pointer]:
+                          - /url: https://github.com/ggml-org/llama.cpp/pull/26452
+                        - link ")" [ref=e1821] [cursor=pointer]:
+                          - /url: /ggml-org/llama.cpp/commit/3581ba0cf591b3f772fbb002de0f70e294bc0396
+                    - cell "Aug 2, 2026last month" [ref=e1822]
+                  - row [ref=e1823]:
+                    - cell [ref=e894]:
+                      - link "convert_hf_to_gguf_update.py, (File)" [ref=e901] [cursor=pointer]:
+                        - /url: /ggml-org/llama.cpp/blob/master/convert_hf_to_gguf_update.py
+                        - text: convert_hf_to_gguf_update.py
+                    - cell [ref=e1824]:
+                      - generic [ref=e1826]:
+                        - link "Add support for Laguna XS.2 & M.1 (" [ref=e1827] [cursor=pointer]:
+                          - /url: /ggml-org/llama.cpp/commit/1f66c3ce1c26c95db3fadb734086c7d9fba23bb9
+                        - link "#25165" [ref=e1828] [cursor=pointer]:
+                          - /url: https://github.com/ggml-org/llama.cpp/pull/25165
+                        - link ")" [ref=e1829] [cursor=pointer]:
+                          - /url: /ggml-org/llama.cpp/commit/1f66c3ce1c26c95db3fadb734086c7d9fba23bb9
+                    - cell "Jul 22, 2026last month" [ref=e1830]
+                  - row [ref=e1831]:
+                    - cell [ref=e908]:
+                      - link "convert_llama_ggml_to_gguf.py, (File)" [ref=e915] [cursor=pointer]:
+                        - /url: /ggml-org/llama.cpp/blob/master/convert_llama_ggml_to_gguf.py
+                        - text: convert_llama_ggml_to_gguf.py
+                    - cell [ref=e1832]:
+                      - generic [ref=e1834]:
+                        - 'link "ci : switch from pyright to ty (" [ref=e1835] [cursor=pointer]':
+                          - /url: /ggml-org/llama.cpp/commit/29b28a98242692e352df38254c9a2bb9fa79c884
+                        - link "#20826" [ref=e1836] [cursor=pointer]:
+                          - /url: https://github.com/ggml-org/llama.cpp/pull/20826
+                        - link ")" [ref=e1837] [cursor=pointer]:
+                          - /url: /ggml-org/llama.cpp/commit/29b28a98242692e352df38254c9a2bb9fa79c884
+                    - cell "Mar 21, 20265 months ago" [ref=e1838]
+                  - row [ref=e1839]:
+                    - cell [ref=e922]:
+                      - link "convert_lora_to_gguf.py, (File)" [ref=e929] [cursor=pointer]:
+                        - /url: /ggml-org/llama.cpp/blob/master/convert_lora_to_gguf.py
+                        - text: convert_lora_to_gguf.py
+                    - cell [ref=e1840]:
+                      - generic [ref=e1842]:
+                        - 'link "convert : fix lora base model arch retrieval (" [ref=e1843] [cursor=pointer]':
+                          - /url: /ggml-org/llama.cpp/commit/dd4623a74f0c85e6b1dd9ee99a92b9c67cac3708
+                        - link "#24621" [ref=e1844] [cursor=pointer]:
+                          - /url: https://github.com/ggml-org/llama.cpp/pull/24621
+                        - link ")" [ref=e1845] [cursor=pointer]:
+                          - /url: /ggml-org/llama.cpp/commit/dd4623a74f0c85e6b1dd9ee99a92b9c67cac3708
+                    - cell "Jun 14, 20262 months ago" [ref=e1846]
+                  - row [ref=e1847]:
+                    - cell [ref=e936]:
+                      - link "flake.nix, (File)" [ref=e943] [cursor=pointer]:
+                        - /url: /ggml-org/llama.cpp/blob/master/flake.nix
+                        - text: flake.nix
+                    - cell [ref=e1848]:
+                      - generic [ref=e1850]:
+                        - 'link "fix(nix): remove non-functional llama-cpp cachix cache from flake.nix (" [ref=e1851] [cursor=pointer]':
+                          - /url: /ggml-org/llama.cpp/commit/1adc9812bd33dc85489bf093528d61c22917d54f
+                        - link "…" [ref=e1852] [cursor=pointer]:
+                          - /url: https://github.com/ggml-org/llama.cpp/pull/15295
+                    - cell "Aug 13, 2025last year" [ref=e1853]
+                  - row [ref=e1854]:
+                    - cell [ref=e950]:
+                      - link "mypy.ini, (File)" [ref=e957] [cursor=pointer]:
+                        - /url: /ggml-org/llama.cpp/blob/master/mypy.ini
+                        - text: mypy.ini
+                    - cell [ref=e1855]:
+                      - generic [ref=e1857]:
+                        - 'link "convert : partially revert PR" [ref=e1858] [cursor=pointer]':
+                          - /url: /ggml-org/llama.cpp/commit/b43ebde3b0ccbc42d9dd782b32e2fd8eb35b43b5
+                        - link "#4818" [ref=e1859] [cursor=pointer]:
+                          - /url: https://github.com/ggml-org/llama.cpp/pull/4818
+                        - link "(" [ref=e1860] [cursor=pointer]:
+                          - /url: /ggml-org/llama.cpp/commit/b43ebde3b0ccbc42d9dd782b32e2fd8eb35b43b5
+                        - link "#5041" [ref=e1861] [cursor=pointer]:
+                          - /url: https://github.com/ggml-org/llama.cpp/pull/5041
+                        - link ")" [ref=e1862] [cursor=pointer]:
+                          - /url: /ggml-org/llama.cpp/commit/b43ebde3b0ccbc42d9dd782b32e2fd8eb35b43b5
+                    - cell "Jan 20, 20242 years ago" [ref=e1863]
+                  - row [ref=e1864]:
+                    - cell [ref=e964]:
+                      - link "pyproject.toml, (File)" [ref=e971] [cursor=pointer]:
+                        - /url: /ggml-org/llama.cpp/blob/master/pyproject.toml
+                        - text: pyproject.toml
+                    - cell [ref=e1865]:
+                      - generic [ref=e1867]:
+                        - 'link "model: add Mellum architecture (" [ref=e1868] [cursor=pointer]':
+                          - /url: /ggml-org/llama.cpp/commit/4fb16eccce5e451b40014355f97374d692480a4d
+                        - link "#23966" [ref=e1869] [cursor=pointer]:
+                          - /url: https://github.com/ggml-org/llama.cpp/pull/23966
+                        - link ")" [ref=e1870] [cursor=pointer]:
+                          - /url: /ggml-org/llama.cpp/commit/4fb16eccce5e451b40014355f97374d692480a4d
+                    - cell "Jun 2, 20262 months ago" [ref=e1871]
+                  - row [ref=e1872]:
+                    - cell [ref=e978]:
+                      - link "pyrightconfig.json, (File)" [ref=e985] [cursor=pointer]:
+                        - /url: /ggml-org/llama.cpp/blob/master/pyrightconfig.json
+                        - text: pyrightconfig.json
+                    - cell [ref=e1873]:
+                      - generic [ref=e1875]:
+                        - 'link "ci : switch from pyright to ty (" [ref=e1876] [cursor=pointer]':
+                          - /url: /ggml-org/llama.cpp/commit/29b28a98242692e352df38254c9a2bb9fa79c884
+                        - link "#20826" [ref=e1877] [cursor=pointer]:
+                          - /url: https://github.com/ggml-org/llama.cpp/pull/20826
+                        - link ")" [ref=e1878] [cursor=pointer]:
+                          - /url: /ggml-org/llama.cpp/commit/29b28a98242692e352df38254c9a2bb9fa79c884
+                    - cell "Mar 21, 20265 months ago" [ref=e1879]
+                  - row [ref=e1880]:
+                    - cell [ref=e992]:
+                      - link "requirements.txt, (File)" [ref=e999] [cursor=pointer]:
+                        - /url: /ggml-org/llama.cpp/blob/master/requirements.txt
+                        - text: requirements.txt
+                    - cell [ref=e1881]:
+                      - link [ref=e1884] [cursor=pointer]:
+                        - /url: /ggml-org/llama.cpp/commit/669912d9a5bf927312c553332ff997f0a99da8fb
+                        - code [ref=e1885]: tool-call
+                        - text: ": fix Qwen 2.5 Coder support, add micro benchmarks, suppor…"
+                    - cell "Mar 5, 2025last year" [ref=e1886]
+                  - row [ref=e1887]:
+                    - cell [ref=e1006]:
+                      - link "ty.toml, (File)" [ref=e1013] [cursor=pointer]:
+                        - /url: /ggml-org/llama.cpp/blob/master/ty.toml
+                        - text: ty.toml
+                    - cell [ref=e1888]:
+                      - 'link "mtmd : DeepSeek-OCR image processing fixes, img_tool::resize padding …" [ref=e1891] [cursor=pointer]':
+                        - /url: /ggml-org/llama.cpp/commit/a8681a0ed2e3f2a7452e642639671bcec20b865c
+                    - cell "May 20, 20263 months ago" [ref=e1892]
+            - generic [ref=e1020]:
+              - generic [ref=e1021]:
+                - heading "Repository files navigation" [level=2] [ref=e1022]
+                - navigation "Repository files" [ref=e1023]:
+                  - list [ref=e1024]:
+                    - listitem [ref=e1025]:
+                      - link "README" [ref=e1026] [cursor=pointer]:
+                        - /url: "#"
+                    - listitem [ref=e1031]:
+                      - link "Contributing" [ref=e1032] [cursor=pointer]:
+                        - /url: "#"
+                    - listitem [ref=e1037]:
+                      - link "MIT license" [ref=e1038] [cursor=pointer]:
+                        - /url: "#"
+                    - listitem [ref=e1043]:
+                      - link "Security" [ref=e1044] [cursor=pointer]:
+                        - /url: "#"
+                - button "Outline" [ref=e1049] [cursor=pointer]
+              - article [ref=e1893]:
+                - generic [ref=e1894]:
+                  - heading "llama.cpp" [level=1] [ref=e1895]
+                  - 'link "Permalink: llama.cpp" [ref=e1896] [cursor=pointer]':
+                    - /url: "#llamacpp"
+                - paragraph [ref=e1899]:
+                  - link [ref=e1900] [cursor=pointer]:
+                    - /url: https://raw.githubusercontent.com/ggml-org/llama.brand/refs/heads/master/cover/llama-cpp/cover-llama-cpp-dark.svg
+                    - img "llama" [ref=e1901]
+                - generic [ref=e1902]:
+                  - paragraph [ref=e1903]: LLM inference in C/C++
+                  - paragraph [ref=e1904]:
+                    - link [ref=e1905] [cursor=pointer]:
+                      - /url: https://opensource.org/licenses/MIT
+                      - 'img "License: MIT" [ref=e1906]'
+                    - link [ref=e1907] [cursor=pointer]:
+                      - /url: https://github.com/ggml-org/llama.cpp/releases?q=tag:v0
+                      - img "Release" [ref=e1908]
+                    - link [ref=e1909] [cursor=pointer]:
+                      - /url: https://github.com/ggml-org/llama.cpp/releases?q=b
+                      - img "Nightly" [ref=e1910]
+                    - link [ref=e1911] [cursor=pointer]:
+                      - /url: https://github.com/ggml-org/llama.cpp/actions/workflows/server.yml
+                      - img "Server" [ref=e1912]
+                    - link [ref=e1913] [cursor=pointer]:
+                      - /url: https://github.com/ggml-org/llama.cpp/actions/workflows/docker.yml
+                      - img "Docker" [ref=e1914]
+                    - link [ref=e1915] [cursor=pointer]:
+                      - /url: https://github.com/ggml-org/llama.cpp/actions/workflows/winget.yml
+                      - img "Winget" [ref=e1916]
+                  - paragraph [ref=e1917]:
+                    - link "ggml" [ref=e1918] [cursor=pointer]:
+                      - /url: https://github.com/ggml-org/ggml
+                    - text: /
+                    - link "ops" [ref=e1919] [cursor=pointer]:
+                      - /url: https://github.com/ggml-org/llama.cpp/blob/master/docs/ops.md
+                    - text: /
+                    - link "maintainer PRs" [ref=e1920] [cursor=pointer]:
+                      - /url: https://github.com/ggml-org/llama.cpp/issues?q=is%3Apr%20is%3Aopen%20draft%3AFalse%20(author%3Argerganov%20OR%20author%3AKitaitiMakoto%20OR%20author%3Adanbev%20OR%20author%3Aaldehir%20OR%20author%3Amax-krasnyansky%20OR%20author%3ACISC%20OR%20author%3Aggerganov%20OR%20author%3Aam17an%20OR%20author%3Abartowski1182%20OR%20author%3Anikwen%20OR%20author%3Ahipudding%20OR%20author%3AServeurpersoCom%20OR%20author%3Apwilkin%20OR%20author%3Areeselevine%20OR%20author%3Angxson%20OR%20author%3Ajeffbolznv%20OR%20author%3Amarty1885%20OR%20author%3A0cc4m%20OR%20author%3ATitaniumtown%20OR%20author%3Aangt%20OR%20author%3AIMbackK%20OR%20author%3Aarthw%20OR%20author%3AJohannesGaessler%20OR%20author%3AORippler%20OR%20author%3Aruixiang63%20OR%20author%3Axctan%20OR%20author%3Aallozaur%20OR%20author%3Ayomaytk%20OR%20author%3Aaendk%20OR%20author%3Agaugarg-nv%20OR%20author%3Ataronaeo%20OR%20author%3Aforforever73%20OR%20author%3Alhez%20OR%20author%3Anetrunnereve%20OR%20author%3Afairydreaming)%20sort%3Aupdated-desc
+                    - text: /
+                    - link "dev stats" [ref=e1921] [cursor=pointer]:
+                      - /url: https://github.com/ggml-org/llama.cpp-dev
+                    - text: /
+                    - link "lib llama API" [ref=e1922] [cursor=pointer]:
+                      - /url: https://github.com/ggml-org/llama.cpp/issues/9289
+                    - text: /
+                    - link "llama-server REST API" [ref=e1923] [cursor=pointer]:
+                      - /url: https://github.com/ggml-org/llama.cpp/issues/9291
+                - generic [ref=e1924]:
+                  - heading "Quick start" [level=2] [ref=e1925]
+                  - 'link "Permalink: Quick start" [ref=e1926] [cursor=pointer]':
+                    - /url: "#quick-start"
+                - paragraph [ref=e1929]:
+                  - text: A few options to get
+                  - code [ref=e1930]: llama.cpp
+                  - text: "installed on your machine:"
+                - list [ref=e1931]:
+                  - listitem [ref=e1932]:
+                    - text: Visit
+                    - link "https://llama.app" [ref=e1933] [cursor=pointer]:
+                      - /url: https://llama.app
+                    - text: and follow the instructions
+                  - listitem [ref=e1934]:
+                    - text: Run with Docker - see our
+                    - link "Docker documentation" [ref=e1935] [cursor=pointer]:
+                      - /url: /ggml-org/llama.cpp/blob/master/docs/docker.md
+                  - listitem [ref=e1936]:
+                    - text: Download pre-built binaries from the
+                    - link "releases page" [ref=e1937] [cursor=pointer]:
+                      - /url: https://github.com/ggml-org/llama.cpp/releases
+                  - listitem [ref=e1938]:
+                    - text: Build from source by cloning this repository - check out
+                    - link "our build guide" [ref=e1939] [cursor=pointer]:
+                      - /url: /ggml-org/llama.cpp/blob/master/docs/build.md
+                - paragraph [ref=e1940]: "Once installed:"
+                - generic [ref=e1941]:
+                  - generic [ref=e1942]:
+                    - generic [ref=e1943]: "# Download and run a model directly from Hugging Face"
+                    - text: llama cli -hf ggml-org/Qwen3.5-0.8B-GGUF
+                    - generic [ref=e1944]: "# Launch OpenAI-compatible API server"
+                    - text: llama serve -hf ggml-org/Qwen3.5-0.8B-GGUF
+                  - button "Copy code to clipboard" [ref=e1946] [cursor=pointer]
+                - table [ref=e1951]:
+                  - rowgroup [ref=e1952]:
+                    - row [ref=e1953]:
+                      - 'cell "VLM session with `llama cli` VLM session with llama cli" [ref=e1954]':
+                        - link [ref=e1955] [cursor=pointer]:
+                          - /url: https://private-user-images.githubusercontent.com/1991296/629069102-88726b48-1713-48aa-a525-95a02e78afc4.png?jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3ODc5MzgxNzksIm5iZiI6MTc4NzkzNzg3OSwicGF0aCI6Ii8xOTkxMjk2LzYyOTA2OTEwMi04ODcyNmI0OC0xNzEzLTQ4YWEtYTUyNS05NWEwMmU3OGFmYzQucG5nP1gtQW16LUFsZ29yaXRobT1BV1M0LUhNQUMtU0hBMjU2JlgtQW16LUNyZWRlbnRpYWw9QUtJQVZDT0RZTFNBNTNQUUs0WkElMkYyMDI2MDgyOCUyRnVzLWVhc3QtMSUyRnMzJTJGYXdzNF9yZXF1ZXN0JlgtQW16LURhdGU9MjAyNjA4MjhUMTcyNDM5WiZYLUFtei1FeHBpcmVzPTMwMCZYLUFtei1TaWduYXR1cmU9NTJhYzg4MDczNzI5ZDJiYWM5OTk5NjFhYzI1MGNlOTRmNjRjYWNhNjg0M2NkYTYyNTgzZDU3NTE5OGY3N2ExOSZYLUFtei1TaWduZWRIZWFkZXJzPWhvc3QmcmVzcG9uc2UtY29udGVudC10eXBlPWltYWdlJTJGcG5nIn0.nyNUCPucnvgR8mDRfk_GS48wG7mcgAU5fKuyd11HzdU
+                          - 'img "VLM session with `llama cli`" [ref=e1956]'
+                        - generic [ref=e1957]: VLM session with llama cli
+                      - 'cell "Built-in web UI against `llama serve` running Qwen 3.6 Built-in web UI against llama serve" [ref=e1958]':
+                        - link [ref=e1959] [cursor=pointer]:
+                          - /url: https://private-user-images.githubusercontent.com/1991296/628539505-b402f972-2e32-4def-8771-8d849f08cf2e.png?jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3ODc5MzgxNzksIm5iZiI6MTc4NzkzNzg3OSwicGF0aCI6Ii8xOTkxMjk2LzYyODUzOTUwNS1iNDAyZjk3Mi0yZTMyLTRkZWYtODc3MS04ZDg0OWYwOGNmMmUucG5nP1gtQW16LUFsZ29yaXRobT1BV1M0LUhNQUMtU0hBMjU2JlgtQW16LUNyZWRlbnRpYWw9QUtJQVZDT0RZTFNBNTNQUUs0WkElMkYyMDI2MDgyOCUyRnVzLWVhc3QtMSUyRnMzJTJGYXdzNF9yZXF1ZXN0JlgtQW16LURhdGU9MjAyNjA4MjhUMTcyNDM5WiZYLUFtei1FeHBpcmVzPTMwMCZYLUFtei1TaWduYXR1cmU9NzVkZjU3YTk4M2E0NWJiNWQ2OTljM2I4YTQ4YmZiOGM2ZjNlM2FiMDAyYzMwNjU3YTAzZDI2Mzc1MzFmODE2MiZYLUFtei1TaWduZWRIZWFkZXJzPWhvc3QmcmVzcG9uc2UtY29udGVudC10eXBlPWltYWdlJTJGcG5nIn0.wJV2XOSf_rGzLxblNU6diPb8JJiVhp2gEbpNwczkxY8
+                          - 'img "Built-in web UI against `llama serve` running Qwen 3.6" [ref=e1960]'
+                        - generic [ref=e1961]: Built-in web UI against llama serve
+                - generic [ref=e1962]:
+                  - heading "Description" [level=2] [ref=e1963]
+                  - 'link "Permalink: Description" [ref=e1964] [cursor=pointer]':
+                    - /url: "#description"
+                - paragraph [ref=e1967]:
+                  - text: The main goal of
+                  - code [ref=e1968]: llama.cpp
+                  - text: is to enable LLM (and VLM) inference with minimal setup and state-of-the-art performance on a wide range of hardware - locally and in the cloud.
+                - list [ref=e1969]:
+                  - listitem [ref=e1970]: Plain C/C++ implementation without any dependencies
+                  - listitem [ref=e1971]: Apple silicon is a first-class citizen - optimized via ARM NEON, Accelerate and Metal frameworks
+                  - listitem [ref=e1972]: AVX, AVX2, AVX512 and AMX support for x86 architectures
+                  - listitem [ref=e1973]: RVV, ZVFH, ZFH, ZICBOP and ZIHINTPAUSE support for RISC-V architectures
+                  - listitem [ref=e1974]: 1.5-bit, 2-bit, 3-bit, 4-bit, 5-bit, 6-bit, and 8-bit integer quantization for faster inference and reduced memory use
+                  - listitem [ref=e1975]: Custom CUDA kernels for running LLMs on NVIDIA GPUs (support for AMD GPUs via HIP and Moore Threads GPUs via MUSA)
+                  - listitem [ref=e1976]: Vulkan and SYCL backend support
+                  - listitem [ref=e1977]: CPU+GPU hybrid inference to partially accelerate models larger than the total VRAM capacity
+                - paragraph [ref=e1978]:
+                  - text: The
+                  - code [ref=e1979]: llama.cpp
+                  - text: project is build on top of the
+                  - link "ggml" [ref=e1980] [cursor=pointer]:
+                    - /url: https://github.com/ggml-org/ggml
+                  - text: library.
+                - generic [ref=e1981]:
+                  - heading "Supported backends" [level=2] [ref=e1982]
+                  - 'link "Permalink: Supported backends" [ref=e1983] [cursor=pointer]':
+                    - /url: "#supported-backends"
+                - generic:
+                  - table
+                - table [ref=e1987]:
+                  - rowgroup [ref=e1988]:
+                    - row [ref=e1989]:
+                      - columnheader "Backend" [ref=e1990]
+                      - columnheader "Target devices" [ref=e1991]
+                  - rowgroup [ref=e1992]:
+                    - row [ref=e1993]:
+                      - cell [ref=e1994]:
+                        - link "BLAS" [ref=e1995] [cursor=pointer]:
+                          - /url: /ggml-org/llama.cpp/blob/master/docs/build.md#blas-build
+                      - cell "All" [ref=e1996]
+                    - row [ref=e1997]:
+                      - cell [ref=e1998]:
+                        - link "BLIS" [ref=e1999] [cursor=pointer]:
+                          - /url: /ggml-org/llama.cpp/blob/master/docs/backend/BLIS.md
+                      - cell "All" [ref=e2000]
+                    - row [ref=e2001]:
+                      - cell [ref=e2002]:
+                        - link "CANN" [ref=e2003] [cursor=pointer]:
+                          - /url: /ggml-org/llama.cpp/blob/master/docs/build.md#cann
+                      - cell "Ascend NPU" [ref=e2004]
+                    - row [ref=e2005]:
+                      - cell [ref=e2006]:
+                        - link "CUDA" [ref=e2007] [cursor=pointer]:
+                          - /url: /ggml-org/llama.cpp/blob/master/docs/build.md#cuda
+                      - cell "Nvidia GPU" [ref=e2008]
+                    - row [ref=e2009]:
+                      - cell [ref=e2010]:
+                        - link "HIP" [ref=e2011] [cursor=pointer]:
+                          - /url: /ggml-org/llama.cpp/blob/master/docs/build.md#hip
+                      - cell "AMD GPU" [ref=e2012]
+                    - row [ref=e2013]:
+                      - cell [ref=e2014]:
+                        - link "Hexagon [In Progress]" [ref=e2015] [cursor=pointer]:
+                          - /url: /ggml-org/llama.cpp/blob/master/docs/backend/snapdragon/README.md
+                      - cell "Snapdragon" [ref=e2016]
+                    - row [ref=e2017]:
+                      - cell [ref=e2018]:
+                        - link "IBM zDNN" [ref=e2019] [cursor=pointer]:
+                          - /url: /ggml-org/llama.cpp/blob/master/docs/backend/zDNN.md
+                      - cell "IBM Z & LinuxONE" [ref=e2020]
+                    - row [ref=e2021]:
+                      - cell [ref=e2022]:
+                        - link "MUSA" [ref=e2023] [cursor=pointer]:
+                          - /url: /ggml-org/llama.cpp/blob/master/docs/build.md#musa
+                      - cell "Moore Threads GPU" [ref=e2024]
+                    - row [ref=e2025]:
+                      - cell [ref=e2026]:
+                        - link "Metal" [ref=e2027] [cursor=pointer]:
+                          - /url: /ggml-org/llama.cpp/blob/master/docs/build.md#metal-build
+                      - cell "Apple Silicon" [ref=e2028]
+                    - row [ref=e2029]:
+                      - cell [ref=e2030]:
+                        - link "OpenCL" [ref=e2031] [cursor=pointer]:
+                          - /url: /ggml-org/llama.cpp/blob/master/docs/backend/OPENCL.md
+                      - cell "Adreno GPU" [ref=e2032]
+                    - row [ref=e2033]:
+                      - cell [ref=e2034]:
+                        - link "OpenVINO [In Progress]" [ref=e2035] [cursor=pointer]:
+                          - /url: /ggml-org/llama.cpp/blob/master/docs/backend/OPENVINO.md
+                      - cell "Intel CPUs, GPUs, and NPUs" [ref=e2036]
+                    - row [ref=e2037]:
+                      - cell [ref=e2038]:
+                        - link "RPC" [ref=e2039] [cursor=pointer]:
+                          - /url: https://github.com/ggml-org/llama.cpp/tree/master/tools/rpc
+                      - cell "All" [ref=e2040]
+                    - row [ref=e2041]:
+                      - cell [ref=e2042]:
+                        - link "SYCL" [ref=e2043] [cursor=pointer]:
+                          - /url: /ggml-org/llama.cpp/blob/master/docs/backend/SYCL.md
+                      - cell "Intel GPU" [ref=e2044]
+                    - row [ref=e2045]:
+                      - cell [ref=e2046]:
+                        - link "VirtGPU" [ref=e2047] [cursor=pointer]:
+                          - /url: /ggml-org/llama.cpp/blob/master/docs/backend/VirtGPU.md
+                      - cell "VirtGPU APIR" [ref=e2048]
+                    - row [ref=e2049]:
+                      - cell [ref=e2050]:
+                        - link "Vulkan" [ref=e2051] [cursor=pointer]:
+                          - /url: /ggml-org/llama.cpp/blob/master/docs/build.md#vulkan
+                      - cell "GPU" [ref=e2052]
+                    - row [ref=e2053]:
+                      - cell [ref=e2054]:
+                        - link "WebGPU" [ref=e2055] [cursor=pointer]:
+                          - /url: /ggml-org/llama.cpp/blob/master/docs/build.md#webgpu
+                      - cell "All" [ref=e2056]
+                    - row [ref=e2057]:
+                      - cell [ref=e2058]:
+                        - link "ZenDNN" [ref=e2059] [cursor=pointer]:
+                          - /url: /ggml-org/llama.cpp/blob/master/docs/build.md#zendnn
+                      - cell "AMD CPU" [ref=e2060]
+                - generic [ref=e2061]:
+                  - heading "Documentation" [level=2] [ref=e2062]
+                  - 'link "Permalink: Documentation" [ref=e2063] [cursor=pointer]':
+                    - /url: "#documentation"
+                - generic [ref=e2066]:
+                  - heading "Tools" [level=4] [ref=e2067]
+                  - 'link "Permalink: Tools" [ref=e2068] [cursor=pointer]':
+                    - /url: "#tools"
+                - list [ref=e2071]:
+                  - listitem [ref=e2072]:
+                    - link "cli" [ref=e2073] [cursor=pointer]:
+                      - /url: /ggml-org/llama.cpp/blob/master/tools/cli/README.md
+                  - listitem [ref=e2074]:
+                    - link "completion" [ref=e2075] [cursor=pointer]:
+                      - /url: /ggml-org/llama.cpp/blob/master/tools/completion/README.md
+                  - listitem [ref=e2076]:
+                    - link "server" [ref=e2077] [cursor=pointer]:
+                      - /url: /ggml-org/llama.cpp/blob/master/tools/server/README.md
+                  - listitem [ref=e2078]:
+                    - link "GBNF grammars" [ref=e2079] [cursor=pointer]:
+                      - /url: /ggml-org/llama.cpp/blob/master/grammars/README.md
+                - generic [ref=e2080]:
+                  - heading "Development" [level=4] [ref=e2081]
+                  - 'link "Permalink: Development" [ref=e2082] [cursor=pointer]':
+                    - /url: "#development"
+                - list [ref=e2085]:
+                  - listitem [ref=e2086]:
+                    - link "How to build" [ref=e2087] [cursor=pointer]:
+                      - /url: /ggml-org/llama.cpp/blob/master/docs/build.md
+                  - listitem [ref=e2088]:
+                    - link "Running on Docker" [ref=e2089] [cursor=pointer]:
+                      - /url: /ggml-org/llama.cpp/blob/master/docs/docker.md
+                  - listitem [ref=e2090]:
+                    - link "Build on Android" [ref=e2091] [cursor=pointer]:
+                      - /url: /ggml-org/llama.cpp/blob/master/docs/android.md
+                  - listitem [ref=e2092]:
+                    - link "Multi-GPU usage" [ref=e2093] [cursor=pointer]:
+                      - /url: /ggml-org/llama.cpp/blob/master/docs/multi-gpu.md
+                  - listitem [ref=e2094]:
+                    - link "Performance troubleshooting" [ref=e2095] [cursor=pointer]:
+                      - /url: /ggml-org/llama.cpp/blob/master/docs/development/token_generation_performance_tips.md
+                  - listitem [ref=e2096]:
+                    - link "GGML tips & tricks" [ref=e2097] [cursor=pointer]:
+                      - /url: https://github.com/ggml-org/llama.cpp/wiki/GGML-Tips-&-Tricks
+                  - listitem [ref=e2098]:
+                    - link "XCFramework" [ref=e2099] [cursor=pointer]:
+                      - /url: /ggml-org/llama.cpp/blob/master/docs/xcframework.md
+                  - listitem [ref=e2100]:
+                    - link "Completions" [ref=e2101] [cursor=pointer]:
+                      - /url: /ggml-org/llama.cpp/blob/master/docs/completions.md
+                  - listitem [ref=e2102]:
+                    - link "Models" [ref=e2103] [cursor=pointer]:
+                      - /url: /ggml-org/llama.cpp/blob/master/docs/models.md
+                  - listitem [ref=e2104]:
+                    - link "Release process" [ref=e2105] [cursor=pointer]:
+                      - /url: /ggml-org/llama.cpp/blob/master/docs/release.md
+                - generic [ref=e2106]:
+                  - heading "Contributing" [level=2] [ref=e2107]
+                  - 'link "Permalink: Contributing" [ref=e2108] [cursor=pointer]':
+                    - /url: "#contributing"
+                - list [ref=e2111]:
+                  - listitem [ref=e2112]: Contributors can open PRs
+                  - listitem [ref=e2113]: Collaborators will be invited based on contributions
+                  - listitem [ref=e2114]:
+                    - text: Maintainers can push to branches in the
+                    - code [ref=e2115]: llama.cpp
+                    - text: repo and merge PRs into the
+                    - code [ref=e2116]: master
+                    - text: branch
+                  - listitem [ref=e2117]: Any help with managing issues, PRs and projects is very appreciated!
+                  - listitem [ref=e2118]:
+                    - text: Read the
+                    - link "CONTRIBUTING.md" [ref=e2119] [cursor=pointer]:
+                      - /url: /ggml-org/llama.cpp/blob/master/CONTRIBUTING.md
+                    - text: for more information
+                - generic [ref=e2120]:
+                  - heading "Acknowledgements" [level=2] [ref=e2121]
+                  - 'link "Permalink: Acknowledgements" [ref=e2122] [cursor=pointer]':
+                    - /url: "#acknowledgements"
+                - list [ref=e2125]:
+                  - listitem [ref=e2126]:
+                    - link "yhirose/cpp-httplib" [ref=e2127] [cursor=pointer]:
+                      - /url: https://github.com/yhirose/cpp-httplib
+                    - text: "- Single-header HTTP server, used by"
+                    - code [ref=e2128]: llama-server
+                    - text: "- MIT license"
+                  - listitem [ref=e2129]:
+                    - link "nothings/stb" [ref=e2130] [cursor=pointer]:
+                      - /url: https://github.com/nothings/stb
+                    - text: "- Single-header image format decoder, used by multimodal subsystem - Public domain"
+                  - listitem [ref=e2131]:
+                    - link "nlohmann/json" [ref=e2132] [cursor=pointer]:
+                      - /url: https://github.com/nlohmann/json
+                    - text: "- Single-header JSON library, used by various tools/examples - MIT License"
+                  - listitem [ref=e2133]:
+                    - link "mackron/miniaudio" [ref=e2134] [cursor=pointer]:
+                      - /url: https://github.com/mackron/miniaudio
+                    - text: "- Single-header audio format decoder, used by multimodal subsystem - Public domain"
+                  - listitem [ref=e2135]:
+                    - link "sheredom/subprocess.h" [ref=e2136] [cursor=pointer]:
+                      - /url: https://github.com/sheredom/subprocess.h
+                    - text: "- Single-header process launching solution for C and C++ - Public domain"
+        - generic [ref=e1299]:
+          - generic [ref=e1300]:
+            - heading "About" [level=2] [ref=e1301]
+            - paragraph [ref=e1302]: LLM inference in C/C++
+            - generic "https://llama.app" [ref=e1306]:
+              - link "llama.app" [ref=e1307] [cursor=pointer]:
+                - /url: https://llama.app
+            - heading "Topics" [level=3] [ref=e1308]
+            - link "ggml" [ref=e1310] [cursor=pointer]:
+              - /url: /topics/ggml
+            - heading "Resources" [level=3] [ref=e1311]
+            - link "Readme" [ref=e1313] [cursor=pointer]:
+              - /url: "#readme-ov-file"
+            - link "MIT license" [ref=e1317] [cursor=pointer]:
+              - /url: "#MIT-1-ov-file"
+            - heading "Contributing" [level=3] [ref=e1320]
+            - link "Contributing" [ref=e1322] [cursor=pointer]:
+              - /url: "#contributing-ov-file"
+            - heading "Security policy" [level=3] [ref=e1325]
+            - link "Security policy" [ref=e1327] [cursor=pointer]:
+              - /url: "#security-ov-file"
+            - link "Activity" [ref=e1331] [cursor=pointer]:
+              - /url: /ggml-org/llama.cpp/activity
+            - link "Custom properties" [ref=e1335] [cursor=pointer]:
+              - /url: /ggml-org/llama.cpp/custom-properties
+            - heading "Stars" [level=3] [ref=e1338]
+            - generic [ref=e1340]:
+              - strong [ref=e1343]: 126.1k
+              - text: stars
+            - heading "Watchers" [level=3] [ref=e1344]
+            - generic [ref=e1346]:
+              - strong [ref=e1349]: "825"
+              - text: watching
+            - heading "Forks" [level=3] [ref=e1350]
+            - link [ref=e1352] [cursor=pointer]:
+              - /url: /ggml-org/llama.cpp/forks
+              - strong [ref=e1356]: 22.3k
+              - text: forks
+            - link "Report repository" [ref=e1358] [cursor=pointer]:
+              - /url: /contact/report-content?content_url=https%3A%2F%2Fgithub.com%2Fggml-org%2Fllama.cpp&report=ggml-org+%28user%29
+          - generic [ref=e2137]:
+            - heading "Releases (6.985)" [level=2] [ref=e2138]:
+              - generic [ref=e2139]:
+                - link "Releases" [ref=e2140] [cursor=pointer]:
+                  - /url: /ggml-org/llama.cpp/releases
+                - generic [ref=e2141]: "6.985"
+                - generic [ref=e2142]: (6.985)
+            - link "v0.3.0 Latest Aug 25, 20263 days ago" [ref=e2143] [cursor=pointer]:
+              - /url: /ggml-org/llama.cpp/releases/tag/v0.3.0
+              - generic [ref=e2146]:
+                - generic [ref=e2147]:
+                  - generic "v0.3.0" [ref=e2148]
+                  - generic [ref=e2149]: Latest
+                - generic [ref=e2150]: Aug 25, 20263 days ago
+            - link "+ 6.984 releases" [ref=e2152] [cursor=pointer]:
+              - /url: /ggml-org/llama.cpp/releases
+          - generic [ref=e2153]:
+            - heading "Contributors (1.933)" [level=2] [ref=e2154]:
+              - generic [ref=e2155]:
+                - link "Contributors" [ref=e2156] [cursor=pointer]:
+                  - /url: /ggml-org/llama.cpp/graphs/contributors
+                - generic [ref=e2157]: "1.933"
+                - generic [ref=e2158]: (1.933)
+            - list [ref=e2159]:
+              - listitem [ref=e2160]:
+                - link [ref=e2161] [cursor=pointer]:
+                  - /url: /ggerganov
+                  - img "@ggerganov" [ref=e2162]
+              - listitem [ref=e2163]:
+                - link [ref=e2164] [cursor=pointer]:
+                  - /url: /ngxson
+                  - img "@ngxson" [ref=e2165]
+              - listitem [ref=e2166]:
+                - link [ref=e2167] [cursor=pointer]:
+                  - /url: /CISC
+                  - img "@CISC" [ref=e2168]
+              - listitem [ref=e2169]:
+                - link [ref=e2170] [cursor=pointer]:
+                  - /url: /slaren
+                  - img "@slaren" [ref=e2171]
+              - listitem [ref=e2172]:
+                - link [ref=e2173] [cursor=pointer]:
+                  - /url: /JohannesGaessler
+                  - img "@JohannesGaessler" [ref=e2174]
+              - listitem [ref=e2175]:
+                - link [ref=e2176] [cursor=pointer]:
+                  - /url: /jeffbolznv
+                  - img "@jeffbolznv" [ref=e2177]
+              - listitem [ref=e2178]:
+                - link [ref=e2179] [cursor=pointer]:
+                  - /url: /danbev
+                  - img "@danbev" [ref=e2180]
+              - listitem [ref=e2181]:
+                - link [ref=e2182] [cursor=pointer]:
+                  - /url: /ServeurpersoCom
+                  - img "@ServeurpersoCom" [ref=e2183]
+              - listitem [ref=e2184]:
+                - link [ref=e2185] [cursor=pointer]:
+                  - /url: /am17an
+                  - img "@am17an" [ref=e2186]
+              - listitem [ref=e2187]:
+                - link [ref=e2188] [cursor=pointer]:
+                  - /url: /allozaur
+                  - img "@allozaur" [ref=e2189]
+              - listitem [ref=e2190]:
+                - link [ref=e2191] [cursor=pointer]:
+                  - /url: /angt
+                  - img "@angt" [ref=e2192]
+              - listitem [ref=e2193]:
+                - link [ref=e2194] [cursor=pointer]:
+                  - /url: /cebtenzzre
+                  - img "@cebtenzzre" [ref=e2195]
+              - listitem [ref=e2196]:
+                - link [ref=e2197] [cursor=pointer]:
+                  - /url: /0cc4m
+                  - img "@0cc4m" [ref=e2198]
+              - listitem [ref=e2199]:
+                - link [ref=e2200] [cursor=pointer]:
+                  - /url: /lhez
+                  - img "@lhez" [ref=e2201]
+            - link "+ 1.919 contributors" [ref=e2203] [cursor=pointer]:
+              - /url: /ggml-org/llama.cpp/graphs/contributors
+          - generic [ref=e2204]:
+            - heading "Languages" [level=2] [ref=e2205]
+            - generic [ref=e2207]:
+              - 'progressbar "C++: 56%" [ref=e2208]'
+              - 'progressbar "C: 15.5%" [ref=e2209]'
+              - 'progressbar "Python: 7.3%" [ref=e2210]'
+              - 'progressbar "Cuda: 5.4%" [ref=e2211]'
+              - 'progressbar "TypeScript: 4.3%" [ref=e2212]'
+              - 'progressbar "Svelte: 2.2%" [ref=e2213]'
+              - 'progressbar "Other: 9.3%" [ref=e2214]'
+            - list [ref=e2215]:
+              - listitem [ref=e2216]:
+                - link "C++ 56%" [ref=e2217] [cursor=pointer]:
+                  - /url: /ggml-org/llama.cpp/search?l=c%2B%2B
+                  - generic [ref=e2219]: C++
+                  - generic [ref=e2220]: 56%
+              - listitem [ref=e2221]:
+                - link "C 15.5%" [ref=e2222] [cursor=pointer]:
+                  - /url: /ggml-org/llama.cpp/search?l=c
+                  - generic [ref=e2224]: C
+                  - generic [ref=e2225]: 15.5%
+              - listitem [ref=e2226]:
+                - link "Python 7.3%" [ref=e2227] [cursor=pointer]:
+                  - /url: /ggml-org/llama.cpp/search?l=python
+                  - generic [ref=e2229]: Python
+                  - generic [ref=e2230]: 7.3%
+              - listitem [ref=e2231]:
+                - link "Cuda 5.4%" [ref=e2232] [cursor=pointer]:
+                  - /url: /ggml-org/llama.cpp/search?l=cuda
+                  - generic [ref=e2234]: Cuda
+                  - generic [ref=e2235]: 5.4%
+              - listitem [ref=e2236]:
+                - link "TypeScript 4.3%" [ref=e2237] [cursor=pointer]:
+                  - /url: /ggml-org/llama.cpp/search?l=typescript
+                  - generic [ref=e2239]: TypeScript
+                  - generic [ref=e2240]: 4.3%
+              - listitem [ref=e2241]:
+                - link "Svelte 2.2%" [ref=e2242] [cursor=pointer]:
+                  - /url: /ggml-org/llama.cpp/search?l=svelte
+                  - generic [ref=e2244]: Svelte
+                  - generic [ref=e2245]: 2.2%
+              - listitem [ref=e2246]:
+                - link "Other 9.3%" [ref=e2247] [cursor=pointer]:
+                  - /url: /ggml-org/llama.cpp/search?l=Other
+                  - generic [ref=e2249]: Other
+                  - generic [ref=e2250]: 9.3%
+    - contentinfo [ref=e1376]:
+      - heading "Footer" [level=2] [ref=e1377]
+      - generic [ref=e1378]:
+        - generic [ref=e1379]:
+          - link "GitHub Homepage" [ref=e1380] [cursor=pointer]:
+            - /url: https://github.com
+          - generic [ref=e1383]: © 2026 GitHub, Inc.
+        - navigation "Footer" [ref=e1384]:
+          - heading "Footer navigation" [level=3] [ref=e1385]
+          - list "Footer navigation" [ref=e1386]:
+            - listitem [ref=e1387]:
+              - link "Terms" [ref=e1388] [cursor=pointer]:
+                - /url: https://docs.github.com/site-policy/github-terms/github-terms-of-service
+            - listitem [ref=e1389]:
+              - link "Privacy" [ref=e1390] [cursor=pointer]:
+                - /url: https://docs.github.com/site-policy/privacy-policies/github-privacy-statement
+            - listitem [ref=e1391]:
+              - link "Security" [ref=e1392] [cursor=pointer]:
+                - /url: https://github.com/security
+            - listitem [ref=e1393]:
+              - link "Status" [ref=e1394] [cursor=pointer]:
+                - /url: https://www.githubstatus.com/
+            - listitem [ref=e1395]:
+              - link "Community" [ref=e1396] [cursor=pointer]:
+                - /url: https://github.community/
+            - listitem [ref=e1397]:
+              - link "Docs" [ref=e1398] [cursor=pointer]:
+                - /url: https://docs.github.com/
+            - listitem [ref=e1399]:
+              - link "Contact" [ref=e1400] [cursor=pointer]:
+                - /url: https://support.github.com?tags=dotcom-footer
+            - listitem [ref=e1401]:
+              - button "Manage cookies" [ref=e1403] [cursor=pointer]
+            - listitem [ref=e1404]:
+              - button "Do not share my personal information" [ref=e1406] [cursor=pointer]
+  - alert [ref=e2251]
+```

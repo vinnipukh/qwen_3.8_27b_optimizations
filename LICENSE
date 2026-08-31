@@ -4,7 +4,7 @@ Model artifact: JonathanColetti/Qwen3.8-27B-Uncensored-GGUF
   File: Qwen3.8-27B-Uncensored-IQ4_XS.gguf (15.31 GB, sha256 53adc4bb…)
   Base model: Qwen/Qwen3.8-27B by Alibaba Cloud — Apache License 2.0
   Derived via Heretic abliteration + llama.cpp imatrix quant (a94d563ed) — inherits Apache 2.0
-  See models/README.md and .planning/research/MODEL-DECISION.md
+  See models/README.md and docs/research/MODEL-DECISION.md
 
 This project (kernel playground, harness, patches, docs) is itself licensed
 under the Apache License, Version 2.0, same as the base model and

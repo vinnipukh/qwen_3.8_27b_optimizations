@@ -17,7 +17,7 @@
 | Download URL | `https://huggingface.co/JonathanColetti/Qwen3.8-27B-Uncensored-GGUF/resolve/main/Qwen3.8-27B-Uncensored-IQ4_XS.gguf` |
 
 **Notes**
-- Published wikitext-2 PPL 7.1583 ±0.25019 (f16 baseline 7.1557) — see `.planning/research/MODEL-DECISION.md`
+- Published wikitext-2 PPL 7.1583 ±0.25019 (f16 baseline 7.1557) — see `docs/research/MODEL-DECISION.md`
 - This file is gitignored (`models/*.gguf`); this README is the provenance of record
 - Companion artifacts available in same repo if later needed: `noMTP-IQ4_XS` (15.08 GB), `draft-Q8_0` (3.16 GB, v2 spec-decode), `imatrix.dat`
-- Heretic maintainer flags down_proj ablation as potentially intelligence-damaging; artifact ships with zero generative/code evals — coding-capability eval deferred to v2 (see REQUIREMENTS.md)
+- Heretic maintainer flags down_proj ablation as potentially intelligence-damaging; artifact ships with zero generative/code evals — coding-capability eval deferred to v2 (see docs/REQUIREMENTS.md)

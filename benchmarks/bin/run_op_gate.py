@@ -187,23 +187,48 @@ def run_op_gate(
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description="Op-Level Correctness Gate runner (QUAL-01)")
+    parser = argparse.ArgumentParser(description="Op-Level Correctness Gate runner (QUAL-01) N=10 rigour")
     parser.add_argument("--backend", default=DEFAULT_BACKEND, help="Backend to test (default: ROCm0)")
     parser.add_argument("--bin-path", default=DEFAULT_BIN, help="Path to test-backend-ops binary")
     parser.add_argument("--ops", default=None, help="Comma-separated op list (default: all)")
     parser.add_argument("--out-json", default=DEFAULT_OUT_JSON, help="Path for JSON output")
+    parser.add_argument("--runs", type=int, default=1, help="Repeats N=10 for REQ-STAT-07 (QUAL-01 0 errors N=10)")
+    # allow --runs 10 via help string with %% escape handled
     args = parser.parse_args()
 
     ops_list = [o.strip() for o in args.ops.split(",") if o.strip()] if args.ops else None
 
-    print(f"=== QUAL-01: Running Op-Level Correctness Gate on {args.backend} ===")
-    res = run_op_gate(
-        backend=args.backend,
-        bin_path=args.bin_path,
-        ops=ops_list,
-        out_json=args.out_json,
-    )
+    # N=10 rigour: loop test-backend-ops --runs times, assert 0 errors each run (REQ-STAT-07)
+    if args.runs == 10:
+        print(f"=== QUAL-01: Running Op-Level Correctness Gate N=10 (0 errors) on {args.backend} ===")
+        print(f"REQ-STAT-07: run_op_gate.py --runs 10 requires 0 errors in each of 10 repeats")
+    else:
+        print(f"=== QUAL-01: Running Op-Level Correctness Gate on {args.backend} ===")
+    all_results = []
+    for run_idx in range(args.runs):
+        if args.runs > 1:
+            print(f"[QUAL-01] run {run_idx+1}/{args.runs}")
+        res = run_op_gate(
+            backend=args.backend,
+            bin_path=args.bin_path,
+            ops=ops_list,
+            out_json=args.out_json if args.runs == 1 else str(Path(args.out_json).with_suffix(f".run{run_idx+1}.json")),
+        )
+        all_results.append(res)
+        if res["error_cases"] != 0:
+            print(f"[QUAL-01] FAIL run {run_idx+1}: {res['error_cases']} errors", file=sys.stderr)
+    # Aggregate verdict: all 10 runs must be 0 errors
+    if args.runs > 1:
+        total_errors = sum(r["error_cases"] for r in all_results)
+        print(f"\n[QUAL-01 N={args.runs}] total_errors across {args.runs} runs: {total_errors} (require 0)")
+        # Write aggregated JSON
+        agg = {"runs": args.runs, "total_errors": total_errors, "per_run": all_results, "gate": "QUAL-01 N=10 0 errors"}
+        with open(args.out_json, "w", encoding="utf-8") as f:
+            json.dump(agg, f, indent=2)
+        print(f"Aggregated N={args.runs} results saved to: {args.out_json}")
+        return 0 if total_errors == 0 and all(r["status"] == "PASS" for r in all_results) else 1
 
+    res = all_results[0]
     print(f"Total test cases: {res['total_cases']}")
     print(f"Supported (passed): {res['supported_cases']}")
     print(f"Unsupported: {res['unsupported_cases']}")

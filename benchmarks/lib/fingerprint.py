@@ -18,7 +18,23 @@ from typing import Any
 
 DEFAULT_MODEL_PATH = "/root/models/Qwen3.8-27B-Uncensored-IQ4_XS.gguf"
 DEFAULT_BIN_PATH = "/root/llama.cpp/build-ci/bin/llama-bench"
-DEFAULT_WSLCONFIG = "/mnt/c/Users/arhan/.wslconfig"
+def _find_wslconfig() -> str:
+    candidates = [
+        os.path.expanduser("~/.wslconfig"),
+    ]
+    if os.path.isdir("/mnt/c/Users"):
+        try:
+            for user in os.listdir("/mnt/c/Users"):
+                if user not in ("Public", "Default", "Default User", "All Users"):
+                    candidates.append(f"/mnt/c/Users/{user}/.wslconfig")
+        except OSError:
+            pass
+    for c in candidates:
+        if os.path.isfile(c):
+            return c
+    return ""
+
+DEFAULT_WSLCONFIG = _find_wslconfig()
 DEFAULT_VERSIONS_TXT = "benchmarks/environment/versions.txt"
 DEFAULT_PIN_TXT = "benchmarks/environment/llamacpp-pin.txt"
 DEFAULT_MODELS_README = "models/README.md"
@@ -29,12 +45,15 @@ def sha256_file(path: str | Path) -> str:
     """Compute sha256 of file streaming 1 MiB chunks."""
     h = hashlib.sha256()
     p = Path(path)
-    if not p.exists():
+    try:
+        if not p.is_file():
+            return ""
+        with open(p, "rb") as f:
+            while chunk := f.read(1024 * 1024):
+                h.update(chunk)
+        return h.hexdigest()
+    except (OSError, PermissionError):
         return ""
-    with open(p, "rb") as f:
-        while chunk := f.read(1024 * 1024):
-            h.update(chunk)
-    return h.hexdigest()
 
 
 def utc_now_iso() -> str:
@@ -180,15 +199,25 @@ def collect_manifest(
 
     # Binary sha256
     bin_p = Path(bin_path)
-    binary_sha = sha256_file(bin_p) if bin_p.exists() else "binary-not-found"
+    try:
+        binary_sha = sha256_file(bin_p) if bin_p.is_file() else "binary-not-found"
+    except (OSError, PermissionError):
+        binary_sha = "binary-not-found"
 
     baseline_bin_p = repo_p / DEFAULT_BASELINE_BIN
-    baseline_binary_sha = sha256_file(baseline_bin_p) if baseline_bin_p.exists() else binary_sha
+    try:
+        baseline_binary_sha = sha256_file(baseline_bin_p) if baseline_bin_p.is_file() else binary_sha
+    except (OSError, PermissionError):
+        baseline_binary_sha = binary_sha
 
     # Model sha256 and HF rev
     model_p = Path(model_path)
     expected_model_sha, hf_rev = parse_model_readme_provenance(repo_p / DEFAULT_MODELS_README)
-    actual_model_sha = expected_model_sha if expected_model_sha else (sha256_file(model_p) if model_p.exists() else "model-not-found")
+    try:
+        model_exists = model_p.is_file()
+    except (OSError, PermissionError):
+        model_exists = False
+    actual_model_sha = expected_model_sha if expected_model_sha else (sha256_file(model_p) if model_exists else "model-not-found")
 
     # Environment
     is_native = (backend_arm.upper() == "VULKAN" and platform.system() == "Windows")

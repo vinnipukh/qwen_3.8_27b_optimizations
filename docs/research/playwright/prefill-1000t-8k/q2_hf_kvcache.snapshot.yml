@@ -1,0 +1,625 @@
+### Open tabs
+- 0: [flash attention 2 long context 8k 16k 32k prefill throughput scaling at DuckDuckGo](https://duckduckgo.com/?q=flash+attention+2+long+context+8k+16k+32k+prefill+throughput+scaling&kad=en_US)
+- 1: [DuckDuckGo](https://html.duckduckgo.com/html/?q=flash+attention+2+long+context+8k+16k+32k+prefill+throughput+scaling)
+- 2: [DuckDuckGo](https://lite.duckduckgo.com/lite/?q=flash+attention+2+long+context+8k+16k+32k+prefill+throughput+scaling)
+- 3: [Captcha - Brave Search](https://search.brave.com/search?q=flash+attention+2+long+context+8k+16k+32k+prefill+throughput+scaling)
+- 4: [flash attention 2 long context 8k 16k 32k prefill throughput scaling - Arama](https://www.bing.com/search?q=flash+attention+2+long+context+8k+16k+32k+prefill+throughput+scaling&rdr=1&rdrig=40FB2FB12BE247E3A2F87EF294A4CE99)
+- 5: ["FlashAttention-2" prefill throughput 8k 16k scaling - Arama](https://www.bing.com/search?q=%22FlashAttention-2%22+prefill+throughput+8k+16k+scaling&rdr=1&rdrig=76F509D45D02467DA2B1192C40E1BE76)
+- 6: [https://www.google.com/search?q=flash+attention+2+long+context+8k+16k+32k+prefill+throughput+scaling&hl=en&gl=us&sei=vcORaoGTIfKm1fIPsp3PiQ8](https://www.google.com/sorry/index?continue=https://www.google.com/search%3Fq%3Dflash%2Battention%2B2%2Blong%2Bcontext%2B8k%2B16k%2B32k%2Bprefill%2Bthroughput%2Bscaling%26hl%3Den%26gl%3Dus%26sei%3DvcORaoGTIfKm1fIPsp3PiQ8&hl=en&q=EgSw6odMGL2Hx9QGIjBz_JWyuDhFlk0k_9Sd2sOWVij5TcNPo8TWvNLttk3wGaoM0WiPg28pSMdLEGzKOxUyAVJaAUM)
+- 7: [[2307.08691] FlashAttention-2: Faster Attention with Better Parallelism and Work Partitioning](https://arxiv.org/abs/2307.08691)
+- 8: [[2307.08691] FlashAttention-2: Faster Attention with Better Parallelism and Work Partitioning](https://arxiv.org/abs/2307.08691)
+- 9: [GitHub - Dao-AILab/flash-attention: Fast and memory-efficient exact attention · GitHub](https://github.com/Dao-AILab/flash-attention)
+- 10: [[2205.14135] FlashAttention: Fast and Memory-Efficient Exact Attention with IO-Awareness](https://arxiv.org/abs/2205.14135)
+- 11: [Overview · Hugging Face](https://huggingface.co/docs/transformers/v5.15.1/optimization_overview)
+- 12: [Page not found – PyTorch](https://pytorch.org/blog/flash-attention)
+- 13: [AMD ROCm — AMD ROCm 10.0.0](https://rocm.docs.amd.com/en/latest/)
+- 14: [[2305.13245] GQA: Training Generalized Multi-Query Transformer Models from Multi-Head Checkpoints](https://arxiv.org/abs/2305.13245)
+- 15: [[2112.10752] High-Resolution Image Synthesis with Latent Diffusion Models](https://arxiv.org/abs/2112.10752)
+- 16: [ggml-org/llama.cpp · Discussions · GitHub](https://github.com/ggml-org/llama.cpp/discussions)
+- 17: (current) [Unlocking Longer Generation with Key-Value Cache Quantization](https://huggingface.co/blog/kv-cache-quantization)
+### Page
+- Page URL: https://huggingface.co/blog/kv-cache-quantization
+- Page Title: Unlocking Longer Generation with Key-Value Cache Quantization
+### Snapshot
+```yaml
+- generic [ref=e2]:
+  - banner [ref=e4]:
+    - generic [ref=e5]:
+      - generic [ref=e6]:
+        - link "Hugging Face's logo Hugging Face" [ref=e7] [cursor=pointer]:
+          - /url: /
+          - img "Hugging Face's logo" [ref=e8]
+          - generic [ref=e9]: Hugging Face
+        - textbox "Search models, datasets, users..." [ref=e11]
+      - navigation "Main" [ref=e14]:
+        - list [ref=e15]:
+          - listitem [ref=e16]:
+            - link "Models" [ref=e17] [cursor=pointer]:
+              - /url: /models
+          - listitem [ref=e22]:
+            - link "Datasets" [ref=e23] [cursor=pointer]:
+              - /url: /datasets
+          - listitem [ref=e29]:
+            - link "Spaces" [ref=e30] [cursor=pointer]:
+              - /url: /spaces
+          - listitem [ref=e35]:
+            - link "Buckets new" [ref=e36] [cursor=pointer]:
+              - /url: /storage
+              - text: Buckets
+              - generic [ref=e41]: new
+          - listitem [ref=e42]:
+            - link "Docs" [ref=e43] [cursor=pointer]:
+              - /url: /docs
+          - listitem [ref=e48]:
+            - link "Pricing" [ref=e49] [cursor=pointer]:
+              - /url: /pricing
+          - listitem [ref=e50]:
+            - generic [ref=e51]:
+              - button [ref=e52] [cursor=pointer]
+              - navigation [ref=e58]:
+                - list [ref=e59]:
+                  - listitem [ref=e60]:
+                    - generic [ref=e61]: Website
+                    - list [ref=e62]:
+                      - listitem [ref=e63]:
+                        - link "Tasks" [ref=e64] [cursor=pointer]:
+                          - /url: /tasks
+                      - listitem [ref=e68]:
+                        - link "HuggingChat" [ref=e69] [cursor=pointer]:
+                          - /url: /chat
+                      - listitem [ref=e73]:
+                        - link "Collections" [ref=e74] [cursor=pointer]:
+                          - /url: /collections
+                      - listitem [ref=e79]:
+                        - link "Languages" [ref=e80] [cursor=pointer]:
+                          - /url: /languages
+                      - listitem [ref=e83]:
+                        - link "Organizations" [ref=e84] [cursor=pointer]:
+                          - /url: /organizations
+                  - listitem [ref=e90]:
+                    - generic [ref=e91]: Community
+                    - list [ref=e92]:
+                      - listitem [ref=e93]:
+                        - link "Blog" [ref=e94] [cursor=pointer]:
+                          - /url: /blog
+                      - listitem [ref=e97]:
+                        - link "Posts" [ref=e98] [cursor=pointer]:
+                          - /url: /posts
+                      - listitem [ref=e101]:
+                        - link "Daily Papers" [ref=e102] [cursor=pointer]:
+                          - /url: /papers
+                      - listitem [ref=e106]:
+                        - link "Hardware" [ref=e107] [cursor=pointer]:
+                          - /url: /hardware
+                      - listitem [ref=e111]:
+                        - link "Learn" [ref=e112] [cursor=pointer]:
+                          - /url: /learn
+                      - listitem [ref=e119]:
+                        - link "Discord" [ref=e120] [cursor=pointer]:
+                          - /url: /join/discord
+                      - listitem [ref=e123]:
+                        - link "Forum" [ref=e124] [cursor=pointer]:
+                          - /url: https://discuss.huggingface.co/
+                      - listitem [ref=e127]:
+                        - link "GitHub" [ref=e128] [cursor=pointer]:
+                          - /url: https://github.com/huggingface
+                  - listitem [ref=e131]:
+                    - generic [ref=e132]: Solutions
+                    - list [ref=e133]:
+                      - listitem [ref=e134]:
+                        - link "Team & Enterprise" [ref=e135] [cursor=pointer]:
+                          - /url: /enterprise
+                      - listitem [ref=e138]:
+                        - link "Hugging Face PRO" [ref=e139] [cursor=pointer]:
+                          - /url: /pro
+                      - listitem [ref=e142]:
+                        - link "Enterprise Support" [ref=e143] [cursor=pointer]:
+                          - /url: /support
+                      - listitem [ref=e147]:
+                        - link "Inference Providers" [ref=e148] [cursor=pointer]:
+                          - /url: /inference/models
+                      - listitem [ref=e152]:
+                        - link "Inference Endpoints" [ref=e153] [cursor=pointer]:
+                          - /url: /inference-endpoints
+                      - listitem [ref=e157]:
+                        - link "Storage Buckets" [ref=e158] [cursor=pointer]:
+                          - /url: /storage
+          - listitem [ref=e163]:
+            - separator [ref=e164]
+          - listitem [ref=e165]:
+            - link "Log In" [ref=e166] [cursor=pointer]:
+              - /url: /login
+          - listitem [ref=e167]:
+            - link "Sign Up" [ref=e168] [cursor=pointer]:
+              - /url: /join
+  - main [ref=e169]:
+    - generic [ref=e170]:
+      - generic [ref=e171]:
+        - generic [ref=e173]:
+          - link "Back to Articles" [ref=e175] [cursor=pointer]:
+            - /url: /blog
+          - heading "Unlocking Longer Generation with Key-Value Cache Quantization" [level=1] [ref=e178]:
+            - link [ref=e179] [cursor=pointer]:
+              - /url: "#unlocking-longer-generation-with-key-value-cache-quantization"
+          - generic [ref=e184]:
+            - generic [ref=e185]: Published May 16, 2024
+            - link "Update on GitHub" [ref=e188] [cursor=pointer]:
+              - /url: https://github.com/huggingface/blog/blob/main/kv-cache-quantization.md
+          - generic [ref=e193]:
+            - link [ref=e196] [cursor=pointer]:
+              - /url: /RaushanTurganbay
+              - img "Raushan Turganbay's avatar" [ref=e197]
+            - link "Raushan Turganbay RaushanTurganbay Follow" [ref=e199] [cursor=pointer]:
+              - /url: /RaushanTurganbay
+              - text: Raushan Turganbay
+              - generic [ref=e200]:
+                - generic [ref=e201]: RaushanTurganbay
+                - button [ref=e204]:
+                  - button "Follow" [ref=e206]
+          - generic [ref=e209]:
+            - paragraph
+            - button [ref=e214] [cursor=pointer]
+            - text: "At Hugging Face, we are excited to share with you a new feature that's going to take your language models to the next level:"
+            - emphasis [ref=e217]: KV Cache Quantization
+            - text: .
+            - paragraph
+            - paragraph [ref=e218]: "TL;DR: KV Cache Quantization reduces memory usage for long-context text generation in LLMs with minimal impact on quality, offering customizable trade-offs between memory efficiency and generation speed."
+            - paragraph [ref=e219]: Have you ever tried generating a lengthy piece of text with your language model, only to hit a wall because of pesky memory limitations? As language models continue to grow in size and capabilities, supporting longer generations can start to really eat up memory. It's a common frustration, especially when you're dealing with limited resources. That's where kv cache quantization swoops in to save the day.
+            - paragraph [ref=e220]:
+              - text: "So, what exactly is kv cache quantization? If you're not familiar with the term, don't sweat it! Let's break it down into two pieces:"
+              - emphasis [ref=e221]: kv cache
+              - text: and
+              - emphasis [ref=e222]: quantization
+              - text: .
+            - paragraph [ref=e223]: Key-value cache, or kv cache, is needed to optimize the generation in autoregressive models, where the model predicts text token by token. This process can be slow since the model can generate only one token at a time, and each new prediction is dependent on the previous context. That means, to predict token number 1000 in the generation, you need information from the previous 999 tokens, which comes in the form of some matrix multiplications across the representations of those tokens. But to predict token number 1001, you also need the same information from the first 999 tokens, plus additional information from token number 1000. That is where key-value cache is used to optimize the sequential generation process by storing previous calculations to reuse in subsequent tokens, so they don't need to be computed again.
+            - paragraph [ref=e224]:
+              - text: More concretely, key-value cache acts as a memory bank for autoregressive generative models, where the model stores key-value pairs derived from self-attention layers for previously processed tokens. In the transformer architecture, self-attention layers calculate attention scores by multiplying queries with keys, producing weighted sums of value vectors as outputs. By storing this information, the model can avoid redundant computations and instead retrieve keys and values of previous tokens from the cache. For a visual explanation of this concept, take a look at how key-value cache functions in the image below. When calculating the attention scores for the
+              - code [ref=e225]: K+1
+              - text: th token we do not need to recompute all of the previous keys and values, but rather take it from cache and concatenate to the current vector. This usually results in faster and more efficient text generation.
+            - figure [ref=e226]:
+              - img "kv cache visual" [ref=e227]
+            - paragraph [ref=e228]:
+              - text: Moving on to the second term, quantization is just a fancy word for reducing the precision of numerical values to save memory. During quantization, each numerical value is rounded or truncated to fit within the reduced precision format, which may result in a loss of information. However, careful selection of quantization parameters and techniques can minimize this loss while still achieving satisfactory performance. There are different quantization methods, so if you're curious to learn more be sure to check out our
+              - link "previous blog post" [ref=e229] [cursor=pointer]:
+                - /url: https://huggingface.co/blog/4bit-transformers-bitsandbytes
+              - text: for a deeper dive into the world of quantization.
+            - paragraph [ref=e230]:
+              - text: Even though kv cache speeds up autoregressive generation, it can become a memory bottleneck with long context length or high batch size. Let's estimate how much memory we will need to store kv cache for an input of sequence length 10000 tokens for a 7B Llama-2 model. The memory required to store kv cache of one token is roughly
+              - code [ref=e231]: 2 * 2 * num_layers * num_key_value_heads * head_dim
+              - text: ", where the first"
+              - code [ref=e232]: "2"
+              - text: accounts for keys and values and the second
+              - code [ref=e233]: "2"
+              - text: is the number of bytes we need (assuming the model is loaded in
+              - code [ref=e234]: float16
+              - text: ). So if we have a context of length 10000 tokens, we would need
+            - paragraph [ref=e235]:
+              - code [ref=e236]: 2 * 2 * 32 * 32 * 128 * 10000 ≈ 5GB
+            - paragraph [ref=e237]: of memory only to store the previous key-value cache, which is almost one third of the memory required to store model parameters in half-precision.
+            - paragraph [ref=e238]: Therefore, by compressing kv cache into a more compact form we can save up a lot of memory and run longer context generation on consumer GPUs. In our experiments, we were able to significantly reduce the memory footprint without sacrificing too much quality by quantizing the kv cache into lower precision formats. With this new quantization feature, we can now support longer generations without running out of memory, which means you can expand your model's context length without worrying about hitting a memory constraint.
+            - heading "Implementation Details" [level=2] [ref=e239]:
+              - link [ref=e240] [cursor=pointer]:
+                - /url: "#implementation-details"
+            - paragraph [ref=e245]:
+              - text: Key-value cache quantization in Transformers was largely inspired by the
+              - 'link "KIVI: A Tuning-Free Asymmetric 2bit Quantization for kv Cache" [ref=e246] [cursor=pointer]':
+                - /url: https://arxiv.org/abs/2402.02750
+              - text: paper. The paper introduced a 2bit asymmetrical quantization for large language models without quality degradation. KIVI quantizes the key cache per-channel and the value cache per-token, because they showed that for LLMs keys have higher magnitudes of outliers in some channels while values don't show such a pattern. Therefore, the relative error between quantized and original precision is much smaller when keys are quantized per-channel and the values per-token.
+            - paragraph [ref=e247]: In the method we integrated in Transformers the key and values are both quantized per-token. The main bottleneck when quantizing per-token is the need to quantize and de-quantize keys and values every time a new token is added, that is every generation step. That might cause a slow down in generation. To overcome this issue we decided to retain a fixed size residual cache to store keys and values in their original precision. When the residual cache reaches its maximum capacity the stored keys and values are quantized and the cache content is discarded. This small trick also allows preserving accuracy since some part of the most recent keys and values are always stored in their original precision. The main consideration is the memory-efficiency trade-off when setting the residual cache length. While residual cache stores keys and values in their original precision, that may result in overall memory usage increase. We found that using a residual length of 128 works well as a baseline.
+            - paragraph [ref=e248]:
+              - text: So given a key or value of shape
+              - code [ref=e249]: batch size, num of heads, num of tokens, head dim
+              - text: we group it to
+              - code [ref=e250]: num of groups, group size
+              - text: "and perform affine quantization as follows:"
+            - paragraph [ref=e251]:
+              - code [ref=e252]: X_Q = round(X / S) - Z
+            - paragraph [ref=e253]: where,
+            - list [ref=e254]:
+              - listitem [ref=e255]: X_Q is the quantized tensor
+              - listitem [ref=e256]:
+                - text: S is the scale, calculated as
+                - code [ref=e257]: (maxX - minX) / (max_val_for_precision - min_val_for_precision)
+              - listitem [ref=e258]:
+                - text: Z is the zeropoint, calculated as
+                - code [ref=e259]: round(-minX / S)
+            - paragraph [ref=e260]:
+              - text: Currently, the kv quantization works on
+              - link "quanto" [ref=e261] [cursor=pointer]:
+                - /url: https://github.com/huggingface/quanto
+              - text: backend with
+              - code [ref=e262]: int2
+              - text: and
+              - code [ref=e263]: int4
+              - text: precisions and
+              - link [ref=e264] [cursor=pointer]:
+                - /url: https://github.com/mobiusml/hqq/tree/master
+                - code [ref=e265]: HQQ
+              - text: backend with
+              - code [ref=e266]: int2
+              - text: ","
+              - code [ref=e267]: int4
+              - text: and
+              - code [ref=e268]: int8
+              - text: precisions. For more information about
+              - code [ref=e269]: quanto
+              - text: refer to the previous
+              - link "blogpost" [ref=e270] [cursor=pointer]:
+                - /url: https://huggingface.co/blog/quanto-introduction
+              - text: . Although we don't currently support more quantization backends, we are open to community contributions that could help integrate them. Specifically, quantization methods that do not need calibration data and can dynamically calculate lower-bit tensors on-the-fly can be easily integrated. Additionally, you can indicate the most common quantization parameters in the config, thus have freedom to tweak the quantization process, e.g. decide whether to perform per-channel or per-token quantization depending on your use case.
+            - heading "Comparing performance of fp16 and quantized cache" [level=2] [ref=e271]:
+              - link [ref=e272] [cursor=pointer]:
+                - /url: "#comparing-performance-of-fp16-and-quantized-cache"
+            - paragraph [ref=e277]:
+              - text: We know visuals speak louder than words, so we've prepared some comparison plots to give you a snapshot of how quantization stacks up against FP16 precision. These plots show you at a glance how the model's generation holds up in terms of quality when we tweak the precision settings for kv cache. We calculated the perplexity of
+              - link "Llama2-7b-chat" [ref=e278] [cursor=pointer]:
+                - /url: https://huggingface.co/meta-llama/Llama-2-7b-chat-hf
+              - text: model on the
+              - link [ref=e279] [cursor=pointer]:
+                - /url: https://huggingface.co/datasets/emozilla/pg19-test
+                - code [ref=e280]: PG-19
+              - text: "dataset with the following quantization parameters:"
+              - code [ref=e281]: nbits=4, group_size=64, resildual_length=128, per_token=True
+            - paragraph [ref=e282]:
+              - text: We can see that the
+              - code [ref=e283]: int4
+              - text: cache performs almost the same as the original
+              - code [ref=e284]: fp16
+              - text: precision for both backends, while the quality degrades when using
+              - code [ref=e285]: int2
+              - text: . The script to reproduce the results is available
+              - link "here" [ref=e286] [cursor=pointer]:
+                - /url: https://gist.github.com/zucchini-nlp/a7b19ec32f8c402761d48f3736eac808
+              - text: .
+            - figure [ref=e287]:
+              - img "Log Perplexity Comparison" [ref=e288]
+            - paragraph [ref=e289]:
+              - text: The same conclusion holds when calculating performance on the
+              - link "LongBench" [ref=e290] [cursor=pointer]:
+                - /url: https://huggingface.co/datasets/THUDM/LongBench
+              - text: benchmark comparing it to results from the KIVI paper.
+              - code [ref=e291]: Int4 quanto
+              - text: precision is comparable and even outperforms slightly the
+              - code [ref=e292]: fp16
+              - text: in all of the datasets in the table below (higher is better).
+            - table [ref=e294]:
+              - rowgroup [ref=e295]:
+                - row [ref=e296]:
+                  - columnheader "Dataset" [ref=e297]
+                  - columnheader "KIVI f16p" [ref=e298]
+                  - columnheader "KIVI int2" [ref=e299]
+                  - columnheader "Transformers fp16" [ref=e300]
+                  - columnheader "Quanto int4" [ref=e301]
+                  - columnheader "Quanto int2" [ref=e302]
+              - rowgroup [ref=e303]:
+                - row [ref=e304]:
+                  - cell "TREC" [ref=e305]
+                  - cell "63.0" [ref=e306]
+                  - cell "67.5" [ref=e307]
+                  - cell "63.0" [ref=e308]
+                  - cell "63.0" [ref=e309]
+                  - cell "55.0" [ref=e310]
+                - row [ref=e311]:
+                  - cell "SAMSum" [ref=e312]
+                  - cell "41.12" [ref=e313]
+                  - cell "42.18" [ref=e314]
+                  - cell "41.12" [ref=e315]
+                  - cell "41.3" [ref=e316]
+                  - cell "14.04" [ref=e317]
+                - row [ref=e318]:
+                  - cell "TriviaQA" [ref=e319]
+                  - cell "NA" [ref=e320]
+                  - cell "NA" [ref=e321]
+                  - cell "84.28" [ref=e322]
+                  - cell "84.76" [ref=e323]
+                  - cell "63.64" [ref=e324]
+                - row [ref=e325]:
+                  - cell "HotPotQA" [ref=e326]
+                  - cell "NA" [ref=e327]
+                  - cell "NA" [ref=e328]
+                  - cell "30.08" [ref=e329]
+                  - cell "30.04" [ref=e330]
+                  - cell "17.3" [ref=e331]
+                - row [ref=e332]:
+                  - cell "Passage_retrieval_en" [ref=e333]
+                  - cell "NA" [ref=e334]
+                  - cell "NA" [ref=e335]
+                  - cell "8.5" [ref=e336]
+                  - cell "9.5" [ref=e337]
+                  - cell "4.82" [ref=e338]
+            - paragraph [ref=e339]:
+              - text: Now, let's talk about the trade-off between memory savings and speed. When we quantize the kv cache in models, we're making them less memory hungry, but sometimes that comes at a tiny cost to generation speed. While quantizing the cache to
+              - code [ref=e340]: int4
+              - text: can offer roughly an x2.5 memory saving, the generation speed starts to decrease with higher batch sizes. One has to decide whether using quantized kv cache and potentially sacrificing a bit of speed is worth the trade-off for the significant gains in memory efficiency. It's all about finding the approach that best suits your specific use case and priorities.
+            - paragraph [ref=e341]:
+              - text: Below are the performance metrics for kv cache in original precision and quantized format. Script to obtain the following figures is available
+              - link "here" [ref=e342] [cursor=pointer]:
+                - /url: https://gist.github.com/zucchini-nlp/56ce57276d7b1ee666e957912d8d36ca
+              - text: .
+            - figure [ref=e343]:
+              - img "GPU memory consumption as max new tokens increase" [ref=e344]
+            - figure [ref=e345]:
+              - img "GPU memory consumption as batch size increases" [ref=e346]
+            - figure [ref=e347]:
+              - img "Latency as batch size increases" [ref=e348]
+            - paragraph [ref=e349]:
+              - text: Wondering what happens when we throw weight quantization into the mix? Sure, combining these techniques can further slim down your model's memory footprint, but there's a catch – it might slow things down even more. In fact, our experiments show that weight quantization together with kv cache quantization can lead to a threefold decrease in speed. But we're constantly tinkering away to find ways to make this combo work seamlessly. And while we don't currently have optimized kernels in the
+              - code [ref=e350]: quanto
+              - text: library, we're open to community contributions that could help improve computational efficiency. Our goal is to ensure your model runs smoothly while maintaining high latency and accuracy.
+            - paragraph [ref=e351]:
+              - text: It's also worth noting that initial processing of the input prompt (aka pre-fill stage) still requires computing the entire key-value matrices in one go for the whole input, which may be another memory bottleneck for long contexts. This is the reason why the latency associated with generating the first token tends to be higher compared to subsequent tokens. There are other different strategies to decrease the memory burden of the pre-fill stage by optimizing the attention computation stage, such as
+              - link "Local Windowed Attention" [ref=e352] [cursor=pointer]:
+                - /url: https://arxiv.org/abs/2004.05150
+              - text: or
+              - link "Flash-Attention" [ref=e353] [cursor=pointer]:
+                - /url: https://arxiv.org/abs/2307.08691
+              - text: . If you are out of memory for the pre-fill stage, you can use
+              - code [ref=e354]: FlashAttention
+              - text: in 🤗 Transformers along with the kv cache quantization to decrease memory usage even more for long input prompts. See
+              - link "the docs" [ref=e355] [cursor=pointer]:
+                - /url: https://huggingface.co/docs/transformers/main/en/perf_infer_gpu_one#flashattention-2
+              - text: for more information on that.
+            - paragraph [ref=e356]: If you are interested in how many tokens we can fit in the context, with memory usage pushed to its limits, a quantized kv cache can support up to 128k tokens with Flash Attention enabled in an 80GB A100. For the cache in half precision, the maximum capacity is 40k tokens.
+            - heading "How to use quantized kv cache in 🤗 Transformers?" [level=2] [ref=e357]:
+              - link [ref=e358] [cursor=pointer]:
+                - /url: "#how-to-use-quantized-kv-cache-in-🤗-transformers"
+            - paragraph [ref=e363]:
+              - text: To use kv cache quantization in 🤗 Transformers we have to install external dependencies first by running
+              - code [ref=e364]: pip install quanto
+              - text: . To activate quantization on kv cache, we have to pass in
+              - code [ref=e365]: cache_implementation="quantized"
+              - text: and indicate quantization parameters in a cache config in dictionary format. And that's all we need to start using kv cache quantization. Additionally, since quanto is device agnostic, you can quantize and run your model regardless if you are on CPU/GPU/MPS (Apple Silicon).
+            - paragraph [ref=e366]:
+              - text: Here you can find a short
+              - link "Colab notebook" [ref=e367] [cursor=pointer]:
+                - /url: https://colab.research.google.com/drive/1YKAdOLoBPIore77xR5Xy0XLN8Etcjhui?usp=sharing
+              - text: with usage examples.
+            - generic [ref=e368]:
+              - code [ref=e370]: ">>> import torch >>> from transformers import AutoTokenizer, AutoModelForCausalLM >>> tokenizer = AutoTokenizer.from_pretrained(\"meta-llama/Llama-2-7b-chat-hf\") >>> model = AutoModelForCausalLM.from_pretrained(\"meta-llama/Llama-2-7b-chat-hf\", torch_dtype=torch.float16, device_map=\"cuda:0\") >>> inputs = tokenizer(\"I like rock music because\", return_tensors=\"pt\").to(model.device) >>> out = model.generate(**inputs, do_sample=False, max_new_tokens=20, cache_implementation=\"quantized\", cache_config={\"backend\": \"quanto\", \"nbits\": 4}) >>> print(tokenizer.batch_decode(out, skip_special_tokens=True)[0]) I like rock music because it's loud and energetic. It's a great way to express myself and rel >>> out = model.generate(**inputs, do_sample=False, max_new_tokens=20) >>> print(tokenizer.batch_decode(out, skip_special_tokens=True)[0]) I like rock music because it's loud and energetic. I like to listen to it when I'm feeling"
+              - button [ref=e371] [cursor=pointer]
+            - heading "Conclusion" [level=2] [ref=e376]:
+              - link [ref=e377] [cursor=pointer]:
+                - /url: "#conclusion"
+            - paragraph [ref=e382]:
+              - text: There are many more different methods to reduce memory usage by key-value cache, including
+              - link "MultiQueryAttention" [ref=e383] [cursor=pointer]:
+                - /url: https://arxiv.org/abs/1911.02150
+              - text: ","
+              - link "GroupedQueryAttention" [ref=e384] [cursor=pointer]:
+                - /url: https://arxiv.org/abs/2305.13245
+              - text: or recent
+              - link "kv cache retrieval" [ref=e385] [cursor=pointer]:
+                - /url: https://arxiv.org/abs/2403.09054
+              - text: "methods. While some of these methods are bound to the model architecture choices, others can be applied post-training. Quantization is one of such post-training optimization techniques and we can draw the following conclusion from our short blogpost:"
+            - list [ref=e386]:
+              - listitem [ref=e387]:
+                - paragraph [ref=e388]:
+                  - strong [ref=e389]: Memory vs Speed trade-off
+                  - text: ": By quantizing the kv cache into lower precision formats, memory usage is significantly reduced, allowing for longer text generations without encountering memory constraints. But users have to decide on whether giving up a tiny bit of generation speed suits their use-case."
+              - listitem [ref=e390]:
+                - paragraph [ref=e391]:
+                  - strong [ref=e392]: Maintained Accuracy
+                  - text: ": Despite the reduction in precision, kv cache quantization in"
+                  - code [ref=e393]: int4
+                  - text: preserves model accuracy to a satisfactory extent, ensuring that generated text remains contextually relevant and coherent.
+              - listitem [ref=e394]:
+                - paragraph [ref=e395]:
+                  - strong [ref=e396]: Flexibility
+                  - text: ": Users have the flexibility to choose between different precision formats based on their specific requirements, allowing for customization to suit varying use cases and priorities."
+              - listitem [ref=e397]:
+                - paragraph [ref=e398]:
+                  - strong [ref=e399]: Potential for Further Optimization
+                  - text: ": While kv cache quantization provides significant benefits on its own, it can also be combined with other optimization techniques, such as weight quantization, to further enhance memory efficiency and computational speed."
+            - heading "Acknowledgment" [level=2] [ref=e400]:
+              - link [ref=e401] [cursor=pointer]:
+                - /url: "#acknowledgment"
+            - paragraph [ref=e406]:
+              - text: Special thanks to
+              - link "Younes" [ref=e407] [cursor=pointer]:
+                - /url: https://huggingface.co/ybelkada
+              - text: and
+              - link "Marc" [ref=e408] [cursor=pointer]:
+                - /url: https://huggingface.co/marcsun13
+              - text: for their assistance and advice on quantization techniques. Their expertise greatly contributed to the development of this feature.
+            - paragraph [ref=e409]:
+              - text: Additionally, I would like to thank
+              - link "Joao" [ref=e410] [cursor=pointer]:
+                - /url: https://huggingface.co/joaogante
+              - text: for his invaluable support.
+            - heading "Additional Resources" [level=2] [ref=e411]:
+              - link [ref=e412] [cursor=pointer]:
+                - /url: "#additional-resources"
+            - list [ref=e417]:
+              - listitem [ref=e418]:
+                - text: Zirui Liu, Jiayi Yuan, Hongye Jin, Shaochen Zhong, Zhaozhuo Xu, Braverman, V., Beidi Chen, & Hu, X. (2023).
+                - 'link "KIVI : Plug-and-play 2bit KV Cache Quantization with Streaming Asymmetric Quantization" [ref=e419] [cursor=pointer]':
+                  - /url: https://arxiv.org/abs/2402.02750
+                - text: .
+              - listitem [ref=e420]:
+                - text: Blogpost from Databricks on
+                - 'link "LLM Inference Performance Engineering: Best Practices" [ref=e421] [cursor=pointer]':
+                  - /url: https://www.databricks.com/blog/llm-inference-performance-engineering-best-practices
+              - listitem [ref=e422]:
+                - text: Coleman Hooper, Sehoon Kim, Hiva Mohammadzadeh, Michael W. Mahoney, Yakun Sophia Shao, Kurt Keutzer, & Amir Gholami. (2024).
+                - 'link "KVQuant: Towards 10 Million Context Length LLM Inference with KV Cache Quantization" [ref=e423] [cursor=pointer]':
+                  - /url: https://arxiv.org/abs/2401.18079
+                - text: .
+              - listitem [ref=e424]:
+                - text: T. Dettmers, M. Lewis, Y. Belkada, and L. Zettlemoyer, (2022).
+                - 'link "LLM.int8(): 8-bit Matrix Multiplication for Transformers at Scale" [ref=e425] [cursor=pointer]':
+                  - /url: https://arxiv.org/abs/2208.07339
+                - text: .
+              - listitem [ref=e426]: A. Gholami, S. Kim, Z. Dong, Z. Yao, M. W. Mahoney, and K. Keutzer, (2021). A Survey of Quantization Methods for Efficient Neural Network Inference.
+        - generic [ref=e429]:
+          - paragraph [ref=e430]: More Articles from our Blog
+          - link "guide diffusers quantization Bringing Nunchaku 4-bit Diffusion Inference to Diffusers 68 July 23, 2026" [ref=e432] [cursor=pointer]:
+            - /url: /blog/nunchaku-diffusers
+            - generic [ref=e436]:
+              - generic [ref=e438]:
+                - generic [ref=e439]: guide
+                - generic [ref=e440]: diffusers
+                - generic [ref=e441]: quantization
+              - heading "Bringing Nunchaku 4-bit Diffusion Inference to Diffusers" [level=2] [ref=e442]
+              - generic [ref=e443]:
+                - list [ref=e445]:
+                  - listitem "rootonchair" [ref=e446]
+                  - listitem "sayakpaul" [ref=e447]
+                  - listitem
+                - generic [ref=e448]:
+                  - generic [ref=e449]: "68"
+                  - generic [ref=e452]: July 23, 2026
+          - link "diffusers flux quantization Diffusers welcomes FLUX-2 +4 190 November 25, 2025" [ref=e454] [cursor=pointer]:
+            - /url: /blog/flux-2
+            - generic [ref=e458]:
+              - generic [ref=e460]:
+                - generic [ref=e461]: diffusers
+                - generic [ref=e462]: flux
+                - generic [ref=e463]: quantization
+              - heading "Diffusers welcomes FLUX-2" [level=2] [ref=e464]
+              - generic [ref=e465]:
+                - list [ref=e467]:
+                  - listitem "YiYiXu" [ref=e468]
+                  - listitem "dg845" [ref=e469]
+                  - listitem "sayakpaul" [ref=e470]
+                  - listitem "OzzyGT" [ref=e471]
+                  - listitem [ref=e472]: "+4"
+                - generic [ref=e473]:
+                  - generic [ref=e474]: "190"
+                  - generic [ref=e477]: November 25, 2025
+        - generic [ref=e478]:
+          - heading "Community" [level=3] [ref=e479]
+          - generic [ref=e483]:
+            - generic [ref=e484]:
+              - generic [ref=e486]:
+                - button "Edit" [ref=e487] [cursor=pointer]
+                - button "Preview" [ref=e488] [cursor=pointer]
+              - generic [ref=e489]:
+                - textbox "Start discussing this article" [disabled] [ref=e492]
+                - generic [ref=e493]: Upload images, audio, and videos by dragging in the text input, pasting, or clicking here.
+            - generic [ref=e501]:
+              - button "Comment" [disabled] [ref=e502]
+              - paragraph [ref=e507]:
+                - text: ·
+                - link "Sign up" [ref=e508] [cursor=pointer]:
+                  - /url: /join?next=%2Fblog%2Fkv-cache-quantization
+                - text: or
+                - link "log in" [ref=e509] [cursor=pointer]:
+                  - /url: /login?next=%2Fblog%2Fkv-cache-quantization
+                - text: to comment
+      - generic [ref=e510]:
+        - generic [ref=e512]:
+          - link [ref=e513] [cursor=pointer]:
+            - /url: /login?next=%2Fblog%2Fkv-cache-quantization
+            - checkbox "Upvote 58" [ref=e514]:
+              - text: Upvote
+              - generic [ref=e517]: "58"
+          - list [ref=e518]:
+            - listitem "ucalyptus" [ref=e519]:
+              - link "ucalyptus" [ref=e520] [cursor=pointer]:
+                - /url: /ucalyptus
+            - listitem "sugatoray" [ref=e521]:
+              - link "sugatoray" [ref=e522] [cursor=pointer]:
+                - /url: /sugatoray
+            - listitem "pcuenq" [ref=e523]:
+              - link "pcuenq" [ref=e524] [cursor=pointer]:
+                - /url: /pcuenq
+            - listitem "RishuD7" [ref=e525]:
+              - link "RishuD7" [ref=e526] [cursor=pointer]:
+                - /url: /RishuD7
+            - listitem "ariG23498" [ref=e527]:
+              - link "ariG23498" [ref=e528] [cursor=pointer]:
+                - /url: /ariG23498
+            - listitem "joaogante" [ref=e529]:
+              - link "joaogante" [ref=e530] [cursor=pointer]:
+                - /url: /joaogante
+            - listitem "rayliuray" [ref=e531]:
+              - link "rayliuray" [ref=e532] [cursor=pointer]:
+                - /url: /rayliuray
+            - listitem "TornikeO" [ref=e533]:
+              - link "TornikeO" [ref=e534] [cursor=pointer]:
+                - /url: /TornikeO
+            - listitem "pupsicated" [ref=e535]:
+              - link "pupsicated" [ref=e536] [cursor=pointer]:
+                - /url: /pupsicated
+            - listitem "adirik" [ref=e537]:
+              - link "adirik" [ref=e538] [cursor=pointer]:
+                - /url: /adirik
+            - listitem "phamvanlinh143" [ref=e539]:
+              - link "phamvanlinh143" [ref=e540] [cursor=pointer]:
+                - /url: /phamvanlinh143
+            - listitem "ucyang" [ref=e541]:
+              - link "ucyang" [ref=e542] [cursor=pointer]:
+                - /url: /ucyang
+            - listitem [ref=e543]:
+              - button "+46" [ref=e544] [cursor=pointer]
+        - generic [ref=e545]:
+          - generic [ref=e546]:
+            - heading "Models mentioned in this article 1" [level=2] [ref=e547]:
+              - text: Models mentioned in this article
+              - generic [ref=e552]: "1"
+            - navigation [ref=e553]:
+              - article [ref=e554]:
+                - link "meta-llama/Llama-2-7b-chat-hf Text Generation • 7B • Updated Apr 17, 2024 • 363k • 4.82k" [ref=e555] [cursor=pointer]:
+                  - /url: /meta-llama/Llama-2-7b-chat-hf
+                  - generic [ref=e556]:
+                    - generic "meta-llama/Llama-2-7b-chat-hf" [ref=e557]:
+                      - heading "meta-llama/Llama-2-7b-chat-hf" [level=4] [ref=e559]
+                    - generic [ref=e560]:
+                      - text: Text Generation
+                      - generic [ref=e565]: •
+                      - 'generic "Number of parameters in the model: 7B" [ref=e566]': 7B
+                      - generic [ref=e569]: •
+                      - generic [ref=e570]:
+                        - text: Updated
+                        - time [ref=e571]: Apr 17, 2024
+                      - generic [ref=e572]: •
+                      - text: 363k
+                      - generic [ref=e575]: •
+                      - text: 4.82k
+          - generic [ref=e578]:
+            - heading "Datasets mentioned in this article 1" [level=2] [ref=e579]:
+              - text: Datasets mentioned in this article
+              - generic [ref=e585]: "1"
+            - navigation [ref=e586]:
+              - article [ref=e587]:
+                - link "emozilla/pg19-test Viewer • Updated Aug 8, 2023 • 100 • 1.87k • 4" [ref=e588] [cursor=pointer]:
+                  - /url: /datasets/emozilla/pg19-test
+                  - generic [ref=e589]:
+                    - generic "emozilla/pg19-test" [ref=e590]:
+                      - heading "emozilla/pg19-test" [level=4] [ref=e596]
+                    - generic [ref=e597]:
+                      - text: Viewer
+                      - generic [ref=e600]: •
+                      - generic [ref=e601]:
+                        - text: Updated
+                        - time [ref=e602]: Aug 8, 2023
+                      - generic [ref=e603]: •
+                      - generic [ref=e606]: "100"
+                      - generic [ref=e607]: •
+                      - text: 1.87k
+                      - generic [ref=e610]: •
+                      - text: "4"
+  - contentinfo [ref=e613]:
+    - navigation [ref=e614]:
+      - button "System theme" [ref=e617] [cursor=pointer]
+      - link "TOS" [ref=e623] [cursor=pointer]:
+        - /url: /terms-of-service
+      - link "Privacy" [ref=e624] [cursor=pointer]:
+        - /url: /privacy
+      - link "About" [ref=e625] [cursor=pointer]:
+        - /url: /huggingface
+      - link "Careers" [ref=e626] [cursor=pointer]:
+        - /url: https://apply.workable.com/huggingface/
+      - link "Hugging Face" [ref=e627] [cursor=pointer]:
+        - /url: /
+      - link "Models" [ref=e642] [cursor=pointer]:
+        - /url: /models
+      - link "Datasets" [ref=e643] [cursor=pointer]:
+        - /url: /datasets
+      - link "Spaces" [ref=e644] [cursor=pointer]:
+        - /url: /spaces
+      - link "Pricing" [ref=e645] [cursor=pointer]:
+        - /url: /pricing
+      - link "Docs" [ref=e646] [cursor=pointer]:
+        - /url: /docs
+```

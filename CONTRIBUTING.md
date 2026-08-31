@@ -37,7 +37,7 @@ All development happens in **WSL2 (Ubuntu 24.04, root user)**. The repo lives on
 
 ## 2. Methodology Rules
 
-Binding for every change — from `.planning/ROADMAP.md` (inherited verbatim from the original 18-phase plan):
+Binding for every change — from `docs/ROADMAP.md` (inherited verbatim from the original 18-phase plan):
 
 1. **Benchmark before optimizing** — no kernel without a measured baseline matrix.
 2. **One optimization at a time** — serialize code changes; parallelize only read-only sweeps.
@@ -50,7 +50,7 @@ Also: keep correctness tests next to every kernel, record compiler/ROCm/driver v
 
 ## 3. Workflow
 
-**GSD phases 1–6** (see `.planning/ROADMAP.md`): 1 Environment & Stock Baseline → 2 Benchmark Harness & Matrix → 3 Correctness Gates & Bottleneck Profiling → 4 Kernel Playground Scaffold → 5 First Custom Kernel (MUL_MAT) → 6 Integration & Publication. Phases 1–4 produced zero optimizations; Phase 5 delivered GEMV 1.26–2.13× / GEMM 1.76–7.50× (cosine 1.0).
+**Phases 1–7** (see `docs/ROADMAP.md`): 1 Environment & Stock Baseline → 2 Benchmark Harness & Matrix → 3 Correctness Gates & Bottleneck Profiling → 4 Kernel Playground Scaffold → 5 First Custom Kernel (MUL_MAT) → 6 Integration & Publication → 7 Hybrid DP4A & WMMA Optimization. Phases 1–4 produced zero optimizations; Phase 5 delivered GEMV 1.26–2.13× / GEMM 1.76–7.50× (cosine 1.0); Phase 7 delivered cooperative Wave32 DP4A and hardware-proven N=15 LLM QA generation.
 
 - **Quilt patches** — all integration is additive patches over pinned upstream in `patches/*.patch` (e.g. `phase5_mul_mat_custom.patch` behind `GGML_CUDA_ENABLE_CUSTOM_GFX1100`, OFF default). No hard fork.
 - **RunStore** — every benchmark run uses `benchmarks/lib/store.py:RunStore` + `benchmarks/lib/fingerprint.py` → append-only `benchmarks/results/<timestamp>_<label>/` with `rows.jsonl` (fsynced), `meta.json`, `CHECKSUMS.sha256`, and lock `benchmarks/results/.session.lock`. Publish via `benchmarks/bin/publish_matrix.py`.

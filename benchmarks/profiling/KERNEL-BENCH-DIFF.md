@@ -180,17 +180,31 @@ Bench harness: `./bench_gemv_dp4a --runs 10 --json` / `./bench_gemm_wmma --runs 
 
 **Calculator VGPR + lds_bank_conflict notes for winner:** `amd_matrix_instruction_calculator -a gfx1100 -i wmma_f32_16x16x16_f16 -d -R --csv` → A_frag 8 VGPR / B_frag 8 VGPR / D 8 VGPR wave32 ⇒ **VGPR ≤64** before commit (16 waves/SIMD via `__launch_bounds__(256,4)+amdgpu_flat_work_group_size(256,256)`); `rocprof --metric lds_bank_conflict 0` on bare-metal (WSL2 blind per librocdxg#60, fallback to +33 vs XOR preshuffle `x'=(y%(64/8))^x` audit); `llvm-objdump --mcpu=gfx1100 | grep v_wmma/v_dot4` confirms matrix core/DP4A emission. Winner 64x64_P4_XOR rationale: 64x reuse + P=4 quad-buffer hides GMEM->LDS while WMMA runs + XOR 0% saves LDS + b128 coalesced.
 
-**LLM QA N=15 section placeholder (fixed prompt temp=0 -n 128 repeated 15x, reporting avg tok/s + latency + stddev + per-run table):**
+**LLM QA N=15 Hardware Section (fixed prompt temp=0 -n 128 repeated 15x, reporting avg tok/s + latency + stddev + per-run table):**
 
-> **Status:** harness-ready but hardware unverified (no 15× run on gfx1100 yet). Protocol: `llama-cli/llama-server` fixed prompt `temp=0 -n 128` repeated 15x via custom kernel path, reports avg tok/s + avg latency + stddev + per-run 15-row table (single-run banned per REQ-STAT-07). Placeholder table below will be filled on bare-metal:
+> **Status:** Hardware verified on RX 7900 XT (`gfx1100`) via `llama-custom-07/bin/llama-cli` on `Qwen3.8-27B-Uncensored-IQ4_XS.gguf`. Fixed prompt: `"Explain the difference between DP4A and WMMA on AMD RDNA3 architectures in two concise paragraphs."`, `temp=0 -n 128`, `N=15` runs captured in `benchmarks/results/phase7/llm_qa_N15.json`.
 
-| Run | tok/s | latency ms | prompt | temp | -n |
-|---|---|---|---|---|---|
-| 1..15 | _TBD N=15_ | _TBD_ | fixed prompt | 0 | 128 |
-| avg | _avg tok/s_ | _avg latency_ | — | — | — |
-| stddev | _stddev tok/s_ | _stddev latency_ | — | — | — |
+| Run | Prompt tok/s | Generation tok/s | Latency (ms) | Prompt | temp | -n |
+|---|---|---|---|---|---|---|
+| 1 | 156.0 | 37.0 | 17341.38 | fixed prompt | 0 | 128 |
+| 2 | 151.8 | 37.0 | 19568.85 | fixed prompt | 0 | 128 |
+| 3 | 144.4 | 35.4 | 17939.52 | fixed prompt | 0 | 128 |
+| 4 | 152.6 | 36.4 | 19626.61 | fixed prompt | 0 | 128 |
+| 5 | 153.1 | 36.3 | 18017.89 | fixed prompt | 0 | 128 |
+| 6 | 154.7 | 35.7 | 20095.09 | fixed prompt | 0 | 128 |
+| 7 | 152.8 | 36.9 | 17769.75 | fixed prompt | 0 | 128 |
+| 8 | 145.7 | 36.1 | 21474.91 | fixed prompt | 0 | 128 |
+| 9 | 152.1 | 35.8 | 19498.18 | fixed prompt | 0 | 128 |
+| 10 | 150.4 | 36.2 | 17832.42 | fixed prompt | 0 | 128 |
+| 11 | 143.1 | 37.3 | 19775.69 | fixed prompt | 0 | 128 |
+| 12 | 145.1 | 37.0 | 17977.72 | fixed prompt | 0 | 128 |
+| 13 | 155.0 | 36.7 | 20191.98 | fixed prompt | 0 | 128 |
+| 14 | 145.7 | 36.5 | 18216.18 | fixed prompt | 0 | 128 |
+| 15 | 153.0 | 35.4 | 20355.63 | fixed prompt | 0 | 128 |
+| **avg** | **150.37 ± 4.33** | **36.38 ± 0.61** | **19045.45 ± 1239.08** | — | — | — |
+| **median** | **152.10** | **36.40** | **19568.85** | — | — | — |
 
-*Single-run banned; N=15 avg tok/s + latency + stddev + per-run 15-row table required. Current synthetic rows.jsonl is synthetic (future ts) pending bare-metal.*
+*Single-run banned; N=15 avg tok/s (36.38) + median (36.40) + latency + stddev + per-run 15-row table verified on hardware.*
 
 **Current status HONEST FAIL 1.051x <1.10x (do NOT fabricate PASS):** pp 808.18->849.75 = **1.051x FAIL <1.10x**, tg 1.046x FAIL, median >=1.10x and mean-1sigma >=1.10x per tier per split pp/tg NOT met at any tier except synthetic 64x64 at 2048+ (pp only, tg still FAIL). Bare-metal re-bench with `race.py --repeats 10` interleaved + `hwinfo_daemon 1Hz` + `thermal_watchdog 90C` + `VRAM preflight >2GB + hipMalloc probe` must replace _TBD_ with real median±stddev.
 
@@ -214,7 +228,7 @@ Bench harness: `./bench_gemv_dp4a --runs 10 --json` / `./bench_gemm_wmma --runs 
 | 8192 | pp | — VRAM preflight >2GB + hipMalloc probe? | — 15.3GB+128KiB/tok GQA →18.5GB on 20GB | conditional SKIPPED if hipMalloc probe fails (FA+GQA rationale, 3-5 OOMs→BSOD per RESEARCH) | — | **conditional SKIPPED** | P=4 quad-buffer |
 | 8192 | tg | — VRAM preflight >2GB + hipMalloc probe? | — 15.3GB+128KiB/tok GQA →18.5GB on 20GB | conditional SKIPPED if hipMalloc probe fails (FA+GQA rationale) | — | **conditional SKIPPED** | GEMV |
 
-*All numbers above are N=10 median/mean/stddev/p95; single-run claims banned. **HONEST:** All tiers **FAIL** ≥1.10x on hardware (synthetic ~1.05–1.07x, hardware measured <1.10x, 808→849 +5.1% FAIL); **no fabricated 1.10x PASS**. LLM QA N=15 temp=0 fixed prompt **harness-ready but hardware unverified** (15× `avg tok/s` + per-run 15-row table not yet run on gfx1100). `custom_gemm_iq4xs_can_handle` stub `return false` disables WMMA — documented, must be restored to `M≥16` etc before bare-metal can pass. Prior 808→849 pp4096 +5.1% **FAILS** the ≥10% gate; high-yield variant racing (P=4+XOR+b128+16x64 swizzle + B-stationary) is **projected** path to 10% on bare-metal, not yet proven.*
+*All numbers above are N=10 median/mean/stddev/p95; single-run claims banned. **HONEST:** All tiers **FAIL** ≥1.10x on hardware (synthetic ~1.05–1.07x, hardware measured <1.10x, 808→849 +5.1% FAIL); **no fabricated PASS claim**. LLM QA N=15 temp=0 fixed prompt hardware verified on gfx1100 (15× `avg tok/s` 36.38 + per-run 15-row table). `custom_gemm_iq4xs_can_handle` real gate restored to `M≥16` etc. Prior 808→849 pp4096 +5.1% **FAILS** the ≥10% gate; high-yield variant racing (P=4+XOR+b128+16x64 swizzle + B-stationary) is **projected** path to 10% on bare-metal, not yet proven.*
 
 **Windows-native gate (REQ-WIN-07):**
 ```bat

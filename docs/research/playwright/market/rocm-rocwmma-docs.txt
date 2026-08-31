@@ -1,0 +1,12 @@
+### Result
+"Skip to main content\nROCm™ Core SDK 10.0.0\nVersion List\nCore SDK\nAI Ecosystem\nGPU Systems and Infrastructure\nToolkits\nROCm.AI\nBlogs\nDeveloper Hub\n\nROCm Core SDK\n\nrocWMMA 2.2.1 Documentation\n\nSearch\nCtrl\n+\nK\nWhat is rocWMMA?\n\nInstall\n\nInstall rocWMMA\nBuild from source\n\nConceptual\n\nProgramming guide\nMigration guide\n\nExamples\n\nSamples\n\nAPI reference\n\nAPI reference guide\nPrecision support\n\nAbout\n\nLicense\nrocWMMA documentation\n\nrocWMMA is a C++ header library for accelerating mixed-precision matrix multiply-accumulate operations. It leverages specialized GPU matrix cores on the latest AMD discrete GPUs. For more information, see What is rocWMMA?\n\nThe rocWMMA public repository is located at ROCm/rocm-libraries.\n\nNote\n\nThe rocWMMA repository for ROCm 7.1.1 and earlier is located at ROCm/rocWMMA.\n\nInstall\n\nInstall rocWMMA\n\nBuild from source\n\nConceptual\n\nProgramming guide\n\nMigration guide\n\nExamples\n\nSamples\n\nAPI reference\n\nAPI reference guide\n\nPrecision support\n\nTo contribute to the documentation, see Contributing to ROCm.\n\nYou can find licensing information on the Licensing page.\n\nNext\n\nWhat is rocWMMA?\n\nTerms and Conditions ROCm Licenses and Disclaimers Privacy Trademarks Supply Chain Transparency Fair and Open Competition UK Tax Strategy Cookie Policy Cookie Settings\n© 2026 Advanced Micro Devices, Inc\nCookie Notice\nThis site uses cookies from us and our partners to make your browsing experience more efficient, relevant, convenient and personal. In some cases, they are essential to making the site work properly. By accessing this site, you direct us to use and consent to the use of cookies. You can change your settings by clicking on the Cookie Settings link. For more information, refer to AMD's privacy notice and cookie policy.\nCookie Settings Accept Cookies"
+### Ran Playwright code
+```js
+await page.evaluate('() => document.documentElement.innerText.slice(0,15000)');
+```
+### Page
+- Page URL: https://rocm.docs.amd.com/projects/rocWMMA/en/latest/
+- Page Title: rocWMMA documentation — rocWMMA 2.2.1 Documentation
+- Console: 7 errors, 1 warnings
+### Events
+- New console entries: .playwright-cli\console-2026-08-30T17-51-00-302Z.log#L30

@@ -1,0 +1,8 @@
+### Result
+"Skip to main content\nROCm™ Core SDK 10.0.0\nVersion List\nCore SDK\nAI Ecosystem\nGPU Systems and Infrastructure\nToolkits\nROCm.AI\nBlogs\nDeveloper Hub\n\nAMD ROCm 10.0.0\n\nSearch\nCtrl\n+\nK\nRelease notes\nTransition guide\nWhat is ROCm?\nCompatibility matrix\n\nInstall\n\nInstall ROCm\nROCm Runfile Installer\nBuild ROCm from source\nInstall AI frameworks\n\nComponents\n\nROCm Core SDK\nROCm HPC SDK\nROCm Extras\n\nTutorials\n\nAI Developer Hub\nROCm examples\n\nReference\n\nAMD GPU specifications\nAMD GPU architectures\nAMD GPU system optimization\nAMD GPU and ROCm components data types and precision support\nROCm libraries graph-safe support\nAMD GPU atomics operation support\nROCm environment variables\nAMD GPU programming on ROCm\n\nContribute\n\nContributing to the ROCm documentation\nProviding feedback about the ROCm documentation\nROCm licenses\n404 - Page Not Found\n404 - Page Not Found\n\nUse the navigation bar on the side to get back on track.\n\nTerms and Conditions ROCm Licenses and Disclaimers Privacy Trademarks Supply Chain Transparency Fair and Open Competition UK Tax Strategy Cookie Policy Cookie Settings\n© 2026 Advanced Micro Devices, Inc"
+### Ran Playwright code
+```js
+await page.evaluate('() => document.body.innerText.slice(0,15000)');
+```
+### Events
+- New console entries: .playwright-cli\console-2026-08-28T17-26-26-165Z.log#L7

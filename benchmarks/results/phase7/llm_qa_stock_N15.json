@@ -1,0 +1,108 @@
+{
+  "model": "Qwen3.8-27B-Uncensored-IQ4_XS.gguf",
+  "binary": "llama.cpp/build-stock/bin/llama-cli",
+  "prompt": "Explain the difference between DP4A and WMMA on AMD RDNA3 architectures in two concise paragraphs.",
+  "n_predict": 128,
+  "temperature": 0.0,
+  "runs": 15,
+  "avg_tok_s": 35.95,
+  "stddev_tok_s": 1.12,
+  "median_tok_s": 36.0,
+  "avg_pp_tok_s": 147.39,
+  "stddev_pp_tok_s": 7.16,
+  "median_pp_tok_s": 148.3,
+  "avg_latency_ms": 19866.58,
+  "stddev_latency_ms": 1190.9,
+  "per_run": [
+    {
+      "run": 1,
+      "prompt_tps": 155.2,
+      "gen_tps": 36.6,
+      "latency_ms": 20001.08
+    },
+    {
+      "run": 2,
+      "prompt_tps": 150.9,
+      "gen_tps": 37.6,
+      "latency_ms": 21361.85
+    },
+    {
+      "run": 3,
+      "prompt_tps": 156.8,
+      "gen_tps": 36.1,
+      "latency_ms": 18228.99
+    },
+    {
+      "run": 4,
+      "prompt_tps": 139.3,
+      "gen_tps": 36.9,
+      "latency_ms": 20808.03
+    },
+    {
+      "run": 5,
+      "prompt_tps": 147.0,
+      "gen_tps": 36.0,
+      "latency_ms": 18264.42
+    },
+    {
+      "run": 6,
+      "prompt_tps": 150.8,
+      "gen_tps": 36.5,
+      "latency_ms": 20526.23
+    },
+    {
+      "run": 7,
+      "prompt_tps": 137.8,
+      "gen_tps": 34.1,
+      "latency_ms": 21587.54
+    },
+    {
+      "run": 8,
+      "prompt_tps": 154.0,
+      "gen_tps": 36.9,
+      "latency_ms": 18551.79
+    },
+    {
+      "run": 9,
+      "prompt_tps": 137.8,
+      "gen_tps": 34.5,
+      "latency_ms": 18865.42
+    },
+    {
+      "run": 10,
+      "prompt_tps": 148.3,
+      "gen_tps": 37.2,
+      "latency_ms": 20668.01
+    },
+    {
+      "run": 11,
+      "prompt_tps": 138.8,
+      "gen_tps": 35.8,
+      "latency_ms": 18515.56
+    },
+    {
+      "run": 12,
+      "prompt_tps": 145.5,
+      "gen_tps": 35.8,
+      "latency_ms": 20996.44
+    },
+    {
+      "run": 13,
+      "prompt_tps": 149.9,
+      "gen_tps": 33.7,
+      "latency_ms": 19262.18
+    },
+    {
+      "run": 14,
+      "prompt_tps": 158.3,
+      "gen_tps": 35.8,
+      "latency_ms": 19462.21
+    },
+    {
+      "run": 15,
+      "prompt_tps": 140.5,
+      "gen_tps": 35.8,
+      "latency_ms": 20898.86
+    }
+  ]
+}

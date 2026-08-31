@@ -1,11 +1,11 @@
 <!-- generated-by: gsd-doc-writer -->
 # Qwen3.8-27B Graph-Aware Report — Phase 10 Light (v2)
 
-> One-page graph snapshot. Deep 64-layer tensor dump deferred to v2 per `.planning/ROADMAP.md` Merge Map | Orig Phase 10 → Phase 5 (graph-aware target choice); tensor-report deep-dive → v2.
+> One-page graph snapshot. Deep 64-layer tensor dump deferred to v2 per `docs/ROADMAP.md` Merge Map | Orig Phase 10 → Phase 5 (graph-aware target choice); tensor-report deep-dive → v2.
 
 ## Model Snapshot
 
-- **Artifact:** `JonathanColetti/Qwen3.8-27B-Uncensored-IQ4_XS.gguf` — 15.31 GB, IQ4_XS, imatrix, sha256 `53adc4bb…` (`.planning/research/MODEL-DECISION.md`)
+- **Artifact:** `JonathanColetti/Qwen3.8-27B-Uncensored-IQ4_XS.gguf` — 15.31 GB, IQ4_XS, imatrix, sha256 `53adc4bb…` (`docs/research/MODEL-DECISION.md`)
 - **Base:** `Qwen/Qwen3.8-27B` (`qwen35` / `Qwen3_5ForConditionalGeneration`), Apache 2.0
 - **Hybrid stack:** 64 text layers = **48× Gated DeltaNet** (SSM, conv_kernel 4, state_size 128, groups 16) + **16× gated full-attention** (full_attention_interval 4)
 - **Dims:** hidden **5120**, FFN intermediate **17408**, 24 heads / 4 KV heads, key/value_length 256, ctx **262,144**, KV cache **~64 KiB/token** (f16 est.) — Phase 9 / attention tuning v2-deferred (tiny KV)

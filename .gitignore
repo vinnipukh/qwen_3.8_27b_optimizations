@@ -1,7 +1,5 @@
 # --- vendored toolchains & build artifacts (never track) ---
-freetoken-rocm-probe/tools/
-freetoken-rocm-probe/bin/
-freetoken-rocm-probe/zigidx.json
+freetoken-rocm-probe/
 benchmarks/bin/eval_profiler
 benchmarks/tools/test_compile
 benchmarks/tools/*.o
@@ -17,17 +15,16 @@ benchmarks/results/.session.lock
 # --- runtime logs & scratch ---
 logs/
 *.log
-.planning/tmp/
-arhan-masaustu/
-scrape_sahibinden.sh
+.planning/
+.playwright-cli/
+.agents/
+skills-lock.json
+output/
 benchmarks/results/*_smoke_hip/
 
 # --- large model artifacts (provenance lives in models/README.md instead) ---
 models/*.gguf
-baseline/**/*.exe
-baseline/**/*.so
-baseline/**/*.a
-baseline/binaries/
+baseline/
 
 # --- Kernel playground artifacts ---
 kernels/build/

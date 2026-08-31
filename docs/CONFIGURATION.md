@@ -319,7 +319,7 @@ All benches emit JSON to stdout parsed by `benchmarks/tools/run_kernel_bench.py`
 
 ## Quant Comparator Scope (Phase 1.3 vs BENCH-04)
 
-Stock baseline is **IQ4_XS locked** — `JonathanColetti/Qwen3.8-27B-Uncensored-IQ4_XS.gguf` (15.31 GB, sha256 `53adc4bb…`, see `models/README.md` and `.planning/research/MODEL-DECISION.md`) — chosen over the 16.81 GB `Q4_K_M` class to preserve headroom on the 20 GB RX 7900 XT (see `.planning/research/MODEL-DECISION.md` § VRAM envelope). This is the **only frozen baseline** for BENCH-04 (`benchmarks/results/BASELINE-MATRIX.md` — pp/tg × {4k, 8k, 16k, 32k} × flash-attn {on, off} plus stock-Vulkan comparator; `benchmarks/golden/stock_baseline_golden.json`).
+Stock baseline is **IQ4_XS locked** — `JonathanColetti/Qwen3.8-27B-Uncensored-IQ4_XS.gguf` (15.31 GB, sha256 `53adc4bb…`, see `models/README.md` and `docs/research/MODEL-DECISION.md`) — chosen over the 16.81 GB `Q4_K_M` class to preserve headroom on the 20 GB RX 7900 XT (see `docs/research/MODEL-DECISION.md` § VRAM envelope). This is the **only frozen baseline** for BENCH-04 (`benchmarks/results/BASELINE-MATRIX.md` — pp/tg × {4k, 8k, 16k, 32k} × flash-attn {on, off} plus stock-Vulkan comparator; `benchmarks/golden/stock_baseline_golden.json`).
 
 `Q4_K_S` / `Q5_K_M` (and the 16.81 GB `Q4_K_M` in the same repo) are **optional v1 comparators per REQUIREMENTS.md § v2** (`Additional quant comparators — Q4_K_M comparator optional in v1; Q6_K/Q8_0 deferred`) — not baseline. They exist only to contextualize IQ4_XS numbers when VRAM permits; they do not define the frozen environment in `benchmarks/environment/` or the `benchmarks/config/thresholds.json` calibration derived from the IQ4_XS run (`20260823_163954_calibration_profile`).
 

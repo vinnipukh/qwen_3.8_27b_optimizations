@@ -1,0 +1,51 @@
+{
+  "session": "quant-kernels",
+  "queries": [
+    "llama.cpp ggml-cuda IQ4_XS Q8_1 quantization DP4A vec_dot dequant fusion",
+    "llama.cpp mmq mmvq cuda hip kernel quantization optimization github",
+    "int8 quantization activation Q8_1 dot product 4x bandwidth custom kernel"
+  ],
+  "urls_visited": [
+    "https://duckduckgo.com/?q=llama.cpp+ggml-cuda+IQ4_XS+Q8_1+quantization+DP4A+vec_dot+dequant+fusion",
+    "https://html.duckduckgo.com/html/?q=llama.cpp+ggml-cuda+IQ4_XS+Q8_1+quantization+DP4A",
+    "https://www.bing.com/search?q=llama.cpp+ggml-cuda+IQ4_XS+Q8_1+quantization+DP4A+vec_dot+dequant+fusion",
+    "https://www.bing.com/search?q=site%3Agithub.com+ggerganov+llama.cpp+ggml-cuda+mmq+mmvq+IQ4_XS",
+    "https://github.com/ggml-org/llama.cpp/blob/master/ggml/src/ggml-cuda/common.cuh",
+    "https://github.com/ggml-org/llama.cpp/blob/master/ggml/src/ggml-cuda/mmq.cu",
+    "https://github.com/ggml-org/llama.cpp/blob/master/ggml/src/ggml-cuda/mmq-vec-dot.cuh",
+    "https://github.com/ggml-org/llama.cpp/blob/master/ggml/src/ggml-cuda/dequantize.cuh",
+    "https://github.com/ggml-org/llama.cpp/blob/master/ggml/src/ggml-cuda/mmvq.cu",
+    "https://github.com/ggml-org/llama.cpp/blob/master/ggml/src/ggml-cuda/mma.cuh",
+    "https://github.com/ggml-org/llama.cpp/blob/master/ggml/src/ggml-cuda/mmq-config-rdna3.cuh",
+    "https://github.com/ggml-org/llama.cpp/blob/master/ggml/src/ggml-cuda/quantize.cuh",
+    "https://github.com/ggml-org/llama.cpp/blob/master/ggml/src/ggml-cuda/vecdotq.cuh",
+    "https://github.com/ggml-org/llama.cpp/blob/master/ggml/src/ggml-cuda/quantize.cu",
+    "https://github.com/ggml-org/llama.cpp/blob/master/ggml/src/ggml-common.h",
+    "https://github.com/ggml-org/llama.cpp/blob/master/ggml/src/ggml-quants.c",
+    "https://github.com/ggml-org/llama.cpp/blob/master/ggml/src/ggml-cuda/ggml-cuda.cu",
+    "https://github.com/ggml-org/llama.cpp/blob/master/ggml/src/ggml-cuda/custom_gfx1100/gemv_iq4xs.cuh",
+    "https://github.com/ggml-org/llama.cpp/blob/master/ggml/src/ggml-cuda/custom_gfx1100/gemm_iq4xs.cuh",
+    "https://rocm.docs.amd.com/en/latest/",
+    "https://raw.githubusercontent.com/ggml-org/llama.cpp/master/ggml/src/ggml-cuda/common.cuh",
+    "https://raw.githubusercontent.com/ggml-org/llama.cpp/master/ggml/src/ggml-cuda/mmq-vec-dot.cuh",
+    "https://raw.githubusercontent.com/ggml-org/llama.cpp/master/ggml/src/ggml-cuda/vecdotq.cuh"
+  ],
+  "key_findings": [
+    "Q8_1 activation quant = 4x traffic cut: block_q8_1 = {half d; half s; int8 qs[32]} =36B per 32 floats (vs 128B F32). ggml-common.h QK8_1=32. mmq.cu quantize_mmq_q8_1_cuda quantizes src1 (activations, batch M dim) on-the-fly per 8k prefill row to block_q8_1_mmq tiles, stored in shared memory pool src1_q8_1. ds half2 holds (d, d*sum(qs)). Payload 1.125 B/elem vs 4 B/elem => 3.55x, plus half2 amortized ~4x claimed. Enables DP4A int8 path without FP32 materialization.",
+    "DP4A v_dot4 execution: common.cuh #define GGML_CUDA_CC_DP4A 610 = min __dp4a; ggml_cuda_dp4a(a,b,c) wrapper: CUDA >=610 uses __dp4a(a,b,c) (single instruction 4x int8 dot), HIP path: CDNA/RDNA2/__gfx906__ => __builtin_amdgcn_sdot4, RDNA3/RDNA4 => __builtin_amdgcn_sudot4(true,a,true,b,c,false) unsigned, fallback scalar 4*MUL. vecdotq.cuh VDR_Q4_0_Q8_1_MMQ=4, vec_dot_q4_0_q8_1_impl loops vdr=4: vi0=(v>>0)&0x0F0F0F0F, vi1=(v>>4)&0x0F0F0F0F, sumi=dp4a(vi0,u0)+dp4a(vi1,u1). Same pattern for Q4_1/Q5/K-quants/IQ. 2 dp4a per 32 elements = 16 INT8 MACs per instruction.",
+    "IQ4_XS dequant paths: block_iq4_xs = {half d; uint16 scales_h; uint8 scales_l[QK_K/64=4]; uint8 qs[128]} => 136B/256=4.25 bpw, 4b non-linear codebook. ggml-common.h + dequantize.cuh kvalues_iq4nl table [-127,-104,-83,-65,-49,-35,-22,-10,1,13,25,38,53,69,89,113]. vec_dot_iq4_xs_q8_1 (VDR=4): ls = (scales_l[i/8]>>(i&4))&0F | ((scales_h>>(i/2))&3)<<4; scale=ls-32; d=half2float(bq4->d)*low2float(aq_ds); q4_vec via get_int_from_table_16(aux_q4,kvalues_iq4nl) => int2 v (8 table bytes), u = get_int_b4(aq.qs), sumi=dp4a(v.x,u0)+dp4a(v.y,u1); final *=(ls-32)*d. Fused path avoids __half conversion until after DP4A. Separate dequantize.cuh path for naive (not used in MMQ) materializes float.",
+    "Fused matmul vs naive float: mmq.cu ggml_cuda_mul_mat_q() fuses quantize_mmq_q8_1_cuda + ggml_cuda_mmq dispatch vs naive: dequantize IQ4_XS to FP16 (5120*6144 Sylv: 30MB) then cublasGemm/cuBLASLt TF32/FP16 => 2x passes over HBM + 8x bandwidth vs 4b weights. Fused keeps weights in 4b L1 texture fetch, activations in Q8_1 SRAM, computes DP4A 4x32-wide tiles (MMQ_TILE_NE_K=?? 32*). Shared memory sram layouts GGML_CUDA_MMQ_SRAM_LAYOUT_Q8_1 vs Q8_0 per type. No intermediate FP buffer, single kernel launch per (ne00,ne01,ne1).",
+    "MMQ vs MMVQ dispatch: mmq.cuh/mma.cuh: MMQ = mul_mat_q, generic M batched (prefill). MMVQ = mul_mat_vec_q, M=1 decode optimized, uses VDR_MMVQ=1-2, smaller K-tiling, max batch MMVQ_MAX_BATCH_SIZE=8. ggml_cuda_should_use_mmq() checks type & cc & ne11 & n_experts; fallback = ne01%128 !=0 selects non-multiples path. MMQ launched via mul_mat_q_case<type> template with tile params from mmq-config-rdna3.cuh CASE(type,J,nwarps,I,...). MMVQ separate kernel file mmvq.cu with row-per-warp=1-2, suited for 1-token latency.",
+    "XTX vs RDNA3 specifics: common.cuh gfx1100 = GGML_CUDA_CC_RDNA3 (0x1100) = RX 7900 XT. Defines: GGML_CUDA_CC_IS_RDNA3, AMD_WMMA_AVAILABLE (RDNA3||RDNA4), AMD_MFMA_AVAILABLE only CDNA, ggml_cuda_get_physical_warp_size()=32 for GFX11 vs 64 for GFX9/CDNA. DP4A available on RDNA2+ (CC>=0x1030), WMMA f16_16x16x16_f16_w32_gfx12 on RDNA4, RDNA3 WMMA uses 16x16x16 with mirrored layout DATA_LAYOUT_I_MAJOR_MIRRORED (2x ne). XTX lacks MFMA and acc registers, TIles must use WMMA not MFMA, double-buffered LDS needed for latency hiding. RDNA1 has no dp4a (emulated via v_mul_i32_i24).",
+    "8k context => batched M dimension: prefill M = 8192 (context length) turns decode M=1 into compute-bound GEMM. ggml-cuda dispatches MMQ when ne11 (batch) large. For 27B Qwen3.8 (K=5120 or 17408 MoE), M=8192 => splits into BLOCK_M=32 tiles => 256 tiles. mmq-config-rdna3.cuh shows for Q4_0/Q8_0 J=128/256, I=64/128, fallback cases J=48..128. At M>=128, kernel selects 256x2x128 (256 threads, 2 rows per warp, 128 J) with MMQ_ITER_K loop over K. Custom gemm_iq4xs_wmma_stream_kernel_cuh uses 64x32 WMMA per block (BLOCK_N=64,BLOCK_M=32, K_TILE=32), 2 warps per dimension, LDS [2][32][33] padded to avoid bank conflicts, __launch_bounds__(256,4) achieving 4 blocks per CU (occupancy). At 8192 prefill doubles buffer halves K_tiles= K/32=160 or 544, amortizes IQ4_XS table lookup (kvalues fetch) across 32 rows.",
+    "Custom gfx1100 hybrids prove path: kernels/matmul_iq4xs gemv_iq4xs.cuh (M=1) 8-thread cooperative per row, LDS [32][33], coop_dp4a via sudot4, quantize_row_q8_1_coop_kernel does warp-shuffle amax/sum reduction, packs ds as half2(d,sum). gemm_iq4xs.cuh (M>=128) implements 64x32 WMMA wmma_f32_16x16x16_f16_w32, double buffered sB[2][32][33], fallback TILE_M=16 tiled kernel for M<512. Both protected by GGML_CUDA_ENABLE_CUSTOM_GFX1100, __launch_bounds__(256,4), layouts fixed for GGML [K,M] row-major X[gm*K+gk] and Y[m*N+n]."
+  ],
+  "uncertainties": [
+    "1000 tok/s at 8k claims assume prefill compute-bound; real tok/s = 8192 / (prefill_latency_ms/1000). Prefill latency dominated by 27B * 2*K*N FLOPs (~ 2* 27e9*8192?) needs ~ 440 TFLOPs W4A8; RX 7900 XT peak 61 TFLOPs FP16, WMMA F16 ~ 122 TFLOPs, DP4A ~ 61 TOPs INT8. Needs ~7ms unattainable without 4-GPU or sparsity.",
+    "DP4A throughput on RDNA3 gfx1100: ISA docs show v_dot4c_i32_i8 only on CDNA2/RDNA2+ via sdot/sudot; not natively 4x faster than F16 FMAs — microbenchmark needed. Fallback scalar path on RDNA1 slower.",
+    "IQ4_XS accuracy at 4.25bpw vs Q4_K (4.5bpw) — non-linear codebook gaps at tails (-127,113) may require per-channel finetune; no perplexity data for Qwen3.8-27B at 8k provided.",
+    "WMMA 64x32 double buffering hides LDS latency but bank padding [32][33] adds 3% SRAM overhead; 8192 M may exceed L2 (96MB) causing thrash, not modeled. HipBLAS fallback for M<512 tiles may pollute.",
+    "DuckDuckGo search blocked by bot challenge (verified via playwright snapshot: 'Select all squares containing a duck'), Bing fallback returned generic results for long technical queries; primary findings therefore rely on direct github source fetch, not search ranking.",
+    "Custom gemm/gemv files locally vendored not upstream (File not found on github.com for custom_gfx1100/); build requires -DGGML_CUDA_ENABLE_CUSTOM_GFX1100=ON which is OFF by default — upstream behavior unchanged without patch."
+  ]
+}

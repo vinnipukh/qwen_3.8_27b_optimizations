@@ -1,0 +1,319 @@
+### Open tabs
+- 0: [flash attention 2 long context 8k 16k 32k prefill throughput scaling at DuckDuckGo](https://duckduckgo.com/?q=flash+attention+2+long+context+8k+16k+32k+prefill+throughput+scaling&kad=en_US)
+- 1: [DuckDuckGo](https://html.duckduckgo.com/html/?q=flash+attention+2+long+context+8k+16k+32k+prefill+throughput+scaling)
+- 2: [DuckDuckGo](https://lite.duckduckgo.com/lite/?q=flash+attention+2+long+context+8k+16k+32k+prefill+throughput+scaling)
+- 3: [Captcha - Brave Search](https://search.brave.com/search?q=flash+attention+2+long+context+8k+16k+32k+prefill+throughput+scaling)
+- 4: [flash attention 2 long context 8k 16k 32k prefill throughput scaling - Arama](https://www.bing.com/search?q=flash+attention+2+long+context+8k+16k+32k+prefill+throughput+scaling&rdr=1&rdrig=40FB2FB12BE247E3A2F87EF294A4CE99)
+- 5: ["FlashAttention-2" prefill throughput 8k 16k scaling - Arama](https://www.bing.com/search?q=%22FlashAttention-2%22+prefill+throughput+8k+16k+scaling&rdr=1&rdrig=76F509D45D02467DA2B1192C40E1BE76)
+- 6: [https://www.google.com/search?q=flash+attention+2+long+context+8k+16k+32k+prefill+throughput+scaling&hl=en&gl=us&sei=vcORaoGTIfKm1fIPsp3PiQ8](https://www.google.com/sorry/index?continue=https://www.google.com/search%3Fq%3Dflash%2Battention%2B2%2Blong%2Bcontext%2B8k%2B16k%2B32k%2Bprefill%2Bthroughput%2Bscaling%26hl%3Den%26gl%3Dus%26sei%3DvcORaoGTIfKm1fIPsp3PiQ8&hl=en&q=EgSw6odMGL2Hx9QGIjBz_JWyuDhFlk0k_9Sd2sOWVij5TcNPo8TWvNLttk3wGaoM0WiPg28pSMdLEGzKOxUyAVJaAUM)
+- 7: [[2307.08691] FlashAttention-2: Faster Attention with Better Parallelism and Work Partitioning](https://arxiv.org/abs/2307.08691)
+- 8: [[2307.08691] FlashAttention-2: Faster Attention with Better Parallelism and Work Partitioning](https://arxiv.org/abs/2307.08691)
+- 9: [GitHub - Dao-AILab/flash-attention: Fast and memory-efficient exact attention · GitHub](https://github.com/Dao-AILab/flash-attention)
+- 10: [[2205.14135] FlashAttention: Fast and Memory-Efficient Exact Attention with IO-Awareness](https://arxiv.org/abs/2205.14135)
+- 11: [Overview · Hugging Face](https://huggingface.co/docs/transformers/v5.15.1/optimization_overview)
+- 12: [Page not found – PyTorch](https://pytorch.org/blog/flash-attention)
+- 13: [AMD ROCm — AMD ROCm 10.0.0](https://rocm.docs.amd.com/en/latest/)
+- 14: [[2305.13245] GQA: Training Generalized Multi-Query Transformer Models from Multi-Head Checkpoints](https://arxiv.org/abs/2305.13245)
+- 15: (current) [[2112.10752] High-Resolution Image Synthesis with Latent Diffusion Models](https://arxiv.org/abs/2112.10752)
+### Page
+- Page URL: https://arxiv.org/abs/2112.10752
+- Page Title: [2112.10752] High-Resolution Image Synthesis with Latent Diffusion Models
+### Snapshot
+```yaml
+- generic [ref=e2]:
+  - link "Skip to main content" [ref=e3] [cursor=pointer]:
+    - /url: "#content"
+  - banner [ref=e4]:
+    - link [ref=e5] [cursor=pointer]:
+      - /url: https://arxiv.org/IgnoreMe
+    - link "archive home" [ref=e6] [cursor=pointer]:
+      - /url: https://arxiv.org/
+      - img "archive" [ref=e7]
+    - navigation "Main navigation" [ref=e8]:
+      - link "Search" [ref=e9] [cursor=pointer]:
+        - /url: https://arxiv.org/search
+      - link "Submit" [ref=e13] [cursor=pointer]:
+        - /url: https://arxiv.org/user/create
+      - link "Donate" [ref=e14] [cursor=pointer]:
+        - /url: https://info.arxiv.org/about/donate.html
+      - link "Log in" [ref=e16] [cursor=pointer]:
+        - /url: https://arxiv.org/login
+  - main [ref=e17]:
+    - generic [ref=e19]:
+      - generic [ref=e20]:
+        - heading "Computer Science > Computer Vision and Pattern Recognition" [level=1] [ref=e22]
+        - generic [ref=e24]:
+          - generic [ref=e25]:
+            - text: "[Submitted on 20 Dec 2021 ("
+            - link "v1" [ref=e26] [cursor=pointer]:
+              - /url: https://arxiv.org/abs/2112.10752v1
+            - text: ), last revised 13 Apr 2022 (this version, v2)]
+          - heading "High-Resolution Image Synthesis with Latent Diffusion Models" [level=1] [ref=e27]
+          - generic [ref=e28]:
+            - link "Robin Rombach" [ref=e29] [cursor=pointer]:
+              - /url: https://arxiv.org/search/cs?searchtype=author&query=Rombach,+R
+            - text: ","
+            - link "Andreas Blattmann" [ref=e30] [cursor=pointer]:
+              - /url: https://arxiv.org/search/cs?searchtype=author&query=Blattmann,+A
+            - text: ","
+            - link "Dominik Lorenz" [ref=e31] [cursor=pointer]:
+              - /url: https://arxiv.org/search/cs?searchtype=author&query=Lorenz,+D
+            - text: ","
+            - link "Patrick Esser" [ref=e32] [cursor=pointer]:
+              - /url: https://arxiv.org/search/cs?searchtype=author&query=Esser,+P
+            - text: ","
+            - link "Björn Ommer" [ref=e33] [cursor=pointer]:
+              - /url: https://arxiv.org/search/cs?searchtype=author&query=Ommer,+B
+          - blockquote [ref=e34]:
+            - text: By decomposing the image formation process into a sequential application of denoising autoencoders, diffusion models (DMs) achieve state-of-the-art synthesis results on image data and beyond. Additionally, their formulation allows for a guiding mechanism to control the image generation process without retraining. However, since these models typically operate directly in pixel space, optimization of powerful DMs often consumes hundreds of GPU days and inference is expensive due to sequential evaluations. To enable DM training on limited computational resources while retaining their quality and flexibility, we apply them in the latent space of powerful pretrained autoencoders. In contrast to previous work, training diffusion models on such a representation allows for the first time to reach a near-optimal point between complexity reduction and detail preservation, greatly boosting visual fidelity. By introducing cross-attention layers into the model architecture, we turn diffusion models into powerful and flexible generators for general conditioning inputs such as text or bounding boxes and high-resolution synthesis becomes possible in a convolutional manner. Our latent diffusion models (LDMs) achieve a new state of the art for image inpainting and highly competitive performance on various tasks, including unconditional image generation, semantic scene synthesis, and super-resolution, while significantly reducing computational requirements compared to pixel-based DMs. Code is available at
+            - link "this https URL" [ref=e35] [cursor=pointer]:
+              - /url: https://github.com/CompVis/latent-diffusion
+            - text: .
+          - table "Additional metadata" [ref=e37]:
+            - rowgroup [ref=e38]:
+              - row [ref=e39]:
+                - cell "Comments:" [ref=e40]
+                - cell "CVPR 2022" [ref=e41]
+              - row [ref=e42]:
+                - cell "Subjects:" [ref=e43]
+                - cell "Computer Vision and Pattern Recognition (cs.CV)" [ref=e44]
+              - row [ref=e45]:
+                - cell "Cite as:" [ref=e46]
+                - cell [ref=e47]:
+                  - generic [ref=e48]:
+                    - link "arXiv:2112.10752" [ref=e49] [cursor=pointer]:
+                      - /url: https://arxiv.org/abs/2112.10752
+                    - text: "[cs.CV]"
+              - row [ref=e50]:
+                - cell [ref=e51]
+                - cell [ref=e52]:
+                  - text: (or
+                  - generic [ref=e53]:
+                    - link "arXiv:2112.10752v2" [ref=e54] [cursor=pointer]:
+                      - /url: https://arxiv.org/abs/2112.10752v2
+                    - text: "[cs.CV]"
+                  - text: for this version)
+              - row [ref=e55]:
+                - cell [ref=e56]
+                - cell [ref=e57]:
+                  - link "https://doi.org/10.48550/arXiv.2112.10752" [ref=e58] [cursor=pointer]:
+                    - /url: https://doi.org/10.48550/arXiv.2112.10752
+                  - button "Focus to learn more" [ref=e60]
+        - generic [ref=e63]:
+          - heading "Submission history" [level=2] [ref=e64]
+          - text: "From: Robin Rombach ["
+          - link "view email" [ref=e65] [cursor=pointer]:
+            - /url: /show-email/a80d5bac/2112.10752
+          - text: "]"
+          - strong [ref=e66]:
+            - link "[v1]" [ref=e67] [cursor=pointer]:
+              - /url: /abs/2112.10752v1
+          - text: Mon, 20 Dec 2021 18:55:25 UTC (46,150 KB)
+          - strong [ref=e68]: "[v2]"
+          - text: Wed, 13 Apr 2022 11:38:44 UTC (38,971 KB)
+      - generic [ref=e69]:
+        - generic [ref=e70]:
+          - heading "Access Paper:" [level=2] [ref=e71]
+          - list [ref=e72]:
+            - listitem [ref=e73]:
+              - link "View PDF" [ref=e74] [cursor=pointer]:
+                - /url: /pdf/2112.10752
+            - listitem [ref=e75]:
+              - link "HTML (experimental)" [ref=e76] [cursor=pointer]:
+                - /url: https://arxiv.org/html/2112.10752v2
+            - listitem [ref=e77]:
+              - link "TeX Source" [ref=e78] [cursor=pointer]:
+                - /url: /src/2112.10752
+          - link "view license" [ref=e80] [cursor=pointer]:
+            - /url: http://arxiv.org/licenses/nonexclusive-distrib/1.0/
+        - generic [ref=e81]:
+          - heading "Current browse context:" [level=3] [ref=e82]
+          - generic [ref=e83]: cs.CV
+          - generic [ref=e84]:
+            - link "< prev" [ref=e86] [cursor=pointer]:
+              - /url: /prevnext?id=2112.10752&function=prev&context=cs.CV
+            - text: "|"
+            - link "next >" [ref=e88] [cursor=pointer]:
+              - /url: /prevnext?id=2112.10752&function=next&context=cs.CV
+          - generic [ref=e89]:
+            - link "new" [ref=e90] [cursor=pointer]:
+              - /url: /list/cs.CV/new
+            - text: "|"
+            - link "recent" [ref=e91] [cursor=pointer]:
+              - /url: /list/cs.CV/recent
+            - text: "|"
+            - link "2021-12" [ref=e92] [cursor=pointer]:
+              - /url: /list/cs.CV/2021-12
+          - generic [ref=e93]:
+            - text: "Change to browse by:"
+            - link "cs" [ref=e95] [cursor=pointer]:
+              - /url: /abs/2112.10752?context=cs
+        - generic [ref=e96]:
+          - heading "References & Citations" [level=3] [ref=e97]
+          - list [ref=e98]:
+            - listitem [ref=e99]:
+              - link "NASA ADS" [ref=e100] [cursor=pointer]:
+                - /url: https://ui.adsabs.harvard.edu/abs/arXiv:2112.10752
+            - listitem [ref=e101]:
+              - link "Google Scholar" [ref=e102] [cursor=pointer]:
+                - /url: https://scholar.google.com/scholar_lookup?arxiv_id=2112.10752
+            - listitem [ref=e103]:
+              - link "Semantic Scholar" [ref=e104] [cursor=pointer]:
+                - /url: https://api.semanticscholar.org/arXiv:2112.10752
+        - generic [ref=e106]:
+          - heading [level=3] [ref=e107]:
+            - link "7 blog links" [ref=e108] [cursor=pointer]:
+              - /url: /tb/2112.10752
+          - text: (
+          - link "what is this?" [ref=e109] [cursor=pointer]:
+            - /url: https://info.arxiv.org/help/trackback.html
+          - text: )
+        - generic [ref=e110]:
+          - heading [level=3] [ref=e111]:
+            - link "DBLP" [ref=e112] [cursor=pointer]:
+              - /url: https://dblp.uni-trier.de
+            - text: "- CS Bibliography"
+          - generic [ref=e113]:
+            - link "listing" [ref=e114] [cursor=pointer]:
+              - /url: https://dblp.uni-trier.de/db/journals/corr/corr2112.html#abs-2112-10752
+            - text: "|"
+            - link "bibtex" [ref=e115] [cursor=pointer]:
+              - /url: https://dblp.uni-trier.de/rec/bibtex/journals/corr/abs-2112-10752
+          - generic [ref=e116]:
+            - link "Dominik Lorenz" [ref=e117] [cursor=pointer]:
+              - /url: https://dblp.uni-trier.de/search/author?author=Dominik%20Lorenz
+            - link "Patrick Esser" [ref=e118] [cursor=pointer]:
+              - /url: https://dblp.uni-trier.de/search/author?author=Patrick%20Esser
+            - link "Björn Ommer" [ref=e119] [cursor=pointer]:
+              - /url: https://dblp.uni-trier.de/search/author?author=Bj%C3%B6rn%20Ommer
+        - button "export BibTeX citation" [ref=e121]
+        - generic [ref=e122]:
+          - heading "Bookmark" [level=3] [ref=e124]
+          - link [ref=e125] [cursor=pointer]:
+            - /url: http://www.bibsonomy.org/BibtexHandler?requTask=upload&url=https://arxiv.org/abs/2112.10752&description=High-Resolution Image Synthesis with Latent Diffusion Models
+            - img "BibSonomy" [ref=e126]
+          - link [ref=e127] [cursor=pointer]:
+            - /url: https://reddit.com/submit?url=https://arxiv.org/abs/2112.10752&title=High-Resolution Image Synthesis with Latent Diffusion Models
+            - img "Reddit" [ref=e128]
+      - tablist "arXivLabs tools" [ref=e130]:
+        - radio "Bibliographic Tools" [checked] [ref=e131]
+        - tab "Bibliographic Tools" [selected] [ref=e132] [cursor=pointer]
+        - tabpanel "Bibliographic Tools" [ref=e133]:
+          - heading "Bibliographic and Citation Tools" [level=1] [ref=e134]
+          - generic [ref=e135]:
+            - generic [ref=e136]:
+              - generic [ref=e138]:
+                - checkbox "Bibliographic Explorer Toggle"
+                - generic [ref=e139] [cursor=pointer]
+                - generic [ref=e140]: Bibliographic Explorer Toggle
+              - generic [ref=e141]:
+                - text: Bibliographic Explorer
+                - emphasis [ref=e142]:
+                  - text: (
+                  - link "What is the Explorer?" [ref=e143] [cursor=pointer]:
+                    - /url: https://info.arxiv.org/labs/showcase.html#arxiv-bibliographic-explorer
+                  - text: )
+            - generic [ref=e144]:
+              - generic [ref=e146]:
+                - checkbox "Connected Papers"
+                - generic [ref=e147] [cursor=pointer]
+                - generic [ref=e148]: Connected Papers Toggle
+              - generic [ref=e149]:
+                - text: Connected Papers
+                - emphasis [ref=e150]:
+                  - text: (
+                  - link "What is Connected Papers?" [ref=e151] [cursor=pointer]:
+                    - /url: https://www.connectedpapers.com/about
+                  - text: )
+            - generic [ref=e152]:
+              - generic [ref=e154]:
+                - checkbox "Litmaps"
+                - generic [ref=e155] [cursor=pointer]
+                - generic [ref=e156]: Litmaps Toggle
+              - generic [ref=e157]:
+                - text: Litmaps
+                - emphasis [ref=e158]:
+                  - text: (
+                  - link "What is Litmaps?" [ref=e159] [cursor=pointer]:
+                    - /url: https://www.litmaps.co/
+                  - text: )
+            - generic [ref=e160]:
+              - generic [ref=e162]:
+                - checkbox "scite Smart Citations"
+                - generic [ref=e163] [cursor=pointer]
+                - generic [ref=e164]: scite.ai Toggle
+              - generic [ref=e165]:
+                - text: scite Smart Citations
+                - emphasis [ref=e166]:
+                  - text: (
+                  - link "What are Smart Citations?" [ref=e167] [cursor=pointer]:
+                    - /url: https://www.scite.ai/
+                  - text: )
+        - radio "Code, Data, Media" [ref=e171]
+        - tab "Code, Data, Media" [ref=e172] [cursor=pointer]
+        - radio "Demos" [ref=e173]
+        - tab "Demos" [ref=e174] [cursor=pointer]
+        - radio "Related Papers" [ref=e175]
+        - tab "Related Papers" [ref=e176] [cursor=pointer]
+        - radio "About arXivLabs" [ref=e177]
+        - tab "About arXivLabs" [ref=e178] [cursor=pointer]
+      - generic [ref=e179]:
+        - link "Which authors of this paper are endorsers?" [ref=e180] [cursor=pointer]:
+          - /url: /auth/show-endorsers/2112.10752
+        - text: "|"
+        - link "Disable MathJax" [ref=e181] [cursor=pointer]:
+          - /url: javascript:setMathjaxCookie()
+        - text: (
+        - link "What is MathJax?" [ref=e182] [cursor=pointer]:
+          - /url: https://info.arxiv.org/help/mathjax.html
+        - text: )
+  - contentinfo [ref=e183]:
+    - generic [ref=e184]:
+      - generic [ref=e185]:
+        - generic [ref=e186]:
+          - text: We gratefully acknowledge support from our
+          - strong [ref=e187]: major funders
+          - text: ","
+          - link [ref=e188] [cursor=pointer]:
+            - /url: https://info.arxiv.org/about/ourmembers.html
+            - strong [ref=e189]: member institutions
+          - text: ", and all contributors."
+        - navigation "Site navigation" [ref=e190]:
+          - link "About" [ref=e191] [cursor=pointer]:
+            - /url: https://info.arxiv.org/about
+          - generic [ref=e192]: ·
+          - link "Help" [ref=e193] [cursor=pointer]:
+            - /url: https://info.arxiv.org/help
+          - generic [ref=e194]: ·
+          - link "Contact" [ref=e195] [cursor=pointer]:
+            - /url: https://info.arxiv.org/help/contact.html
+          - generic [ref=e196]: ·
+          - link "Subscribe" [ref=e197] [cursor=pointer]:
+            - /url: https://info.arxiv.org/help/subscribe
+          - generic [ref=e198]: ·
+          - link "Copyright" [ref=e199] [cursor=pointer]:
+            - /url: https://info.arxiv.org/help/license/index.html
+          - generic [ref=e200]: ·
+          - link "Privacy" [ref=e201] [cursor=pointer]:
+            - /url: https://info.arxiv.org/help/policies/privacy_policy.html
+          - generic [ref=e202]: ·
+          - link "Accessibility" [ref=e203] [cursor=pointer]:
+            - /url: https://info.arxiv.org/help/web_accessibility.html
+          - generic [ref=e204]: ·
+          - link "Operational Status (opens in new tab)" [ref=e205] [cursor=pointer]:
+            - /url: https://status.arxiv.org
+            - text: Operational Status
+            - generic [ref=e206]: (opens in new tab)
+      - generic "Major funders" [ref=e207]:
+        - generic [ref=e208]: Major funding support from
+        - generic [ref=e209]:
+          - link [ref=e210] [cursor=pointer]:
+            - /url: https://www.simonsfoundation.org/
+            - img "Simons Foundation" [ref=e211]
+          - link [ref=e212] [cursor=pointer]:
+            - /url: https://www.sfi.org.bm/
+            - img "Simons Foundation International" [ref=e213]
+          - link [ref=e214] [cursor=pointer]:
+            - /url: https://www.schmidtsciences.org/
+            - img "Schmidt Sciences" [ref=e215]
+```

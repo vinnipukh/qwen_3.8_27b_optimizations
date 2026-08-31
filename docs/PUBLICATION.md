@@ -56,9 +56,9 @@ Provenance: `benchmarks/environment/versions.txt`, `hipconfig.txt`, `rocminfo.tx
 
 | Library | Version | Purpose | Notes |
 |---|---|---|---|
-| rocWMMA | **2.2.1** header-only (`rocwmma/rocwmma.hpp`) | WMMA wrapper alternative to raw `__builtin_amdgcn_wmma*` (RDNA3 `WMMA`/`SWMMAC`) | Header-only → no runtime, `#include <rocwmma/rocwmma.hpp>`, compiles with `HIP_PATH/bin/clang++.exe --offload-arch=gfx1100 -G Ninja` (see `output/deep-research/high-yield/RDNA3-high-yield-keywords-synthesis.md` §A.1, `rocm.docs.amd.com/projects/rocWMMA/`). `≤2` langs gate. |
-| amd_matrix_instruction_calculator | latest (`ROCm/amd_matrix_instruction_calculator`, star 143) | Pre-commit VGPR/layout oracle (`-a gfx1100 -i wmma_f32_16x16x16_f16 -d`, `--register-layout --csv`) | Predicts `A_frag 8 VGPR / D 8 VGPR wave32` (`OPSEL`, `NEG`, `CBSZ/ABID/BLGP`) → `≤64 VGPR` → `16 waves/SIMD` before code lands (see `output/deep-research/high-yield/RDNA3-high-yield-keywords-synthesis.md` §A.2; prereq `pip install tabulate typing_extensions`, `python matrix_calculator.py -a gfx1100 -L`). Offline only, not shipped. |
-| adelj88/rocm_wmma_gemm tune/race pattern | 15★, 62 commits (`github.com/adelj88/rocm_wmma_gemm`) | Tile-sweep ritual: `tune.py` Genetic + Random Forest surrogate (`--budget 100`, crowding) + `race.py --repeats 10` interleaved (`A,B,A,B…` not `AAAA BBBB`) | Template for `N=10` `REQ-STAT-07` thermal-bias kill; do not fork whole lib — adapt `budget`/`k_slice` to `64×32 vs 64×64` sweep (see `output/deep-research/high-yield/RDNA3-high-yield-keywords-synthesis.md` §A.3). |
+| rocWMMA | **2.2.1** header-only (`rocwmma/rocwmma.hpp`) | WMMA wrapper alternative to raw `__builtin_amdgcn_wmma*` (RDNA3 `WMMA`/`SWMMAC`) | Header-only → no runtime, `#include <rocwmma/rocwmma.hpp>`, compiles with `HIP_PATH/bin/clang++.exe --offload-arch=gfx1100 -G Ninja` (see `docs/research/deep-research/high-yield/RDNA3-high-yield-keywords-synthesis.md` §A.1, `rocm.docs.amd.com/projects/rocWMMA/`). `≤2` langs gate. |
+| amd_matrix_instruction_calculator | latest (`ROCm/amd_matrix_instruction_calculator`, star 143) | Pre-commit VGPR/layout oracle (`-a gfx1100 -i wmma_f32_16x16x16_f16 -d`, `--register-layout --csv`) | Predicts `A_frag 8 VGPR / D 8 VGPR wave32` (`OPSEL`, `NEG`, `CBSZ/ABID/BLGP`) → `≤64 VGPR` → `16 waves/SIMD` before code lands (see `docs/research/deep-research/high-yield/RDNA3-high-yield-keywords-synthesis.md` §A.2; prereq `pip install tabulate typing_extensions`, `python matrix_calculator.py -a gfx1100 -L`). Offline only, not shipped. |
+| adelj88/rocm_wmma_gemm tune/race pattern | 15★, 62 commits (`github.com/adelj88/rocm_wmma_gemm`) | Tile-sweep ritual: `tune.py` Genetic + Random Forest surrogate (`--budget 100`, crowding) + `race.py --repeats 10` interleaved (`A,B,A,B…` not `AAAA BBBB`) | Template for `N=10` `REQ-STAT-07` thermal-bias kill; do not fork whole lib — adapt `budget`/`k_slice` to `64×32 vs 64×64` sweep (see `docs/research/deep-research/high-yield/RDNA3-high-yield-keywords-synthesis.md` §A.3). |
 
 ## 3. GPU target
 
@@ -189,7 +189,7 @@ M128 all variants 0.04× FAIL (WMMA ≈17.6 ms vs stock ≈0.72 ms — the scala
 
 ### Phase 7 replan closure plans (re-scoped 2026-08-28)
 
-Re-scoped Phase 7 adds three must-haves (REQ-WIN-07 Windows-native ≤2 langs, REQ-PERF-07 ≥1.10× pp+tg at {512..8192} N=10, REQ-STAT-07 N≥10 / LLM QA N≥15); the 2026-08-30 bare-metal re-bench shows **0/3 fulfilled honestly**, so closure runs the replan plans in `.planning/phases/07-hybrid-dp4a-wmma-kernel-optimization/` (07-01 → 07-02 → 07-03):
+Re-scoped Phase 7 adds three must-haves (REQ-WIN-07 Windows-native ≤2 langs, REQ-PERF-07 ≥1.10× pp+tg at {512..8192} N=10, REQ-STAT-07 N≥10 / LLM QA N≥15); the 2026-08-30 bare-metal re-bench shows **0/3 fulfilled honestly**, so closure runs the replan plans in `docs/phases/07-hybrid-dp4a-wmma-kernel-optimization/` (07-01 → 07-02 → 07-03):
 
 - **07-01 — REQ-WIN-07 Windows-native** — install HIP SDK 6.4 (`C:\Program Files\AMD\ROCm\6.4`) + Ninja/CMake (`winget install Ninja-build.Ninja Kitware.CMake`), then `build_windows.bat` (`%HIP_PATH%\bin\clang++.exe --offload-arch=gfx1100 -G Ninja`, never MSVC `cl` on `.hip`), serving `build-windows/bin/llama-server.exe` → `curl http://127.0.0.1:8000/v1/chat/completions → 200`. Failure mode today: `hipcc`/`clang++.exe` not found on this host (SDK not installed), `llama-server.exe` MISSING — **an install step, not a code fix**.
 - **07-02 — REQ-PERF-07 high-yield variants** — race 5 GEMM variants (64×32 P2+33 / P4+XOR / 64×64 P4+XOR / 128×32 / LUT μ=4) + GEMV +33-vs-XOR as distinct HIP OBJECTs via `race.py --repeats 10` interleaved A,B,A,B; implement P=4 XOR 0% LDS, b128 (`global_load_b128`/`float4`/`ulong2` 16 B), offline 16×64 swizzle (`tools/swizzle_iq4xs.py`), 64×64 B-stationary 64× reuse, LUT μ=4 bake; M<512 delegated to tiled `gemm_iq4xs_tiled_gpu` (proven 1.47–7.39× vs naive); gates VGPR ≤64 + `rocprof lds_bank_conflict 0` + `llvm-objdump --mcpu=gfx1100 | grep v_wmma/v_dot4`. Target: `512 pp 1.079→1.15×` with mean−1σ ≥1.10×.
@@ -197,19 +197,44 @@ Re-scoped Phase 7 adds three must-haves (REQ-WIN-07 Windows-native ≤2 langs, R
 
 ### Deep-research synthesis — exhaustive (2026-08-30)
 
-Full write-up with sources: `output/deep-research/phase7-3must-haves-exhaustive.md` (5 isolated sessions, 10+ queries, 25+ pages; primary rocm.docs / llvm.org / CK Tile docs).
+Full write-up with sources: `docs/research/deep-research/phase7-3must-haves-exhaustive.md` (5 isolated sessions, 10+ queries, 25+ pages; primary rocm.docs / llvm.org / CK Tile docs).
 
 **REQ-WIN-07 — Windows install path, not code.** ROCm runs natively on Windows 11 22H2+ via HIP SDK (`clang++.exe --offload-arch=gfx1100`; `-G Ninja` is mandatory — MSVC `cl` cannot compile `__builtin_amdgcn_*`); WSL2 routes HIP→DXCore via `librocdxg` under `HSA_ENABLE_DXG_DETECTION=1`. `build_windows.bat` (5857 B) already carries the correct quoted `HIP_PATH` guard, `where clang++.exe --offload-arch=gfx1100 --version`, `-G Ninja`, `MODEL_PATH` guard, and `curl :8000` smoke; CMake discovery uses `find_package(hip REQUIRED CONFIG PATHS "$ENV{HIP_PATH}/lib/cmake/hip")` (no `/opt/rocm` hardcode). Remaining work is purely: install HIP SDK + Ninja/CMake, run the bat, Phase 8 prune (`py 40 → 0`) for ≤2 langs. <!-- VERIFY: AMD HIP SDK download location and Windows ROCm system-requirements for gfx1100 (RDNA3) on Windows 11 22H2+ — https://www.amd.com/en/developer/resources/rocm-hub/hip-sdk.html and https://rocm.docs.amd.com/projects/install-on-windows/en/latest/reference/system-requirements.html -->
 
 **REQ-PERF-07 — high-yield variants.** 1.10× is a system co-design problem, not a kernel trick: stock DP4A already saturates ~800 GB/s at 87.8 µs; WMMA 1024 ops/CU loses to scalar `d*(ls-32)*kvalues` dequant (~40k iters/thread at M=512) + LDS `__syncthreads` + DXG jitter (stddev 21–26 µs, p95 138–156 µs). Highest-yield levers, ranked: P=4 quad-buffer XOR 0% LDS (+13% pp8192 projection per KERNEL-BENCH-DIFF §8), offline 16×64 swizzle → 128 B b128 coalesced, 64×64 B-stationary 64× reuse (only variant >1.2× measured today: 1.89 peak @ M1024), LUT μ=4 32 B baked `d*(ls-32)` (drops the per-element scalar `dl`), W8A8 SmoothQuant α=0.5 fused rmsnorm → INT8 WMMA arm (comparator if W4A16 alone <1.10×). Expected uplift: P=4+XOR+b128+swizzle +13% + LUT +5% + W8A8 +8% → ≥1.10× median AND mean−1σ at {512..4096}; 8192 stays SKIPPED under the FA+GQA VRAM clause.
 
-**REQ-STAT-07 — N=15 LLM QA.** Harness is ready end-to-end (`bench_* --runs 10`, `llama-bench -r 10`, `race.py --repeats 10` A,B,A,B interleaved, `hwinfo_daemon` 1 Hz + `thermal_watchdog` 90 °C, RunStore fsynced `rows.jsonl` + `CHECKSUMS.sha256`, `python`/`py` 3.14.7 probe on Windows). The only hardware-missing item is the N=15 LLM QA table — no `llama-cli --temp 0` ×15 run on gfx1100 yet. Protocol: fixed prompt, `temp=0`, `-n 128`, repeated 15× via custom kernel path; reports avg tok/s + avg latency + stddev + per-run 15-row table (single-run banned per REQ-STAT-07):
+**REQ-STAT-07 — N=15 LLM QA (Direct Stock vs Custom Comparison).** Verified on RX 7900 XT (`gfx1100`) via `llama-custom-07/bin/llama-cli` (custom `5c6b397`) vs `llama.cpp/build-stock/bin/llama-cli` (stock `bb4caa7`) on `Qwen3.8-27B-Uncensored-IQ4_XS.gguf` (`benchmarks/results/phase7/llm_qa_N15.json` and `llm_qa_stock_N15.json`). Protocol: fixed prompt `"Explain the difference between DP4A and WMMA on AMD RDNA3 architectures in two concise paragraphs."`, `temp=0`, `-n 128`, repeated 15× per binary; reports avg tok/s + avg latency + stddev + per-run 15-row table (single-run banned per REQ-STAT-07):
 
-| Run | tok/s | latency ms | prompt | temp | -n | pp_or_tg |
+| Metric | Stock Baseline (`bb4caa7`) | Custom Kernel (`5c6b397`) | Delta / Speedup |
+|:---|:---:|:---:|:---:|
+| **Generation Speed (Mean $\pm \sigma$)** | $35.95 \pm 1.12\text{ tok/s}$ | **$36.38 \pm 0.61\text{ tok/s}$** | **$+1.2\%$ ($1.012\times$)** |
+| **Generation Speed (Median)** | $36.00\text{ tok/s}$ | **$36.40\text{ tok/s}$** | **$+1.1\%$ ($1.011\times$)** |
+| **Prompt Eval Speed (Mean $\pm \sigma$)** | $147.39 \pm 7.16\text{ tok/s}$ | **$150.37 \pm 4.33\text{ tok/s}$** | **$+2.0\%$ ($1.020\times$)** |
+| **Prompt Eval Speed (Median)** | $148.30\text{ tok/s}$ | **$152.10\text{ tok/s}$** | **$+2.6\%$ ($1.026\times$)** |
+| **Avg End-to-End Latency** | $19,866.6\text{ ms}$ | **$19,045.5\text{ ms}$** | **$-821.1\text{ ms}$ ($-4.1\%$)** |
+| **Variance / StdDev** | $\sigma = 1.12\text{ tok/s}$ | **$\sigma = 0.61\text{ tok/s}$** | **$45\%$ lower variance** |
+
+**Custom Kernel 15-Run Table (`llm_qa_N15.json`):**
+
+| Run | Prompt tok/s | Generation tok/s | Latency (ms) | Prompt | temp | -n |
 |---|---|---|---|---|---|---|
-| 1..15 | _TBD N=15_ | _TBD_ | fixed prompt | 0 | 128 | pp |
-| avg | _avg tok/s_ | _avg latency_ | — | — | — | — |
-| stddev | _stddev tok/s_ | _stddev latency_ | — | — | — | — |
+| 1 | 156.0 | 37.0 | 17341.38 | fixed prompt | 0 | 128 |
+| 2 | 151.8 | 37.0 | 19568.85 | fixed prompt | 0 | 128 |
+| 3 | 144.4 | 35.4 | 17939.52 | fixed prompt | 0 | 128 |
+| 4 | 152.6 | 36.4 | 19626.61 | fixed prompt | 0 | 128 |
+| 5 | 153.1 | 36.3 | 18017.89 | fixed prompt | 0 | 128 |
+| 6 | 154.7 | 35.7 | 20095.09 | fixed prompt | 0 | 128 |
+| 7 | 152.8 | 36.9 | 17769.75 | fixed prompt | 0 | 128 |
+| 8 | 145.7 | 36.1 | 21474.91 | fixed prompt | 0 | 128 |
+| 9 | 152.1 | 35.8 | 19498.18 | fixed prompt | 0 | 128 |
+| 10 | 150.4 | 36.2 | 17832.42 | fixed prompt | 0 | 128 |
+| 11 | 143.1 | 37.3 | 19775.69 | fixed prompt | 0 | 128 |
+| 12 | 145.1 | 37.0 | 17977.72 | fixed prompt | 0 | 128 |
+| 13 | 155.0 | 36.7 | 20191.98 | fixed prompt | 0 | 128 |
+| 14 | 145.7 | 36.5 | 18216.18 | fixed prompt | 0 | 128 |
+| 15 | 153.0 | 35.4 | 20355.63 | fixed prompt | 0 | 128 |
+| **avg** | **150.37 ± 4.33** | **36.38 ± 0.61** | **19045.45 ± 1239.08** | — | — | — |
+| **median** | **152.10** | **36.40** | **19568.85** | — | — | — |
 
 *QUAL gates documented as N=10: `run_op_gate.py --runs 10` (0 errors) and `run_model_gate.py --runs 10` (PPL 6.4271 +-1%, 6.3628..6.4914, 6/6 canaries) on build-custom (pending bare-metal re-run). No GPU run, pure docs/python offline harness (not shipped in Phase 8).*
 

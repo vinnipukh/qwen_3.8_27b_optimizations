@@ -1,0 +1,274 @@
+### Open tabs
+- 0: [flash attention 2 long context 8k 16k 32k prefill throughput scaling at DuckDuckGo](https://duckduckgo.com/?q=flash+attention+2+long+context+8k+16k+32k+prefill+throughput+scaling&kad=en_US)
+- 1: [DuckDuckGo](https://html.duckduckgo.com/html/?q=flash+attention+2+long+context+8k+16k+32k+prefill+throughput+scaling)
+- 2: [DuckDuckGo](https://lite.duckduckgo.com/lite/?q=flash+attention+2+long+context+8k+16k+32k+prefill+throughput+scaling)
+- 3: [Captcha - Brave Search](https://search.brave.com/search?q=flash+attention+2+long+context+8k+16k+32k+prefill+throughput+scaling)
+- 4: [flash attention 2 long context 8k 16k 32k prefill throughput scaling - Arama](https://www.bing.com/search?q=flash+attention+2+long+context+8k+16k+32k+prefill+throughput+scaling&rdr=1&rdrig=40FB2FB12BE247E3A2F87EF294A4CE99)
+- 5: ["FlashAttention-2" prefill throughput 8k 16k scaling - Arama](https://www.bing.com/search?q=%22FlashAttention-2%22+prefill+throughput+8k+16k+scaling&rdr=1&rdrig=76F509D45D02467DA2B1192C40E1BE76)
+- 6: [https://www.google.com/search?q=flash+attention+2+long+context+8k+16k+32k+prefill+throughput+scaling&hl=en&gl=us&sei=vcORaoGTIfKm1fIPsp3PiQ8](https://www.google.com/sorry/index?continue=https://www.google.com/search%3Fq%3Dflash%2Battention%2B2%2Blong%2Bcontext%2B8k%2B16k%2B32k%2Bprefill%2Bthroughput%2Bscaling%26hl%3Den%26gl%3Dus%26sei%3DvcORaoGTIfKm1fIPsp3PiQ8&hl=en&q=EgSw6odMGL2Hx9QGIjBz_JWyuDhFlk0k_9Sd2sOWVij5TcNPo8TWvNLttk3wGaoM0WiPg28pSMdLEGzKOxUyAVJaAUM)
+- 7: [[2307.08691] FlashAttention-2: Faster Attention with Better Parallelism and Work Partitioning](https://arxiv.org/abs/2307.08691)
+- 8: [[2307.08691] FlashAttention-2: Faster Attention with Better Parallelism and Work Partitioning](https://arxiv.org/abs/2307.08691)
+- 9: [GitHub - Dao-AILab/flash-attention: Fast and memory-efficient exact attention · GitHub](https://github.com/Dao-AILab/flash-attention)
+- 10: [[2205.14135] FlashAttention: Fast and Memory-Efficient Exact Attention with IO-Awareness](https://arxiv.org/abs/2205.14135)
+- 11: [Overview · Hugging Face](https://huggingface.co/docs/transformers/v5.15.1/optimization_overview)
+- 12: (current) [Page not found – PyTorch](https://pytorch.org/blog/flash-attention)
+### Page
+- Page URL: https://pytorch.org/blog/flash-attention
+- Page Title: Page not found – PyTorch
+- HTTP status: 404
+- Console: 1 errors, 0 warnings
+### Snapshot
+```yaml
+- generic [ref=e1]:
+  - dialog "Çerez Onay Başlığı" [ref=e2]:
+    - button "Bu iletişim kutusunu kapat" [ref=e3] [cursor=pointer]:
+      - img "Bu iletişim kutusunu kapat" [ref=e4]
+    - generic [ref=e5]:
+      - generic [ref=e6]: "Bu web sitesi, temel site işlevlerinin yanı sıra mantıksal analiz, kişiselleştirme ve hedeflenmiş reklamcılık için çerezler gibi teknolojiler kullanır. Daha fazla bilgi edinmek için aşağıdaki bağlantıyı görüntüleyin:"
+      - link "Gizlilik Politikası" [ref=e7] [cursor=pointer]:
+        - /url: https://lfprojects.org/policies/privacy-policy/
+    - button "Tercihleri yönet" [ref=e9] [cursor=pointer]
+  - navigation "Skip links":
+    - link "Skip to main content" [ref=e10] [cursor=pointer]:
+      - /url: "#ajax-content-wrap"
+  - generic [ref=e12]:
+    - navigation "Secondary Navigation" [ref=e15]:
+      - link "Join us at PyTorch Conference North America · Oct 20-21 · San Jose, CA" [ref=e17] [cursor=pointer]:
+        - /url: https://events.linuxfoundation.org/pytorch-conference-north-america/register/?utm_source=pytorch&utm_medium=ribbon-banner&utm_campaign=PyTorch-Conference-NA-2026&utm_content=hero&__hstc=132719121.8bd8e95564b35917b8bcffd996dde5a0.1787937801298.1787937801298.1787937801298.1&__hssc=132719121.1.1787937801298&__hsfp=751b82ea06b3eb681982f8e1935a2a3b
+    - text: 
+    - banner "Main Menu" [ref=e18]:
+      - generic [ref=e20]:
+        - link [ref=e22] [cursor=pointer]:
+          - /url: https://pytorch.org
+          - img "PyTorch Logo" [ref=e23]
+        - generic [ref=e24]:
+          - text: 
+          - navigation "Main Menu" [ref=e25]:
+            - list [ref=e26]:
+              - listitem [ref=e27]:
+                - link [ref=e28] [cursor=pointer]:
+                  - /url: "#"
+                  - text: Learn
+                  - generic [ref=e29]: 
+                - list:
+                  - listitem:
+                    - link "Get Started":
+                      - /url: https://pytorch.org/get-started/locally/
+                  - listitem:
+                    - link "Tutorials":
+                      - /url: https://pytorch.org/tutorials/
+                  - listitem:
+                    - link "Learn the Basics":
+                      - /url: https://pytorch.org/tutorials/beginner/basics/intro.html
+                  - listitem:
+                    - link "PyTorch Recipes ":
+                      - /url: https://docs.pytorch.org/tutorials/recipes_index.html
+                  - listitem:
+                    - link "Intro to PyTorch – YouTube Series":
+                      - /url: https://pytorch.org/tutorials/beginner/introyt.html
+                  - listitem:
+                    - link "Videos":
+                      - /url: https://pytorch.org/webinars/
+                  - listitem:
+                    - link "PyTorch Certification":
+                      - /url: https://pytorch.org/pytorch-certification/
+              - listitem [ref=e31]:
+                - link [ref=e32] [cursor=pointer]:
+                  - /url: "#"
+                  - text: Community
+                  - generic [ref=e33]: 
+                - list:
+                  - listitem:
+                    - link "Landscape ":
+                      - /url: https://landscape.pytorch.org/
+                  - listitem:
+                    - link "Join the Ecosystem":
+                      - /url: /join-ecosystem
+                  - listitem:
+                    - link "Community Hub":
+                      - /url: https://pytorch.org/community-hub/
+                  - listitem:
+                    - link "Forums ":
+                      - /url: https://discuss.pytorch.org/
+                  - listitem:
+                    - link "Developer Resources":
+                      - /url: https://pytorch.org/resources/
+                  - listitem:
+                    - link "Events":
+                      - /url: https://pytorch.org/events/
+                  - listitem:
+                    - link "Working Groups":
+                      - /url: https://pytorch.org/working-groups/
+                  - listitem:
+                    - link "Meeting Calendar":
+                      - /url: https://pytorch.org/meeting-calendar/
+                  - listitem:
+                    - link "Contributor Awards":
+                      - /url: https://pytorch.org/contributor-awards/
+                  - listitem:
+                    - link "Ambassadors":
+                      - /url: https://pytorch.org/programs/ambassadors/
+              - listitem [ref=e35]:
+                - link [ref=e36] [cursor=pointer]:
+                  - /url: https://pytorch.org/projects/
+                  - text: Projects
+                  - generic [ref=e37]: 
+                - list:
+                  - listitem:
+                    - link "PyTorch":
+                      - /url: https://pytorch.org/projects/pytorch/
+                      - text: PyTorch
+                      - generic: 
+                    - list:
+                      - listitem:
+                        - link "Executorch":
+                          - /url: https://pytorch.org/projects/executorch/
+                  - listitem:
+                    - link "vLLM":
+                      - /url: https://pytorch.org/projects/vllm/
+                  - listitem:
+                    - link "DeepSpeed":
+                      - /url: https://pytorch.org/projects/deepspeed/
+                  - listitem:
+                    - link "Ray":
+                      - /url: https://pytorch.org/projects/ray/
+                  - listitem:
+                    - link "Helion":
+                      - /url: https://pytorch.org/projects/helion/
+                  - listitem:
+                    - link "Safetensors":
+                      - /url: https://pytorch.org/projects/safetensors/
+                  - listitem:
+                    - link "Host Your Project":
+                      - /url: https://pytorch.org/projects/host-your-project/
+              - listitem [ref=e39]:
+                - link [ref=e40] [cursor=pointer]:
+                  - /url: "#"
+                  - text: Docs
+                  - generic [ref=e41]: 
+                - list:
+                  - listitem:
+                    - link "PyTorch":
+                      - /url: https://pytorch.org/docs/stable/index.html
+                  - listitem:
+                    - link "Domains":
+                      - /url: https://pytorch.org/domains/
+              - listitem [ref=e43]:
+                - link [ref=e44] [cursor=pointer]:
+                  - /url: "#"
+                  - text: Blog & News
+                  - generic [ref=e45]: 
+                - list:
+                  - listitem:
+                    - link "Blog":
+                      - /url: https://pytorch.org/blog/
+                  - listitem:
+                    - link "Announcements":
+                      - /url: /announcements
+                  - listitem:
+                    - link "Case Studies":
+                      - /url: https://pytorch.org/case-studies/
+                  - listitem:
+                    - link "Newsletter":
+                      - /url: https://pytorch.org/newsletter/
+              - listitem [ref=e47]:
+                - link [ref=e48] [cursor=pointer]:
+                  - /url: "#"
+                  - text: About
+                  - generic [ref=e49]: 
+                - list:
+                  - listitem:
+                    - link "PyTorch Foundation":
+                      - /url: https://pytorch.org/foundation/
+                  - listitem:
+                    - link "Members":
+                      - /url: /members
+                  - listitem:
+                    - link "Governing Board":
+                      - /url: https://pytorch.org/governing-board/
+                  - listitem:
+                    - link "Technical Advisory Council":
+                      - /url: https://pytorch.org/tac/
+                  - listitem:
+                    - link "Cloud Credit Program":
+                      - /url: https://pytorch.org/credits/
+                  - listitem:
+                    - link "Staff":
+                      - /url: https://pytorch.org/staff/
+                  - listitem:
+                    - link "Contact":
+                      - /url: https://pytorch.org/contact/
+                  - listitem:
+                    - link "Brand Guidelines":
+                      - /url: https://pytorch.org/brand-guidelines/
+              - listitem [ref=e51]:
+                - link "JOIN" [ref=e52] [cursor=pointer]:
+                  - /url: https://pytorch.org/join/
+            - list [ref=e53]:
+              - listitem [ref=e54]:
+                - link "search" [ref=e56] [cursor=pointer]:
+                  - /url: "#search-box"
+                  - generic [ref=e57]: 
+  - generic [ref=e59]:
+    - generic [ref=e64]:
+      - heading "404" [level=1] [ref=e65]
+      - heading "Page Not Found" [level=2] [ref=e66]
+      - link "Back Home " [ref=e67] [cursor=pointer]:
+        - /url: https://pytorch.org
+        - generic [ref=e68]: Back Home
+        - generic [ref=e69]: 
+    - contentinfo [ref=e70]:
+      - generic [ref=e76]:
+        - list [ref=e78]:
+          - listitem [ref=e79]:
+            - link "x-twitter" [ref=e80] [cursor=pointer]:
+              - /url: https://twitter.com/pytorch
+              - generic [ref=e82]: 
+          - listitem [ref=e83]:
+            - link "facebook" [ref=e84] [cursor=pointer]:
+              - /url: https://www.facebook.com/pytorch
+              - generic [ref=e86]: 
+          - listitem [ref=e87]:
+            - link "linkedin" [ref=e88] [cursor=pointer]:
+              - /url: https://www.linkedin.com/company/pytorch
+              - generic [ref=e90]: 
+          - listitem [ref=e91]:
+            - link "youtube" [ref=e92] [cursor=pointer]:
+              - /url: https://www.youtube.com/pytorch
+              - generic [ref=e94]: 
+          - listitem [ref=e95]:
+            - link "github" [ref=e96] [cursor=pointer]:
+              - /url: https://github.com/pytorch/pytorch
+              - generic [ref=e98]: 
+          - listitem [ref=e99]:
+            - link "slack" [ref=e100] [cursor=pointer]:
+              - /url: https://join.slack.com/t/pytorch/shared_invite/zt-2j2la612p-miUinTTaxXczKOJw48poHA
+              - generic [ref=e102]: 
+          - listitem [ref=e103]:
+            - link "discord" [ref=e104] [cursor=pointer]:
+              - /url: https://discord.com/invite/eNSRmh92XT
+              - generic [ref=e106]: 
+        - paragraph [ref=e108]:
+          - text: © 2026 PyTorch. Copyright © The Linux Foundation®. All rights reserved. The Linux Foundation has registered trademarks and uses trademarks. For more information, including terms of use, privacy policy, and trademark usage, please see our
+          - link "Policies" [ref=e109] [cursor=pointer]:
+            - /url: https://www.linuxfoundation.org/legal/policies?__hstc=132719121.8bd8e95564b35917b8bcffd996dde5a0.1787937801298.1787937801298.1787937801298.1&__hssc=132719121.1.1787937801298&__hsfp=751b82ea06b3eb681982f8e1935a2a3b
+          - text: page.
+          - link "Trademark Usage" [ref=e110] [cursor=pointer]:
+            - /url: https://www.linuxfoundation.org/trademark-usage?__hstc=132719121.8bd8e95564b35917b8bcffd996dde5a0.1787937801298.1787937801298.1787937801298.1&__hssc=132719121.1.1787937801298&__hsfp=751b82ea06b3eb681982f8e1935a2a3b
+          - text: .
+          - link "Privacy Policy" [ref=e111] [cursor=pointer]:
+            - /url: http://www.linuxfoundation.org/privacy?__hstc=132719121.8bd8e95564b35917b8bcffd996dde5a0.1787937801298.1787937801298.1787937801298.1&__hssc=132719121.1.1787937801298&__hsfp=751b82ea06b3eb681982f8e1935a2a3b
+          - text: .
+    - dialog "Off Canvas Menu" [ref=e113]:
+      - generic:
+        - generic:
+          - link "Close Menu " [ref=e114] [cursor=pointer]:
+            - /url: "#"
+            - generic [ref=e115]: Close Menu
+            - generic [ref=e116]: 
+          - text:       
+    - generic:
+      - generic:
+        - button "Menu"
+  - button "Back to top" [ref=e117] [cursor=pointer]:  
+```

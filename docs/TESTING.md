@@ -16,8 +16,8 @@ Level 2: Constraint & Integrity Gates (BENCH-01, scan_banned_signatures, D2-19 o
 Level 3: VRAM & RSS Overcommit Gates (BENCH-03, preflight buffer check, three-signal guard)
 Level 4: Vulkan Coverage Gate (D2-04, vulkan_gate.sh 6-part check)
 Level 5: Numerical Correctness Gates — Phase 14 doctrine (per-op max_abs / mean_abs / relative error / cosine similarity; full-model same prompt / same seed / same sampling — see ROADMAP-original.md Phase 14) via QUAL-01 test-backend-ops and QUAL-02 perplexity + canaries; per-kernel thresholds: demo `dequant_iq4_xs` tight gate max_abs < 1e-5 / mean_abs < 1e-6 / cosine > 0.99999 (+10x broken discrimination) and matmul gate cosine >= 0.999 / max_rel <= 1e-3 / no NaN/Inf (test_gemv 10/10, test_gemm 11/11, cosine 1.0)
-Level 6: Kernel Numerical Comparison (test_compare vs CPU golden ref, KERN-01 — demo `dequant_iq4_xs` tight gate max_abs < 1e-5 / mean < 1e-6 / cosine > 0.99999 +10x broken discrimination; see `.planning/phases/04-kernel-playground-scaffold/`)
-Level 7: Matmul Numerical Comparison (test_gemv_compare, test_gemm_compare, cosine 1.0) — custom gfx1100 GEMV/GEMM vs CPU FP64 oracle (`kernels/matmul_iq4xs/ref_cpu.*`), gate cosine >=0.999 / max_rel <=1e-3 / no NaN/Inf (achieved cosine 1.0, max_abs 0 on all cases); see `.planning/phases/05-first-custom-kernel-bottleneck-attack/`
+Level 6: Kernel Numerical Comparison (test_compare vs CPU golden ref, KERN-01 — demo `dequant_iq4_xs` tight gate max_abs < 1e-5 / mean < 1e-6 / cosine > 0.99999 +10x broken discrimination; see `docs/phases/04-kernel-playground-scaffold/`)
+Level 7: Matmul Numerical Comparison (test_gemv_compare, test_gemm_compare, cosine 1.0) — custom gfx1100 GEMV/GEMM vs CPU FP64 oracle (`kernels/matmul_iq4xs/ref_cpu.*`), gate cosine >=0.999 / max_rel <=1e-3 / no NaN/Inf (achieved cosine 1.0, max_abs 0 on all cases); see `docs/phases/05-first-custom-kernel-bottleneck-attack/`
 Level 8: Phase 7 DP4A & WMMA True-Stock Comparator Gate — Direct microbenchmark vs real upstream `vec_dot_iq4_xs_q8_1` DP4A implementation with fused `Q8_1` integer activation quantization. Three harnesses: test_real_stock_compare (15/15 PASS cosine 0.999985 vs FP64 oracle), test_gemv_dp4a_compare (10/10 PASS cosine >=0.999 vs oracle and 1.000 vs real stock), test_gemm_wmma_compare (15 shapes PASS cosine >=0.999). Paired benches vs real DP4A (not vs naive): bench_real_stock 84 us vs naive 543 us (6.43x, attn_q 5120x5120), bench_gemv_dp4a peak 1.178x avg 1.00 under WSL DXG jitter, bench_gemm_wmma M=512 6.7x micro (WMMA path). QUAL-01 test-backend-ops now PASS (4243 supported, 0 errors on both stock and custom after hang fix — previously hang exit 124); QUAL-02 PPL 6.4271 pass; end-to-end llama-cli/llama-bench coherence gates documented below. Phase 7 verification score 2/5 must-haves verified (real-stock comparator and quilt patch verified; 3 gaps require bare-metal WSL2 gfx1100 re-bench).
 ```
 
@@ -74,6 +74,23 @@ python3 benchmarks/tools/run_kernel_bench.py --bin kernels/build/matmul_iq4xs/be
 ```
 
 Each bench emits JSON with `median_us`, `p95_us`, `speedup`, `GB/s`/`TFLOPS`. Archival produces `bench_sweep.json` + `rows.jsonl` + `manifest.json` + `CHECKSUMS.sha256` via `benchmarks/lib/store.py`.
+
+### LLM QA End-to-End Test Suite ($N=15$ Rigour Gate)
+
+To verify real-world generation throughput, latency, and numerical coherence without single-run bias, run the $N=15$ greedy generation test:
+
+```bash
+# In WSL2 environment:
+export HSA_ENABLE_DXG_DETECTION=1
+python3 tools/run_llm_qa_n15.py        # Generates benchmarks/results/phase7/llm_qa_N15.json
+python3 tools/run_llm_qa_stock_n15.py  # Generates benchmarks/results/phase7/llm_qa_stock_N15.json
+```
+
+**Parameters:**
+- Model: `Qwen3.8-27B-Uncensored-IQ4_XS.gguf` (15.31 GB)
+- Prompt: `"Explain the difference between DP4A and WMMA on AMD RDNA3 architectures in two concise paragraphs."`
+- Flags: `-n 128 --temp 0 -ngl 99 -b 2048 --single-turn --simple-io`
+- Verified Hardware Metrics (RX 7900 XT): Custom $36.38 \pm 0.61\text{ tok/s}$ generation ($+1.2\%$ vs stock $35.95 \pm 1.12\text{ tok/s}$), prompt eval $150.37 \pm 4.33\text{ tok/s}$ ($+2.0\%$), and average request latency $19.05\text{ s}$ ($-821\text{ ms}$).
 
 ### Quality gates (QUAL-01 / QUAL-02)
 

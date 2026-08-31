@@ -1,0 +1,1200 @@
+### Open tabs
+- 0: [flash attention 2 long context 8k 16k 32k prefill throughput scaling at DuckDuckGo](https://duckduckgo.com/?q=flash+attention+2+long+context+8k+16k+32k+prefill+throughput+scaling&kad=en_US)
+- 1: [DuckDuckGo](https://html.duckduckgo.com/html/?q=flash+attention+2+long+context+8k+16k+32k+prefill+throughput+scaling)
+- 2: [DuckDuckGo](https://lite.duckduckgo.com/lite/?q=flash+attention+2+long+context+8k+16k+32k+prefill+throughput+scaling)
+- 3: [Captcha - Brave Search](https://search.brave.com/search?q=flash+attention+2+long+context+8k+16k+32k+prefill+throughput+scaling)
+- 4: [flash attention 2 long context 8k 16k 32k prefill throughput scaling - Arama](https://www.bing.com/search?q=flash+attention+2+long+context+8k+16k+32k+prefill+throughput+scaling&rdr=1&rdrig=40FB2FB12BE247E3A2F87EF294A4CE99)
+- 5: ["FlashAttention-2" prefill throughput 8k 16k scaling - Arama](https://www.bing.com/search?q=%22FlashAttention-2%22+prefill+throughput+8k+16k+scaling&rdr=1&rdrig=76F509D45D02467DA2B1192C40E1BE76)
+- 6: [https://www.google.com/search?q=flash+attention+2+long+context+8k+16k+32k+prefill+throughput+scaling&hl=en&gl=us&sei=vcORaoGTIfKm1fIPsp3PiQ8](https://www.google.com/sorry/index?continue=https://www.google.com/search%3Fq%3Dflash%2Battention%2B2%2Blong%2Bcontext%2B8k%2B16k%2B32k%2Bprefill%2Bthroughput%2Bscaling%26hl%3Den%26gl%3Dus%26sei%3DvcORaoGTIfKm1fIPsp3PiQ8&hl=en&q=EgSw6odMGL2Hx9QGIjBz_JWyuDhFlk0k_9Sd2sOWVij5TcNPo8TWvNLttk3wGaoM0WiPg28pSMdLEGzKOxUyAVJaAUM)
+- 7: [[2307.08691] FlashAttention-2: Faster Attention with Better Parallelism and Work Partitioning](https://arxiv.org/abs/2307.08691)
+- 8: [[2307.08691] FlashAttention-2: Faster Attention with Better Parallelism and Work Partitioning](https://arxiv.org/abs/2307.08691)
+- 9: (current) [GitHub - Dao-AILab/flash-attention: Fast and memory-efficient exact attention · GitHub](https://github.com/Dao-AILab/flash-attention)
+### Page
+- Page URL: https://github.com/Dao-AILab/flash-attention
+- Page Title: GitHub - Dao-AILab/flash-attention: Fast and memory-efficient exact attention · GitHub
+- Console: 1 errors, 0 warnings
+### Snapshot
+```yaml
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - generic [ref=e3]:
+      - link "Skip to content" [ref=e4] [cursor=pointer]:
+        - /url: "#start-of-content"
+      - banner [ref=e9]:
+        - heading "Navigation Menu" [level=2] [ref=e10]
+        - generic [ref=e11]:
+          - link "Homepage" [ref=e13] [cursor=pointer]:
+            - /url: /
+          - generic [ref=e16]:
+            - navigation "Global" [ref=e17]:
+              - list [ref=e18]:
+                - listitem [ref=e19]:
+                  - button "Platform" [ref=e21] [cursor=pointer]
+                - listitem [ref=e24]:
+                  - button "Solutions" [ref=e26] [cursor=pointer]
+                - listitem [ref=e29]:
+                  - button "Resources" [ref=e31] [cursor=pointer]
+                - listitem [ref=e34]:
+                  - button "Open Source" [ref=e36] [cursor=pointer]
+                - listitem [ref=e39]:
+                  - button "Enterprise" [ref=e41] [cursor=pointer]
+                - listitem [ref=e44]:
+                  - link "Pricing" [ref=e45] [cursor=pointer]:
+                    - /url: https://github.com/pricing
+            - generic [ref=e46]:
+              - button "Search or jump to, type / to search" [ref=e48] [cursor=pointer]
+              - link "Sign in" [ref=e55] [cursor=pointer]:
+                - /url: /login?return_to=https%3A%2F%2Fgithub.com%2FDao-AILab%2Fflash-attention
+              - link "Sign up" [ref=e58] [cursor=pointer]:
+                - /url: /signup?ref_cta=Sign+up&ref_loc=header+logged+out&ref_page=%2F%3Cuser-name%3E%2F%3Crepo-name%3E&source=header-repo&source_repo=Dao-AILab%2Fflash-attention
+              - button "Appearance settings" [ref=e61] [cursor=pointer]
+    - main [ref=e68]:
+      - generic [ref=e69]:
+        - generic [ref=e70]:
+          - generic [ref=e72]:
+            - link "Dao-AILab" [ref=e76] [cursor=pointer]:
+              - /url: /Dao-AILab
+            - generic [ref=e77]: /
+            - strong [ref=e78]:
+              - link "flash-attention" [ref=e79] [cursor=pointer]:
+                - /url: /Dao-AILab/flash-attention
+            - generic [ref=e80]: Public
+          - generic [ref=e81]:
+            - list:
+              - listitem [ref=e82]:
+                - link "You must be signed in to change notification settings" [ref=e83] [cursor=pointer]:
+                  - /url: /login?return_to=%2FDao-AILab%2Fflash-attention
+                  - text: Notifications
+              - listitem [ref=e86]:
+                - link "Fork 3k" [ref=e87] [cursor=pointer]:
+                  - /url: /login?return_to=%2FDao-AILab%2Fflash-attention
+                  - text: Fork
+                  - generic "3,018" [ref=e90]: 3k
+              - listitem [ref=e91]:
+                - link "You must be signed in to star a repository" [ref=e93] [cursor=pointer]:
+                  - /url: /login?return_to=%2FDao-AILab%2Fflash-attention
+                  - text: Star
+                  - generic "24794 users starred this repository" [ref=e96]: 24.8k
+        - navigation "Repository" [ref=e97]:
+          - list [ref=e98]:
+            - listitem [ref=e99]:
+              - link "Code" [ref=e100] [cursor=pointer]:
+                - /url: /Dao-AILab/flash-attention
+            - listitem [ref=e104]:
+              - link "Issues 1k" [ref=e105] [cursor=pointer]:
+                - /url: /Dao-AILab/flash-attention/issues
+                - generic [ref=e109]: Issues
+                - generic "1,027" [ref=e110]: 1k
+            - listitem [ref=e111]:
+              - link "Pull requests 248" [ref=e112] [cursor=pointer]:
+                - /url: /Dao-AILab/flash-attention/pulls
+                - generic [ref=e115]: Pull requests
+                - generic "248" [ref=e116]
+            - listitem [ref=e117]:
+              - link "Discussions" [ref=e118] [cursor=pointer]:
+                - /url: /Dao-AILab/flash-attention/discussions
+            - listitem [ref=e122]:
+              - link "Actions" [ref=e123] [cursor=pointer]:
+                - /url: /Dao-AILab/flash-attention/actions
+            - listitem [ref=e127]:
+              - link "Projects" [ref=e128] [cursor=pointer]:
+                - /url: /Dao-AILab/flash-attention/projects
+            - listitem [ref=e132]:
+              - link "Security and quality" [ref=e133] [cursor=pointer]:
+                - /url: /Dao-AILab/flash-attention/security
+            - listitem [ref=e137]:
+              - link "Insights" [ref=e138] [cursor=pointer]:
+                - /url: /Dao-AILab/flash-attention/pulse
+      - generic [ref=e155]:
+        - generic [ref=e158]:
+          - generic [ref=e159]:
+            - generic [ref=e160]:
+              - button "main branch" [ref=e162] [cursor=pointer]:
+                - generic [ref=e163]: main
+              - generic [ref=e167]:
+                - link [ref=e168] [cursor=pointer]:
+                  - /url: /Dao-AILab/flash-attention/branches
+                  - generic [ref=e171]:
+                    - strong [ref=e172]: "65"
+                    - text: Branches
+                - link [ref=e173] [cursor=pointer]:
+                  - /url: /Dao-AILab/flash-attention/tags
+                  - generic [ref=e176]:
+                    - strong [ref=e177]: "125"
+                    - text: Tags
+            - generic [ref=e178]:
+              - combobox "Go to file" [ref=e186]
+              - button "Code" [ref=e187] [cursor=pointer]
+          - generic [ref=e190]:
+            - generic [ref=e191]:
+              - generic [ref=e193]:
+                - heading "Latest commit" [level=2] [ref=e194]
+                - generic [ref=e195]:
+                  - generic [ref=e197]:
+                    - link [ref=e198] [cursor=pointer]:
+                      - /url: /drisspg
+                      - img "drisspg" [ref=e199]
+                    - link "commits by drisspg" [ref=e200] [cursor=pointer]:
+                      - /url: /Dao-AILab/flash-attention/commits?author=drisspg
+                      - text: drisspg
+                  - generic [ref=e201]:
+                    - generic [ref=e203]:
+                      - link "[CuTe] Speed up scalar SM100 mask compilation (" [ref=e204] [cursor=pointer]:
+                        - /url: /Dao-AILab/flash-attention/commit/ce088ab9ce0fc0434dcd8afa0a791da9fcc3a820
+                      - link "#2819" [ref=e205] [cursor=pointer]:
+                        - /url: https://github.com/Dao-AILab/flash-attention/pull/2819
+                      - link ")" [ref=e206] [cursor=pointer]:
+                        - /url: /Dao-AILab/flash-attention/commit/ce088ab9ce0fc0434dcd8afa0a791da9fcc3a820
+                    - button "Open commit details" [ref=e207] [cursor=pointer]
+                    - button "pending" [ref=e210] [cursor=pointer]
+                - generic [ref=e213]:
+                  - generic [ref=e215]:
+                    - link "Commit ce088ab" [ref=e216] [cursor=pointer]:
+                      - /url: /Dao-AILab/flash-attention/commit/ce088ab9ce0fc0434dcd8afa0a791da9fcc3a820
+                      - text: ce088ab
+                    - text: ·
+                    - generic "Aug 28, 2026, 03:43 GMT+3" [ref=e217]: Aug 28, 202616 hours ago
+                  - generic [ref=e218]:
+                    - heading "History" [level=2] [ref=e219]
+                    - link "1,557 Commits" [ref=e220] [cursor=pointer]:
+                      - /url: /Dao-AILab/flash-attention/commits/main/
+              - heading "Folders and files" [level=2] [ref=e223]
+              - table "Folders and files" [ref=e224]:
+                - rowgroup:
+                  - row "Name Last commit message Last commit date":
+                    - columnheader "Name"
+                    - columnheader "Last commit message"
+                    - columnheader "Last commit date"
+                - rowgroup [ref=e225]:
+                  - row [ref=e226]:
+                    - cell [ref=e227]:
+                      - link ".github, (Directory)" [ref=e234] [cursor=pointer]:
+                        - /url: /Dao-AILab/flash-attention/tree/main/.github
+                        - text: .github
+                    - cell [ref=e235]:
+                      - generic [ref=e237]:
+                        - 'link "ci: run MLA backward cases so CI exercises flash_bwd_mla_sm100.py (" [ref=e238] [cursor=pointer]':
+                          - /url: /Dao-AILab/flash-attention/commit/e79261e4fe23135c55923782707f297a957fa124
+                        - link "#2690" [ref=e239] [cursor=pointer]:
+                          - /url: https://github.com/Dao-AILab/flash-attention/pull/2690
+                    - cell "Jun 29, 20262 months ago" [ref=e240]
+                  - row [ref=e242]:
+                    - cell [ref=e243]:
+                      - link "AI, (Directory)" [ref=e250] [cursor=pointer]:
+                        - /url: /Dao-AILab/flash-attention/tree/main/AI
+                        - text: AI
+                    - cell [ref=e251]:
+                      - generic [ref=e253]:
+                        - link "[AI] Add doc on debug methodology (" [ref=e254] [cursor=pointer]:
+                          - /url: /Dao-AILab/flash-attention/commit/df61ab6c4a0fb1f94f1f43b2a23479a0ab92b8ab
+                        - link "#2753" [ref=e255] [cursor=pointer]:
+                          - /url: https://github.com/Dao-AILab/flash-attention/pull/2753
+                        - link ")" [ref=e256] [cursor=pointer]:
+                          - /url: /Dao-AILab/flash-attention/commit/df61ab6c4a0fb1f94f1f43b2a23479a0ab92b8ab
+                    - cell "Aug 3, 2026last month" [ref=e257]
+                  - row [ref=e259]:
+                    - cell [ref=e260]:
+                      - link "assets, (Directory)" [ref=e267] [cursor=pointer]:
+                        - /url: /Dao-AILab/flash-attention/tree/main/assets
+                        - text: assets
+                    - cell [ref=e268]:
+                      - link "Add fa4_paper.pdf" [ref=e271] [cursor=pointer]:
+                        - /url: /Dao-AILab/flash-attention/commit/120b30694d57792e0d58a33fbc05024c2c003714
+                    - cell "Mar 5, 20265 months ago" [ref=e272]
+                  - row [ref=e274]:
+                    - cell [ref=e275]:
+                      - link "benchmarks, (Directory)" [ref=e282] [cursor=pointer]:
+                        - /url: /Dao-AILab/flash-attention/tree/main/benchmarks
+                        - text: benchmarks
+                    - cell [ref=e283]:
+                      - generic [ref=e285]:
+                        - link "[CuTe,Sm100] Varlen Dynamic Persistent scheduler and metadata (" [ref=e286] [cursor=pointer]:
+                          - /url: /Dao-AILab/flash-attention/commit/c46b8144f2d5039d3d3de05da1b668325130bb35
+                        - link "#2559" [ref=e287] [cursor=pointer]:
+                          - /url: https://github.com/Dao-AILab/flash-attention/pull/2559
+                        - link ")" [ref=e288] [cursor=pointer]:
+                          - /url: /Dao-AILab/flash-attention/commit/c46b8144f2d5039d3d3de05da1b668325130bb35
+                    - cell "Aug 2, 2026last month" [ref=e289]
+                  - row [ref=e291]:
+                    - cell [ref=e292]:
+                      - link "csrc, (Directory)" [ref=e299] [cursor=pointer]:
+                        - /url: /Dao-AILab/flash-attention/tree/main/csrc
+                        - text: csrc
+                    - cell [ref=e300]:
+                      - generic [ref=e302]:
+                        - link "Fix duplicated word in layer norm comment (" [ref=e303] [cursor=pointer]:
+                          - /url: /Dao-AILab/flash-attention/commit/d7e4dba3e568106b0f1b6323b07c1272f53679b3
+                        - link "#2744" [ref=e304] [cursor=pointer]:
+                          - /url: https://github.com/Dao-AILab/flash-attention/pull/2744
+                        - link ")" [ref=e305] [cursor=pointer]:
+                          - /url: /Dao-AILab/flash-attention/commit/d7e4dba3e568106b0f1b6323b07c1272f53679b3
+                    - cell "Aug 6, 20263 weeks ago" [ref=e306]
+                  - row [ref=e308]:
+                    - cell [ref=e309]:
+                      - link "examples/inference, (Directory)" [ref=e316] [cursor=pointer]:
+                        - /url: /Dao-AILab/flash-attention/tree/main/examples/inference
+                        - text: examples/inference
+                    - cell [ref=e317]:
+                      - link "Clarify inference README is a placeholder" [ref=e320] [cursor=pointer]:
+                        - /url: /Dao-AILab/flash-attention/commit/02ac572f3ffc4f402e4183aaa6824b45859d3ed3
+                    - cell "Oct 12, 20233 years ago" [ref=e321]
+                  - row [ref=e323]:
+                    - cell [ref=e324]:
+                      - link "flash_attn, (Directory)" [ref=e331] [cursor=pointer]:
+                        - /url: /Dao-AILab/flash-attention/tree/main/flash_attn
+                        - text: flash_attn
+                    - cell [ref=e332]:
+                      - generic [ref=e334]:
+                        - link "[CuTe] Speed up scalar SM100 mask compilation (" [ref=e335] [cursor=pointer]:
+                          - /url: /Dao-AILab/flash-attention/commit/ce088ab9ce0fc0434dcd8afa0a791da9fcc3a820
+                        - link "#2819" [ref=e336] [cursor=pointer]:
+                          - /url: https://github.com/Dao-AILab/flash-attention/pull/2819
+                        - link ")" [ref=e337] [cursor=pointer]:
+                          - /url: /Dao-AILab/flash-attention/commit/ce088ab9ce0fc0434dcd8afa0a791da9fcc3a820
+                    - cell "Aug 28, 202616 hours ago" [ref=e338]
+                  - row [ref=e340]:
+                    - cell [ref=e341]:
+                      - link "hopper, (Directory)" [ref=e348] [cursor=pointer]:
+                        - /url: /Dao-AILab/flash-attention/tree/main/hopper
+                        - text: hopper
+                    - cell [ref=e349]:
+                      - generic [ref=e351]:
+                        - link "Remove SM100 Functions from Hopper (" [ref=e352] [cursor=pointer]:
+                          - /url: /Dao-AILab/flash-attention/commit/c75d019dea9d910312974417bc28f190dfdda6d9
+                        - link "#2746" [ref=e353] [cursor=pointer]:
+                          - /url: https://github.com/Dao-AILab/flash-attention/pull/2746
+                        - link ")" [ref=e354] [cursor=pointer]:
+                          - /url: /Dao-AILab/flash-attention/commit/c75d019dea9d910312974417bc28f190dfdda6d9
+                    - cell "Jul 29, 2026last month" [ref=e355]
+                  - row [ref=e357]:
+                    - cell [ref=e358]:
+                      - link "tests, (Directory)" [ref=e365] [cursor=pointer]:
+                        - /url: /Dao-AILab/flash-attention/tree/main/tests
+                        - text: tests
+                    - cell [ref=e366]:
+                      - generic [ref=e368]:
+                        - link "Fix CLC fuzz scheduler expectations (" [ref=e369] [cursor=pointer]:
+                          - /url: /Dao-AILab/flash-attention/commit/a369df707e1980fb328abcc1733e3457ec10155f
+                        - link "#2766" [ref=e370] [cursor=pointer]:
+                          - /url: https://github.com/Dao-AILab/flash-attention/pull/2766
+                        - link ")" [ref=e371] [cursor=pointer]:
+                          - /url: /Dao-AILab/flash-attention/commit/a369df707e1980fb328abcc1733e3457ec10155f
+                    - cell "Aug 9, 20263 weeks ago" [ref=e372]
+                  - row [ref=e374]:
+                    - cell [ref=e375]:
+                      - link "third_party, (Directory)" [ref=e382] [cursor=pointer]:
+                        - /url: /Dao-AILab/flash-attention/tree/main/third_party
+                        - text: third_party
+                    - cell [ref=e383]:
+                      - generic [ref=e385]:
+                        - link "[Triton] Fix graph capture issues and env var (" [ref=e386] [cursor=pointer]:
+                          - /url: /Dao-AILab/flash-attention/commit/fefa96a3fa2e4ca26e8d6ed5f5887e0c6380516d
+                        - link "#2620" [ref=e387] [cursor=pointer]:
+                          - /url: https://github.com/Dao-AILab/flash-attention/pull/2620
+                        - link ")" [ref=e388] [cursor=pointer]:
+                          - /url: /Dao-AILab/flash-attention/commit/fefa96a3fa2e4ca26e8d6ed5f5887e0c6380516d
+                    - cell "Jun 3, 20262 months ago" [ref=e389]
+                  - row [ref=e391]:
+                    - cell [ref=e392]:
+                      - link "tools, (Directory)" [ref=e399] [cursor=pointer]:
+                        - /url: /Dao-AILab/flash-attention/tree/main/tools
+                        - text: tools
+                    - cell [ref=e400]:
+                      - generic [ref=e402]:
+                        - link "[CuTe] Relax CUTLASS DSL requirement (" [ref=e403] [cursor=pointer]:
+                          - /url: /Dao-AILab/flash-attention/commit/0251105a2fb19d2957484b7f023cd8c115286ced
+                        - link "#2798" [ref=e404] [cursor=pointer]:
+                          - /url: https://github.com/Dao-AILab/flash-attention/pull/2798
+                        - link ")" [ref=e405] [cursor=pointer]:
+                          - /url: /Dao-AILab/flash-attention/commit/0251105a2fb19d2957484b7f023cd8c115286ced
+                    - cell "Aug 15, 20262 weeks ago" [ref=e406]
+                  - row [ref=e408]:
+                    - cell [ref=e409]:
+                      - link "training, (Directory)" [ref=e416] [cursor=pointer]:
+                        - /url: /Dao-AILab/flash-attention/tree/main/training
+                        - text: training
+                    - cell [ref=e417]:
+                      - generic [ref=e419]:
+                        - 'link "fix: add weights_only=True to all torch.load call sites (" [ref=e420] [cursor=pointer]':
+                          - /url: /Dao-AILab/flash-attention/commit/12f0ce1d28db3afb5da74de681e8a87c291d87d9
+                        - link "#2622" [ref=e421] [cursor=pointer]:
+                          - /url: https://github.com/Dao-AILab/flash-attention/pull/2622
+                        - link ")" [ref=e422] [cursor=pointer]:
+                          - /url: /Dao-AILab/flash-attention/commit/12f0ce1d28db3afb5da74de681e8a87c291d87d9
+                    - cell "Jun 5, 20262 months ago" [ref=e423]
+                  - row [ref=e425]:
+                    - cell [ref=e426]:
+                      - link ".gitignore, (File)" [ref=e433] [cursor=pointer]:
+                        - /url: /Dao-AILab/flash-attention/blob/main/.gitignore
+                        - text: .gitignore
+                    - cell [ref=e434]:
+                      - generic [ref=e436]:
+                        - link "[FA3] uv installation support (" [ref=e437] [cursor=pointer]:
+                          - /url: /Dao-AILab/flash-attention/commit/002cce0a1068f8c07dfccb5a1d232b9a3276947c
+                        - link "#2458" [ref=e438] [cursor=pointer]:
+                          - /url: https://github.com/Dao-AILab/flash-attention/pull/2458
+                        - link ")" [ref=e439] [cursor=pointer]:
+                          - /url: /Dao-AILab/flash-attention/commit/002cce0a1068f8c07dfccb5a1d232b9a3276947c
+                    - cell "Jul 3, 2026last month" [ref=e440]
+                  - row [ref=e442]:
+                    - cell [ref=e443]:
+                      - link ".gitmodules, (File)" [ref=e450] [cursor=pointer]:
+                        - /url: /Dao-AILab/flash-attention/blob/main/.gitmodules
+                        - text: .gitmodules
+                    - cell [ref=e451]:
+                      - generic [ref=e453]:
+                        - link "[AMD] Migrate to Triton Backend to Aiter (" [ref=e454] [cursor=pointer]:
+                          - /url: /Dao-AILab/flash-attention/commit/3f94643fb41bcedded28c85185a8e11d42ef1592
+                        - link "#2230" [ref=e455] [cursor=pointer]:
+                          - /url: https://github.com/Dao-AILab/flash-attention/pull/2230
+                        - link ")" [ref=e456] [cursor=pointer]:
+                          - /url: /Dao-AILab/flash-attention/commit/3f94643fb41bcedded28c85185a8e11d42ef1592
+                    - cell "Mar 12, 20265 months ago" [ref=e457]
+                  - row [ref=e459]:
+                    - cell [ref=e460]:
+                      - link ".pre-commit-config.yaml, (File)" [ref=e467] [cursor=pointer]:
+                        - /url: /Dao-AILab/flash-attention/blob/main/.pre-commit-config.yaml
+                        - text: .pre-commit-config.yaml
+                    - cell [ref=e468]:
+                      - generic [ref=e470]:
+                        - link "Handle linter for flash mla file (" [ref=e471] [cursor=pointer]:
+                          - /url: /Dao-AILab/flash-attention/commit/628452c73a4fab560189a7caa8702642c6a38235
+                        - link "#2459" [ref=e472] [cursor=pointer]:
+                          - /url: https://github.com/Dao-AILab/flash-attention/pull/2459
+                        - link ")" [ref=e473] [cursor=pointer]:
+                          - /url: /Dao-AILab/flash-attention/commit/628452c73a4fab560189a7caa8702642c6a38235
+                    - cell "Apr 15, 20264 months ago" [ref=e474]
+                  - row [ref=e476]:
+                    - cell [ref=e477]:
+                      - link "AGENTS.md, (Symlink to file)" [ref=e484] [cursor=pointer]:
+                        - /url: /Dao-AILab/flash-attention/blob/main/AGENTS.md
+                        - text: AGENTS.md
+                    - cell [ref=e485]:
+                      - generic [ref=e487]:
+                        - link "Add CLC scheduler heuristic (" [ref=e488] [cursor=pointer]:
+                          - /url: /Dao-AILab/flash-attention/commit/d7f60e6639250626589c528a943aaaba6fe5955a
+                        - link "#2455" [ref=e489] [cursor=pointer]:
+                          - /url: https://github.com/Dao-AILab/flash-attention/pull/2455
+                        - link ")" [ref=e490] [cursor=pointer]:
+                          - /url: /Dao-AILab/flash-attention/commit/d7f60e6639250626589c528a943aaaba6fe5955a
+                    - cell "Apr 16, 20264 months ago" [ref=e491]
+                  - row [ref=e493]:
+                    - cell [ref=e494]:
+                      - link "AUTHORS, (File)" [ref=e501] [cursor=pointer]:
+                        - /url: /Dao-AILab/flash-attention/blob/main/AUTHORS
+                        - text: AUTHORS
+                    - cell [ref=e502]:
+                      - link "FlashAttention-2 release" [ref=e505] [cursor=pointer]:
+                        - /url: /Dao-AILab/flash-attention/commit/4f285b354796fb17df8636485b9a04df3ebbb7dc
+                    - cell "Jul 17, 20233 years ago" [ref=e506]
+                  - row [ref=e508]:
+                    - cell [ref=e509]:
+                      - link "CLAUDE.md, (File)" [ref=e516] [cursor=pointer]:
+                        - /url: /Dao-AILab/flash-attention/blob/main/CLAUDE.md
+                        - text: CLAUDE.md
+                    - cell [ref=e517]:
+                      - generic [ref=e519]:
+                        - link "[CuTe] Relax CUTLASS DSL requirement (" [ref=e520] [cursor=pointer]:
+                          - /url: /Dao-AILab/flash-attention/commit/0251105a2fb19d2957484b7f023cd8c115286ced
+                        - link "#2798" [ref=e521] [cursor=pointer]:
+                          - /url: https://github.com/Dao-AILab/flash-attention/pull/2798
+                        - link ")" [ref=e522] [cursor=pointer]:
+                          - /url: /Dao-AILab/flash-attention/commit/0251105a2fb19d2957484b7f023cd8c115286ced
+                    - cell "Aug 15, 20262 weeks ago" [ref=e523]
+                  - row [ref=e525]:
+                    - cell [ref=e526]:
+                      - link "LICENSE, (File)" [ref=e533] [cursor=pointer]:
+                        - /url: /Dao-AILab/flash-attention/blob/main/LICENSE
+                        - text: LICENSE
+                    - cell [ref=e534]:
+                      - link "Change license from Apache 2.0 to BSD" [ref=e537] [cursor=pointer]:
+                        - /url: /Dao-AILab/flash-attention/commit/64f42cd0576344ad21c178abe2cd58aac4c92e4e
+                    - cell "Sep 9, 20224 years ago" [ref=e538]
+                  - row [ref=e540]:
+                    - cell [ref=e541]:
+                      - link "MANIFEST.in, (File)" [ref=e548] [cursor=pointer]:
+                        - /url: /Dao-AILab/flash-attention/blob/main/MANIFEST.in
+                        - text: MANIFEST.in
+                    - cell [ref=e549]:
+                      - link "Support ROCM builds from source distribution, and improve error handl…" [ref=e552] [cursor=pointer]:
+                        - /url: /Dao-AILab/flash-attention/commit/6b1d059eda21c1bd421f3d352786fca2cab61954
+                    - cell "Jan 18, 2025last year" [ref=e553]
+                  - row [ref=e555]:
+                    - cell [ref=e556]:
+                      - link "Makefile, (File)" [ref=e563] [cursor=pointer]:
+                        - /url: /Dao-AILab/flash-attention/blob/main/Makefile
+                        - text: Makefile
+                    - cell [ref=e564]:
+                      - link "allow for uploading to pypi" [ref=e567] [cursor=pointer]:
+                        - /url: /Dao-AILab/flash-attention/commit/b0eac3297fecf4fe604f7b937a72d9f59c1b70c6
+                    - cell "Nov 15, 20224 years ago" [ref=e568]
+                  - row [ref=e570]:
+                    - cell [ref=e571]:
+                      - link "README.md, (File)" [ref=e578] [cursor=pointer]:
+                        - /url: /Dao-AILab/flash-attention/blob/main/README.md
+                        - text: README.md
+                    - cell [ref=e579]:
+                      - generic [ref=e581]:
+                        - link "[AMD ROCm] Enable RDNA backward and adopt CK unified workspace (" [ref=e582] [cursor=pointer]:
+                          - /url: /Dao-AILab/flash-attention/commit/1f7ce2f7cb503473559f3d44d575ae05b1ed8557
+                        - link "#2675" [ref=e583] [cursor=pointer]:
+                          - /url: https://github.com/Dao-AILab/flash-attention/pull/2675
+                        - link ")" [ref=e584] [cursor=pointer]:
+                          - /url: /Dao-AILab/flash-attention/commit/1f7ce2f7cb503473559f3d44d575ae05b1ed8557
+                    - cell "Jul 6, 2026last month" [ref=e585]
+                  - row [ref=e587]:
+                    - cell [ref=e588]:
+                      - link "setup.py, (File)" [ref=e595] [cursor=pointer]:
+                        - /url: /Dao-AILab/flash-attention/blob/main/setup.py
+                        - text: setup.py
+                    - cell [ref=e596]:
+                      - link "Expand FLASHATTENTION_DISABLE_DROPOUT to not bring in unneeded headers (" [ref=e599] [cursor=pointer]:
+                        - /url: /Dao-AILab/flash-attention/commit/00756db9d921da0846453283ddfbeb7457abd09b
+                    - cell "Jul 24, 2026last month" [ref=e600]
+                  - row [ref=e602]:
+                    - cell [ref=e603]:
+                      - link "usage.md, (File)" [ref=e610] [cursor=pointer]:
+                        - /url: /Dao-AILab/flash-attention/blob/main/usage.md
+                        - text: usage.md
+                    - cell [ref=e611]:
+                      - link "Indent bwd_sm80.hpp" [ref=e614] [cursor=pointer]:
+                        - /url: /Dao-AILab/flash-attention/commit/8e595e57819c3b70793ecc75078fb67ab77bebcd
+                    - cell "Jun 1, 2025last year" [ref=e615]
+            - generic [ref=e618]:
+              - generic [ref=e619]:
+                - heading "Repository files navigation" [level=2] [ref=e620]
+                - navigation "Repository files" [ref=e621]:
+                  - list [ref=e622]:
+                    - listitem [ref=e623]:
+                      - link "README" [ref=e624] [cursor=pointer]:
+                        - /url: "#"
+                    - listitem [ref=e629]:
+                      - link "BSD-3-Clause license" [ref=e630] [cursor=pointer]:
+                        - /url: "#"
+                - button "Outline" [ref=e635] [cursor=pointer]
+              - article [ref=e639]:
+                - generic [ref=e640]:
+                  - heading "FlashAttention" [level=1] [ref=e641]
+                  - 'link "Permalink: FlashAttention" [ref=e642] [cursor=pointer]':
+                    - /url: "#flashattention"
+                - paragraph [ref=e645]: This repository provides the official implementation of FlashAttention and FlashAttention-2 from the following papers.
+                - paragraph [ref=e646]:
+                  - strong [ref=e647]: "FlashAttention: Fast and Memory-Efficient Exact Attention with IO-Awareness"
+                  - text: "Tri Dao, Daniel Y. Fu, Stefano Ermon, Atri Rudra, Christopher Ré Paper:"
+                  - link "https://arxiv.org/abs/2205.14135" [ref=e648] [cursor=pointer]:
+                    - /url: https://arxiv.org/abs/2205.14135
+                  - text: IEEE Spectrum
+                  - link "article" [ref=e649] [cursor=pointer]:
+                    - /url: https://spectrum.ieee.org/mlperf-rankings-2022
+                  - text: about our submission to the MLPerf 2.0 benchmark using FlashAttention.
+                  - link [ref=e650] [cursor=pointer]:
+                    - /url: /Dao-AILab/flash-attention/blob/main/assets/flashattn_banner.jpg
+                    - img "FlashAttention" [ref=e651]
+                - paragraph [ref=e652]:
+                  - strong [ref=e653]: "FlashAttention-2: Faster Attention with Better Parallelism and Work Partitioning"
+                  - text: Tri Dao
+                - paragraph [ref=e654]:
+                  - text: "Paper:"
+                  - link "https://tridao.me/publications/flash2/flash2.pdf" [ref=e655] [cursor=pointer]:
+                    - /url: https://tridao.me/publications/flash2/flash2.pdf
+                - paragraph [ref=e656]:
+                  - link [ref=e657] [cursor=pointer]:
+                    - /url: /Dao-AILab/flash-attention/blob/main/assets/flashattention_logo.png
+                    - img "FlashAttention-2" [ref=e658]
+                - generic [ref=e659]:
+                  - heading "Usage" [level=2] [ref=e660]
+                  - 'link "Permalink: Usage" [ref=e661] [cursor=pointer]':
+                    - /url: "#usage"
+                - paragraph [ref=e664]:
+                  - text: We've been very happy to see FlashAttention being widely adopted in such a short time after its release. This
+                  - link "page" [ref=e665] [cursor=pointer]:
+                    - /url: https://github.com/Dao-AILab/flash-attention/blob/main/usage.md
+                  - text: contains a partial list of places where FlashAttention is being used.
+                - paragraph [ref=e666]: FlashAttention and FlashAttention-2 are free to use and modify (see LICENSE). Please cite and credit FlashAttention if you use it.
+                - generic [ref=e667]:
+                  - heading "FlashAttention-3 beta release" [level=2] [ref=e668]
+                  - 'link "Permalink: FlashAttention-3 beta release" [ref=e669] [cursor=pointer]':
+                    - /url: "#flashattention-3-beta-release"
+                - paragraph [ref=e672]: FlashAttention-3 is optimized for Hopper GPUs (e.g. H100).
+                - paragraph [ref=e673]:
+                  - text: "Blogpost:"
+                  - link "https://tridao.me/blog/2024/flash3/" [ref=e674] [cursor=pointer]:
+                    - /url: https://tridao.me/blog/2024/flash3/
+                - paragraph [ref=e675]:
+                  - text: "Paper:"
+                  - link "https://tridao.me/publications/flash3/flash3.pdf" [ref=e676] [cursor=pointer]:
+                    - /url: https://tridao.me/publications/flash3/flash3.pdf
+                - paragraph [ref=e677]:
+                  - link [ref=e678] [cursor=pointer]:
+                    - /url: /Dao-AILab/flash-attention/blob/main/assets/flash3_fp16_fwd.png
+                    - img "FlashAttention-3 speedup on H100 80GB SXM5 with FP16" [ref=e679]
+                - paragraph [ref=e680]: This is a beta release for testing / benchmarking before we integrate that with the rest of the repo.
+                - paragraph [ref=e681]: "Currently released:"
+                - list [ref=e682]:
+                  - listitem [ref=e683]: FP16 / BF16 forward and backward, FP8 forward
+                - paragraph [ref=e684]: "Requirements: H100 / H800 GPU, CUDA >= 12.3."
+                - paragraph [ref=e685]: We highly recommend CUDA 12.8 for best performance.
+                - paragraph [ref=e686]: "To install:"
+                - generic [ref=e687]:
+                  - generic [ref=e688]: cd hopper python setup.py install
+                  - button "Copy code to clipboard" [ref=e690] [cursor=pointer]
+                - paragraph [ref=e694]: "To run the test:"
+                - generic [ref=e695]:
+                  - generic [ref=e696]: export PYTHONPATH=$PWD pytest -q -s test_flash_attn.py
+                  - button "Copy code to clipboard" [ref=e698] [cursor=pointer]
+                - paragraph [ref=e702]: "Once the package is installed, you can import it as follows:"
+                - generic [ref=e703]:
+                  - generic [ref=e704]: from flash_attn_3 import flash_attn_interface flash_attn_interface.flash_attn_func()
+                  - button "Copy code to clipboard" [ref=e706] [cursor=pointer]
+                - paragraph [ref=e710]:
+                  - text: To install using
+                  - code [ref=e711]: uv
+                  - text: ", in your"
+                  - code [ref=e712]: pyproject.toml
+                  - text: ":"
+                - generic [ref=e713]:
+                  - generic [ref=e714]:
+                    - text: "[project] dependencies = ["
+                    - generic [ref=e715]: "\"flash-attn-3\""
+                    - text: "] [tool.uv] no-build-isolation = true [tool.uv.sources] flash-attn-3 = { git ="
+                    - generic [ref=e716]: "\"https://github.com/Dao-AILab/flash-attention\""
+                    - text: ", subdirectory ="
+                    - generic [ref=e717]: "\"hopper\""
+                    - text: "}"
+                  - button "Copy code to clipboard" [ref=e719] [cursor=pointer]
+                - generic [ref=e723]:
+                  - heading "FlashAttention-4 (CuTeDSL)" [level=2] [ref=e724]
+                  - 'link "Permalink: FlashAttention-4 (CuTeDSL)" [ref=e725] [cursor=pointer]':
+                    - /url: "#flashattention-4-cutedsl"
+                - paragraph [ref=e728]: FlashAttention-4 is written in CuTeDSL and optimized for Hopper and Blackwell GPUs (e.g. H100, B200).
+                - paragraph [ref=e729]: "To install:"
+                - generic [ref=e730]:
+                  - generic [ref=e731]: pip install flash-attn-4
+                  - button "Copy code to clipboard" [ref=e733] [cursor=pointer]
+                - paragraph [ref=e737]:
+                  - text: If you're on CUDA 13, we recommend installing with the
+                  - code [ref=e738]: cu13
+                  - text: "extra for best performance:"
+                - generic [ref=e739]:
+                  - generic [ref=e740]:
+                    - text: pip install
+                    - generic [ref=e741]: "\"flash-attn-4[cu13]\""
+                  - button "Copy code to clipboard" [ref=e743] [cursor=pointer]
+                - paragraph [ref=e747]: "Once installed, you can use it as follows:"
+                - generic [ref=e748]:
+                  - generic [ref=e749]: from flash_attn.cute import flash_attn_func out = flash_attn_func(q, k, v, causal=True)
+                  - button "Copy code to clipboard" [ref=e751] [cursor=pointer]
+                - generic [ref=e755]:
+                  - heading "Installation and features" [level=2] [ref=e756]
+                  - 'link "Permalink: Installation and features" [ref=e757] [cursor=pointer]':
+                    - /url: "#installation-and-features"
+                - paragraph [ref=e760]:
+                  - strong [ref=e761]: "Requirements:"
+                - list [ref=e762]:
+                  - listitem [ref=e763]: CUDA toolkit or ROCm toolkit
+                  - listitem [ref=e764]: PyTorch 2.2 and above.
+                  - listitem [ref=e765]:
+                    - code [ref=e766]: packaging
+                    - text: Python package (
+                    - code [ref=e767]: pip install packaging
+                    - text: )
+                  - listitem [ref=e768]:
+                    - code [ref=e769]: psutil
+                    - text: Python package (
+                    - code [ref=e770]: pip install psutil
+                    - text: )
+                  - listitem [ref=e771]:
+                    - code [ref=e772]: ninja
+                    - text: Python package (
+                    - code [ref=e773]: pip install ninja
+                    - text: ) *
+                  - listitem [ref=e774]:
+                    - text: Linux. Might work for Windows starting v2.3.2 (we've seen a few positive
+                    - link "reports" [ref=e775] [cursor=pointer]:
+                      - /url: https://github.com/Dao-AILab/flash-attention/issues/595
+                    - text: ) but Windows compilation still requires more testing. If you have ideas on how to set up prebuilt CUDA wheels for Windows, please reach out via Github issue.
+                - paragraph [ref=e776]:
+                  - text: "* Make sure that"
+                  - code [ref=e777]: ninja
+                  - text: is installed and that it works correctly (e.g.
+                  - code [ref=e778]: ninja --version
+                  - text: then
+                  - code [ref=e779]: echo $?
+                  - text: should return exit code 0). If not (sometimes
+                  - code [ref=e780]: ninja --version
+                  - text: then
+                  - code [ref=e781]: echo $?
+                  - text: returns a nonzero exit code), uninstall then reinstall
+                  - code [ref=e782]: ninja
+                  - text: (
+                  - code [ref=e783]: pip uninstall -y ninja && pip install ninja
+                  - text: ). Without
+                  - code [ref=e784]: ninja
+                  - text: ", compiling can take a very long time (2h) since it does not use multiple CPU cores. With"
+                  - code [ref=e785]: ninja
+                  - text: compiling takes 3-5 minutes on a 64-core machine using CUDA toolkit.
+                - paragraph [ref=e786]:
+                  - strong [ref=e787]: "To install:"
+                - generic [ref=e788]:
+                  - generic [ref=e789]: pip install flash-attn --no-build-isolation
+                  - button "Copy code to clipboard" [ref=e791] [cursor=pointer]
+                - paragraph [ref=e795]: "Alternatively you can compile from source:"
+                - generic [ref=e796]:
+                  - generic [ref=e797]: python setup.py install
+                  - button "Copy code to clipboard" [ref=e799] [cursor=pointer]
+                - paragraph [ref=e803]:
+                  - text: If your machine has less than 96GB of RAM and lots of CPU cores,
+                  - code [ref=e804]: ninja
+                  - text: might run too many parallel compilation jobs that could exhaust the amount of RAM. To limit the number of parallel compilation jobs, you can set the environment variable
+                  - code [ref=e805]: MAX_JOBS
+                  - text: ":"
+                - generic [ref=e806]:
+                  - generic [ref=e807]: MAX_JOBS=4 pip install flash-attn --no-build-isolation
+                  - button "Copy code to clipboard" [ref=e809] [cursor=pointer]
+                - paragraph [ref=e813]:
+                  - strong [ref=e814]: "Interface:"
+                  - code [ref=e815]: src/flash_attention_interface.py
+                - generic [ref=e816]:
+                  - heading "NVIDIA CUDA Support" [level=3] [ref=e817]
+                  - 'link "Permalink: NVIDIA CUDA Support" [ref=e818] [cursor=pointer]':
+                    - /url: "#nvidia-cuda-support"
+                - paragraph [ref=e821]:
+                  - strong [ref=e822]: "Requirements:"
+                - list [ref=e823]:
+                  - listitem [ref=e824]: CUDA 12.0 and above.
+                - paragraph [ref=e825]:
+                  - text: We recommend the
+                  - link "Pytorch" [ref=e826] [cursor=pointer]:
+                    - /url: https://catalog.ngc.nvidia.com/orgs/nvidia/containers/pytorch
+                  - text: container from Nvidia, which has all the required tools to install FlashAttention.
+                - paragraph [ref=e827]: "FlashAttention-2 with CUDA currently supports:"
+                - list [ref=e828]:
+                  - listitem [ref=e829]:
+                    - text: Ampere, Ada, or Hopper GPUs (e.g., A100, RTX 3090, RTX 4090, H100). For Turing GPUs (T4, RTX 2080), see the separate
+                    - link "flash-attention-turing" [ref=e830] [cursor=pointer]:
+                      - /url: https://github.com/ssiu/flash-attention-turing
+                    - text: repo, which supports a core subset of FlashAttention features on Turing.
+                  - listitem [ref=e831]: Datatype fp16 and bf16 (bf16 requires Ampere, Ada, or Hopper GPUs).
+                  - listitem [ref=e832]:
+                    - text: All head dimensions up to 256.
+                    - deletion [ref=e833]: Head dim > 192 backward requires A100/A800 or H100/H800
+                    - text: . Head dim 256 backward now works on consumer GPUs (if there's no dropout) as of flash-attn 2.5.5.
+                - generic [ref=e834]:
+                  - heading "AMD ROCm Support" [level=3] [ref=e835]
+                  - 'link "Permalink: AMD ROCm Support" [ref=e836] [cursor=pointer]':
+                    - /url: "#amd-rocm-support"
+                - paragraph [ref=e839]:
+                  - text: ROCm version has two backends. There is
+                  - link "composable_kernel" [ref=e840] [cursor=pointer]:
+                    - /url: https://github.com/ROCm/composable_kernel
+                  - text: (ck) which is the default backend and a
+                  - link "Triton" [ref=e841] [cursor=pointer]:
+                    - /url: https://github.com/triton-lang/triton
+                  - text: backend. They provide an implementation of FlashAttention-2.
+                - paragraph [ref=e842]:
+                  - strong [ref=e843]: "Requirements:"
+                - list [ref=e844]:
+                  - listitem [ref=e845]: ROCm 6.0 and above.
+                - paragraph [ref=e846]:
+                  - text: We recommend the
+                  - link "Pytorch" [ref=e847] [cursor=pointer]:
+                    - /url: https://hub.docker.com/r/rocm/pytorch
+                  - text: container from ROCm, which has all the required tools to install FlashAttention.
+                - generic [ref=e848]:
+                  - heading "Composable Kernel Backend" [level=4] [ref=e849]
+                  - 'link "Permalink: Composable Kernel Backend" [ref=e850] [cursor=pointer]':
+                    - /url: "#composable-kernel-backend"
+                - paragraph [ref=e853]: "FlashAttention-2 ROCm CK backend currently supports:"
+                - list [ref=e854]:
+                  - listitem [ref=e855]: MI200x, MI250x, MI300x, MI355x, and RDNA 3/4 GPUs.
+                  - listitem [ref=e856]: Datatype fp16 and bf16
+                  - listitem [ref=e857]: Both forward's and backward's head dimensions up to 256.
+                - generic [ref=e858]:
+                  - heading "Triton Backend" [level=4] [ref=e859]
+                  - 'link "Permalink: Triton Backend" [ref=e860] [cursor=pointer]':
+                    - /url: "#triton-backend"
+                - paragraph [ref=e863]:
+                  - text: The Triton implementation of
+                  - link "Flash Attention" [ref=e864] [cursor=pointer]:
+                    - /url: https://tridao.me/publications/flash2/flash2.pdf
+                  - text: supports AMD's CDNA (MI200, MI300) and RDNA GPUs using fp16, bf16, and fp32 datatypes. It provides forward and backward passes with causal masking, variable sequence lengths, arbitrary Q/KV sequence lengths and head sizes, MQA/GQA, dropout, rotary embeddings, ALiBi, paged attention, and FP8 (via the Flash Attention v3 interface). Sliding window attention is currently a work in progress.
+                - paragraph [ref=e865]:
+                  - text: The Triton backend kernels are provided by the
+                  - link "aiter" [ref=e866] [cursor=pointer]:
+                    - /url: https://github.com/ROCm/aiter
+                  - text: package, included as a git submodule at
+                  - code [ref=e867]: third_party/aiter
+                  - text: and automatically installed during setup.
+                - paragraph [ref=e868]:
+                  - text: To install, first get PyTorch for ROCm from
+                  - link "https://pytorch.org/get-started/locally/" [ref=e869] [cursor=pointer]:
+                    - /url: https://pytorch.org/get-started/locally/
+                  - text: ", then install Flash Attention:"
+                - generic [ref=e870]:
+                  - generic [ref=e871]:
+                    - text: cd flash-attention FLASH_ATTENTION_TRITON_AMD_ENABLE=
+                    - generic [ref=e872]: "\"TRUE\""
+                    - text: pip install --no-build-isolation .
+                  - button "Copy code to clipboard" [ref=e874] [cursor=pointer]
+                - paragraph [ref=e878]: "To use a specific aiter commit (e.g., for testing or development):"
+                - generic [ref=e879]:
+                  - generic [ref=e880]:
+                    - text: cd flash-attention cd third_party/aiter && git fetch origin && git checkout <commit-sha> && cd ../.. FLASH_ATTENTION_TRITON_AMD_ENABLE=
+                    - generic [ref=e881]: "\"TRUE\""
+                    - text: pip install --no-build-isolation .
+                  - button "Copy code to clipboard" [ref=e883] [cursor=pointer]
+                - paragraph [ref=e887]: "To run the tests (note: full suite takes hours):"
+                - generic [ref=e888]:
+                  - generic [ref=e889]:
+                    - text: FLASH_ATTENTION_TRITON_AMD_ENABLE=
+                    - generic [ref=e890]: "\"TRUE\""
+                    - text: pytest tests/test_flash_attn_triton_amd.py
+                  - button "Copy code to clipboard" [ref=e892] [cursor=pointer]
+                - paragraph [ref=e896]:
+                  - text: The Triton backend uses a default kernel configuration optimized for determinism and reasonable performance across workloads. For peak throughput, enable
+                  - code [ref=e897]: FLASH_ATTENTION_TRITON_AMD_AUTOTUNE="TRUE"
+                  - text: to search for optimal settings, which incurs a one-time warmup cost.
+                - paragraph [ref=e898]:
+                  - text: Alternativly, if
+                  - emphasis [ref=e899]: not
+                  - text: autotuning,
+                  - code [ref=e900]: FLASH_ATTENTION_FWD_TRITON_AMD_CONFIG_JSON
+                  - text: may be used to set a single triton config overriding the hardcoded defaults for
+                  - code [ref=e901]: attn_fwd
+                  - text: . E.g.
+                - generic [ref=e902]:
+                  - generic [ref=e903]:
+                    - text: FLASH_ATTENTION_FWD_TRITON_AMD_CONFIG_JSON=
+                    - generic [ref=e904]: "'{\"BLOCK_M\":128,\"BLOCK_N\":64,\"waves_per_eu\":1,\"PRE_LOAD_V\":false,\"num_stages\":1,\"num_warps\":8}'"
+                  - button "Copy code to clipboard" [ref=e906] [cursor=pointer]
+                - paragraph [ref=e910]: "For a quick start with Docker:"
+                - generic [ref=e911]:
+                  - generic [ref=e912]:
+                    - text: FROM rocm/pytorch:latest WORKDIR /workspace
+                    - generic [ref=e913]: "# build flash attention with triton backend"
+                    - text: RUN git clone https://github.com/Dao-AILab/flash-attention &&\ cd flash-attention &&\ FLASH_ATTENTION_TRITON_AMD_ENABLE="TRUE" pip install --no-build-isolation .
+                    - generic [ref=e914]: "# set working dir"
+                    - text: WORKDIR /workspace/flash-attention
+                    - generic [ref=e915]: "# set env variable to use triton backend"
+                    - text: ENV FLASH_ATTENTION_TRITON_AMD_ENABLE="TRUE"
+                  - button "Copy code to clipboard" [ref=e917] [cursor=pointer]
+                - paragraph [ref=e921]: "Build and run:"
+                - generic [ref=e922]:
+                  - generic [ref=e923]: docker build -t flash-attn-triton . docker run -it --network=host --user root --group-add video --cap-add=SYS_PTRACE --security-opt seccomp=unconfined --ipc=host --shm-size 16G --device=/dev/kfd --device=/dev/dri flash-attn-triton
+                  - button "Copy code to clipboard" [ref=e925] [cursor=pointer]
+                - generic [ref=e929]:
+                  - heading "How to use FlashAttention" [level=2] [ref=e930]
+                  - 'link "Permalink: How to use FlashAttention" [ref=e931] [cursor=pointer]':
+                    - /url: "#how-to-use-flashattention"
+                - paragraph [ref=e934]: "The main functions implement scaled dot product attention (softmax(Q @ K^T * softmax_scale) @ V):"
+                - generic [ref=e935]:
+                  - generic [ref=e936]: from flash_attn import flash_attn_qkvpacked_func, flash_attn_func
+                  - button "Copy code to clipboard" [ref=e938] [cursor=pointer]
+                - generic [ref=e942]:
+                  - generic [ref=e943]: "flash_attn_qkvpacked_func(qkv, dropout_p=0.0, softmax_scale=None, causal=False, window_size=(-1, -1), alibi_slopes=None, deterministic=False): \"\"\"dropout_p should be set to 0.0 during evaluation If Q, K, V are already stacked into 1 tensor, this function will be faster than calling flash_attn_func on Q, K, V since the backward pass avoids explicit concatenation of the gradients of Q, K, V. If window_size != (-1, -1), implements sliding window local attention. Query at position i will only attend to keys between [i - window_size[0], i + window_size[1]] inclusive. Arguments: qkv: (batch_size, seqlen, 3, nheads, headdim) dropout_p: float. Dropout probability. softmax_scale: float. The scaling of QK^T before applying softmax. Default to 1 / sqrt(headdim). causal: bool. Whether to apply causal attention mask (e.g., for auto-regressive modeling). window_size: (left, right). If not (-1, -1), implements sliding window local attention. alibi_slopes: (nheads,) or (batch_size, nheads), fp32. A bias of (-alibi_slope * |i - j|) is added to the attention score of query i and key j. deterministic: bool. Whether to use the deterministic implementation of the backward pass, which is slightly slower and uses more memory. The forward pass is always deterministic. Return: out: (batch_size, seqlen, nheads, headdim). \"\"\""
+                  - button "Copy code to clipboard" [ref=e945] [cursor=pointer]
+                - generic [ref=e949]:
+                  - generic [ref=e950]: "flash_attn_func(q, k, v, dropout_p=0.0, softmax_scale=None, causal=False, window_size=(-1, -1), alibi_slopes=None, deterministic=False): \"\"\"dropout_p should be set to 0.0 during evaluation Supports multi-query and grouped-query attention (MQA/GQA) by passing in KV with fewer heads than Q. Note that the number of heads in Q must be divisible by the number of heads in KV. For example, if Q has 6 heads and K, V have 2 heads, head 0, 1, 2 of Q will attention to head 0 of K, V, and head 3, 4, 5 of Q will attention to head 1 of K, V. If window_size != (-1, -1), implements sliding window local attention. Query at position i will only attend to keys between [i + seqlen_k - seqlen_q - window_size[0], i + seqlen_k - seqlen_q + window_size[1]] inclusive. Arguments: q: (batch_size, seqlen, nheads, headdim) k: (batch_size, seqlen, nheads_k, headdim) v: (batch_size, seqlen, nheads_k, headdim) dropout_p: float. Dropout probability. softmax_scale: float. The scaling of QK^T before applying softmax. Default to 1 / sqrt(headdim). causal: bool. Whether to apply causal attention mask (e.g., for auto-regressive modeling). window_size: (left, right). If not (-1, -1), implements sliding window local attention. alibi_slopes: (nheads,) or (batch_size, nheads), fp32. A bias of (-alibi_slope * |i + seqlen_k - seqlen_q - j|) is added to the attention score of query i and key j. deterministic: bool. Whether to use the deterministic implementation of the backward pass, which is slightly slower and uses more memory. The forward pass is always deterministic. Return: out: (batch_size, seqlen, nheads, headdim). \"\"\""
+                  - button "Copy code to clipboard" [ref=e952] [cursor=pointer]
+                - generic [ref=e956]:
+                  - generic [ref=e957]: "def flash_attn_with_kvcache( q, k_cache, v_cache, k=None, v=None, rotary_cos=None, rotary_sin=None, cache_seqlens: Optional[Union[(int, torch.Tensor)]] = None, cache_batch_idx: Optional[torch.Tensor] = None, block_table: Optional[torch.Tensor] = None, softmax_scale=None, causal=False, window_size=(-1, -1), # -1 means infinite context window rotary_interleaved=True, alibi_slopes=None, ): \"\"\" If k and v are not None, k_cache and v_cache will be updated *inplace* with the new values from k and v. This is useful for incremental decoding: you can pass in the cached keys/values from the previous step, and update them with the new keys/values from the current step, and do attention with the updated cache, all in 1 kernel. If you pass in k / v, you must make sure that the cache is large enough to hold the new values. For example, the KV cache could be pre-allocated with the max sequence length, and you can use cache_seqlens to keep track of the current sequence lengths of each sequence in the batch. Also apply rotary embedding if rotary_cos and rotary_sin are passed in. The key @k will be rotated by rotary_cos and rotary_sin at indices cache_seqlens, cache_seqlens + 1, etc. If causal or local (i.e., window_size != (-1, -1)), the query @q will be rotated by rotary_cos and rotary_sin at indices cache_seqlens, cache_seqlens + 1, etc. If not causal and not local, the query @q will be rotated by rotary_cos and rotary_sin at indices cache_seqlens only (i.e. we consider all tokens in @q to be at position cache_seqlens). See tests/test_flash_attn.py::test_flash_attn_kvcache for examples of how to use this function. Supports multi-query and grouped-query attention (MQA/GQA) by passing in KV with fewer heads than Q. Note that the number of heads in Q must be divisible by the number of heads in KV. For example, if Q has 6 heads and K, V have 2 heads, head 0, 1, 2 of Q will attention to head 0 of K, V, and head 3, 4, 5 of Q will attention to head 1 of K, V. If causal=True, the causal mask is aligned to the bottom right corner of the attention matrix. For example, if seqlen_q = 2 and seqlen_k = 5, the causal mask (1 = keep, 0 = masked out) is: 1 1 1 1 0 1 1 1 1 1 If seqlen_q = 5 and seqlen_k = 2, the causal mask is: 0 0 0 0 0 0 1 0 1 1 If the row of the mask is all zero, the output will be zero. If window_size != (-1, -1), implements sliding window local attention. Query at position i will only attend to keys between [i + seqlen_k - seqlen_q - window_size[0], i + seqlen_k - seqlen_q + window_size[1]] inclusive. Note: Does not support backward pass. Arguments: q: (batch_size, seqlen, nheads, headdim) k_cache: (batch_size_cache, seqlen_cache, nheads_k, headdim) if there's no block_table, or (num_blocks, page_block_size, nheads_k, headdim) if there's a block_table (i.e. paged KV cache) page_block_size must be a multiple of 256. v_cache: (batch_size_cache, seqlen_cache, nheads_k, headdim) if there's no block_table, or (num_blocks, page_block_size, nheads_k, headdim) if there's a block_table (i.e. paged KV cache) k [optional]: (batch_size, seqlen_new, nheads_k, headdim). If not None, we concatenate k with k_cache, starting at the indices specified by cache_seqlens. v [optional]: (batch_size, seqlen_new, nheads_k, headdim). Similar to k. rotary_cos [optional]: (seqlen_ro, rotary_dim / 2). If not None, we apply rotary embedding to k and q. Only applicable if k and v are passed in. rotary_dim must be divisible by 16. rotary_sin [optional]: (seqlen_ro, rotary_dim / 2). Similar to rotary_cos. cache_seqlens: int, or (batch_size,), dtype torch.int32. The sequence lengths of the KV cache. block_table [optional]: (batch_size, max_num_blocks_per_seq), dtype torch.int32. cache_batch_idx: (batch_size,), dtype torch.int32. The indices used to index into the KV cache. If None, we assume that the batch indices are [0, 1, 2, ..., batch_size - 1]. If the indices are not distinct, and k and v are provided, the values updated in the cache might come from any of the duplicate indices. softmax_scale: float. The scaling of QK^T before applying softmax. Default to 1 / sqrt(headdim). causal: bool. Whether to apply causal attention mask (e.g., for auto-regressive modeling). window_size: (left, right). If not (-1, -1), implements sliding window local attention. rotary_interleaved: bool. Only applicable if rotary_cos and rotary_sin are passed in. If True, rotary embedding will combine dimensions 0 & 1, 2 & 3, etc. If False, rotary embedding will combine dimensions 0 & rotary_dim / 2, 1 & rotary_dim / 2 + 1 (i.e. GPT-NeoX style). alibi_slopes: (nheads,) or (batch_size, nheads), fp32. A bias of (-alibi_slope * |i + seqlen_k - seqlen_q - j|) is added to the attention score of query i and key j. Return: out: (batch_size, seqlen, nheads, headdim). \"\"\""
+                  - button "Copy code to clipboard" [ref=e959] [cursor=pointer]
+                - paragraph [ref=e963]:
+                  - text: To see how these functions are used in a multi-head attention layer (which includes QKV projection, output projection), see the MHA
+                  - link "implementation" [ref=e964] [cursor=pointer]:
+                    - /url: https://github.com/Dao-AILab/flash-attention/blob/main/flash_attn/modules/mha.py
+                  - text: .
+                - generic [ref=e965]:
+                  - heading "Using with 🤗 Kernels" [level=3] [ref=e966]
+                  - 'link "Permalink: Using with 🤗 Kernels" [ref=e967] [cursor=pointer]':
+                    - /url: "#using-with--kernels"
+                - paragraph [ref=e970]:
+                  - text: If your hardware environment belongs to any of the above-mentioned, you can also use the
+                  - link [ref=e971] [cursor=pointer]:
+                    - /url: https://github.com/huggingface/kernels
+                    - code [ref=e972]: kernels
+                    - text: library
+                  - text: to use Flash Attention 2 and 3 right away.
+                - generic [ref=e973]:
+                  - generic [ref=e974]: "# pip install kernels from kernels import get_kernel # FA2 fa_module = get_kernel(\"kernels-community/flash-attn2\", version=1) flash_attn_func = fa_module.flash_attn_func # FA3 fa3_module = get_kernel(\"kernels-community/flash-attn3\", version=1) flash_attn_func = fa3_module.flash_attn_func"
+                  - button "Copy code to clipboard" [ref=e976] [cursor=pointer]
+                - generic [ref=e980]:
+                  - heading "Changelog" [level=2] [ref=e981]
+                  - 'link "Permalink: Changelog" [ref=e982] [cursor=pointer]':
+                    - /url: "#changelog"
+                - generic [ref=e985]:
+                  - 'heading "2.0: Complete rewrite, 2x faster" [level=3] [ref=e986]'
+                  - 'link "Permalink: 2.0: Complete rewrite, 2x faster" [ref=e987] [cursor=pointer]':
+                    - /url: "#20-complete-rewrite-2x-faster"
+                - paragraph [ref=e990]: Upgrading from FlashAttention (1.x) to FlashAttention-2
+                - paragraph [ref=e991]: "These functions have been renamed:"
+                - list [ref=e992]:
+                  - listitem [ref=e993]:
+                    - code [ref=e994]: flash_attn_unpadded_func
+                    - text: "->"
+                    - code [ref=e995]: flash_attn_varlen_func
+                  - listitem [ref=e996]:
+                    - code [ref=e997]: flash_attn_unpadded_qkvpacked_func
+                    - text: "->"
+                    - code [ref=e998]: flash_attn_varlen_qkvpacked_func
+                  - listitem [ref=e999]:
+                    - code [ref=e1000]: flash_attn_unpadded_kvpacked_func
+                    - text: "->"
+                    - code [ref=e1001]: flash_attn_varlen_kvpacked_func
+                - paragraph [ref=e1002]: "If the inputs have the same sequence lengths in the same batch, it is simpler and faster to use these functions:"
+                - generic [ref=e1003]:
+                  - generic [ref=e1004]: flash_attn_qkvpacked_func(qkv, dropout_p=0.0, softmax_scale=None, causal=False)
+                  - button "Copy code to clipboard" [ref=e1006] [cursor=pointer]
+                - generic [ref=e1010]:
+                  - generic [ref=e1011]: flash_attn_func(q, k, v, dropout_p=0.0, softmax_scale=None, causal=False)
+                  - button "Copy code to clipboard" [ref=e1013] [cursor=pointer]
+                - generic [ref=e1017]:
+                  - 'heading "2.1: Change behavior of causal flag" [level=3] [ref=e1018]'
+                  - 'link "Permalink: 2.1: Change behavior of causal flag" [ref=e1019] [cursor=pointer]':
+                    - /url: "#21-change-behavior-of-causal-flag"
+                - paragraph [ref=e1022]: If seqlen_q != seqlen_k and causal=True, the causal mask is aligned to the bottom right corner of the attention matrix, instead of the top-left corner.
+                - paragraph [ref=e1023]: "For example, if seqlen_q = 2 and seqlen_k = 5, the causal mask (1 = keep, 0 = masked out) is: v2.0: 1 0 0 0 0 1 1 0 0 0 v2.1: 1 1 1 1 0 1 1 1 1 1"
+                - paragraph [ref=e1024]: "If seqlen_q = 5 and seqlen_k = 2, the causal mask is: v2.0: 1 0 1 1 1 1 1 1 1 1 v2.1: 0 0 0 0 0 0 1 0 1 1 If the row of the mask is all zero, the output will be zero."
+                - generic [ref=e1025]:
+                  - 'heading "2.2: Optimize for inference" [level=3] [ref=e1026]'
+                  - 'link "Permalink: 2.2: Optimize for inference" [ref=e1027] [cursor=pointer]':
+                    - /url: "#22-optimize-for-inference"
+                - paragraph [ref=e1030]: Optimize for inference (iterative decoding) when query has very small sequence length (e.g., query sequence length = 1). The bottleneck here is to load KV cache as fast as possible, and we split the loading across different thread blocks, with a separate kernel to combine results.
+                - paragraph [ref=e1031]:
+                  - text: See the function
+                  - code [ref=e1032]: flash_attn_with_kvcache
+                  - text: with more features for inference (perform rotary embedding, updating KV cache inplace).
+                - paragraph [ref=e1033]: Thanks to the xformers team, and in particular Daniel Haziza, for this collaboration.
+                - generic [ref=e1034]:
+                  - 'heading "2.3: Local (i.e., sliding window) attention" [level=3] [ref=e1035]'
+                  - 'link "Permalink: 2.3: Local (i.e., sliding window) attention" [ref=e1036] [cursor=pointer]':
+                    - /url: "#23-local-ie-sliding-window-attention"
+                - paragraph [ref=e1039]:
+                  - text: Implement sliding window attention (i.e., local attention). Thanks to
+                  - link "Mistral AI" [ref=e1040] [cursor=pointer]:
+                    - /url: https://mistral.ai/
+                  - text: and in particular Timothée Lacroix for this contribution. Sliding window was used in the
+                  - link "Mistral 7B" [ref=e1041] [cursor=pointer]:
+                    - /url: https://mistral.ai/news/announcing-mistral-7b/
+                  - text: model.
+                - generic [ref=e1042]:
+                  - 'heading "2.4: ALiBi (attention with linear bias), deterministic backward pass." [level=3] [ref=e1043]'
+                  - 'link "Permalink: 2.4: ALiBi (attention with linear bias), deterministic backward pass." [ref=e1044] [cursor=pointer]':
+                    - /url: "#24-alibi-attention-with-linear-bias-deterministic-backward-pass"
+                - paragraph [ref=e1047]: Implement ALiBi (Press et al., 2021). Thanks to Sanghun Cho from Kakao Brain for this contribution.
+                - paragraph [ref=e1048]:
+                  - text: Implement deterministic backward pass. Thanks to engineers from
+                  - link "Meituan" [ref=e1049] [cursor=pointer]:
+                    - /url: /Dao-AILab/flash-attention/blob/main/www.meituan.com
+                  - text: for this contribution.
+                - generic [ref=e1050]:
+                  - 'heading "2.5: Paged KV cache." [level=3] [ref=e1051]'
+                  - 'link "Permalink: 2.5: Paged KV cache." [ref=e1052] [cursor=pointer]':
+                    - /url: "#25-paged-kv-cache"
+                - paragraph [ref=e1055]:
+                  - text: Support paged KV cache (i.e.,
+                  - link "PagedAttention" [ref=e1056] [cursor=pointer]:
+                    - /url: https://arxiv.org/abs/2309.06180
+                  - text: ). Thanks to @beginlner for this contribution.
+                - generic [ref=e1057]:
+                  - 'heading "2.6: Softcapping." [level=3] [ref=e1058]'
+                  - 'link "Permalink: 2.6: Softcapping." [ref=e1059] [cursor=pointer]':
+                    - /url: "#26-softcapping"
+                - paragraph [ref=e1062]: Support attention with softcapping, as used in Gemma-2 and Grok models. Thanks to @Narsil and @lucidrains for this contribution.
+                - generic [ref=e1063]:
+                  - 'heading "2.7: Compatibility with torch compile" [level=3] [ref=e1064]'
+                  - 'link "Permalink: 2.7: Compatibility with torch compile" [ref=e1065] [cursor=pointer]':
+                    - /url: "#27-compatibility-with-torch-compile"
+                - paragraph [ref=e1068]: Thanks to @ani300 for this contribution.
+                - generic [ref=e1069]:
+                  - heading "Performance" [level=2] [ref=e1070]
+                  - 'link "Permalink: Performance" [ref=e1071] [cursor=pointer]':
+                    - /url: "#performance"
+                - paragraph [ref=e1074]: We present expected speedup (combined forward + backward pass) and memory savings from using FlashAttention against PyTorch standard attention, depending on sequence length, on different GPUs (speedup depends on memory bandwidth - we see more speedup on slower GPU memory).
+                - paragraph [ref=e1075]: "We currently have benchmarks for these GPUs:"
+                - list [ref=e1076]:
+                  - listitem [ref=e1077]:
+                    - link "A100" [ref=e1078] [cursor=pointer]:
+                      - /url: "#a100"
+                  - listitem [ref=e1079]:
+                    - link "H100" [ref=e1080] [cursor=pointer]:
+                      - /url: "#h100"
+                - generic [ref=e1081]:
+                  - heading "A100" [level=3] [ref=e1082]
+                  - 'link "Permalink: A100" [ref=e1083] [cursor=pointer]':
+                    - /url: "#a100"
+                - paragraph [ref=e1086]: "We display FlashAttention speedup using these parameters:"
+                - list [ref=e1087]:
+                  - listitem [ref=e1088]: Head dimension 64 or 128, hidden dimension 2048 (i.e. either 32 or 16 heads).
+                  - listitem [ref=e1089]: Sequence length 512, 1k, 2k, 4k, 8k, 16k.
+                  - listitem [ref=e1090]: Batch size set to 16k / seqlen.
+                - generic [ref=e1091]:
+                  - heading "Speedup" [level=4] [ref=e1092]
+                  - 'link "Permalink: Speedup" [ref=e1093] [cursor=pointer]':
+                    - /url: "#speedup"
+                - paragraph [ref=e1096]:
+                  - link [ref=e1097] [cursor=pointer]:
+                    - /url: /Dao-AILab/flash-attention/blob/main/assets/flash2_a100_fwd_bwd_benchmark.png
+                    - img "FlashAttention speedup on A100 80GB SXM5 with FP16/BF16" [ref=e1098]
+                - generic [ref=e1099]:
+                  - heading "Memory" [level=4] [ref=e1100]
+                  - 'link "Permalink: Memory" [ref=e1101] [cursor=pointer]':
+                    - /url: "#memory"
+                - paragraph [ref=e1104]:
+                  - link [ref=e1105] [cursor=pointer]:
+                    - /url: /Dao-AILab/flash-attention/blob/main/assets/flashattn_memory.jpg
+                    - img "FlashAttention memory" [ref=e1106]
+                - paragraph [ref=e1107]: We show memory savings in this graph (note that memory footprint is the same no matter if you use dropout or masking). Memory savings are proportional to sequence length -- since standard attention has memory quadratic in sequence length, whereas FlashAttention has memory linear in sequence length. We see 10X memory savings at sequence length 2K, and 20X at 4K. As a result, FlashAttention can scale to much longer sequence lengths.
+                - generic [ref=e1108]:
+                  - heading "H100" [level=3] [ref=e1109]
+                  - 'link "Permalink: H100" [ref=e1110] [cursor=pointer]':
+                    - /url: "#h100"
+                - paragraph [ref=e1113]:
+                  - link [ref=e1114] [cursor=pointer]:
+                    - /url: /Dao-AILab/flash-attention/blob/main/assets/flash2_h100_fwd_bwd_benchmark.png
+                    - img "FlashAttention speedup on H100 SXM5 with FP16/BF16" [ref=e1115]
+                - generic [ref=e1116]:
+                  - heading "Full model code and training script" [level=2] [ref=e1117]
+                  - 'link "Permalink: Full model code and training script" [ref=e1118] [cursor=pointer]':
+                    - /url: "#full-model-code-and-training-script"
+                - paragraph [ref=e1121]:
+                  - text: We have released the full GPT model
+                  - link "implementation" [ref=e1122] [cursor=pointer]:
+                    - /url: https://github.com/Dao-AILab/flash-attention/blob/main/flash_attn/models/gpt.py
+                  - text: . We also provide optimized implementations of other layers (e.g., MLP, LayerNorm, cross-entropy loss, rotary embedding). Overall this speeds up training by 3-5x compared to the baseline implementation from Huggingface, reaching up to 225 TFLOPs/sec per A100, equivalent to 72% model FLOPs utilization (we don't need any activation checkpointing).
+                - paragraph [ref=e1123]:
+                  - text: We also include a training
+                  - link "script" [ref=e1124] [cursor=pointer]:
+                    - /url: https://github.com/Dao-AILab/flash-attention/tree/main/training
+                  - text: to train GPT2 on Openwebtext and GPT3 on The Pile.
+                - generic [ref=e1125]:
+                  - heading "Triton implementation of FlashAttention" [level=2] [ref=e1126]
+                  - 'link "Permalink: Triton implementation of FlashAttention" [ref=e1127] [cursor=pointer]':
+                    - /url: "#triton-implementation-of-flashattention"
+                - paragraph [ref=e1130]:
+                  - text: "Phil Tillet (OpenAI) has an experimental implementation of FlashAttention in Triton:"
+                  - link "https://github.com/openai/triton/blob/master/python/tutorials/06-fused-attention.py" [ref=e1131] [cursor=pointer]:
+                    - /url: https://github.com/openai/triton/blob/master/python/tutorials/06-fused-attention.py
+                - paragraph [ref=e1132]: As Triton is a higher-level language than CUDA, it might be easier to understand and experiment with. The notations in the Triton implementation are also closer to what's used in our paper.
+                - paragraph [ref=e1133]:
+                  - text: "We also have an experimental implementation in Triton that support attention bias (e.g. ALiBi):"
+                  - link "https://github.com/Dao-AILab/flash-attention/blob/main/flash_attn/flash_attn_triton.py" [ref=e1134] [cursor=pointer]:
+                    - /url: https://github.com/Dao-AILab/flash-attention/blob/main/flash_attn/flash_attn_triton.py
+                - generic [ref=e1135]:
+                  - heading "Tests" [level=2] [ref=e1136]
+                  - 'link "Permalink: Tests" [ref=e1137] [cursor=pointer]':
+                    - /url: "#tests"
+                - paragraph [ref=e1140]: We test that FlashAttention produces the same output and gradient as a reference implementation, up to some numerical tolerance. In particular, we check that the maximum numerical error of FlashAttention is at most twice the numerical error of a baseline implementation in Pytorch (for different head dimensions, input dtype, sequence length, causal / non-causal).
+                - paragraph [ref=e1141]: "To run the tests:"
+                - generic [ref=e1142]:
+                  - generic [ref=e1143]: pytest -q -s tests/test_flash_attn.py
+                  - button "Copy code to clipboard" [ref=e1145] [cursor=pointer]
+                - generic [ref=e1149]:
+                  - heading "When you encounter issues" [level=2] [ref=e1150]
+                  - 'link "Permalink: When you encounter issues" [ref=e1151] [cursor=pointer]':
+                    - /url: "#when-you-encounter-issues"
+                - paragraph [ref=e1154]: This new release of FlashAttention-2 has been tested on several GPT-style models, mostly on A100 GPUs.
+                - paragraph [ref=e1155]: If you encounter bugs, please open a GitHub Issue!
+                - generic [ref=e1156]:
+                  - heading "Tests" [level=2] [ref=e1157]
+                  - 'link "Permalink: Tests" [ref=e1158] [cursor=pointer]':
+                    - /url: "#tests-1"
+                - paragraph [ref=e1161]: "To run the tests:"
+                - generic [ref=e1162]:
+                  - generic [ref=e1163]: pytest tests/test_flash_attn_ck.py
+                  - button "Copy code to clipboard" [ref=e1165] [cursor=pointer]
+                - generic [ref=e1169]:
+                  - heading "Citation" [level=2] [ref=e1170]
+                  - 'link "Permalink: Citation" [ref=e1171] [cursor=pointer]':
+                    - /url: "#citation"
+                - paragraph [ref=e1174]: "If you use this codebase, or otherwise found our work valuable, please cite:"
+                - generic [ref=e1175]:
+                  - code [ref=e1177]: "@inproceedings{dao2022flashattention, title={Flash{A}ttention: Fast and Memory-Efficient Exact Attention with {IO}-Awareness}, author={Dao, Tri and Fu, Daniel Y. and Ermon, Stefano and Rudra, Atri and R{\\'e}, Christopher}, booktitle={Advances in Neural Information Processing Systems (NeurIPS)}, year={2022} } @inproceedings{dao2023flashattention2, title={Flash{A}ttention-2: Faster Attention with Better Parallelism and Work Partitioning}, author={Dao, Tri}, booktitle={International Conference on Learning Representations (ICLR)}, year={2024} }"
+                  - button "Copy code to clipboard" [ref=e1179] [cursor=pointer]
+        - generic [ref=e1185]:
+          - generic [ref=e1186]:
+            - heading "About" [level=2] [ref=e1187]
+            - paragraph [ref=e1188]: Fast and memory-efficient exact attention
+            - heading "Resources" [level=3] [ref=e1189]
+            - link "Readme" [ref=e1191] [cursor=pointer]:
+              - /url: "#readme-ov-file"
+            - link "BSD-3-Clause license" [ref=e1195] [cursor=pointer]:
+              - /url: "#BSD-3-Clause-1-ov-file"
+            - link "Activity" [ref=e1199] [cursor=pointer]:
+              - /url: /Dao-AILab/flash-attention/activity
+            - link "Custom properties" [ref=e1203] [cursor=pointer]:
+              - /url: /Dao-AILab/flash-attention/custom-properties
+            - heading "Stars" [level=3] [ref=e1206]
+            - generic [ref=e1208]:
+              - strong [ref=e1211]: 24.8k
+              - text: stars
+            - heading "Watchers" [level=3] [ref=e1212]
+            - generic [ref=e1214]:
+              - strong [ref=e1217]: "150"
+              - text: watching
+            - heading "Forks" [level=3] [ref=e1218]
+            - link [ref=e1220] [cursor=pointer]:
+              - /url: /Dao-AILab/flash-attention/forks
+              - strong [ref=e1224]: 3.0k
+              - text: forks
+            - link "Report repository" [ref=e1226] [cursor=pointer]:
+              - /url: /contact/report-content?content_url=https%3A%2F%2Fgithub.com%2FDao-AILab%2Fflash-attention&report=Dao-AILab+%28user%29
+          - generic [ref=e1278]:
+            - heading "Releases (119)" [level=2] [ref=e1279]:
+              - generic [ref=e1280]:
+                - link "Releases" [ref=e1281] [cursor=pointer]:
+                  - /url: /Dao-AILab/flash-attention/releases
+                - generic [ref=e1282]: "119"
+                - generic [ref=e1283]: (119)
+            - link "v2.8.3.post1 Latest Jun 10, 20262 months ago" [ref=e1284] [cursor=pointer]:
+              - /url: /Dao-AILab/flash-attention/releases/tag/v2.8.3.post1
+              - generic [ref=e1287]:
+                - generic [ref=e1288]:
+                  - generic "v2.8.3.post1" [ref=e1289]
+                  - generic [ref=e1290]: Latest
+                - generic [ref=e1291]: Jun 10, 20262 months ago
+            - link "+ 118 releases" [ref=e1293] [cursor=pointer]:
+              - /url: /Dao-AILab/flash-attention/releases
+          - generic [ref=e1294]:
+            - heading "Contributors (213)" [level=2] [ref=e1295]:
+              - generic [ref=e1296]:
+                - link "Contributors" [ref=e1297] [cursor=pointer]:
+                  - /url: /Dao-AILab/flash-attention/graphs/contributors
+                - generic [ref=e1298]: "213"
+                - generic [ref=e1299]: (213)
+            - list [ref=e1300]:
+              - listitem [ref=e1301]:
+                - link [ref=e1302] [cursor=pointer]:
+                  - /url: /tridao
+                  - img "@tridao" [ref=e1303]
+              - listitem [ref=e1304]:
+                - link [ref=e1305] [cursor=pointer]:
+                  - /url: /drisspg
+                  - img "@drisspg" [ref=e1306]
+              - listitem [ref=e1307]:
+                - link [ref=e1308] [cursor=pointer]:
+                  - /url: /Johnsonms
+                  - img "@Johnsonms" [ref=e1309]
+              - listitem [ref=e1310]:
+                - link [ref=e1311] [cursor=pointer]:
+                  - /url: /jayhshah
+                  - img "@jayhshah" [ref=e1312]
+              - listitem [ref=e1313]:
+                - link [ref=e1314] [cursor=pointer]:
+                  - /url: /piercefreeman
+                  - img "@piercefreeman" [ref=e1315]
+              - listitem [ref=e1316]:
+                - link [ref=e1317] [cursor=pointer]:
+                  - /url: /reubenconducts
+                  - img "@reubenconducts" [ref=e1318]
+              - listitem [ref=e1319]:
+                - link [ref=e1320] [cursor=pointer]:
+                  - /url: /guilhermeleobas
+                  - img "@guilhermeleobas" [ref=e1321]
+              - listitem [ref=e1322]:
+                - link [ref=e1323] [cursor=pointer]:
+                  - /url: /ksivaman
+                  - img "@ksivaman" [ref=e1324]
+              - listitem [ref=e1325]:
+                - link [ref=e1326] [cursor=pointer]:
+                  - /url: /ipiszy
+                  - img "@ipiszy" [ref=e1327]
+              - listitem [ref=e1328]:
+                - link [ref=e1329] [cursor=pointer]:
+                  - /url: /rocking5566
+                  - img "@rocking5566" [ref=e1330]
+              - listitem [ref=e1331]:
+                - link [ref=e1332] [cursor=pointer]:
+                  - /url: /DanFu09
+                  - img "@DanFu09" [ref=e1333]
+              - listitem [ref=e1334]:
+                - link [ref=e1335] [cursor=pointer]:
+                  - /url: /johnnynunez
+                  - img "@johnnynunez" [ref=e1336]
+              - listitem [ref=e1337]:
+                - link [ref=e1338] [cursor=pointer]:
+                  - /url: /v0i0
+                  - img "@v0i0" [ref=e1339]
+              - listitem [ref=e1340]:
+                - link [ref=e1341] [cursor=pointer]:
+                  - /url: /micmelesse
+                  - img "@micmelesse" [ref=e1342]
+            - link "+ 199 contributors" [ref=e1344] [cursor=pointer]:
+              - /url: /Dao-AILab/flash-attention/graphs/contributors
+          - generic [ref=e1345]:
+            - heading "Languages" [level=2] [ref=e1346]
+            - generic [ref=e1348]:
+              - 'progressbar "Python: 71.2%" [ref=e1349]'
+              - 'progressbar "C++: 21.5%" [ref=e1350]'
+              - 'progressbar "Cuda: 7.2%" [ref=e1351]'
+              - 'progressbar "Dockerfile: 0.1%" [ref=e1352]'
+              - 'progressbar "C: 0%"'
+              - 'progressbar "Shell: 0%"'
+            - list [ref=e1353]:
+              - listitem [ref=e1354]:
+                - link "Python 71.2%" [ref=e1355] [cursor=pointer]:
+                  - /url: /Dao-AILab/flash-attention/search?l=python
+                  - generic [ref=e1357]: Python
+                  - generic [ref=e1358]: 71.2%
+              - listitem [ref=e1359]:
+                - link "C++ 21.5%" [ref=e1360] [cursor=pointer]:
+                  - /url: /Dao-AILab/flash-attention/search?l=c%2B%2B
+                  - generic [ref=e1362]: C++
+                  - generic [ref=e1363]: 21.5%
+              - listitem [ref=e1364]:
+                - link "Cuda 7.2%" [ref=e1365] [cursor=pointer]:
+                  - /url: /Dao-AILab/flash-attention/search?l=cuda
+                  - generic [ref=e1367]: Cuda
+                  - generic [ref=e1368]: 7.2%
+              - listitem [ref=e1369]:
+                - link "Dockerfile 0.1%" [ref=e1370] [cursor=pointer]:
+                  - /url: /Dao-AILab/flash-attention/search?l=dockerfile
+                  - generic [ref=e1372]: Dockerfile
+                  - generic [ref=e1373]: 0.1%
+              - listitem [ref=e1374]:
+                - link "C 0%" [ref=e1375] [cursor=pointer]:
+                  - /url: /Dao-AILab/flash-attention/search?l=c
+                  - generic [ref=e1377]: C
+                  - generic [ref=e1378]: 0%
+              - listitem [ref=e1379]:
+                - link "Shell 0%" [ref=e1380] [cursor=pointer]:
+                  - /url: /Dao-AILab/flash-attention/search?l=shell
+                  - generic [ref=e1382]: Shell
+                  - generic [ref=e1383]: 0%
+    - contentinfo [ref=e1244]:
+      - heading "Footer" [level=2] [ref=e1245]
+      - generic [ref=e1246]:
+        - generic [ref=e1247]:
+          - link "GitHub Homepage" [ref=e1248] [cursor=pointer]:
+            - /url: https://github.com
+          - generic [ref=e1251]: © 2026 GitHub, Inc.
+        - navigation "Footer" [ref=e1252]:
+          - heading "Footer navigation" [level=3] [ref=e1253]
+          - list "Footer navigation" [ref=e1254]:
+            - listitem [ref=e1255]:
+              - link "Terms" [ref=e1256] [cursor=pointer]:
+                - /url: https://docs.github.com/site-policy/github-terms/github-terms-of-service
+            - listitem [ref=e1257]:
+              - link "Privacy" [ref=e1258] [cursor=pointer]:
+                - /url: https://docs.github.com/site-policy/privacy-policies/github-privacy-statement
+            - listitem [ref=e1259]:
+              - link "Security" [ref=e1260] [cursor=pointer]:
+                - /url: https://github.com/security
+            - listitem [ref=e1261]:
+              - link "Status" [ref=e1262] [cursor=pointer]:
+                - /url: https://www.githubstatus.com/
+            - listitem [ref=e1263]:
+              - link "Community" [ref=e1264] [cursor=pointer]:
+                - /url: https://github.community/
+            - listitem [ref=e1265]:
+              - link "Docs" [ref=e1266] [cursor=pointer]:
+                - /url: https://docs.github.com/
+            - listitem [ref=e1267]:
+              - link "Contact" [ref=e1268] [cursor=pointer]:
+                - /url: https://support.github.com?tags=dotcom-footer
+            - listitem [ref=e1269]:
+              - button "Manage cookies" [ref=e1271] [cursor=pointer]
+            - listitem [ref=e1272]:
+              - button "Do not share my personal information" [ref=e1274] [cursor=pointer]
+  - alert [ref=e1277]
+```

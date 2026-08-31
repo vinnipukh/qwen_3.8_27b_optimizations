@@ -1,0 +1,1134 @@
+### Open tabs
+- 0: [flash attention 2 long context 8k 16k 32k prefill throughput scaling at DuckDuckGo](https://duckduckgo.com/?q=flash+attention+2+long+context+8k+16k+32k+prefill+throughput+scaling&kad=en_US)
+- 1: [DuckDuckGo](https://html.duckduckgo.com/html/?q=flash+attention+2+long+context+8k+16k+32k+prefill+throughput+scaling)
+- 2: [DuckDuckGo](https://lite.duckduckgo.com/lite/?q=flash+attention+2+long+context+8k+16k+32k+prefill+throughput+scaling)
+- 3: [Captcha - Brave Search](https://search.brave.com/search?q=flash+attention+2+long+context+8k+16k+32k+prefill+throughput+scaling)
+- 4: [flash attention 2 long context 8k 16k 32k prefill throughput scaling - Arama](https://www.bing.com/search?q=flash+attention+2+long+context+8k+16k+32k+prefill+throughput+scaling&rdr=1&rdrig=40FB2FB12BE247E3A2F87EF294A4CE99)
+- 5: ["FlashAttention-2" prefill throughput 8k 16k scaling - Arama](https://www.bing.com/search?q=%22FlashAttention-2%22+prefill+throughput+8k+16k+scaling&rdr=1&rdrig=76F509D45D02467DA2B1192C40E1BE76)
+- 6: [https://www.google.com/search?q=flash+attention+2+long+context+8k+16k+32k+prefill+throughput+scaling&hl=en&gl=us&sei=vcORaoGTIfKm1fIPsp3PiQ8](https://www.google.com/sorry/index?continue=https://www.google.com/search%3Fq%3Dflash%2Battention%2B2%2Blong%2Bcontext%2B8k%2B16k%2B32k%2Bprefill%2Bthroughput%2Bscaling%26hl%3Den%26gl%3Dus%26sei%3DvcORaoGTIfKm1fIPsp3PiQ8&hl=en&q=EgSw6odMGL2Hx9QGIjBz_JWyuDhFlk0k_9Sd2sOWVij5TcNPo8TWvNLttk3wGaoM0WiPg28pSMdLEGzKOxUyAVJaAUM)
+- 7: [[2307.08691] FlashAttention-2: Faster Attention with Better Parallelism and Work Partitioning](https://arxiv.org/abs/2307.08691)
+- 8: [[2307.08691] FlashAttention-2: Faster Attention with Better Parallelism and Work Partitioning](https://arxiv.org/abs/2307.08691)
+- 9: [GitHub - Dao-AILab/flash-attention: Fast and memory-efficient exact attention · GitHub](https://github.com/Dao-AILab/flash-attention)
+- 10: [[2205.14135] FlashAttention: Fast and Memory-Efficient Exact Attention with IO-Awareness](https://arxiv.org/abs/2205.14135)
+- 11: [Overview · Hugging Face](https://huggingface.co/docs/transformers/v5.15.1/optimization_overview)
+- 12: [Page not found – PyTorch](https://pytorch.org/blog/flash-attention)
+- 13: [AMD ROCm — AMD ROCm 10.0.0](https://rocm.docs.amd.com/en/latest/)
+- 14: [[2305.13245] GQA: Training Generalized Multi-Query Transformer Models from Multi-Head Checkpoints](https://arxiv.org/abs/2305.13245)
+- 15: [[2112.10752] High-Resolution Image Synthesis with Latent Diffusion Models](https://arxiv.org/abs/2112.10752)
+- 16: (current) [ggml-org/llama.cpp · Discussions · GitHub](https://github.com/ggml-org/llama.cpp/discussions)
+### Page
+- Page URL: https://github.com/ggml-org/llama.cpp/discussions
+- Page Title: ggml-org/llama.cpp · Discussions · GitHub
+- Console: 1 errors, 0 warnings
+### Snapshot
+```yaml
+- generic [ref=e2]:
+  - generic [ref=e3]:
+    - link "Skip to content" [ref=e4] [cursor=pointer]:
+      - /url: "#start-of-content"
+    - banner [ref=e9]:
+      - heading "Navigation Menu" [level=2] [ref=e10]
+      - generic [ref=e11]:
+        - link "Homepage" [ref=e13] [cursor=pointer]:
+          - /url: /
+        - generic [ref=e16]:
+          - navigation "Global" [ref=e17]:
+            - list [ref=e18]:
+              - listitem [ref=e19]:
+                - button "Platform" [ref=e21] [cursor=pointer]
+              - listitem [ref=e24]:
+                - button "Solutions" [ref=e26] [cursor=pointer]
+              - listitem [ref=e29]:
+                - button "Resources" [ref=e31] [cursor=pointer]
+              - listitem [ref=e34]:
+                - button "Open Source" [ref=e36] [cursor=pointer]
+              - listitem [ref=e39]:
+                - button "Enterprise" [ref=e41] [cursor=pointer]
+              - listitem [ref=e44]:
+                - link "Pricing" [ref=e45] [cursor=pointer]:
+                  - /url: https://github.com/pricing
+          - generic [ref=e46]:
+            - button "Search or jump to, type / to search" [ref=e48] [cursor=pointer]
+            - link "Sign in" [ref=e55] [cursor=pointer]:
+              - /url: /login?return_to=https%3A%2F%2Fgithub.com%2Fggml-org%2Fllama.cpp%2Fdiscussions
+            - link "Sign up" [ref=e58] [cursor=pointer]:
+              - /url: /signup?ref_cta=Sign+up&ref_loc=header+logged+out&ref_page=%2F%3Cuser-name%3E%2F%3Crepo-name%3E%2Fdiscussions%2Findex&source=header-repo&source_repo=ggml-org%2Fllama.cpp
+            - button "Appearance settings" [ref=e61] [cursor=pointer]
+  - main [ref=e68]:
+    - generic [ref=e69]:
+      - generic [ref=e70]:
+        - generic [ref=e72]:
+          - link "ggml-org" [ref=e76] [cursor=pointer]:
+            - /url: /ggml-org
+          - generic [ref=e77]: /
+          - strong [ref=e78]:
+            - link "llama.cpp" [ref=e79] [cursor=pointer]:
+              - /url: /ggml-org/llama.cpp
+          - generic [ref=e80]: Public
+        - generic [ref=e81]:
+          - list:
+            - listitem [ref=e82]:
+              - link "You must be signed in to change notification settings" [ref=e83] [cursor=pointer]:
+                - /url: /login?return_to=%2Fggml-org%2Fllama.cpp
+                - text: Notifications
+            - listitem [ref=e86]:
+              - link "Fork 22.3k" [ref=e87] [cursor=pointer]:
+                - /url: /login?return_to=%2Fggml-org%2Fllama.cpp
+                - text: Fork
+                - generic "22,339" [ref=e90]: 22.3k
+            - listitem [ref=e91]:
+              - link "You must be signed in to star a repository" [ref=e93] [cursor=pointer]:
+                - /url: /login?return_to=%2Fggml-org%2Fllama.cpp
+                - text: Star
+                - generic "126084 users starred this repository" [ref=e96]: 126k
+      - navigation "Repository" [ref=e97]:
+        - list [ref=e98]:
+          - listitem [ref=e99]:
+            - link "Code" [ref=e100] [cursor=pointer]:
+              - /url: /ggml-org/llama.cpp
+          - listitem [ref=e104]:
+            - link "Issues 854" [ref=e105] [cursor=pointer]:
+              - /url: /ggml-org/llama.cpp/issues
+              - generic [ref=e109]: Issues
+              - generic "854" [ref=e110]
+          - listitem [ref=e111]:
+            - link "Pull requests 1.4k" [ref=e112] [cursor=pointer]:
+              - /url: /ggml-org/llama.cpp/pulls
+              - generic [ref=e115]: Pull requests
+              - generic "1,406" [ref=e116]: 1.4k
+          - listitem [ref=e117]:
+            - link "Discussions" [ref=e118] [cursor=pointer]:
+              - /url: /ggml-org/llama.cpp/discussions
+          - listitem [ref=e122]:
+            - link "Actions" [ref=e123] [cursor=pointer]:
+              - /url: /ggml-org/llama.cpp/actions
+          - listitem [ref=e127]:
+            - link "Projects" [ref=e128] [cursor=pointer]:
+              - /url: /ggml-org/llama.cpp/projects
+          - listitem [ref=e132]:
+            - link "Wiki" [ref=e133] [cursor=pointer]:
+              - /url: /ggml-org/llama.cpp/wiki
+          - listitem [ref=e137]:
+            - link "Security and quality 13" [ref=e138] [cursor=pointer]:
+              - /url: /ggml-org/llama.cpp/security
+              - generic [ref=e141]: Security and quality
+              - generic "13" [ref=e142]
+          - listitem [ref=e143]:
+            - link "Insights" [ref=e144] [cursor=pointer]:
+              - /url: /ggml-org/llama.cpp/pulse
+    - generic [ref=e150]:
+      - heading "ggml-org llama.cpp Discussions" [level=1] [ref=e151]
+      - generic [ref=e153]:
+        - heading "Pinned Discussions" [level=2] [ref=e154]
+        - list "Pinned Discussions" [ref=e155]:
+          - listitem [ref=e156]:
+            - generic [ref=e159] [cursor=pointer]:
+              - heading [level=3] [ref=e161]:
+                - link "Inference at the edge" [ref=e162]:
+                  - /url: /ggml-org/llama.cpp/discussions/205
+              - generic [ref=e163]:
+                - link "Announcements (category)" [ref=e164]:
+                  - /url: /ggml-org/llama.cpp/discussions?discussions_q=category%3A%22Announcements%22
+                  - generic [ref=e165]: 📣
+                  - text: Announcements
+                - generic [ref=e167]: ·
+                - link "ggerganov (author)" [ref=e168]:
+                  - /url: /ggerganov
+                  - text: ggerganov
+          - listitem [ref=e169]:
+            - generic [ref=e172] [cursor=pointer]:
+              - heading [level=3] [ref=e174]:
+                - 'link "guide : using `llama-ui` — the new WebUI of llama.cpp" [ref=e175]':
+                  - /url: /ggml-org/llama.cpp/discussions/16938
+              - generic [ref=e176]:
+                - link "Show and tell (category)" [ref=e177]:
+                  - /url: /ggml-org/llama.cpp/discussions?discussions_q=category%3A%22Show+and+tell%22
+                  - generic [ref=e178]: 🙌
+                  - text: Show and tell
+                - generic [ref=e180]: ·
+                - link "ggerganov (author)" [ref=e181]:
+                  - /url: /ggerganov
+                  - text: ggerganov
+          - listitem [ref=e182]:
+            - generic [ref=e185] [cursor=pointer]:
+              - heading [level=3] [ref=e187]:
+                - link "ggml.ai joins Hugging Face to ensure the long-term progress of Local AI" [ref=e188]:
+                  - /url: /ggml-org/llama.cpp/discussions/19759
+              - generic [ref=e189]:
+                - link "Announcements (category)" [ref=e190]:
+                  - /url: /ggml-org/llama.cpp/discussions?discussions_q=category%3A%22Announcements%22
+                  - generic [ref=e191]: 📣
+                  - text: Announcements
+                - generic [ref=e193]: ·
+                - link "ggerganov (author)" [ref=e194]:
+                  - /url: /ggerganov
+                  - text: ggerganov
+          - listitem [ref=e195]:
+            - generic [ref=e198] [cursor=pointer]:
+              - heading [level=3] [ref=e200]:
+                - 'link "llama.app : website + unified `llama` binary" [ref=e201]':
+                  - /url: /ggml-org/llama.cpp/discussions/23875
+              - generic [ref=e202]:
+                - link "Announcements (category)" [ref=e203]:
+                  - /url: /ggml-org/llama.cpp/discussions?discussions_q=category%3A%22Announcements%22
+                  - generic [ref=e204]: 📣
+                  - text: Announcements
+                - generic [ref=e206]: ·
+                - link "ggerganov (author)" [ref=e207]:
+                  - /url: /ggerganov
+                  - text: ggerganov
+      - generic [ref=e208]:
+        - generic [ref=e212]:
+          - generic [ref=e213]: Search all discussions
+          - generic [ref=e214]:
+            - generic [ref=e218]:
+              - generic [ref=e219]: is:open
+              - combobox "Search all discussions" [ref=e223]: is:open
+            - generic [ref=e224]:
+              - generic [ref=e225]: Clear
+              - button "Clear Search all discussions" [ref=e226] [cursor=pointer]
+        - generic [ref=e228]:
+          - group [ref=e230]:
+            - 'button "Sort by: Latest activity" [ref=e231] [cursor=pointer]'
+          - button "Filter labels" [ref=e238] [cursor=pointer]:
+            - generic [ref=e239]: Label
+          - 'button "Filter: Open" [ref=e244] [cursor=pointer]'
+      - generic [ref=e247]:
+        - generic [ref=e249]:
+          - heading "Categories, most helpful, and community links" [level=2] [ref=e250]
+          - generic [ref=e251]:
+            - heading "Categories" [level=3] [ref=e253]
+            - generic "Categories" [ref=e254]:
+              - navigation "Categories" [ref=e255]:
+                - list [ref=e256]:
+                  - listitem [ref=e257]:
+                    - link "View all discussions" [ref=e258] [cursor=pointer]:
+                      - /url: /ggml-org/llama.cpp/discussions
+                  - listitem [ref=e260]:
+                    - link "Announcements" [ref=e261] [cursor=pointer]:
+                      - /url: /ggml-org/llama.cpp/discussions/categories/announcements
+                      - generic: 📣
+                  - listitem [ref=e263]:
+                    - link "General" [ref=e264] [cursor=pointer]:
+                      - /url: /ggml-org/llama.cpp/discussions/categories/general
+                      - generic: 💬
+                  - listitem [ref=e266]:
+                    - link "Ideas" [ref=e267] [cursor=pointer]:
+                      - /url: /ggml-org/llama.cpp/discussions/categories/ideas
+                      - generic: 💡
+                  - listitem [ref=e269]:
+                    - link "Polls" [ref=e270] [cursor=pointer]:
+                      - /url: /ggml-org/llama.cpp/discussions/categories/polls
+                      - generic: 🗳️
+                  - listitem [ref=e272]:
+                    - link "Q&A" [ref=e273] [cursor=pointer]:
+                      - /url: /ggml-org/llama.cpp/discussions/categories/q-a
+                      - generic: 🙏
+                  - listitem [ref=e275]:
+                    - link "Show and tell" [ref=e276] [cursor=pointer]:
+                      - /url: /ggml-org/llama.cpp/discussions/categories/show-and-tell
+                      - generic: 🙌
+          - generic [ref=e1185]:
+            - generic [ref=e1186]:
+              - heading "Most helpful" [level=3] [ref=e1187]
+              - generic [ref=e1188]: Last 30 days
+            - list [ref=e1189]:
+              - listitem [ref=e1190]:
+                - link [ref=e1191] [cursor=pointer]:
+                  - /url: /MLuc24
+                  - img "@MLuc24" [ref=e1192]
+                - link "MLuc24" [ref=e1194] [cursor=pointer]:
+                  - /url: /MLuc24
+                - generic [ref=e1198]: "3"
+              - listitem [ref=e1199]:
+                - link [ref=e1200] [cursor=pointer]:
+                  - /url: /ggerganov
+                  - img "@ggerganov" [ref=e1201]
+                - link "ggerganov" [ref=e1203] [cursor=pointer]:
+                  - /url: /ggerganov
+                - generic [ref=e1207]: "2"
+              - listitem [ref=e1208]:
+                - link [ref=e1209] [cursor=pointer]:
+                  - /url: /christianalberto
+                  - img "@christianalberto" [ref=e1210]
+                - link "christianalberto" [ref=e1212] [cursor=pointer]:
+                  - /url: /christianalberto
+                - generic [ref=e1216]: "2"
+              - listitem [ref=e1217]:
+                - link [ref=e1218] [cursor=pointer]:
+                  - /url: /lMysticl
+                  - img "@lMysticl" [ref=e1219]
+                - link "lMysticl" [ref=e1221] [cursor=pointer]:
+                  - /url: /lMysticl
+                - generic [ref=e1225]: "1"
+              - listitem [ref=e1226]:
+                - link [ref=e1227] [cursor=pointer]:
+                  - /url: /arthw
+                  - img "@arthw" [ref=e1228]
+                - link "arthw" [ref=e1230] [cursor=pointer]:
+                  - /url: /arthw
+                - generic [ref=e1234]: "1"
+              - listitem [ref=e1235]:
+                - link [ref=e1236] [cursor=pointer]:
+                  - /url: /psyopsis930
+                  - img "@psyopsis930" [ref=e1237]
+                - link "psyopsis930" [ref=e1239] [cursor=pointer]:
+                  - /url: /psyopsis930
+                - generic [ref=e1243]: "1"
+              - listitem [ref=e1244]:
+                - link [ref=e1245] [cursor=pointer]:
+                  - /url: /edt-xx
+                  - img "@edt-xx" [ref=e1246]
+                - link "edt-xx" [ref=e1248] [cursor=pointer]:
+                  - /url: /edt-xx
+                - generic [ref=e1252]: "1"
+              - listitem [ref=e1253]:
+                - link [ref=e1254] [cursor=pointer]:
+                  - /url: /0xshubhs
+                  - img "@0xshubhs" [ref=e1255]
+                - link "0xshubhs" [ref=e1257] [cursor=pointer]:
+                  - /url: /0xshubhs
+                - generic [ref=e1261]: "1"
+              - listitem [ref=e1262]:
+                - link [ref=e1263] [cursor=pointer]:
+                  - /url: /bogdanr
+                  - img "@bogdanr" [ref=e1264]
+                - link "bogdanr" [ref=e1266] [cursor=pointer]:
+                  - /url: /bogdanr
+                - generic [ref=e1270]: "1"
+              - listitem [ref=e1271]:
+                - link [ref=e1272] [cursor=pointer]:
+                  - /url: /gitsult4n
+                  - img "@gitsult4n" [ref=e1273]
+                - link "gitsult4n" [ref=e1275] [cursor=pointer]:
+                  - /url: /gitsult4n
+                - generic [ref=e1279]: "1"
+          - heading "Community links" [level=3] [ref=e285]
+          - list [ref=e286]:
+            - listitem [ref=e287]:
+              - link "Community guidelines" [ref=e288] [cursor=pointer]:
+                - /url: https://docs.github.com/articles/github-community-guidelines
+            - listitem [ref=e293]:
+              - link "llama.app" [ref=e294] [cursor=pointer]:
+                - /url: https://llama.app
+        - generic [ref=e299]:
+          - heading "Discussions" [level=2] [ref=e300]
+          - list "Discussions" [ref=e302]:
+            - listitem [ref=e303]:
+              - generic [ref=e305]:
+                - generic [ref=e306]:
+                  - 'button "Upvote: 1" [disabled] [ref=e310]':
+                    - generic [ref=e313]: "1"
+                  - generic [ref=e314]: 🙏
+                - generic [ref=e317]:
+                  - generic [ref=e318]:
+                    - heading [level=3] [ref=e319]:
+                      - link "Offloading is not being handled" [ref=e320] [cursor=pointer]:
+                        - /url: /ggml-org/llama.cpp/discussions/27898
+                    - generic [ref=e321]:
+                      - link "siakc (author)" [ref=e322] [cursor=pointer]:
+                        - /url: /siakc
+                        - text: siakc
+                      - text: asked Aug 28, 20266 minutes ago in
+                      - link "Q&A (category)" [ref=e323] [cursor=pointer]:
+                        - /url: /ggml-org/llama.cpp/discussions/categories/q-a?discussions_q=is%3Aopen+category%3AQ%26A
+                        - text: Q&A
+                      - generic [ref=e324]: · Unanswered
+                  - generic [ref=e325]:
+                    - link [ref=e329] [cursor=pointer]:
+                      - /url: /siakc
+                      - img "siakc (participant)" [ref=e330]
+                    - 'link "0 comments: siakc, 05:17PM today" [ref=e332] [cursor=pointer]':
+                      - /url: /ggml-org/llama.cpp/discussions/27898
+                      - text: "0"
+            - listitem [ref=e335]:
+              - generic [ref=e337]:
+                - generic [ref=e338]:
+                  - 'button "Upvote: 85" [disabled] [ref=e342]':
+                    - generic [ref=e345]: "85"
+                  - generic [ref=e346]: 🙌
+                - generic [ref=e349]:
+                  - generic [ref=e350]:
+                    - heading [level=3] [ref=e351]:
+                      - link "Performance of llama.cpp on Apple Silicon M-series" [ref=e352] [cursor=pointer]:
+                        - /url: /ggml-org/llama.cpp/discussions/4167
+                    - link "performance" [ref=e354] [cursor=pointer]:
+                      - /url: /ggml-org/llama.cpp/discussions?discussions_q=is%3Aopen+label%3Aperformance
+                    - generic [ref=e355]:
+                      - link "ggerganov (author)" [ref=e356] [cursor=pointer]:
+                        - /url: /ggerganov
+                        - text: ggerganov
+                      - text: started Nov 22, 2023on Nov 22, 2023 in
+                      - link "Show and tell (category)" [ref=e357] [cursor=pointer]:
+                        - /url: /ggml-org/llama.cpp/discussions/categories/show-and-tell?discussions_q=is%3Aopen+category%3A%22Show+and+tell%22
+                        - text: Show and tell
+                  - generic [ref=e358]:
+                    - generic [ref=e361]:
+                      - link [ref=e362] [cursor=pointer]:
+                        - /url: /ggerganov
+                        - img "ggerganov (participant)" [ref=e363]
+                      - link [ref=e364] [cursor=pointer]:
+                        - /url: /QueryType
+                        - img "QueryType (participant)" [ref=e365]
+                      - link [ref=e366] [cursor=pointer]:
+                        - /url: /brozkrut
+                        - img "brozkrut (participant)" [ref=e367]
+                    - 'link "268 comments: ggerganov, 09:46AM on November 22, 2023" [ref=e369] [cursor=pointer]':
+                      - /url: /ggml-org/llama.cpp/discussions/4167
+                      - text: "268"
+            - listitem [ref=e372]:
+              - generic [ref=e374]:
+                - generic [ref=e375]:
+                  - 'button "Upvote: 6" [disabled] [ref=e379]':
+                    - generic [ref=e382]: "6"
+                  - generic [ref=e383]: 🙌
+                - generic [ref=e386]:
+                  - generic [ref=e387]:
+                    - heading [level=3] [ref=e388]:
+                      - link "Performance of llama.cpp on Intel GPU with SYCL backend" [ref=e389] [cursor=pointer]:
+                        - /url: /ggml-org/llama.cpp/discussions/23313
+                    - link "performance" [ref=e391] [cursor=pointer]:
+                      - /url: /ggml-org/llama.cpp/discussions?discussions_q=is%3Aopen+label%3Aperformance
+                    - generic [ref=e392]:
+                      - link "arthw (author)" [ref=e393] [cursor=pointer]:
+                        - /url: /arthw
+                        - text: arthw
+                      - text: started May 19, 2026on May 19 in
+                      - link "Show and tell (category)" [ref=e394] [cursor=pointer]:
+                        - /url: /ggml-org/llama.cpp/discussions/categories/show-and-tell?discussions_q=is%3Aopen+category%3A%22Show+and+tell%22
+                        - text: Show and tell
+                  - generic [ref=e395]:
+                    - generic [ref=e398]:
+                      - link [ref=e399] [cursor=pointer]:
+                        - /url: /arthw
+                        - img "arthw (participant)" [ref=e400]
+                      - link [ref=e401] [cursor=pointer]:
+                        - /url: /FCLC
+                        - img "FCLC (participant)" [ref=e402]
+                      - link [ref=e403] [cursor=pointer]:
+                        - /url: /digitalscream
+                        - img "digitalscream (participant)" [ref=e404]
+                    - 'link "119 comments: arthw, 03:45AM on May 19" [ref=e406] [cursor=pointer]':
+                      - /url: /ggml-org/llama.cpp/discussions/23313
+                      - text: "119"
+            - listitem [ref=e409]:
+              - generic [ref=e411]:
+                - generic [ref=e412]:
+                  - 'button "Upvote: 1" [disabled] [ref=e416]':
+                    - generic [ref=e419]: "1"
+                  - generic [ref=e420]: 💡
+                - generic [ref=e423]:
+                  - generic [ref=e424]:
+                    - heading [level=3] [ref=e425]:
+                      - link "Fix 429 HF model download errors in CI" [ref=e426] [cursor=pointer]:
+                        - /url: /ggml-org/llama.cpp/discussions/27890
+                    - generic [ref=e427]:
+                      - link "nikwen (author)" [ref=e428] [cursor=pointer]:
+                        - /url: /nikwen
+                        - text: nikwen
+                      - text: started Aug 28, 20262 hours ago in
+                      - link "Ideas (category)" [ref=e429] [cursor=pointer]:
+                        - /url: /ggml-org/llama.cpp/discussions/categories/ideas?discussions_q=is%3Aopen+category%3AIdeas
+                        - text: Ideas
+                  - generic [ref=e430]:
+                    - link [ref=e434] [cursor=pointer]:
+                      - /url: /nikwen
+                      - img "nikwen (participant)" [ref=e435]
+                    - 'link "0 comments: nikwen, 02:56PM today" [ref=e437] [cursor=pointer]':
+                      - /url: /ggml-org/llama.cpp/discussions/27890
+                      - text: "0"
+            - listitem [ref=e440]:
+              - generic [ref=e442]:
+                - generic [ref=e443]:
+                  - 'button "Upvote: 1" [disabled] [ref=e447]':
+                    - generic [ref=e450]: "1"
+                  - generic [ref=e451]: 💬
+                - generic [ref=e454]:
+                  - generic [ref=e455]:
+                    - heading [level=3] [ref=e456]:
+                      - 'link "metal : tuning Flash-Attention kernel across M-chips" [ref=e457] [cursor=pointer]':
+                        - /url: /ggml-org/llama.cpp/discussions/27668
+                    - generic [ref=e458]:
+                      - link "ggerganov (author)" [ref=e459] [cursor=pointer]:
+                        - /url: /ggerganov
+                        - text: ggerganov
+                      - text: started Aug 24, 20264 days ago in
+                      - link "General (category)" [ref=e460] [cursor=pointer]:
+                        - /url: /ggml-org/llama.cpp/discussions/categories/general?discussions_q=is%3Aopen+category%3AGeneral
+                        - text: General
+                  - generic [ref=e461]:
+                    - generic [ref=e464]:
+                      - link [ref=e465] [cursor=pointer]:
+                        - /url: /ggerganov
+                        - img "ggerganov (participant)" [ref=e466]
+                      - link [ref=e467] [cursor=pointer]:
+                        - /url: /jruhe-adesso
+                        - img "jruhe-adesso (participant)" [ref=e468]
+                      - link [ref=e469] [cursor=pointer]:
+                        - /url: /SerayaEryn
+                        - img "SerayaEryn (participant)" [ref=e470]
+                    - 'link "10 comments: ggerganov, 05:05PM on August 24" [ref=e472] [cursor=pointer]':
+                      - /url: /ggml-org/llama.cpp/discussions/27668
+                      - text: "10"
+            - listitem [ref=e475]:
+              - generic [ref=e477]:
+                - generic [ref=e478]:
+                  - 'button "Upvote: 1" [disabled] [ref=e482]':
+                    - generic [ref=e485]: "1"
+                  - generic [ref=e486]: 💡
+                - generic [ref=e489]:
+                  - generic [ref=e490]:
+                    - heading [level=3] [ref=e491]:
+                      - 'link "API modification: Allow prompt processing to happen in chunks" [ref=e492] [cursor=pointer]':
+                        - /url: /ggml-org/llama.cpp/discussions/27878
+                    - generic [ref=e493]:
+                      - link "robertosw (author)" [ref=e494] [cursor=pointer]:
+                        - /url: /robertosw
+                        - text: robertosw
+                      - text: started Aug 28, 20264 hours ago in
+                      - link "Ideas (category)" [ref=e495] [cursor=pointer]:
+                        - /url: /ggml-org/llama.cpp/discussions/categories/ideas?discussions_q=is%3Aopen+category%3AIdeas
+                        - text: Ideas
+                  - generic [ref=e496]:
+                    - link [ref=e500] [cursor=pointer]:
+                      - /url: /robertosw
+                      - img "robertosw (participant)" [ref=e501]
+                    - 'link "0 comments: robertosw, 12:34PM today" [ref=e503] [cursor=pointer]':
+                      - /url: /ggml-org/llama.cpp/discussions/27878
+                      - text: "0"
+            - listitem [ref=e506]:
+              - generic [ref=e508]:
+                - generic [ref=e509]:
+                  - 'button "Upvote: 3" [disabled] [ref=e513]':
+                    - generic [ref=e516]: "3"
+                  - generic [ref=e517]: 💡
+                - generic [ref=e520]:
+                  - generic [ref=e521]:
+                    - heading [level=3] [ref=e522]:
+                      - link "Qwen 4 PLE SSD offloading" [ref=e523] [cursor=pointer]:
+                        - /url: /ggml-org/llama.cpp/discussions/27864
+                    - generic [ref=e524]:
+                      - link "tarruda (author)" [ref=e525] [cursor=pointer]:
+                        - /url: /tarruda
+                        - text: tarruda
+                      - text: started Aug 28, 20268 hours ago in
+                      - link "Ideas (category)" [ref=e526] [cursor=pointer]:
+                        - /url: /ggml-org/llama.cpp/discussions/categories/ideas?discussions_q=is%3Aopen+category%3AIdeas
+                        - text: Ideas
+                  - generic [ref=e527]:
+                    - generic [ref=e530]:
+                      - link [ref=e531] [cursor=pointer]:
+                        - /url: /tarruda
+                        - img "tarruda (participant)" [ref=e532]
+                      - link [ref=e533] [cursor=pointer]:
+                        - /url: /thiagottjv
+                        - img "thiagottjv (participant)" [ref=e534]
+                    - 'link "3 comments: tarruda, 08:52AM today" [ref=e536] [cursor=pointer]':
+                      - /url: /ggml-org/llama.cpp/discussions/27864
+                      - text: "3"
+            - listitem [ref=e539]:
+              - generic [ref=e541]:
+                - generic [ref=e542]:
+                  - 'button "Upvote: 1" [disabled] [ref=e546]':
+                    - generic [ref=e549]: "1"
+                  - generic [ref=e550]: 💡
+                - generic [ref=e553]:
+                  - generic [ref=e554]:
+                    - heading [level=3] [ref=e555]:
+                      - 'link "Feature request: Reusable cache handles" [ref=e556] [cursor=pointer]':
+                        - /url: /ggml-org/llama.cpp/discussions/27818
+                    - generic [ref=e557]:
+                      - link "korint (author)" [ref=e558] [cursor=pointer]:
+                        - /url: /korint
+                        - text: korint
+                      - text: started Aug 27, 2026yesterday in
+                      - link "Ideas (category)" [ref=e559] [cursor=pointer]:
+                        - /url: /ggml-org/llama.cpp/discussions/categories/ideas?discussions_q=is%3Aopen+category%3AIdeas
+                        - text: Ideas
+                  - generic [ref=e560]:
+                    - link [ref=e564] [cursor=pointer]:
+                      - /url: /korint
+                      - img "korint (participant)" [ref=e565]
+                    - 'link "0 comments: korint, 05:56PM yesterday" [ref=e567] [cursor=pointer]':
+                      - /url: /ggml-org/llama.cpp/discussions/27818
+                      - text: "0"
+            - listitem [ref=e570]:
+              - generic [ref=e572]:
+                - generic [ref=e573]:
+                  - 'button "Upvote: 1" [disabled] [ref=e577]':
+                    - generic [ref=e580]: "1"
+                  - generic [ref=e581]: 💬
+                - generic [ref=e584]:
+                  - generic [ref=e585]:
+                    - heading [level=3] [ref=e586]:
+                      - link "PROCESAMIENTO EN PARALELO POR CANAL DE MEMORIA MULTIPLICADA" [ref=e587] [cursor=pointer]:
+                        - /url: /ggml-org/llama.cpp/discussions/27848
+                    - generic [ref=e588]:
+                      - link "mailsnaj-sys (author)" [ref=e589] [cursor=pointer]:
+                        - /url: /mailsnaj-sys
+                        - text: mailsnaj-sys
+                      - text: started Aug 28, 202614 hours ago in
+                      - link "General (category)" [ref=e590] [cursor=pointer]:
+                        - /url: /ggml-org/llama.cpp/discussions/categories/general?discussions_q=is%3Aopen+category%3AGeneral
+                        - text: General
+                  - generic [ref=e591]:
+                    - link [ref=e595] [cursor=pointer]:
+                      - /url: /mailsnaj-sys
+                      - img "mailsnaj-sys (participant)" [ref=e596]
+                    - 'link "0 comments: mailsnaj-sys, 02:43AM today" [ref=e598] [cursor=pointer]':
+                      - /url: /ggml-org/llama.cpp/discussions/27848
+                      - text: "0"
+            - listitem [ref=e601]:
+              - generic [ref=e603]:
+                - generic [ref=e604]:
+                  - 'button "Upvote: 101" [disabled] [ref=e608]':
+                    - generic [ref=e611]: "101"
+                  - generic [ref=e612]: 🙌
+                - generic [ref=e615]:
+                  - generic [ref=e616]:
+                    - heading [level=3] [ref=e617]:
+                      - link [ref=e618] [cursor=pointer]:
+                        - /url: /ggml-org/llama.cpp/discussions/16938
+                        - text: "guide : using"
+                        - code [ref=e619]: llama-ui
+                        - text: — the new WebUI of llama.cpp
+                    - generic [ref=e620]:
+                      - link "ggerganov (author)" [ref=e621] [cursor=pointer]:
+                        - /url: /ggerganov
+                        - text: ggerganov
+                      - text: started Nov 2, 2025on Nov 2, 2025 in
+                      - link "Show and tell (category)" [ref=e622] [cursor=pointer]:
+                        - /url: /ggml-org/llama.cpp/discussions/categories/show-and-tell?discussions_q=is%3Aopen+category%3A%22Show+and+tell%22
+                        - text: Show and tell
+                  - generic [ref=e623]:
+                    - generic [ref=e626]:
+                      - link [ref=e627] [cursor=pointer]:
+                        - /url: /ggerganov
+                        - img "ggerganov (participant)" [ref=e628]
+                      - link [ref=e629] [cursor=pointer]:
+                        - /url: /ServeurpersoCom
+                        - img "ServeurpersoCom (participant)" [ref=e630]
+                      - link [ref=e631] [cursor=pointer]:
+                        - /url: /tarruda
+                        - img "tarruda (participant)" [ref=e632]
+                    - 'link "280 comments: ggerganov, 01:52PM on November 02, 2025" [ref=e634] [cursor=pointer]':
+                      - /url: /ggml-org/llama.cpp/discussions/16938
+                      - text: "280"
+            - listitem [ref=e637]:
+              - generic [ref=e639]:
+                - generic [ref=e640]:
+                  - 'button "Upvote: 8" [disabled] [ref=e644]':
+                    - generic [ref=e647]: "8"
+                  - generic [ref=e648]: 🙌
+                - generic [ref=e651]:
+                  - generic [ref=e652]:
+                    - heading [level=3] [ref=e653]:
+                      - 'link "Tutorial: KV cache reuse with llama-server" [ref=e654] [cursor=pointer]':
+                        - /url: /ggml-org/llama.cpp/discussions/13606
+                    - generic [ref=e655]:
+                      - link "smahs (author)" [ref=e656] [cursor=pointer]:
+                        - /url: /smahs
+                        - text: smahs
+                      - text: started May 17, 2025on May 17, 2025 in
+                      - link "Show and tell (category)" [ref=e657] [cursor=pointer]:
+                        - /url: /ggml-org/llama.cpp/discussions/categories/show-and-tell?discussions_q=is%3Aopen+category%3A%22Show+and+tell%22
+                        - text: Show and tell
+                  - generic [ref=e658]:
+                    - generic [ref=e661]:
+                      - link [ref=e662] [cursor=pointer]:
+                        - /url: /smahs
+                        - img "smahs (participant)" [ref=e663]
+                      - link [ref=e664] [cursor=pointer]:
+                        - /url: /ggerganov
+                        - img "ggerganov (participant)" [ref=e665]
+                      - link [ref=e666] [cursor=pointer]:
+                        - /url: /Mihaiii
+                        - img "Mihaiii (participant)" [ref=e667]
+                    - 'link "23 comments: smahs, 02:27PM on May 17, 2025" [ref=e669] [cursor=pointer]':
+                      - /url: /ggml-org/llama.cpp/discussions/13606
+                      - text: "23"
+            - listitem [ref=e672]:
+              - generic [ref=e674]:
+                - generic [ref=e675]:
+                  - 'button "Upvote: 1" [disabled] [ref=e679]':
+                    - generic [ref=e682]: "1"
+                  - generic [ref=e683]: 💬
+                - generic [ref=e686]:
+                  - generic [ref=e687]:
+                    - heading [level=3] [ref=e688]:
+                      - link "Are hallucinations rooted deeper than alignment can fix? A thought on discrete hardware vs continuous semantics*" [ref=e689] [cursor=pointer]:
+                        - /url: /ggml-org/llama.cpp/discussions/24950
+                    - generic [ref=e690]:
+                      - link "jack1-tom (author)" [ref=e691] [cursor=pointer]:
+                        - /url: /jack1-tom
+                        - text: jack1-tom
+                      - text: started Jun 23, 2026on Jun 23 in
+                      - link "General (category)" [ref=e692] [cursor=pointer]:
+                        - /url: /ggml-org/llama.cpp/discussions/categories/general?discussions_q=is%3Aopen+category%3AGeneral
+                        - text: General
+                  - generic [ref=e693]:
+                    - generic [ref=e696]:
+                      - link [ref=e697] [cursor=pointer]:
+                        - /url: /jack1-tom
+                        - img "jack1-tom (participant)" [ref=e698]
+                      - link [ref=e699] [cursor=pointer]:
+                        - /url: /didjaseeit
+                        - img "didjaseeit (participant)" [ref=e700]
+                    - 'link "9 comments: jack1-tom, 05:47PM on June 23" [ref=e702] [cursor=pointer]':
+                      - /url: /ggml-org/llama.cpp/discussions/24950
+                      - text: "9"
+            - listitem [ref=e705]:
+              - generic [ref=e707]:
+                - generic [ref=e708]:
+                  - 'button "Upvote: 1" [disabled] [ref=e712]':
+                    - generic [ref=e715]: "1"
+                  - generic [ref=e716]: 💬
+                - generic [ref=e719]:
+                  - generic [ref=e720]:
+                    - heading [level=3] [ref=e721]:
+                      - link "Absence of Watermarking" [ref=e722] [cursor=pointer]:
+                        - /url: /ggml-org/llama.cpp/discussions/27826
+                    - generic [ref=e723]:
+                      - link "tftranslate (author)" [ref=e724] [cursor=pointer]:
+                        - /url: /tftranslate
+                        - text: tftranslate
+                      - text: started Aug 27, 2026yesterday in
+                      - link "General (category)" [ref=e725] [cursor=pointer]:
+                        - /url: /ggml-org/llama.cpp/discussions/categories/general?discussions_q=is%3Aopen+category%3AGeneral
+                        - text: General
+                  - generic [ref=e726]:
+                    - link [ref=e730] [cursor=pointer]:
+                      - /url: /tftranslate
+                      - img "tftranslate (participant)" [ref=e731]
+                    - 'link "0 comments: tftranslate, 07:23PM yesterday" [ref=e733] [cursor=pointer]':
+                      - /url: /ggml-org/llama.cpp/discussions/27826
+                      - text: "0"
+            - listitem [ref=e736]:
+              - generic [ref=e738]:
+                - generic [ref=e739]:
+                  - 'button "Upvote: 1" [disabled] [ref=e743]':
+                    - generic [ref=e746]: "1"
+                  - generic [ref=e747]: 🙌
+                - generic [ref=e750]:
+                  - generic [ref=e751]:
+                    - heading [level=3] [ref=e752]:
+                      - link "Bypassing 99.56% of Matrix Calculations via GIS Quadtree Indexing in Pure C++20 — Overcoming the 16GB Memory Wall Using llama.cpp" [ref=e753] [cursor=pointer]:
+                        - /url: /ggml-org/llama.cpp/discussions/27820
+                    - generic [ref=e754]:
+                      - link "kenjiigarashi (author)" [ref=e755] [cursor=pointer]:
+                        - /url: /kenjiigarashi
+                        - text: kenjiigarashi
+                      - text: started Aug 27, 2026yesterday in
+                      - link "Show and tell (category)" [ref=e756] [cursor=pointer]:
+                        - /url: /ggml-org/llama.cpp/discussions/categories/show-and-tell?discussions_q=is%3Aopen+category%3A%22Show+and+tell%22
+                        - text: Show and tell
+                  - generic [ref=e757]:
+                    - link [ref=e761] [cursor=pointer]:
+                      - /url: /kenjiigarashi
+                      - img "kenjiigarashi (participant)" [ref=e762]
+                    - 'link "0 comments: kenjiigarashi, 06:14PM yesterday" [ref=e764] [cursor=pointer]':
+                      - /url: /ggml-org/llama.cpp/discussions/27820
+                      - text: "0"
+            - listitem [ref=e767]:
+              - generic [ref=e769]:
+                - generic [ref=e770]:
+                  - 'button "Upvote: 140" [disabled] [ref=e774]':
+                    - generic [ref=e777]: "140"
+                  - generic [ref=e778]: 📣
+                - generic [ref=e781]:
+                  - generic [ref=e782]:
+                    - heading [level=3] [ref=e783]:
+                      - link "ggml.ai joins Hugging Face to ensure the long-term progress of Local AI" [ref=e784] [cursor=pointer]:
+                        - /url: /ggml-org/llama.cpp/discussions/19759
+                    - generic [ref=e785]:
+                      - link "ggerganov (author)" [ref=e786] [cursor=pointer]:
+                        - /url: /ggerganov
+                        - text: ggerganov
+                      - text: announced Feb 20, 2026on Feb 20 in
+                      - link "Announcements (category)" [ref=e787] [cursor=pointer]:
+                        - /url: /ggml-org/llama.cpp/discussions/categories/announcements?discussions_q=is%3Aopen+category%3AAnnouncements
+                        - text: Announcements
+                  - generic [ref=e788]:
+                    - generic [ref=e791]:
+                      - link [ref=e792] [cursor=pointer]:
+                        - /url: /ggerganov
+                        - img "ggerganov (participant)" [ref=e793]
+                      - link [ref=e794] [cursor=pointer]:
+                        - /url: /julien-c
+                        - img "julien-c (participant)" [ref=e795]
+                      - link [ref=e796] [cursor=pointer]:
+                        - /url: /LysandreJik
+                        - img "LysandreJik (participant)" [ref=e797]
+                    - 'link "63 comments: ggerganov, 01:20PM on February 20" [ref=e799] [cursor=pointer]':
+                      - /url: /ggml-org/llama.cpp/discussions/19759
+                      - text: "63"
+            - listitem [ref=e802]:
+              - generic [ref=e804]:
+                - generic [ref=e805]:
+                  - 'button "Upvote: 7" [disabled] [ref=e809]':
+                    - generic [ref=e812]: "7"
+                  - generic [ref=e813]: 💡
+                - generic [ref=e816]:
+                  - generic [ref=e817]:
+                    - heading [level=3] [ref=e818]:
+                      - link "[llama-server] Save & Load Slots from Disk Cache Automatically" [ref=e819] [cursor=pointer]:
+                        - /url: /ggml-org/llama.cpp/discussions/16979
+                    - generic [ref=e820]:
+                      - link "Interpause (author)" [ref=e821] [cursor=pointer]:
+                        - /url: /Interpause
+                        - text: Interpause
+                      - text: started Nov 3, 2025on Nov 3, 2025 in
+                      - link "Ideas (category)" [ref=e822] [cursor=pointer]:
+                        - /url: /ggml-org/llama.cpp/discussions/categories/ideas?discussions_q=is%3Aopen+category%3AIdeas
+                        - text: Ideas
+                  - generic [ref=e823]:
+                    - generic [ref=e826]:
+                      - link [ref=e827] [cursor=pointer]:
+                        - /url: /Interpause
+                        - img "Interpause (participant)" [ref=e828]
+                      - link [ref=e829] [cursor=pointer]:
+                        - /url: /ggerganov
+                        - img "ggerganov (participant)" [ref=e830]
+                      - link [ref=e831] [cursor=pointer]:
+                        - /url: /alexhalf
+                        - img "alexhalf (participant)" [ref=e832]
+                    - 'link "4 comments: Interpause, 08:44PM on November 03, 2025" [ref=e834] [cursor=pointer]':
+                      - /url: /ggml-org/llama.cpp/discussions/16979
+                      - text: "4"
+            - listitem [ref=e837]:
+              - generic [ref=e839]:
+                - generic [ref=e840]:
+                  - 'button "Upvote: 1" [disabled] [ref=e844]':
+                    - generic [ref=e847]: "1"
+                  - generic [ref=e848]: 🙌
+                - generic [ref=e851]:
+                  - generic [ref=e852]:
+                    - heading [level=3] [ref=e853]:
+                      - link "Mesa 26.1.7 doubles Vulkan throughput on Intel Arc B580 (Battlemage) — 30 → 67 tok/s" [ref=e854] [cursor=pointer]:
+                        - /url: /ggml-org/llama.cpp/discussions/27777
+                    - generic [ref=e855]:
+                      - link "guidov (author)" [ref=e856] [cursor=pointer]:
+                        - /url: /guidov
+                        - text: guidov
+                      - text: started Aug 27, 20262 days ago in
+                      - link "Show and tell (category)" [ref=e857] [cursor=pointer]:
+                        - /url: /ggml-org/llama.cpp/discussions/categories/show-and-tell?discussions_q=is%3Aopen+category%3A%22Show+and+tell%22
+                        - text: Show and tell
+                  - generic [ref=e858]:
+                    - link [ref=e862] [cursor=pointer]:
+                      - /url: /guidov
+                      - img "guidov (participant)" [ref=e863]
+                    - 'link "0 comments: guidov, 01:00AM yesterday" [ref=e865] [cursor=pointer]':
+                      - /url: /ggml-org/llama.cpp/discussions/27777
+                      - text: "0"
+            - listitem [ref=e868]:
+              - generic [ref=e870]:
+                - generic [ref=e871]:
+                  - 'button "Upvote: 1" [disabled] [ref=e875]':
+                    - generic [ref=e878]: "1"
+                  - generic [ref=e879]: 💡
+                - generic [ref=e882]:
+                  - generic [ref=e883]:
+                    - heading [level=3] [ref=e884]:
+                      - link "Persist RAM prompt cache (--cache-ram) to disk between restarts" [ref=e885] [cursor=pointer]:
+                        - /url: /ggml-org/llama.cpp/discussions/27759
+                    - generic [ref=e886]:
+                      - link "micik1 (author)" [ref=e887] [cursor=pointer]:
+                        - /url: /micik1
+                        - text: micik1
+                      - text: started Aug 26, 20262 days ago in
+                      - link "Ideas (category)" [ref=e888] [cursor=pointer]:
+                        - /url: /ggml-org/llama.cpp/discussions/categories/ideas?discussions_q=is%3Aopen+category%3AIdeas
+                        - text: Ideas
+                  - generic [ref=e889]:
+                    - link [ref=e893] [cursor=pointer]:
+                      - /url: /micik1
+                      - img "micik1 (participant)" [ref=e894]
+                    - 'link "0 comments: micik1, 06:58PM on August 26" [ref=e896] [cursor=pointer]':
+                      - /url: /ggml-org/llama.cpp/discussions/27759
+                      - text: "0"
+            - listitem [ref=e899]:
+              - generic [ref=e901]:
+                - generic [ref=e902]:
+                  - 'button "Upvote: 2" [disabled] [ref=e906]':
+                    - generic [ref=e909]: "2"
+                  - generic [ref=e910]: 💬
+                - generic [ref=e913]:
+                  - generic [ref=e914]:
+                    - heading [level=3] [ref=e915]:
+                      - link "Volta cards at 200 tok/sec on Qwen 27B models" [ref=e916] [cursor=pointer]:
+                        - /url: /ggml-org/llama.cpp/discussions/27539
+                    - generic [ref=e917]:
+                      - link "gelim (author)" [ref=e918] [cursor=pointer]:
+                        - /url: /gelim
+                        - text: gelim
+                      - text: started Aug 22, 2026last week in
+                      - link "General (category)" [ref=e919] [cursor=pointer]:
+                        - /url: /ggml-org/llama.cpp/discussions/categories/general?discussions_q=is%3Aopen+category%3AGeneral
+                        - text: General
+                  - generic [ref=e920]:
+                    - link [ref=e924] [cursor=pointer]:
+                      - /url: /gelim
+                      - img "gelim (participant)" [ref=e925]
+                    - 'link "0 comments: gelim, 12:20PM on August 22" [ref=e927] [cursor=pointer]':
+                      - /url: /ggml-org/llama.cpp/discussions/27539
+                      - text: "0"
+            - listitem [ref=e930]:
+              - generic [ref=e932]:
+                - generic [ref=e933]:
+                  - 'button "Upvote: 13" [disabled] [ref=e937]':
+                    - generic [ref=e940]: "13"
+                  - generic [ref=e941]: 💬
+                - generic [ref=e944]:
+                  - generic [ref=e945]:
+                    - heading [level=3] [ref=e946]:
+                      - 'link "RFC: Adding a native AMD ggml-hrx backend" [ref=e947] [cursor=pointer]':
+                        - /url: /ggml-org/llama.cpp/discussions/27219
+                    - generic [ref=e948]:
+                      - link "stellaraccident (author)" [ref=e949] [cursor=pointer]:
+                        - /url: /stellaraccident
+                        - text: stellaraccident
+                      - text: started Aug 17, 20262 weeks ago in
+                      - link "General (category)" [ref=e950] [cursor=pointer]:
+                        - /url: /ggml-org/llama.cpp/discussions/categories/general?discussions_q=is%3Aopen+category%3AGeneral
+                        - text: General
+                  - generic [ref=e951]:
+                    - generic [ref=e954]:
+                      - link [ref=e955] [cursor=pointer]:
+                        - /url: /stellaraccident
+                        - img "stellaraccident (participant)" [ref=e956]
+                      - link [ref=e957] [cursor=pointer]:
+                        - /url: /inforithmics
+                        - img "inforithmics (participant)" [ref=e958]
+                      - link [ref=e959] [cursor=pointer]:
+                        - /url: /Geramy
+                        - img "Geramy (participant)" [ref=e960]
+                    - 'link "10 comments: stellaraccident, 03:20AM on August 17" [ref=e962] [cursor=pointer]':
+                      - /url: /ggml-org/llama.cpp/discussions/27219
+                      - text: "10"
+            - listitem [ref=e965]:
+              - generic [ref=e967]:
+                - generic [ref=e968]:
+                  - 'button "Upvote: 3" [disabled] [ref=e972]':
+                    - generic [ref=e975]: "3"
+                  - generic [ref=e976]: 💬
+                - generic [ref=e979]:
+                  - generic [ref=e980]:
+                    - heading [level=3] [ref=e981]:
+                      - link "Create a pingable alias for calling in support from AMD" [ref=e982] [cursor=pointer]:
+                        - /url: /ggml-org/llama.cpp/discussions/26582
+                    - generic [ref=e983]:
+                      - link "jeremyfowers (author)" [ref=e984] [cursor=pointer]:
+                        - /url: /jeremyfowers
+                        - text: jeremyfowers
+                      - text: started Aug 4, 20263 weeks ago in
+                      - link "General (category)" [ref=e985] [cursor=pointer]:
+                        - /url: /ggml-org/llama.cpp/discussions/categories/general?discussions_q=is%3Aopen+category%3AGeneral
+                        - text: General
+                  - generic [ref=e986]:
+                    - generic [ref=e989]:
+                      - link [ref=e990] [cursor=pointer]:
+                        - /url: /jeremyfowers
+                        - img "jeremyfowers (participant)" [ref=e991]
+                      - link [ref=e992] [cursor=pointer]:
+                        - /url: /harkgill-amd
+                        - img "harkgill-amd (participant)" [ref=e993]
+                      - link [ref=e994] [cursor=pointer]:
+                        - /url: /ggerganov
+                        - img "ggerganov (participant)" [ref=e995]
+                    - 'link "5 comments: jeremyfowers, 02:43PM on August 04" [ref=e997] [cursor=pointer]':
+                      - /url: /ggml-org/llama.cpp/discussions/26582
+                      - text: "5"
+            - listitem [ref=e1000]:
+              - generic [ref=e1002]:
+                - generic [ref=e1003]:
+                  - 'button "Upvote: 9" [disabled] [ref=e1007]':
+                    - generic [ref=e1010]: "9"
+                  - generic [ref=e1011]: 💬
+                - generic [ref=e1014]:
+                  - generic [ref=e1015]:
+                    - heading [level=3] [ref=e1016]:
+                      - link "[Windows 11] AMD Adrenalin driver (32.0.31007.5012) causes R9700 VRAM to offload to system RAM on idle - crash with 32GB RAM" [ref=e1017] [cursor=pointer]:
+                        - /url: /ggml-org/llama.cpp/discussions/23443
+                    - generic [ref=e1018]:
+                      - link "realsheox-max (author)" [ref=e1019] [cursor=pointer]:
+                        - /url: /realsheox-max
+                        - text: realsheox-max
+                      - text: started May 20, 2026on May 21 in
+                      - link "General (category)" [ref=e1020] [cursor=pointer]:
+                        - /url: /ggml-org/llama.cpp/discussions/categories/general?discussions_q=is%3Aopen+category%3AGeneral
+                        - text: General
+                  - generic [ref=e1021]:
+                    - generic [ref=e1024]:
+                      - link [ref=e1025] [cursor=pointer]:
+                        - /url: /realsheox-max
+                        - img "realsheox-max (participant)" [ref=e1026]
+                      - link [ref=e1027] [cursor=pointer]:
+                        - /url: /Jrjy3
+                        - img "Jrjy3 (participant)" [ref=e1028]
+                      - link [ref=e1029] [cursor=pointer]:
+                        - /url: /TOS10000
+                        - img "TOS10000 (participant)" [ref=e1030]
+                    - 'link "14 comments: realsheox-max, 09:32PM on May 20" [ref=e1032] [cursor=pointer]':
+                      - /url: /ggml-org/llama.cpp/discussions/23443
+                      - text: "14"
+            - listitem [ref=e1035]:
+              - generic [ref=e1037]:
+                - generic [ref=e1038]:
+                  - 'button "Upvote: 1" [disabled] [ref=e1042]':
+                    - generic [ref=e1045]: "1"
+                  - generic [ref=e1046]: 🙌
+                - generic [ref=e1049]:
+                  - generic [ref=e1050]:
+                    - heading [level=3] [ref=e1051]:
+                      - link "4/5 coding tasks solved by a 2.6B local model through an agent loop (llama.cpp-compatible /v1 endpoint)" [ref=e1052] [cursor=pointer]:
+                        - /url: /ggml-org/llama.cpp/discussions/27737
+                    - generic [ref=e1053]:
+                      - link "ilyaosovskoi (author)" [ref=e1054] [cursor=pointer]:
+                        - /url: /ilyaosovskoi
+                        - text: ilyaosovskoi
+                      - text: started Aug 26, 20262 days ago in
+                      - link "Show and tell (category)" [ref=e1055] [cursor=pointer]:
+                        - /url: /ggml-org/llama.cpp/discussions/categories/show-and-tell?discussions_q=is%3Aopen+category%3A%22Show+and+tell%22
+                        - text: Show and tell
+                  - generic [ref=e1056]:
+                    - link [ref=e1060] [cursor=pointer]:
+                      - /url: /ilyaosovskoi
+                      - img "ilyaosovskoi (participant)" [ref=e1061]
+                    - 'link "0 comments: ilyaosovskoi, 12:19PM on August 26" [ref=e1063] [cursor=pointer]':
+                      - /url: /ggml-org/llama.cpp/discussions/27737
+                      - text: "0"
+            - listitem [ref=e1066]:
+              - generic [ref=e1068]:
+                - generic [ref=e1069]:
+                  - 'button "Upvote: 7" [disabled] [ref=e1073]':
+                    - generic [ref=e1076]: "7"
+                  - generic [ref=e1077]: 💡
+                - generic [ref=e1080]:
+                  - generic [ref=e1081]:
+                    - heading [level=3] [ref=e1082]:
+                      - 'link "Feature Request: Hexagon backend support for Qualcomm DragonWing Linux" [ref=e1083] [cursor=pointer]':
+                        - /url: /ggml-org/llama.cpp/discussions/19364
+                    - generic [ref=e1084]:
+                      - link "ekcrisp (author)" [ref=e1085] [cursor=pointer]:
+                        - /url: /ekcrisp
+                        - text: ekcrisp
+                      - text: started Feb 5, 2026on Feb 5 in
+                      - link "Ideas (category)" [ref=e1086] [cursor=pointer]:
+                        - /url: /ggml-org/llama.cpp/discussions/categories/ideas?discussions_q=is%3Aopen+category%3AIdeas
+                        - text: Ideas
+                  - generic [ref=e1087]:
+                    - generic [ref=e1090]:
+                      - link [ref=e1091] [cursor=pointer]:
+                        - /url: /ekcrisp
+                        - img "ekcrisp (participant)" [ref=e1092]
+                      - link [ref=e1093] [cursor=pointer]:
+                        - /url: /ymcki
+                        - img "ymcki (participant)" [ref=e1094]
+                      - link [ref=e1095] [cursor=pointer]:
+                        - /url: /KraftMK
+                        - img "KraftMK (participant)" [ref=e1096]
+                    - 'link "14 comments: ekcrisp, 02:14PM on February 05" [ref=e1098] [cursor=pointer]':
+                      - /url: /ggml-org/llama.cpp/discussions/19364
+                      - text: "14"
+            - listitem [ref=e1101]:
+              - generic [ref=e1103]:
+                - generic [ref=e1104]:
+                  - 'button "Upvote: 44" [disabled] [ref=e1108]':
+                    - generic [ref=e1111]: "44"
+                  - generic [ref=e1112]: 💬
+                - generic [ref=e1115]:
+                  - generic [ref=e1116]:
+                    - heading [level=3] [ref=e1117]:
+                      - link "Performance of llama.cpp with Vulkan" [ref=e1118] [cursor=pointer]:
+                        - /url: /ggml-org/llama.cpp/discussions/10879
+                    - generic [ref=e1119]:
+                      - link "performance" [ref=e1120] [cursor=pointer]:
+                        - /url: /ggml-org/llama.cpp/discussions?discussions_q=is%3Aopen+label%3Aperformance
+                      - link "need feedback" [ref=e1121] [cursor=pointer]:
+                        - /url: /ggml-org/llama.cpp/discussions?discussions_q=is%3Aopen+label%3A%22need+feedback%22
+                    - generic [ref=e1122]:
+                      - link "netrunnereve (author)" [ref=e1123] [cursor=pointer]:
+                        - /url: /netrunnereve
+                        - text: netrunnereve
+                      - text: started Dec 18, 2024on Dec 18, 2024 in
+                      - link "General (category)" [ref=e1124] [cursor=pointer]:
+                        - /url: /ggml-org/llama.cpp/discussions/categories/general?discussions_q=is%3Aopen+category%3AGeneral
+                        - text: General
+                  - generic [ref=e1125]:
+                    - generic [ref=e1128]:
+                      - link [ref=e1129] [cursor=pointer]:
+                        - /url: /netrunnereve
+                        - img "netrunnereve (participant)" [ref=e1130]
+                      - link [ref=e1131] [cursor=pointer]:
+                        - /url: /max-krasnyansky
+                        - img "max-krasnyansky (participant)" [ref=e1132]
+                      - link [ref=e1133] [cursor=pointer]:
+                        - /url: /hkbu-kennycheng
+                        - img "hkbu-kennycheng (participant)" [ref=e1134]
+                    - 'link "772 comments: netrunnereve, 03:56AM on December 18, 2024" [ref=e1136] [cursor=pointer]':
+                      - /url: /ggml-org/llama.cpp/discussions/10879
+                      - text: "772"
+          - navigation "Pagination" [ref=e1141]:
+            - link "Previous page" [disabled] [ref=e1142]: Previous
+            - link "Page 1" [ref=e1143] [cursor=pointer]:
+              - /url: /ggml-org/llama.cpp/discussions?page=1
+              - text: "1"
+            - link "Page 2" [ref=e1144] [cursor=pointer]:
+              - /url: /ggml-org/llama.cpp/discussions?page=2
+              - text: "2"
+            - link "Page 3" [ref=e1145] [cursor=pointer]:
+              - /url: /ggml-org/llama.cpp/discussions?page=3
+              - text: "3"
+            - link "Page 4" [ref=e1146] [cursor=pointer]:
+              - /url: /ggml-org/llama.cpp/discussions?page=4
+              - text: "4"
+            - link "Page 5" [ref=e1147] [cursor=pointer]:
+              - /url: /ggml-org/llama.cpp/discussions?page=5
+              - text: "5"
+            - generic [ref=e1148]: …
+            - link "Page 39" [ref=e1149] [cursor=pointer]:
+              - /url: /ggml-org/llama.cpp/discussions?page=39
+              - text: "39"
+            - link "Page 40" [ref=e1150] [cursor=pointer]:
+              - /url: /ggml-org/llama.cpp/discussions?page=40
+              - text: "40"
+            - link "Next page" [ref=e1151] [cursor=pointer]:
+              - /url: /ggml-org/llama.cpp/discussions?page=2
+              - text: Next
+  - contentinfo [ref=e1152]:
+    - heading "Footer" [level=2] [ref=e1153]
+    - generic [ref=e1154]:
+      - generic [ref=e1155]:
+        - link "GitHub Homepage" [ref=e1156] [cursor=pointer]:
+          - /url: https://github.com
+        - generic [ref=e1159]: © 2026 GitHub, Inc.
+      - navigation "Footer" [ref=e1160]:
+        - heading "Footer navigation" [level=3] [ref=e1161]
+        - list "Footer navigation" [ref=e1162]:
+          - listitem [ref=e1163]:
+            - link "Terms" [ref=e1164] [cursor=pointer]:
+              - /url: https://docs.github.com/site-policy/github-terms/github-terms-of-service
+          - listitem [ref=e1165]:
+            - link "Privacy" [ref=e1166] [cursor=pointer]:
+              - /url: https://docs.github.com/site-policy/privacy-policies/github-privacy-statement
+          - listitem [ref=e1167]:
+            - link "Security" [ref=e1168] [cursor=pointer]:
+              - /url: https://github.com/security
+          - listitem [ref=e1169]:
+            - link "Status" [ref=e1170] [cursor=pointer]:
+              - /url: https://www.githubstatus.com/
+          - listitem [ref=e1171]:
+            - link "Community" [ref=e1172] [cursor=pointer]:
+              - /url: https://github.community/
+          - listitem [ref=e1173]:
+            - link "Docs" [ref=e1174] [cursor=pointer]:
+              - /url: https://docs.github.com/
+          - listitem [ref=e1175]:
+            - link "Contact" [ref=e1176] [cursor=pointer]:
+              - /url: https://support.github.com?tags=dotcom-footer
+          - listitem [ref=e1177]:
+            - button "Manage cookies" [ref=e1179] [cursor=pointer]
+          - listitem [ref=e1180]:
+            - button "Do not share my personal information" [ref=e1182] [cursor=pointer]
+```

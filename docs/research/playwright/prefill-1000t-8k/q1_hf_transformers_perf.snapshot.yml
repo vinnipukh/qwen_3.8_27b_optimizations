@@ -1,0 +1,618 @@
+### Open tabs
+- 0: [flash attention 2 long context 8k 16k 32k prefill throughput scaling at DuckDuckGo](https://duckduckgo.com/?q=flash+attention+2+long+context+8k+16k+32k+prefill+throughput+scaling&kad=en_US)
+- 1: [DuckDuckGo](https://html.duckduckgo.com/html/?q=flash+attention+2+long+context+8k+16k+32k+prefill+throughput+scaling)
+- 2: [DuckDuckGo](https://lite.duckduckgo.com/lite/?q=flash+attention+2+long+context+8k+16k+32k+prefill+throughput+scaling)
+- 3: [Captcha - Brave Search](https://search.brave.com/search?q=flash+attention+2+long+context+8k+16k+32k+prefill+throughput+scaling)
+- 4: [flash attention 2 long context 8k 16k 32k prefill throughput scaling - Arama](https://www.bing.com/search?q=flash+attention+2+long+context+8k+16k+32k+prefill+throughput+scaling&rdr=1&rdrig=40FB2FB12BE247E3A2F87EF294A4CE99)
+- 5: ["FlashAttention-2" prefill throughput 8k 16k scaling - Arama](https://www.bing.com/search?q=%22FlashAttention-2%22+prefill+throughput+8k+16k+scaling&rdr=1&rdrig=76F509D45D02467DA2B1192C40E1BE76)
+- 6: [https://www.google.com/search?q=flash+attention+2+long+context+8k+16k+32k+prefill+throughput+scaling&hl=en&gl=us&sei=vcORaoGTIfKm1fIPsp3PiQ8](https://www.google.com/sorry/index?continue=https://www.google.com/search%3Fq%3Dflash%2Battention%2B2%2Blong%2Bcontext%2B8k%2B16k%2B32k%2Bprefill%2Bthroughput%2Bscaling%26hl%3Den%26gl%3Dus%26sei%3DvcORaoGTIfKm1fIPsp3PiQ8&hl=en&q=EgSw6odMGL2Hx9QGIjBz_JWyuDhFlk0k_9Sd2sOWVij5TcNPo8TWvNLttk3wGaoM0WiPg28pSMdLEGzKOxUyAVJaAUM)
+- 7: [[2307.08691] FlashAttention-2: Faster Attention with Better Parallelism and Work Partitioning](https://arxiv.org/abs/2307.08691)
+- 8: [[2307.08691] FlashAttention-2: Faster Attention with Better Parallelism and Work Partitioning](https://arxiv.org/abs/2307.08691)
+- 9: [GitHub - Dao-AILab/flash-attention: Fast and memory-efficient exact attention · GitHub](https://github.com/Dao-AILab/flash-attention)
+- 10: [[2205.14135] FlashAttention: Fast and Memory-Efficient Exact Attention with IO-Awareness](https://arxiv.org/abs/2205.14135)
+- 11: (current) [Overview · Hugging Face](https://huggingface.co/docs/transformers/v5.15.1/optimization_overview)
+### Page
+- Page URL: https://huggingface.co/docs/transformers/v5.15.1/optimization_overview
+- Page Title: Overview · Hugging Face
+- Console: 1 errors, 0 warnings
+### Snapshot
+```yaml
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - banner [ref=e4]:
+      - generic [ref=e5]:
+        - generic [ref=e6]:
+          - link "Hugging Face's logo Hugging Face" [ref=e7] [cursor=pointer]:
+            - /url: /
+            - img "Hugging Face's logo" [ref=e8]
+            - generic [ref=e9]: Hugging Face
+          - textbox "Search models, datasets, users..." [ref=e11]
+        - navigation "Main" [ref=e14]:
+          - list [ref=e15]:
+            - listitem [ref=e16]:
+              - link "Models" [ref=e17] [cursor=pointer]:
+                - /url: /models
+            - listitem [ref=e22]:
+              - link "Datasets" [ref=e23] [cursor=pointer]:
+                - /url: /datasets
+            - listitem [ref=e29]:
+              - link "Spaces" [ref=e30] [cursor=pointer]:
+                - /url: /spaces
+            - listitem [ref=e35]:
+              - link "Buckets new" [ref=e36] [cursor=pointer]:
+                - /url: /storage
+                - text: Buckets
+                - generic [ref=e41]: new
+            - listitem [ref=e42]:
+              - link "Docs" [ref=e43] [cursor=pointer]:
+                - /url: /docs
+            - listitem [ref=e48]:
+              - link "Pricing" [ref=e49] [cursor=pointer]:
+                - /url: /pricing
+            - listitem [ref=e50]:
+              - generic [ref=e51]:
+                - button [ref=e52] [cursor=pointer]
+                - navigation [ref=e58]:
+                  - list [ref=e59]:
+                    - listitem [ref=e60]:
+                      - generic [ref=e61]: Website
+                      - list [ref=e62]:
+                        - listitem [ref=e63]:
+                          - link "Tasks" [ref=e64] [cursor=pointer]:
+                            - /url: /tasks
+                        - listitem [ref=e68]:
+                          - link "HuggingChat" [ref=e69] [cursor=pointer]:
+                            - /url: /chat
+                        - listitem [ref=e73]:
+                          - link "Collections" [ref=e74] [cursor=pointer]:
+                            - /url: /collections
+                        - listitem [ref=e79]:
+                          - link "Languages" [ref=e80] [cursor=pointer]:
+                            - /url: /languages
+                        - listitem [ref=e83]:
+                          - link "Organizations" [ref=e84] [cursor=pointer]:
+                            - /url: /organizations
+                    - listitem [ref=e90]:
+                      - generic [ref=e91]: Community
+                      - list [ref=e92]:
+                        - listitem [ref=e93]:
+                          - link "Blog" [ref=e94] [cursor=pointer]:
+                            - /url: /blog
+                        - listitem [ref=e97]:
+                          - link "Posts" [ref=e98] [cursor=pointer]:
+                            - /url: /posts
+                        - listitem [ref=e101]:
+                          - link "Daily Papers" [ref=e102] [cursor=pointer]:
+                            - /url: /papers
+                        - listitem [ref=e106]:
+                          - link "Hardware" [ref=e107] [cursor=pointer]:
+                            - /url: /hardware
+                        - listitem [ref=e111]:
+                          - link "Learn" [ref=e112] [cursor=pointer]:
+                            - /url: /learn
+                        - listitem [ref=e119]:
+                          - link "Discord" [ref=e120] [cursor=pointer]:
+                            - /url: /join/discord
+                        - listitem [ref=e123]:
+                          - link "Forum" [ref=e124] [cursor=pointer]:
+                            - /url: https://discuss.huggingface.co/
+                        - listitem [ref=e127]:
+                          - link "GitHub" [ref=e128] [cursor=pointer]:
+                            - /url: https://github.com/huggingface
+                    - listitem [ref=e131]:
+                      - generic [ref=e132]: Solutions
+                      - list [ref=e133]:
+                        - listitem [ref=e134]:
+                          - link "Team & Enterprise" [ref=e135] [cursor=pointer]:
+                            - /url: /enterprise
+                        - listitem [ref=e138]:
+                          - link "Hugging Face PRO" [ref=e139] [cursor=pointer]:
+                            - /url: /pro
+                        - listitem [ref=e142]:
+                          - link "Enterprise Support" [ref=e143] [cursor=pointer]:
+                            - /url: /support
+                        - listitem [ref=e147]:
+                          - link "Inference Providers" [ref=e148] [cursor=pointer]:
+                            - /url: /inference/models
+                        - listitem [ref=e152]:
+                          - link "Inference Endpoints" [ref=e153] [cursor=pointer]:
+                            - /url: /inference-endpoints
+                        - listitem [ref=e157]:
+                          - link "Storage Buckets" [ref=e158] [cursor=pointer]:
+                            - /url: /storage
+            - listitem [ref=e163]:
+              - separator [ref=e164]
+            - listitem [ref=e165]:
+              - link "Log In" [ref=e166] [cursor=pointer]:
+                - /url: /login
+            - listitem [ref=e167]:
+              - link "Sign Up" [ref=e168] [cursor=pointer]:
+                - /url: /join
+    - main [ref=e169]:
+      - generic [ref=e170]:
+        - generic [ref=e173]:
+          - generic [ref=e174]:
+            - generic [ref=e175]:
+              - heading "Transformers" [level=1] [ref=e177]
+              - combobox [ref=e180]:
+                - option "🏡 View all docs"
+                - option "AWS Trainium & Inferentia"
+                - option "Accelerate"
+                - option "Argilla"
+                - option "AutoTrain"
+                - option "Bitsandbytes"
+                - option "CLI"
+                - option "Chat UI"
+                - option "Dataset viewer"
+                - option "Datasets"
+                - option "Deploying on AWS"
+                - option "Diffusers"
+                - option "Distilabel"
+                - option "Evaluate"
+                - option "Google Cloud"
+                - option "Google TPUs"
+                - option "Gradio"
+                - option "Hub"
+                - option "Hub Python Library"
+                - option "Huggingface.js"
+                - option "Inference Endpoints (dedicated)"
+                - option "Inference Providers"
+                - option "Kernels"
+                - option "LeRobot"
+                - option "Leaderboards"
+                - option "Lighteval"
+                - option "Microsoft Azure"
+                - option "OpenEnv"
+                - option "Optimum"
+                - option "PEFT"
+                - option "Reachy Mini"
+                - option "Safetensors"
+                - option "Sentence Transformers"
+                - option "TRL"
+                - option "Tasks"
+                - option "Text Embeddings Inference"
+                - option "Text Generation Inference"
+                - option "Tokenizers"
+                - option "Trackio"
+                - option "Transformers" [selected]
+                - option "Transformers.js"
+                - option "Xet"
+                - option "smolagents"
+                - option "timm"
+            - button "Search documentation Ctrl+K" [ref=e181] [cursor=pointer]:
+              - generic [ref=e184]: Search documentation
+              - generic [ref=e185]: Ctrl+K
+            - generic [ref=e186]:
+              - combobox [ref=e187]:
+                - option "main"
+                - option "v5.15.1" [selected]
+                - option "v5.14.0"
+                - option "v5.13.1"
+                - option "v5.12.0"
+                - option "v5.11.0"
+                - option "v5.10.4"
+                - option "v5.9.0"
+                - option "v5.8.1"
+                - option "v5.7.0"
+                - option "v5.6.2"
+                - option "v5.5.4"
+                - option "v5.4.0"
+                - option "v5.3.0"
+                - option "v5.2.0"
+                - option "v5.1.0"
+                - option "v5.0.0"
+                - option "v4.57.6"
+                - option "v4.56.2"
+                - option "v4.55.4"
+                - option "v4.53.3"
+                - option "v4.52.3"
+                - option "v4.51.3"
+                - option "v4.50.0"
+                - option "v4.49.0"
+                - option "v4.48.2"
+                - option "v4.47.1"
+                - option "v4.46.3"
+                - option "v4.45.2"
+                - option "v4.44.2"
+                - option "v4.43.4"
+                - option "v4.42.4"
+                - option "v4.41.2"
+                - option "v4.40.2"
+                - option "v4.39.3"
+                - option "v4.38.2"
+                - option "v4.37.2"
+                - option "v4.36.1"
+                - option "v4.35.2"
+                - option "v4.34.1"
+                - option "v4.33.3"
+                - option "v4.32.1"
+                - option "v4.31.0"
+                - option "v4.30.0"
+                - option "v4.29.1"
+                - option "v4.28.1"
+                - option "v4.27.2"
+                - option "v4.26.1"
+                - option "v4.25.1"
+                - option "v4.24.0"
+                - option "v4.23.1"
+                - option "v4.22.2"
+                - option "v4.21.3"
+                - option "v4.20.1"
+                - option "v4.19.4"
+                - option "v4.18.0"
+                - option "v4.17.0"
+                - option "v4.16.2"
+                - option "v4.15.0"
+                - option "v4.14.1"
+                - option "v4.13.0"
+                - option "v4.12.5"
+                - option "v4.11.3"
+                - option "v4.10.1"
+                - option "v4.9.2"
+                - option "v4.8.2"
+                - option "v4.7.0"
+                - option "v4.6.0"
+                - option "v4.5.1"
+                - option "v4.4.2"
+                - option "v4.3.3"
+                - option "v4.2.2"
+                - option "v4.1.1"
+                - option "v4.0.1"
+                - option "v3.5.1"
+                - option "v3.4.0"
+                - option "v3.3.1"
+                - option "v3.2.0"
+                - option "v3.1.0"
+                - option "v3.0.2"
+                - option "v2.11.0"
+                - option "v2.10.0"
+                - option "v2.9.1"
+                - option "v2.8.0"
+                - option "v2.7.0"
+                - option "v2.6.0"
+                - option "v2.5.1"
+                - option "v2.4.1"
+                - option "v2.3.0"
+                - option "v2.2.2"
+                - option "v2.1.1"
+                - option "v2.0.0"
+                - option "v1.2.0"
+                - option "v1.1.0"
+                - option "v1.0.0"
+                - option "doc-builder-html"
+              - combobox [ref=e188]:
+                - option "AR"
+                - option "DE"
+                - option "EN" [selected]
+                - option "ES"
+                - option "FR"
+                - option "HI"
+                - option "IT"
+                - option "JA"
+                - option "KO"
+                - option "PT"
+                - option "RO"
+                - option "TR"
+                - option "ZH"
+              - button [ref=e190] [cursor=pointer]
+              - link "164,566" [ref=e197] [cursor=pointer]:
+                - /url: https://github.com/huggingface/transformers
+          - navigation [ref=e200]:
+            - generic [ref=e201] [cursor=pointer]: Get started
+            - generic [ref=e205]:
+              - link "Transformers" [ref=e206] [cursor=pointer]:
+                - /url: /docs/transformers/v5.15.1/index
+              - link "Installation" [ref=e207] [cursor=pointer]:
+                - /url: /docs/transformers/v5.15.1/installation
+              - link "Quickstart" [ref=e208] [cursor=pointer]:
+                - /url: /docs/transformers/v5.15.1/quicktour
+            - generic [ref=e209] [cursor=pointer]: Base classes
+            - generic [ref=e213]:
+              - generic [ref=e214] [cursor=pointer]: Models
+              - generic [ref=e218] [cursor=pointer]: Preprocessors
+            - generic [ref=e222] [cursor=pointer]: Inference
+            - generic [ref=e226]:
+              - generic [ref=e227] [cursor=pointer]: Pipeline API
+              - generic [ref=e231] [cursor=pointer]: Generate API
+              - generic [ref=e235] [cursor=pointer]: Optimization
+              - generic [ref=e239]:
+                - link "Overview" [ref=e240] [cursor=pointer]:
+                  - /url: /docs/transformers/v5.15.1/optimization_overview
+                - link "Attention backends" [ref=e241] [cursor=pointer]:
+                  - /url: /docs/transformers/v5.15.1/attention_interface
+                - link "Experts backends" [ref=e242] [cursor=pointer]:
+                  - /url: /docs/transformers/v5.15.1/experts_interface
+                - link "Continuous batching" [ref=e243] [cursor=pointer]:
+                  - /url: /docs/transformers/v5.15.1/continuous_batching
+                - link "Continuous batching architecture" [ref=e244] [cursor=pointer]:
+                  - /url: /docs/transformers/v5.15.1/continuous_batching_architecture
+                - link "Paged attention" [ref=e245] [cursor=pointer]:
+                  - /url: /docs/transformers/v5.15.1/paged_attention
+                - generic [ref=e246] [cursor=pointer]: Kernels
+                - link "torch.compile" [ref=e250] [cursor=pointer]:
+                  - /url: /docs/transformers/v5.15.1/perf_torch_compile
+                - link "Exporters" [ref=e251] [cursor=pointer]:
+                  - /url: /docs/transformers/v5.15.1/exporters
+                - link "Extending the exporters" [ref=e252] [cursor=pointer]:
+                  - /url: /docs/transformers/v5.15.1/exporters_extend
+                - link "Tensor parallelism" [ref=e253] [cursor=pointer]:
+                  - /url: /docs/transformers/v5.15.1/perf_infer_gpu_multi
+                - link "Expert parallelism" [ref=e254] [cursor=pointer]:
+                  - /url: /docs/transformers/v5.15.1/expert_parallelism
+                - link "Cache strategies" [ref=e255] [cursor=pointer]:
+                  - /url: /docs/transformers/v5.15.1/kv_cache
+                - link "Caching" [ref=e256] [cursor=pointer]:
+                  - /url: /docs/transformers/v5.15.1/cache_explanation
+                - link "Assisted decoding" [ref=e257] [cursor=pointer]:
+                  - /url: /docs/transformers/v5.15.1/assisted_decoding
+                - link "Getting the most out of LLMs" [ref=e258] [cursor=pointer]:
+                  - /url: /docs/transformers/v5.15.1/llm_tutorial_optimization
+              - generic [ref=e259] [cursor=pointer]: Chat with models
+              - generic [ref=e263] [cursor=pointer]: Serving
+            - generic [ref=e267] [cursor=pointer]: Training
+            - generic [ref=e271]:
+              - generic [ref=e272] [cursor=pointer]: Get started
+              - generic [ref=e276] [cursor=pointer]: Customization
+              - link "Parameter-efficient fine-tuning" [ref=e280] [cursor=pointer]:
+                - /url: /docs/transformers/v5.15.1/peft
+              - generic [ref=e281] [cursor=pointer]: Performance
+              - generic [ref=e285] [cursor=pointer]: Distributed training
+              - generic [ref=e289] [cursor=pointer]: Hardware
+            - generic [ref=e293] [cursor=pointer]: Quantization
+            - generic [ref=e297] [cursor=pointer]: Ecosystem integrations
+            - generic [ref=e301] [cursor=pointer]: Resources
+            - generic [ref=e305] [cursor=pointer]: API
+        - generic [ref=e310]:
+          - generic [ref=e312]:
+            - generic [ref=e313]: Join the Hugging Face community
+            - paragraph [ref=e314]: and get access to the augmented documentation experience
+            - generic [ref=e315]:
+              - generic [ref=e316]: Collaborate on models, datasets and Spaces
+              - generic [ref=e323]: Faster examples with accelerated inference
+              - generic [ref=e328]: Switch between documentation themes
+            - generic [ref=e333]:
+              - link [ref=e334] [cursor=pointer]:
+                - /url: /join
+                - button "Sign Up" [ref=e335]
+              - paragraph [ref=e336]: to get started
+          - generic [ref=e337]:
+            - paragraph
+            - generic [ref=e339]:
+              - button "Copy page" [ref=e340] [cursor=pointer]
+              - button "Open copy menu" [ref=e347] [cursor=pointer]
+            - heading [level=1] [ref=e350]:
+              - link [ref=e351] [cursor=pointer]:
+                - /url: "#overview"
+              - text: Overview
+            - paragraph [ref=e355]: Transformers provides multiple inference optimization techniques to make models fast, affordable, and accessible. Options include alternative attention mechanisms for reduced memory traffic, code compilation for faster execution, and optimized kernels for throughput. Stack these techniques for maximum performance.
+            - blockquote [ref=e356]:
+              - paragraph [ref=e357]: Memory and speed are closely related but not the same. Shrinking your memory footprint makes a model “faster” because there is less data to move around. Pure speed optimizations don’t always reduce memory and sometimes increase usage. Choose the appropriate optimization based on your use case and hardware.
+            - paragraph [ref=e358]: Use the table below to pick an optimization technique.
+            - table [ref=e359]:
+              - rowgroup [ref=e360]:
+                - row [ref=e361]:
+                  - columnheader "Technique" [ref=e362]
+                  - columnheader "Speed" [ref=e363]
+                  - columnheader "Memory" [ref=e364]
+              - rowgroup [ref=e365]:
+                - row [ref=e366]:
+                  - cell [ref=e367]:
+                    - link "Compilation" [ref=e368] [cursor=pointer]:
+                      - /url: "#compilation"
+                  - cell "✅" [ref=e369]
+                  - cell [ref=e370]
+                - row [ref=e371]:
+                  - cell [ref=e372]:
+                    - link "Attention backends" [ref=e373] [cursor=pointer]:
+                      - /url: "#attention-backends"
+                  - cell "✅" [ref=e374]
+                  - cell "✅" [ref=e375]
+                - row [ref=e376]:
+                  - cell [ref=e377]:
+                    - link "Kernels" [ref=e378] [cursor=pointer]:
+                      - /url: "#kernels"
+                  - cell "✅" [ref=e379]
+                  - cell "✅" [ref=e380]
+                - row [ref=e381]:
+                  - cell [ref=e382]:
+                    - link "Quantization" [ref=e383] [cursor=pointer]:
+                      - /url: "#quantization"
+                  - cell "✅" [ref=e384]
+                  - cell "✅" [ref=e385]
+                - row [ref=e386]:
+                  - cell [ref=e387]:
+                    - link "Caching" [ref=e388] [cursor=pointer]:
+                      - /url: "#caching"
+                  - cell "✅" [ref=e389]
+                  - cell "✅" [ref=e390]
+                - row [ref=e391]:
+                  - cell [ref=e392]:
+                    - link "Parallelism" [ref=e393] [cursor=pointer]:
+                      - /url: "#parallelism"
+                  - cell "✅" [ref=e394]
+                  - cell [ref=e395]
+                - row [ref=e396]:
+                  - cell [ref=e397]:
+                    - link "Continuous batching" [ref=e398] [cursor=pointer]:
+                      - /url: "#continuous-batching"
+                  - cell "✅" [ref=e399]
+                  - cell [ref=e400]
+            - paragraph [ref=e401]: This guide gives you a quick start on Transformers optimizations.
+            - heading [level=2] [ref=e402]:
+              - link [ref=e403] [cursor=pointer]:
+                - /url: "#compilation"
+              - text: Compilation
+            - paragraph [ref=e407]:
+              - link "torch.compile" [ref=e408] [cursor=pointer]:
+                - /url: ./perf_torch_compile
+              - text: reduces Python overhead, fuses operations, and creates kernels tuned for your shapes and hardware. The first run warms it up and subsequent runs use the faster compiled path.
+            - paragraph [ref=e409]:
+              - text: Pass a
+              - link "fixed size cache" [ref=e410] [cursor=pointer]:
+                - /url: ./kv_cache#fixed-size-cache
+              - text: to
+              - link "generate()" [ref=e411] [cursor=pointer]:
+                - /url: /docs/transformers/v5.15.1/en/main_classes/text_generation#transformers.GenerationMixin.generate
+              - text: to trigger
+              - code [ref=e412]: torch.compile
+              - text: automatically.
+            - generic [ref=e413]:
+              - button "Copied" [ref=e415] [cursor=pointer]
+              - generic [ref=e420]: import torch from transformers import AutoTokenizer, AutoModelForCausalLM tokenizer = AutoTokenizer.from_pretrained("Qwen/Qwen3-0.6B") model = AutoModelForCausalLM.from_pretrained("Qwen/Qwen3-0.6B", dtype=torch.float16, device_map="auto") input = tokenizer("The French Bread Law states", return_tensors="pt").to(model.device) output = model.generate(**input, do_sample=False, max_new_tokens=20, cache_implementation="static") tokenizer.batch_decode(output, skip_special_tokens=True)[0]
+            - blockquote [ref=e421]:
+              - paragraph [ref=e422]:
+                - text: Avoid calling
+                - code [ref=e423]: torch.compile(model)
+                - text: outside of
+                - link "generate()" [ref=e424] [cursor=pointer]:
+                  - /url: /docs/transformers/v5.15.1/en/main_classes/text_generation#transformers.GenerationMixin.generate
+                - text: to prevent the model from recompiling every step.
+            - heading [level=2] [ref=e425]:
+              - link [ref=e426] [cursor=pointer]:
+                - /url: "#attention-backends"
+              - text: Attention backends
+            - paragraph [ref=e430]:
+              - text: Alternative
+              - link "attention backends" [ref=e431] [cursor=pointer]:
+                - /url: ./attention_interface
+              - text: lower memory traffic. For example, FlashAttention tiles attention computations and avoids large intermediate tensors to reduce memory footprint.
+            - paragraph [ref=e432]:
+              - text: Set
+              - code [ref=e433]: attn_implementation
+              - text: in
+              - link "from_pretrained()" [ref=e434] [cursor=pointer]:
+                - /url: /docs/transformers/v5.15.1/en/main_classes/model#transformers.PreTrainedModel.from_pretrained
+              - text: to load an optimized attention backend.
+            - generic [ref=e435]:
+              - button "Copied" [ref=e437] [cursor=pointer]
+              - generic [ref=e442]: from transformers import AutoModelForCausalLM model = AutoModelForCausalLM.from_pretrained("Qwen/Qwen3-0.6B", attn_implementation="flash_attention_2")
+            - heading [level=2] [ref=e443]:
+              - link [ref=e444] [cursor=pointer]:
+                - /url: "#kernels"
+              - text: Kernels
+            - paragraph [ref=e448]:
+              - text: Kernels fuse operations to boost throughput and reduce memory usage. The
+              - link "Kernels" [ref=e449] [cursor=pointer]:
+                - /url: https://huggingface.co/docs/kernels/en/index
+              - text: library loads optimized compute kernels from the
+              - link "Hub" [ref=e450] [cursor=pointer]:
+                - /url: https://huggingface.co/kernels-community
+              - text: in a flexible and version-safe way.
+            - paragraph [ref=e451]: The example below loads an optimized FlashAttention-2 kernel without installing the package.
+            - generic [ref=e452]:
+              - button "Copied" [ref=e454] [cursor=pointer]
+              - generic [ref=e459]: import torch from transformers import AutoModelForCausalLM model = AutoModelForCausalLM.from_pretrained( "Qwen/Qwen3-0.6B", attn_implementation="kernels-community/flash-attn2" )
+            - heading [level=2] [ref=e460]:
+              - link [ref=e461] [cursor=pointer]:
+                - /url: "#quantization"
+              - text: Quantization
+            - paragraph [ref=e465]:
+              - link "Quantization" [ref=e466] [cursor=pointer]:
+                - /url: ./quantization/overview
+              - text: shrinks the size of every parameter which lowers memory footprint and increases speed because you can do more operations.
+            - paragraph [ref=e467]:
+              - text: Pass a quantization config to the
+              - code [ref=e468]: quantization_config
+              - text: argument in
+              - link "from_pretrained()" [ref=e469] [cursor=pointer]:
+                - /url: /docs/transformers/v5.15.1/en/main_classes/model#transformers.PreTrainedModel.from_pretrained
+              - text: . Each quantization backend has a different config with different arguments. The example below quantizes a model to 4-bits and configures the computation dtype with the
+              - link "bitsandbytes" [ref=e470] [cursor=pointer]:
+                - /url: ./quantization/bitsandbytes
+              - text: backend.
+            - generic [ref=e471]:
+              - button "Copied" [ref=e473] [cursor=pointer]
+              - generic [ref=e478]: import torch from transformers import AutoModelForCausalLM, BitsAndBytesConfig bnb_config = BitsAndBytesConfig(load_in_4bit=True, bnb_4bit_compute_dtype=torch.bfloat16) model = AutoModelForCausalLM.from_pretrained( "allenai/Olmo-3-7B-Think", quantization_config=bnb_config )
+            - heading [level=2] [ref=e479]:
+              - link [ref=e480] [cursor=pointer]:
+                - /url: "#caching"
+              - text: Caching
+            - paragraph [ref=e484]:
+              - link "Caching" [ref=e485] [cursor=pointer]:
+                - /url: ./kv_cache
+              - text: speeds up generation by reusing past keys and values instead of recomputing them for every token. To offset and reduce the memory cost of storing past keys and values, Transformers supports offloading the cache to the CPU. Only the current layer remains on the GPU.
+            - paragraph [ref=e486]:
+              - text: Use the
+              - code [ref=e487]: cache_implementation
+              - text: argument in
+              - link "generate()" [ref=e488] [cursor=pointer]:
+                - /url: /docs/transformers/v5.15.1/en/main_classes/text_generation#transformers.GenerationMixin.generate
+              - text: to set a cache strategy.
+            - generic [ref=e489]:
+              - button "Copied" [ref=e491] [cursor=pointer]
+              - generic [ref=e496]: import torch from transformers import AutoTokenizer, AutoModelForCausalLM tokenizer = AutoTokenizer.from_pretrained("Qwen/Qwen3-0.6B") model = AutoModelForCausalLM.from_pretrained( "Qwen/Qwen3-0.6B", attn_implementation="kernels-community/flash-attn2" ) inputs = tokenizer("The Le Décret Pain states that a baguette must,", return_tensors="pt") outputs = model.generate(**inputs, do_sample=False, max_new_tokens=50, cache_implementation="offloaded")
+            - heading [level=2] [ref=e497]:
+              - link [ref=e498] [cursor=pointer]:
+                - /url: "#parallelism"
+              - text: Parallelism
+            - paragraph [ref=e502]:
+              - link "Parallelism" [ref=e503] [cursor=pointer]:
+                - /url: ./perf_infer_gpu_multi
+              - text: distributes a model across devices so models too big for one device run fast. This approach uses more memory due to sharding overhead and communication to sync results.
+            - paragraph [ref=e504]:
+              - link "Tensor parallelism" [ref=e505] [cursor=pointer]:
+                - /url: ./perf_infer_gpu_multi
+              - text: splits a model layer across devices. Set
+              - code [ref=e506]: tp_plan="auto"
+              - text: in
+              - link "from_pretrained()" [ref=e507] [cursor=pointer]:
+                - /url: /docs/transformers/v5.15.1/en/main_classes/model#transformers.PreTrainedModel.from_pretrained
+              - text: to enable it.
+            - generic [ref=e508]:
+              - button "Copied" [ref=e510] [cursor=pointer]
+              - generic [ref=e515]: import torch from transformers import AutoModelForCausalLM, AutoTokenizer model = AutoModelForCausalLM.from_pretrained("meta-llama/Meta-Llama-3-8B-Instruct", tp_plan="auto") print(model._tp_plan)
+            - heading [level=2] [ref=e516]:
+              - link [ref=e517] [cursor=pointer]:
+                - /url: "#continuous-batching"
+              - text: Continuous batching
+            - paragraph [ref=e521]:
+              - link "Continuous batching" [ref=e522] [cursor=pointer]:
+                - /url: ./continuous_batching
+              - text: maximizes throughput by keeping the GPU busy with dynamic scheduling and chunked prefill.
+              - link "Serving" [ref=e523] [cursor=pointer]:
+                - /url: ./serve-cli/serving
+              - text: applications use it to process multiple incoming requests concurrently.
+            - paragraph [ref=e524]:
+              - text: Use
+              - link "generate_batch()" [ref=e525] [cursor=pointer]:
+                - /url: /docs/transformers/v5.15.1/en/main_classes/continuous_batching#transformers.ContinuousMixin.generate_batch
+              - text: to enable continuous batching.
+            - generic [ref=e526]:
+              - button "Copied" [ref=e528] [cursor=pointer]
+              - generic [ref=e533]:
+                - text: "import torch from transformers import AutoModelForCausalLM, AutoTokenizer from transformers.generation import GenerationConfig model = AutoModelForCausalLM.from_pretrained( \"Qwen/Qwen3-0.6B\", attn_implementation=\"paged|sdpa\", device_map=\"auto\", torch_dtype=torch.bfloat16, ) tokenizer = AutoTokenizer.from_pretrained(\"Qwen/Qwen3-0.6B\") prompts = [ \"The Le Décret Pain states that a baguette must\", \"Explain gravity in one sentence.\", \"Name the capital of France.\", ] inputs = [tokenizer.encode(p) for p in prompts] generation_config = GenerationConfig( max_new_tokens=32, eos_token_id=tokenizer.eos_token_id, pad_token_id=tokenizer.pad_token_id, do_sample=False, max_batch_tokens=512, ) outputs = model.generate_batch( inputs=inputs, generation_config=generation_config, ) for request_id, output in outputs.items(): text = tokenizer.decode(output.generated_tokens, skip_special_tokens=True) print("
+                - generic [ref=e534]: "f\"[{request_id}] {text}\""
+                - text: )
+            - link "Update on GitHub" [ref=e535] [cursor=pointer]:
+              - /url: https://github.com/huggingface/transformers/blob/main/docs/source/en/optimization_overview.md
+            - paragraph
+          - generic [ref=e543]:
+            - link "← Perplexity of fixed-length models" [ref=e544] [cursor=pointer]:
+              - /url: /docs/transformers/v5.15.1/perplexity
+              - generic [ref=e545]: ←
+              - text: Perplexity of fixed-length models
+            - link "Attention backends →" [ref=e546] [cursor=pointer]:
+              - /url: /docs/transformers/v5.15.1/attention_interface
+              - text: Attention backends
+              - generic [ref=e547]: →
+        - navigation [ref=e550]:
+          - link "Overview" [ref=e551] [cursor=pointer]:
+            - /url: "#overview"
+          - link "Compilation" [ref=e552] [cursor=pointer]:
+            - /url: "#compilation"
+          - link "Attention backends" [ref=e553] [cursor=pointer]:
+            - /url: "#attention-backends"
+          - link "Kernels" [ref=e554] [cursor=pointer]:
+            - /url: "#kernels"
+          - link "Quantization" [ref=e555] [cursor=pointer]:
+            - /url: "#quantization"
+          - link "Caching" [ref=e556] [cursor=pointer]:
+            - /url: "#caching"
+          - link "Parallelism" [ref=e557] [cursor=pointer]:
+            - /url: "#parallelism"
+          - link "Continuous batching" [ref=e558] [cursor=pointer]:
+            - /url: "#continuous-batching"
+  - generic [ref=e561]:
+    - textbox "Ask HuggingChat" [ref=e565]
+    - button "Send message" [ref=e566] [cursor=pointer]
+```

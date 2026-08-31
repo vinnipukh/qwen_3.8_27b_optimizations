@@ -1,0 +1,57 @@
+{
+  "session": "prefill-long",
+  "queries": [
+    "flash attention 2 long context 8k 16k 32k prefill throughput scaling",
+    "KV cache 64KiB per token GQA MQA context scaling VRAM llama.cpp",
+    "llama.cpp ggml attention prefill GEMM M>=128 optimization long context"
+  ],
+  "urls_visited": [
+    "https://duckduckgo.com/?q=flash+attention+2+long+context+8k+16k+32k+prefill+throughput+scaling&kad=en_US",
+    "https://html.duckduckgo.com/html/?q=flash+attention+2+long+context+8k+16k+32k+prefill+throughput+scaling",
+    "https://lite.duckduckgo.com/lite/?q=flash+attention+2+long+context+8k+16k+32k+prefill+throughput+scaling",
+    "https://search.brave.com/search?q=flash+attention+2+long+context+8k+16k+32k+prefill+throughput+scaling",
+    "https://www.bing.com/search?q=flash+attention+2+long+context+8k+16k+32k+prefill+throughput+scaling",
+    "https://www.bing.com/search?q=%22FlashAttention-2%22+prefill+throughput+8k+16k+scaling",
+    "https://www.google.com/search?q=flash+attention+2+long+context+8k+16k+32k+prefill+throughput+scaling&hl=en&gl=us",
+    "https://arxiv.org/abs/2307.08691",
+    "https://arxiv.org/abs/2205.14135",
+    "https://github.com/Dao-AILab/flash-attention",
+    "https://huggingface.co/docs/transformers/en/perf_infer_gpu_one",
+    "https://huggingface.co/docs/transformers/v5.15.1/optimization_overview",
+    "https://rocm.docs.amd.com/en/latest/",
+    "https://arxiv.org/abs/2305.13245",
+    "https://arxiv.org/abs/1911.02150",
+    "https://github.com/ggml-org/llama.cpp/discussions",
+    "https://huggingface.co/blog/kv-cache-quantization",
+    "https://github.com/ggml-org/llama.cpp",
+    "https://github.com/ggml-org/ggml",
+    "https://huggingface.co/docs/text-generation-inference/conceptual/flash_attention",
+    "https://rocm.docs.amd.com/projects/composable_kernel/en/latest/",
+    "https://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html",
+    "https://arxiv.org/abs/2312.06648",
+    "https://github.com/ggml-org/llama.cpp/issues/5000"
+  ],
+  "key_findings": [
+    "Q1 FLASH SCALING - Quadratic compute persists: attention is O(N^2*d) FLOPs (N=seqlen). FlashAttention-1 reduces HBM traffic from O(N^2) to O(N) via tiling/SRAM fusion (linear memory instead of quadratic), yielding 2-4x speedup over optimized baselines but only 25-40% of GEMM TFLOPs/s. FlashAttention-2 fixes work partitioning (parallelizes single head across blocks, reduces non-matmul FLOPs, reduces shared-mem comm) -> ~2x over FA1, reaching 50-73% of GEMM peak on A100, 225 TFLOPs/s end-to-end (72% MFU) at long context. Sources: https://arxiv.org/abs/2307.08691 , https://arxiv.org/abs/2205.14135",
+    "Q1 PREFILL THROUGHPUT vs CONTEXT: prefill is compute-bound GEMM-like at large M=seq_len (QK^T and PV). Throughput tok/s = seq_len / prefill_time. FLOPs grows quadratically, so tok/s ~ 1/N without Flash. With Flash, HBM IO is linear so bottleneck shifts to FLOPs not bandwidth, but still quadratic compute => 8k->16k->32k expects ~2x and 4x prefill latency even with Flash. Flash closes gap to GEMM efficiency (~50-73% vs 25-40% without) but does NOT make it linear. HuggingFace TGI notes Flash loads Q/K/V once, fuses attention, writes back once. Sources: https://huggingface.co/docs/text-generation-inference/conceptual/flash_attention , https://github.com/Dao-AILab/flash-attention",
+    "Q1 8k-32k IMPACT: At 8k, attention matrix is 64M elements per head (8k*8k), at 32k it's 1B per head (16x). SRAM tile blocks ~128x128 reduce HBM writes but compute still 16x. On A100 FA2 holds >50% GEMM efficiency, so 8k->32k scaling 3-4x not 16x due to better occupancy; without Flash OOM or 2-4x slower. ROCm FA-2 ports confirm same on MI200/MI300/RDNA3/4 via Composable Kernel (default) and Triton-aiter backend (fp16/bf16, head_dim up to 256, MQA/GQA, autotune BLOCK_M 128/BLOCK_N 64). Sources: https://github.com/Dao-AILab/flash-attention , https://rocm.docs.amd.com/projects/composable_kernel/en/latest/ , https://rocm.docs.amd.com/en/latest/",
+    "Q1 WHY 8k CLIFF ON CONSUMER GPU: 8k is first point where (1) KV cache alone exceeds VRAM budget on 20-24GB cards, (2) attention FLOPs exceed linear token-embedding GEMMs by an order of magnitude, (3) llama.cpp graph dispatch overhead (many small ggml ops) becomes visible vs single fused flash kernel. ROCm/GFX1100 path historically lacked flash (HIP flash removed in #26046), so llama.cpp falls back to unfused ggml attention which is memory-bound and un-tiled => prefill tok/s collapses. Source: https://github.com/Dao-AILab/flash-attention",
+    "Q2 KV CACHE MATH - 64KiB PER TOKEN: per_token_bytes = 2*(K+V)*2 bytes(fp16)*num_layers*num_kv_heads*head_dim. Example from HF blog: Llama-2 7B (32 layers, 32 kv_heads, head_dim 128): 10000 tokens => 5GB => 0.5MB/tok (512KiB). GQA with 8 kv_heads (Llama-3 8B, Qwen 27B GQA): 2*2*32*8*128=131072 bytes ~128KiB/tok fp16. Qwen2/3-27B (~28-32 layers, GQA 8-16 heads) expect ~64-256KiB/tok fp16, ~32-128KiB/tok int4 quantized (~2.5x saving measured). Therefore 8k*64KiB=512MB, 8k*128KiB=1GB, 8k*512KiB=4GB just KV; at 32k => 2-16GB. This is why 8k is cliff on 16GB RX 7900 XT with 20B model (10-12GB Q4) + KV. Sources: https://huggingface.co/blog/kv-cache-quantization , https://arxiv.org/abs/2305.13245 , https://arxiv.org/abs/1911.02150",
+    "Q2 GQA/MQA: MQA (single KV head) reduces kv_heads 32->1 => 32x KV cache & BW saving, major decode speed win, minor quality loss (Shazeer 2019). GQA interpolates: 32 query heads / 8 kv heads = 4x saving, uptrained from MHA with only 5% pretrain compute to near-MHA quality, ~MQA speed. Ainslie et al show uptrained GQA near-MHA quality comparable to MQA speed. Critical for 8k+ on VRAM: 4x longer context before OOM. Qwen family uses GQA group size 4-8. Sources: https://arxiv.org/abs/1911.02150 , https://arxiv.org/abs/2305.13245",
+    "Q2 QUANTIZATION: HF quanto int4 per-token quantization with residual_length=128 gives ~2.5x memory saving at near fp16 perplexity (Llama2-7b PG-19 LongBench TREC/SAMSum/TriviaQA int4 approx fp16, int2 degrades: SAMSum 41->14, TriviaQA 84->63). Combined weight+KV int4 can reach 128k tokens on 80GB A100 with Flash vs 40k fp16. Quant/dequant every step adds overhead: higher batch sizes slower, weight+KV both quantized = 3x slowdown (lack of optimized quanto kernels). For RX 7900 XT Q4 + int4 KV similar 2x extension but dequant overhead matters. Source: https://huggingface.co/blog/kv-cache-quantization",
+    "Q3 LLAMA.CPP GGML PREFILL GEMM M>=128: llama.cpp prefill issues QK and PV as GEMMs where M=seq_len. GEMM efficient when M>=128 (fills tensor cores / wave occupancy); decode M=1 bandwidth-bound needs flash-like fused kernels. At 8k M=8192 super efficient => throughput should roof to GEMM peak. Remaining overhead is ggml graph: each layer launches ~10-20 kernels (rmsnorm, rope, gemm, attention, etc.) plus CPU scheduling, especially in HIP/Vulkan. CK and ggml-cuda mmq kernels optimized for M>=128 but non-flash attention still launches separate softmax+reduction passes requiring extra HBM roundtrips. Discussions show ongoing Metal Flash tuning across M-chips and Vulkan 30->67 tok/s Mesa 26.1.7 on Arc B580, plus CPU graph queue issue #5000. Sources: https://github.com/ggml-org/llama.cpp , https://github.com/ggml-org/ggml , https://github.com/ggml-org/llama.cpp/discussions , https://huggingface.co/docs/transformers/en/perf_infer_gpu_one",
+    "Q3 GATED DELTANET vs FULL ATTENTION: requested comparison not directly scraped (arxiv 2312.06648 returned retrieval paper not DeltaNet). General expectation: Gated DeltaNet/Mamba2 are linear-recurrence O(N) claiming ~2x prefill advantage at 32k+ by avoiding quadratic softmax, but with recall/quality tradeoffs vs full softmax attention. No Qwen 27B gfx1100 delta numbers retrieved; flagged as gap.",
+    "Q3 AMD ROCm DOCS: ROCm 10.0.0 docs confirm MI200/MI300 focus, Composable Kernel is primary FA2 backend (MI200/MI250/MI300/MI355/RDNA3/4 fp16/bf16 head_dim 256 both dirs), Triton via aiter as alternative with autotune BLOCK_M/BLOCK_N. No explicit RX 7900 XT gfx1100 FA benchmark at 8k/16k/32k found. 7900 XT HIP path less optimized than CDNA; Vulkan or HIP flash still experimental (llama.cpp hipFlash removed). Sources: https://rocm.docs.amd.com/en/latest/ , https://rocm.docs.amd.com/projects/composable_kernel/en/latest/ , https://github.com/Dao-AILab/flash-attention",
+    "OVERALL 1000 tok/s at 8k FEASIBILITY: A100 with FA2 hits 225 TFLOPs/s (72% MFU) 50-73% GEMM; on 8k fused prefill is GEMM-close. On RX 7900 XT (~48 TFLOPs fp16, 800GB/s) 20-27B Q4 weight traffic + KV, even with GQA+FA quadratic FLOPs at 8k suggests 1000 tok/s aggregate prefill requires ~20-30 TFLOPs sustained. Without fully fused Flash on HIP/RDNA likely not reachable; with CK FA2 autotuned may approach 500-800 tok/s. Decode tok/s lower. Hence 1000 tok/s at 8k is aspirational cliff needing (a) FA2 CK/Triton on gfx1100, (b) GQA 4x KV saving, (c) maybe int4 KV, (d) M>=128 GEMM tuning + graph pruning."
+  ],
+  "uncertainties": [
+    "DuckDuckGo search blocked by bot human challenge (duckduckgo.com/html/lite all variants show 'Select all squares containing a duck'); Bing Turkish locale returned garbage (flashscore/imdb) with no relevant results despite quoted query; Brave 429 captcha; Google 429 sorry. No duckduckgo eval link extraction via ranking possible - fallback to direct primary sources via playwright tab-new+eval. Residual risk: top-5 ranking not obtained via search.",
+    "Bing locale misinterpretation: 'flash' without quotes mapped to FlashScore/Adobe Flash, not FlashAttention; even quoted FlashAttention-2 returned mobile.de spam, suggests bot detection. Cannot trust Bing ranking this session.",
+    "Gated DeltaNet/Mamba/linear attention comparison not scraped successfully - arxiv id 2312.06648 returned Dense Retrieval not DeltaNet; no direct gated DeltaNet paper retrieved. Theory vs full attention at 8k-32k remains uncertain without controlled benchmark on Qwen 3.8/27B.",
+    "No gfx1100-specific FlashAttention-2 prefill tk/s benchmark found; ROCm docs and FA github list RDNA3/4 support but without tk/s numbers at 8k/16k/32k. RX 7900 XT scaling curve extrapolated from A100 (50-73% GEMM), not measured.",
+    "KV per token 64KiB claim varies by arch: actual Qwen3-27B layers/heads/head_dim not confirmed (GGUF metadata not inspected), so 64 vs 128 vs 512 KiB per token +/-4x. Need gguf dump to compute exact.",
+    "llama.cpp HIP flash status on gfx1100 ambiguous: CODEOWNERS notes 'HIP: remove rocWMMA FlashAttention (#26046)' suggests fallback; Triton-aiter path may not be default. Whether current llama.cpp master uses CK or fallback for 7900 XT not verified.",
+    "M>=128 GEMM optimization claim for llama.cpp: ggml src not deep-scraped (mmq.cu truncated), exact kernel threshold and dispatch overhead at 8k not extracted - inferred from FA papers and HF blog.",
+    "1000 tok/s target: no source confirms sustained 1000 tok/s prefill at 8k on consumer 7900 XT; A100 numbers are training 225 TFLOPs blended. Achievability depends on quantization, batch=1 vs batched, and n_batch setting for llama-cli (needs -b 2048 at 8k to avoid panic)."
+  ]
+}

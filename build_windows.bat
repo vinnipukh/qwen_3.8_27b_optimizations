@@ -5,11 +5,14 @@ REM The .hip files use __builtin_amdgcn_sudot4/perm/wmma which cl cannot compile
 
 setlocal EnableDelayedExpansion
 
+REM Ensure git safe.directory for shared checkouts
+git config --global --add safe.directory "%CD%" >nul 2>&1
+
 REM --- HIP SDK detection ------------------------------------------------------
 if "%HIP_PATH%"=="" set "HIP_PATH=C:\Program Files\AMD\ROCm\6.4"
 if not exist "%HIP_PATH%\bin\clang++.exe" (
-    echo [ERROR] HIP SDK not found at HIP_PATH=%HIP_PATH%
-    echo        Expected %HIP_PATH%\bin\clang++.exe (HIP 6.4) and %HIP_PATH%\lib\cmake\hip\hip-config.cmake
+    echo [ERROR] HIP SDK not found at HIP_PATH="%HIP_PATH%"
+    echo        Expected "%HIP_PATH%\bin\clang++.exe" (HIP 6.4) and "%HIP_PATH%\lib\cmake\hip\hip-config.cmake"
     echo        Install AMD HIP SDK for Windows: https://www.amd.com/en/developer/resources/rocm-hub/hip-sdk.html
     echo        Or set HIP_PATH environment variable: set HIP_PATH=C:\your\ROCm\path
     exit /b 1
@@ -17,28 +20,28 @@ if not exist "%HIP_PATH%\bin\clang++.exe" (
 
 set "PATH=%HIP_PATH%\bin;%PATH%"
 
-echo [INFO] HIP_PATH=%HIP_PATH%
+echo [INFO] HIP_PATH="%HIP_PATH%"
 where clang++.exe || (
     echo [ERROR] clang++.exe not in PATH after HIP_PATH setup
     exit /b 1
 )
 
-clang++.exe --offload-arch=gfx1100 --version
+"%HIP_PATH%\bin\clang++.exe" --offload-arch=gfx1100 --version
 if errorlevel 1 (
     echo [ERROR] clang++.exe --offload-arch=gfx1100 --version failed
     exit /b 1
 )
 
-REM --- Verify Ninja (required, not Visual Studio generator) -------------------
+REM --- Verify Ninja (required, not MSVC/cl generator) -------------------------
 where ninja >nul 2>&1
 if errorlevel 1 (
     echo [ERROR] Ninja not found. Install via: winget install Ninja-build.Ninja
-    echo        VS generator (cl) cannot compile __builtin_amdgcn_* intrinsics in .hip files.
+    echo        MSVC generator (cl) cannot compile __builtin_amdgcn_* intrinsics in .hip files.
     exit /b 1
 )
 
 REM --- CMake configure --------------------------------------------------------
-echo [INFO] Configuring with HIP_PATH/bin/clang++.exe --offload-arch=gfx1100 -G Ninja ...
+echo [INFO] Configuring with "%HIP_PATH%\bin\clang++.exe" --offload-arch=gfx1100 -G Ninja ...
 
 cmake -S . -B build-windows -G Ninja ^
   -DCMAKE_HIP_ARCHITECTURES=gfx1100 ^
@@ -60,7 +63,7 @@ echo [INFO] Building build-windows (this may take 5-15 mins for llama.cpp + kern
 cmake --build build-windows --config Release
 if errorlevel 1 (
     echo [ERROR] Build failed. Check __builtin_amdgcn_sudot4/perm/wmma intrinsics compile with clang++ --offload-arch=gfx1100
-    echo        Common pitfall: using Visual Studio generator (cl) instead of Ninja + clang++
+    echo        Common pitfall: using MSVC generator (cl) instead of Ninja + clang++
     exit /b 1
 )
 

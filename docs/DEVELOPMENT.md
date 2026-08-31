@@ -104,8 +104,8 @@ python3 benchmarks/bin/publish_matrix.py \
 
 ## Building and Running the Kernel Playground (Phases 4–5)
 
-See complete hardware ISA and kernel reference library at [`.planning/reference/GPU-KERNEL-RESOURCES.md`](../.planning/reference/GPU-KERNEL-RESOURCES.md)
-and Phase 4 design at [`.planning/phases/04-kernel-playground-scaffold/04-CONTEXT.md`](../.planning/phases/04-kernel-playground-scaffold/04-CONTEXT.md).
+See complete hardware ISA and kernel reference library at [`docs/reference/GPU-KERNEL-RESOURCES.md`](reference/GPU-KERNEL-RESOURCES.md)
+and Phase 4 design at [`docs/phases/04-kernel-playground-scaffold/04-CONTEXT.md`](phases/04-kernel-playground-scaffold/04-CONTEXT.md).
 
 The playground operates completely **outside llama.cpp** (KERN-01):
 
@@ -144,9 +144,9 @@ Fixtures are generated via `python3 tools/dump_gguf_fixtures.py` combining real 
 
 ## Building and Running Matmul Kernels (Phase 5 — extended in Phase 7)
 
-Phase 5 extends the playground with `kernels/matmul_iq4xs/` — a standalone IQ4_XS `MUL_MAT` GEMV/GEMM implementation for `gfx1100`. It provides a FP64 CPU golden oracle (`kernels/matmul_iq4xs/ref_cpu.cpp` / `ref_cpu.h` exposing `gemv_iq4xs_cpu_ref` / `gemm_iq4xs_cpu_ref` over 8 canonical Qwen3.8-27B shapes), a stock HIP comparator (`stock_hip_comparator.hip`), and custom kernels (`impl_gemv_gfx1100.hip` — 8 threads/row, 128-bit `uint4` loads, `double` accumulate; `impl_gemm_wmma.hip` — `TILE_M=16` tiled fallback + WMMA `__builtin_amdgcn_wmma_f32_16x16x16_f16_w32` with `B_lds[2][32][33]` double-buffer). Reference: [`.planning/phases/05-first-custom-kernel-bottleneck-attack/05-CONTEXT.md`](../.planning/phases/05-first-custom-kernel-bottleneck-attack/05-CONTEXT.md).
+Phase 5 extends the playground with `kernels/matmul_iq4xs/` — a standalone IQ4_XS `MUL_MAT` GEMV/GEMM implementation for `gfx1100`. It provides a FP64 CPU golden oracle (`kernels/matmul_iq4xs/ref_cpu.cpp` / `ref_cpu.h` exposing `gemv_iq4xs_cpu_ref` / `gemm_iq4xs_cpu_ref` over 8 canonical Qwen3.8-27B shapes), a stock HIP comparator (`stock_hip_comparator.hip`), and custom kernels (`impl_gemv_gfx1100.hip` — 8 threads/row, 128-bit `uint4` loads, `double` accumulate; `impl_gemm_wmma.hip` — `TILE_M=16` tiled fallback + WMMA `__builtin_amdgcn_wmma_f32_16x16x16_f16_w32` with `B_lds[2][32][33]` double-buffer). Reference: [`docs/phases/05-first-custom-kernel-bottleneck-attack/05-CONTEXT.md`](phases/05-first-custom-kernel-bottleneck-attack/05-CONTEXT.md).
 
-Phase 7 adds three new HIP sources plus paired test/bench binaries and baseline artifacts to the same directory — see § Phase 7 below. The top-level `kernels/CMakeLists.txt` conditionally adds the op via `if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/matmul_iq4xs/CMakeLists.txt") add_subdirectory(matmul_iq4xs) endif()` — so the standard playground configure handles `matmul_iq4xs` automatically. Detailed Phase 7 context: [`.planning/phases/07-hybrid-dp4a-wmma-kernel-optimization/07-CONTEXT.md`](../.planning/phases/07-hybrid-dp4a-wmma-kernel-optimization/07-CONTEXT.md) and summaries [07-01](../.planning/phases/07-hybrid-dp4a-wmma-kernel-optimization/07-01-SUMMARY.md) through [07-04](../.planning/phases/07-hybrid-dp4a-wmma-kernel-optimization/07-04-SUMMARY.md).
+Phase 7 adds three new HIP sources plus paired test/bench binaries and baseline artifacts to the same directory — see § Phase 7 below. The top-level `kernels/CMakeLists.txt` conditionally adds the op via `if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/matmul_iq4xs/CMakeLists.txt") add_subdirectory(matmul_iq4xs) endif()` — so the standard playground configure handles `matmul_iq4xs` automatically. Detailed Phase 7 context: [`docs/phases/07-hybrid-dp4a-wmma-kernel-optimization/07-CONTEXT.md`](phases/07-hybrid-dp4a-wmma-kernel-optimization/07-CONTEXT.md) and summaries [07-01](phases/07-hybrid-dp4a-wmma-kernel-optimization/07-01-SUMMARY.md) through [07-03](phases/07-hybrid-dp4a-wmma-kernel-optimization/07-03-SUMMARY.md).
 
 ### Build
 
@@ -354,7 +354,7 @@ In either case, verify archived output with `sha256sum -c benchmarks/results/<ru
 
 ## Phase 7 Hybrid DP4A & WMMA Kernel Playground and Quilt Workflow (2026-08-27)
 
-Phase 7 fuses Q8_1 integer activation quantization and RDNA3 hardware matrix cores with Wave32 cooperative workgroups to beat real production `llama.cpp` stock (`vec_dot_iq4_xs_q8_1` + `quantize_row_q8_1` via DP4A `v_dot4` / WMMA `v_wmma`) rather than the Phase 5 naive float scalar comparator. Full design at [07-CONTEXT.md](../.planning/phases/07-hybrid-dp4a-wmma-kernel-optimization/07-CONTEXT.md); execution summaries [07-01](../.planning/phases/07-hybrid-dp4a-wmma-kernel-optimization/07-01-SUMMARY.md), [07-02](../.planning/phases/07-hybrid-dp4a-wmma-kernel-optimization/07-02-SUMMARY.md), [07-03](../.planning/phases/07-hybrid-dp4a-wmma-kernel-optimization/07-03-SUMMARY.md), [07-04](../.planning/phases/07-hybrid-dp4a-wmma-kernel-optimization/07-04-SUMMARY.md); verification [07-VERIFICATION.md](../.planning/phases/07-hybrid-dp4a-wmma-kernel-optimization/07-VERIFICATION.md).
+Phase 7 fuses Q8_1 integer activation quantization and RDNA3 hardware matrix cores with Wave32 cooperative workgroups to beat real production `llama.cpp` stock (`vec_dot_iq4_xs_q8_1` + `quantize_row_q8_1` via DP4A `v_dot4` / WMMA `v_wmma`) rather than the Phase 5 naive float scalar comparator. Full design at [07-CONTEXT.md](phases/07-hybrid-dp4a-wmma-kernel-optimization/07-CONTEXT.md); execution summaries [07-01](phases/07-hybrid-dp4a-wmma-kernel-optimization/07-01-SUMMARY.md), [07-02](phases/07-hybrid-dp4a-wmma-kernel-optimization/07-02-SUMMARY.md), [07-03](phases/07-hybrid-dp4a-wmma-kernel-optimization/07-03-SUMMARY.md); verification [07-VERIFICATION.md](phases/07-hybrid-dp4a-wmma-kernel-optimization/07-VERIFICATION.md).
 
 ### New files in `kernels/matmul_iq4xs/` (Phase 7)
 
@@ -455,7 +455,7 @@ v = (_Float16)X[gm*K + gk];          // was X[gk*M+gm]
 Y[out_m*N + out_n] = c_frag[ele];    // was Y[n*M+m]
 ```
 
-Without the fix, every GEMM with `N≠M` (e.g. `5120×17408`) transposes output — `test_gemm_wmma_compare` would fail cosine ~0.1; after fix `cosine >= 0.999` PASS. Documented in [07-04-SUMMARY.md](../.planning/phases/07-hybrid-dp4a-wmma-kernel-optimization/07-04-SUMMARY.md) and `benchmarks/profiling/KERNEL-BENCH-DIFF.md` §8. The standalone playground retains `X[gk*M+gm]` convention (its own `[K,M]` harness layout) — only the in-tree cuh is GGML-corrected; keep them distinct.
+Without the fix, every GEMM with `N≠M` (e.g. `5120×17408`) transposes output — `test_gemm_wmma_compare` would fail cosine ~0.1; after fix `cosine >= 0.999` PASS. Documented in [07-01-SUMMARY.md](phases/07-hybrid-dp4a-wmma-kernel-optimization/07-01-SUMMARY.md) and `benchmarks/profiling/KERNEL-BENCH-DIFF.md` §8. The standalone playground retains `X[gk*M+gm]` convention (its own `[K,M]` harness layout) — only the in-tree cuh is GGML-corrected; keep them distinct.
 
 ### Quilt patch workflow
 
@@ -495,7 +495,7 @@ Every bash and harness subprocess call uses an explicit bounded timeout per ROAD
 | `cmake --build` (llama.cpp `build-stock` / `build-custom`) | **600 s** | `cmake --build /root/llama-custom-07/build-* --parallel 14` (HIP compile dominates) |
 | Paired `llama-bench` sweep (stock vs custom back-to-back, 4 tiers) | **300 s** per bench invocation | `llama-bench --single-turn --simple-io --load-mode none -ngl 99 -b 2048` per tier |
 
-Use `timeout 90 bash -lc '...'` or `subprocess.run(..., timeout=90)` for every invocation; bare `subprocess.run` without `timeout=` is banned. See `.planning/STATE.md` step-up discipline and `benchmarks/tools/run_kernel_bench.py:27` (`timeout=120`).
+Use `timeout 90 bash -lc '...'` or `subprocess.run(..., timeout=90)` for every invocation; bare `subprocess.run` without `timeout=` is banned. See `docs/TESTING.md` step-up discipline and `benchmarks/tools/run_kernel_bench.py:27` (`timeout=120`).
 
 ### End-to-end validation (thermal-paired `llama-bench` A/B)
 

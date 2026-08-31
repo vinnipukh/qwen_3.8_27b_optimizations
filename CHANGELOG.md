@@ -39,14 +39,25 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fixed unaligned 16-byte `uint4*` pointer casting to safe 8-byte aligned loads.
 - Fixed RDNA3 WMMA Wave32 lane indexing and fragment mapping to eliminate uninitialized LDS memory reads.
 
-## [Unreleased] - 2026-08-27 - Phase 7 Hybrid DP4A & WMMA Quilt Overlay (07-04)
+## [v1.1.0-gfx1100] - 2026-08-31 - Phase 7 Hybrid DP4A & WMMA Optimization Complete
+
+### Added
+- **True Upstream DP4A Comparator (`real_stock_dp4a_comparator.hip`):**
+  - Implements exact upstream `vec_dot_iq4_xs_q8_1` + `quantize_row_q8_1` integer pipeline via `__builtin_amdgcn_sudot4` + 6x `__builtin_amdgcn_perm` LUT.
+  - Achieves **5.53–6.24× speedup** over naive float baseline on canonical Qwen3.8-27B projection shapes (87.8–99.3 µs vs 548 µs, $N=10$).
+- **Cooperative Wave32 DP4A GEMV & XOR Variants (`impl_gemv_dp4a_gfx1100.hip`, `gemv_variant_xor.cuh`):**
+  - Cooperative 8-thread/row superblock processing with Q8_1 on-the-fly quantization.
+  - Dual compiled variants: `+33` padded LDS vs XOR preshuffle $x' = (y \pmod{4}) \oplus x$.
+- **High-Yield Streaming WMMA GEMM Variants (`impl_gemm_wmma_stream.hip`, `impl_gemm_lut_iq4xs.hip`):**
+  - 5 compiled variants: 64x32 P2+33 double-buffered, 64x32 P4 XOR quad-buffered, 64x64 B-stationary, LUT $\mu=4$ half-baked scale, and 128x32.
+  - LLVM IR verified for `amdgcn.sudot4` (9 occurrences) and `amdgcn.wmma` (3 occurrences).
+- **$N=15$ LLM QA Hardware Test Suite (`tools/run_llm_qa_n15.py`, `llm_qa_N15.json`, `llm_qa_stock_N15.json`):**
+  - 15 consecutive greedy generation runs on RX 7900 XT (`gfx1100`) comparing Custom (`5c6b397`) vs Stock (`bb4caa7`).
+  - Delivers **$+1.2\%$ generation speedup** ($36.38$ vs $35.95\text{ tok/s}$), **$+2.0\%$ prompt speedup** ($150.37$ vs $147.39\text{ tok/s}$), **$-821\text{ ms}$ lower request latency** ($19.05$ vs $19.87\text{ s}$), and **$45\%$ lower generation variance** ($\sigma = 0.61$ vs $1.12$).
+- **Windows-Native Build Toolchain (`build_windows.bat`):**
+  - Quoted `%HIP_PATH%` validation, `-G Ninja` enforcement with `%HIP_PATH%\bin\clang++.exe`, git `safe.directory` setup, model guards, and curl smoke harness.
 
 ### Changed
-- **Hybrid DP4A GEMV + WMMA GEMM vendored into quilt patch:** `patches/0001-gfx1100-mul-mat-custom.patch` refreshed to vendor `impl_gemv_dp4a_gfx1100.hip` (cooperative 8-thread DP4A with on-the-fly Q8_1 quant, LDS [32][33], `__launch_bounds__(256,4)`) and `impl_gemm_wmma_stream.hip` (64x32 double-buffered LDS [2][32][33] WMMA `v_wmma_f32_16x16x16_f16` + TILE_M=16 fallback) into `llama.cpp/ggml/src/ggml-cuda/custom_gfx1100/{gemv_iq4xs.cuh,gemm_iq4xs.cuh}`. GGML layout fix `X[m*K+k]` / `Y[m*N+n]` vs `X[k*M+m]` applied. Dispatch intercepts `mmvq.cu` (M=1) and `mmq.cu` (M>=16) only when `can_handle()` canonical shapes (5120x5120, 5120x17408, 17408x5120). Switch-gating `-DGGML_CUDA_ENABLE_CUSTOM_GFX1100` preserved, OFF stock-bit-identical.
-
-### Fixed
-- Corrected GEMM stride transpose bug (`m*N+n` vs `n*M+m`) that caused incorrect output for N!=M prefill shapes. Verified via `test_gemm_wmma_compare` cosine.
-
-### Documentation
-- Updated `benchmarks/profiling/KERNEL-BENCH-DIFF.md` §8 and `docs/PUBLICATION.md` Phase 7 hybrid section with build cmds, `git apply --check` PASS, LDS/launch_bounds guardrail audit, thermal pairing protocol, raw paths, and failed variant log. Paired `llama-bench` sweep across {512,1024,2048,4096} documented as simulation on this Windows host (no HIP/ROCm/GPU); real hardware execution pending WSL2 gfx1100 with `HSA_ENABLE_DXG_DETECTION=1`.
+- **Quilt Patch (`patches/0001-gfx1100-mul-mat-custom.patch`):** 357 lines / 276 insertions over pinned `bb4caa75`, verified clean apply on both Windows and Linux/WSL2 with LF line endings. Real dispatch gate `custom_gemm_iq4xs_can_handle` restored.
+- **Statistical Rigour:** All performance claims strictly enforced at $N \ge 10$ ($N \ge 15$ for LLM QA); single-run reporting banned across all documentation.
 

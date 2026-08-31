@@ -1,0 +1,350 @@
+### Open tabs
+- 0: [flash attention 2 long context 8k 16k 32k prefill throughput scaling at DuckDuckGo](https://duckduckgo.com/?q=flash+attention+2+long+context+8k+16k+32k+prefill+throughput+scaling&kad=en_US)
+- 1: [DuckDuckGo](https://html.duckduckgo.com/html/?q=flash+attention+2+long+context+8k+16k+32k+prefill+throughput+scaling)
+- 2: [DuckDuckGo](https://lite.duckduckgo.com/lite/?q=flash+attention+2+long+context+8k+16k+32k+prefill+throughput+scaling)
+- 3: [Captcha - Brave Search](https://search.brave.com/search?q=flash+attention+2+long+context+8k+16k+32k+prefill+throughput+scaling)
+- 4: [flash attention 2 long context 8k 16k 32k prefill throughput scaling - Arama](https://www.bing.com/search?q=flash+attention+2+long+context+8k+16k+32k+prefill+throughput+scaling&rdr=1&rdrig=40FB2FB12BE247E3A2F87EF294A4CE99)
+- 5: ["FlashAttention-2" prefill throughput 8k 16k scaling - Arama](https://www.bing.com/search?q=%22FlashAttention-2%22+prefill+throughput+8k+16k+scaling&rdr=1&rdrig=76F509D45D02467DA2B1192C40E1BE76)
+- 6: [https://www.google.com/search?q=flash+attention+2+long+context+8k+16k+32k+prefill+throughput+scaling&hl=en&gl=us&sei=vcORaoGTIfKm1fIPsp3PiQ8](https://www.google.com/sorry/index?continue=https://www.google.com/search%3Fq%3Dflash%2Battention%2B2%2Blong%2Bcontext%2B8k%2B16k%2B32k%2Bprefill%2Bthroughput%2Bscaling%26hl%3Den%26gl%3Dus%26sei%3DvcORaoGTIfKm1fIPsp3PiQ8&hl=en&q=EgSw6odMGL2Hx9QGIjBz_JWyuDhFlk0k_9Sd2sOWVij5TcNPo8TWvNLttk3wGaoM0WiPg28pSMdLEGzKOxUyAVJaAUM)
+- 7: [[2307.08691] FlashAttention-2: Faster Attention with Better Parallelism and Work Partitioning](https://arxiv.org/abs/2307.08691)
+- 8: [[2307.08691] FlashAttention-2: Faster Attention with Better Parallelism and Work Partitioning](https://arxiv.org/abs/2307.08691)
+- 9: [GitHub - Dao-AILab/flash-attention: Fast and memory-efficient exact attention · GitHub](https://github.com/Dao-AILab/flash-attention)
+- 10: [[2205.14135] FlashAttention: Fast and Memory-Efficient Exact Attention with IO-Awareness](https://arxiv.org/abs/2205.14135)
+- 11: [Overview · Hugging Face](https://huggingface.co/docs/transformers/v5.15.1/optimization_overview)
+- 12: [Page not found – PyTorch](https://pytorch.org/blog/flash-attention)
+- 13: (current) [AMD ROCm — AMD ROCm 10.0.0](https://rocm.docs.amd.com/en/latest/)
+### Page
+- Page URL: https://rocm.docs.amd.com/en/latest/
+- Page Title: AMD ROCm — AMD ROCm 10.0.0
+- Console: 8 errors, 0 warnings
+### Snapshot
+```yaml
+- generic [ref=e1]:
+  - link "Skip to main content" [ref=e3] [cursor=pointer]:
+    - /url: "#main-content"
+  - text: 
+  - generic: 
+  - banner [ref=e4]:
+    - navigation [ref=e5]:
+      - generic [ref=e7]:
+        - generic [ref=e8]:
+          - button "Toggle navigation"
+          - link [ref=e9] [cursor=pointer]:
+            - /url: https://www.amd.com/
+            - img "AMD Logo" [ref=e10]
+          - link "ROCm™ Core SDK 10.0.0" [ref=e12] [cursor=pointer]:
+            - /url: https://rocm.docs.amd.com/en/latest
+        - link "Version List" [ref=e13] [cursor=pointer]:
+          - /url: https://rocm.docs.amd.com/en/latest/release/versions.html
+    - navigation [ref=e14]:
+      - generic [ref=e17]:
+        - list [ref=e18]:
+          - listitem [ref=e19]:
+            - button "Core SDK" [ref=e20] [cursor=pointer]
+          - listitem [ref=e21]:
+            - button "AI Ecosystem" [ref=e22] [cursor=pointer]
+          - listitem [ref=e23]:
+            - button "GPU Systems and Infrastructure" [ref=e24] [cursor=pointer]
+          - listitem [ref=e25]:
+            - button "Toolkits" [ref=e26] [cursor=pointer]
+          - listitem [ref=e27]:
+            - button "ROCm.AI" [ref=e28] [cursor=pointer]
+        - list [ref=e30]:
+          - listitem [ref=e31]:
+            - button "Blogs" [ref=e32] [cursor=pointer]
+          - listitem [ref=e33]:
+            - button "Developer Hub" [ref=e34] [cursor=pointer]
+  - generic [ref=e36]:
+    - generic [ref=e38]:
+      - link [ref=e40] [cursor=pointer]:
+        - /url: "#"
+        - paragraph [ref=e41]: AMD ROCm 10.0.0
+      - button "Search" [ref=e43] [cursor=pointer]:
+        - img [ref=e44]: 
+        - generic [ref=e47]:
+          - generic [ref=e48]: Ctrl
+          - text: +
+          - generic [ref=e49]: K
+      - navigation "Main" [ref=e51]:
+        - generic [ref=e52]:
+          - list [ref=e53]:
+            - listitem [ref=e54]:
+              - link "Release notes" [ref=e55] [cursor=pointer]:
+                - /url: about/release-notes.html
+            - listitem [ref=e56]:
+              - link "Transition guide" [ref=e57] [cursor=pointer]:
+                - /url: about/transition-guide-TheRock.html
+            - listitem [ref=e58]:
+              - link "What is ROCm?" [ref=e59] [cursor=pointer]:
+                - /url: about/what-is-rocm.html
+            - listitem [ref=e60]:
+              - link "Compatibility matrix" [ref=e61] [cursor=pointer]:
+                - /url: compatibility/compatibility-matrix.html
+          - heading "Install" [level=2] [ref=e62]
+          - list [ref=e63]:
+            - listitem [ref=e64]:
+              - link "Install ROCm" [ref=e65] [cursor=pointer]:
+                - /url: install/rocm.html
+              - group:
+                - img [ref=e66] [cursor=pointer]: 
+            - listitem [ref=e68]:
+              - link "ROCm Runfile Installer" [ref=e69] [cursor=pointer]:
+                - /url: install/rocm-runfile-installer.html
+            - listitem [ref=e70]:
+              - link "Build ROCm from source" [ref=e71] [cursor=pointer]:
+                - /url: install/build-from-source.html
+            - listitem [ref=e72]:
+              - link "Install AI frameworks" [ref=e73] [cursor=pointer]:
+                - /url: ai-ecosystem.html
+              - group:
+                - img [ref=e74] [cursor=pointer]: 
+                - text:    
+          - heading "Components" [level=2] [ref=e76]
+          - list [ref=e77]:
+            - listitem [ref=e78]:
+              - link "ROCm Core SDK" [ref=e79] [cursor=pointer]:
+                - /url: components/core.html
+              - group:
+                - img [ref=e80] [cursor=pointer]: 
+                - text:                                          
+            - listitem [ref=e82]:
+              - link "ROCm HPC SDK" [ref=e83] [cursor=pointer]:
+                - /url: components/hpc-sdk/index.html
+              - group:
+                - img [ref=e84] [cursor=pointer]: 
+            - listitem [ref=e86]:
+              - link "ROCm Extras" [ref=e87] [cursor=pointer]:
+                - /url: components/extras.html
+              - group:
+                - img [ref=e88] [cursor=pointer]: 
+                - text:   
+          - heading "Tutorials" [level=2] [ref=e90]
+          - list [ref=e91]:
+            - listitem [ref=e92]:
+              - link "AI Developer Hub" [ref=e93] [cursor=pointer]:
+                - /url: https://rocm.docs.amd.com/projects/ai-developer-hub/en/latest/
+            - listitem [ref=e94]:
+              - link "ROCm examples" [ref=e95] [cursor=pointer]:
+                - /url: https://github.com/ROCm/rocm-examples/tree/release/therock-10.0
+          - heading "Reference" [level=2] [ref=e96]
+          - list [ref=e97]:
+            - listitem [ref=e98]:
+              - link "AMD GPU specifications" [ref=e99] [cursor=pointer]:
+                - /url: reference/gpu-specs.html
+            - listitem [ref=e100]:
+              - link "AMD GPU architectures" [ref=e101] [cursor=pointer]:
+                - /url: reference/gpu-arch/index.html
+              - group:
+                - img [ref=e102] [cursor=pointer]: 
+                - text:            
+            - listitem [ref=e104]:
+              - link "AMD GPU system optimization" [ref=e105] [cursor=pointer]:
+                - /url: reference/system-optimization/index.html
+              - group:
+                - img [ref=e106] [cursor=pointer]: 
+                - text:           
+            - listitem [ref=e108]:
+              - link "AMD GPU and ROCm components data types and precision support" [ref=e109] [cursor=pointer]:
+                - /url: reference/precision-support.html
+            - listitem [ref=e110]:
+              - link "ROCm libraries graph-safe support" [ref=e111] [cursor=pointer]:
+                - /url: reference/graph-safe-support.html
+            - listitem [ref=e112]:
+              - link "AMD GPU atomics operation support" [ref=e113] [cursor=pointer]:
+                - /url: reference/gpu-atomics-operation.html
+            - listitem [ref=e114]:
+              - link "ROCm environment variables" [ref=e115] [cursor=pointer]:
+                - /url: reference/environment-variables/index.html
+              - group:
+                - img [ref=e116] [cursor=pointer]: 
+            - listitem [ref=e118]:
+              - link "AMD GPU programming on ROCm" [ref=e119] [cursor=pointer]:
+                - /url: reference/hip-programming.html
+          - heading "Contribute" [level=2] [ref=e120]
+          - list [ref=e121]:
+            - listitem [ref=e122]:
+              - link "Contributing to the ROCm documentation" [ref=e123] [cursor=pointer]:
+                - /url: contribute/contributing.html
+              - group:
+                - img [ref=e124] [cursor=pointer]: 
+            - listitem [ref=e126]:
+              - link "Providing feedback about the ROCm documentation" [ref=e127] [cursor=pointer]:
+                - /url: contribute/feedback.html
+            - listitem [ref=e128]:
+              - link "ROCm licenses" [ref=e129] [cursor=pointer]:
+                - /url: about/license.html
+    - main [ref=e132]:
+      - generic [ref=e134]:
+        - generic [ref=e136]:
+          - generic "Toggle primary sidebar" [ref=e139] [cursor=pointer]:
+            - img [ref=e140]: 
+          - generic [ref=e144]:
+            - generic [ref=e145]:
+              - button "Source repositories" [ref=e146] [cursor=pointer]:
+                - img [ref=e147]: 
+              - text:  
+            - generic [ref=e149]:
+              - button "Download this page" [ref=e150] [cursor=pointer]:
+                - img [ref=e151]: 
+              - text:  
+            - button "light/dark" [ref=e153] [cursor=pointer]:
+              - text:  
+              - img [ref=e154]: 
+            - text: 
+        - article [ref=e156]:
+          - generic [ref=e157]:
+            - heading "AMD ROCm" [level=1] [ref=e158]
+            - paragraph [ref=e159]: "ROCm is AMD’s open-source GPU computing platform: an end‑to‑end ecosystem of compilers, runtimes, and libraries for AI, HPC, and domain‑specific workloads. It is open source, cross‑platform (Linux and Windows), and optimized for AMD Instinct™, AMD Radeon™, and AMD Ryzen™ AI devices."
+            - generic [ref=e161]:
+              - generic [ref=e163]:
+                - generic [ref=e164]:
+                  - generic [ref=e165]: Core SDK
+                  - paragraph [ref=e166]: The foundational libraries, runtimes, and tools for GPU computing on AMD hardware — math and compute libraries, communication primitives, HIP runtime, profiling and debugging tools, and more.
+                  - list [ref=e167]:
+                    - listitem [ref=e168]:
+                      - paragraph [ref=e169]:
+                        - link "Install the ROCm Core SDK" [ref=e170] [cursor=pointer]:
+                          - /url: install/rocm.html
+                    - listitem [ref=e171]:
+                      - paragraph [ref=e172]:
+                        - link "ROCm 10.0.0 compatibility" [ref=e173] [cursor=pointer]:
+                          - /url: compatibility/compatibility-matrix.html
+                - paragraph [ref=e175]:
+                  - link "Go to Core SDK docs " [ref=e176] [cursor=pointer]:
+                    - /url: about/release-notes.html
+              - generic [ref=e178]:
+                - generic [ref=e179]:
+                  - generic [ref=e180]: AI Ecosystem
+                  - paragraph [ref=e181]: Full-stack documentation and recipes to deploy AI workloads on AMD GPUs using popular ROCm-enabled frameworks.
+                  - list [ref=e182]:
+                    - listitem [ref=e183]:
+                      - paragraph [ref=e184]: Deep learning frameworks
+                      - list [ref=e185]:
+                        - listitem [ref=e186]:
+                          - paragraph [ref=e187]:
+                            - link "PyTorch" [ref=e188] [cursor=pointer]:
+                              - /url: https://rocm.docs.amd.com/projects/ai-ecosystem/en/latest/frameworks/pytorch/install.html
+                        - listitem [ref=e189]:
+                          - paragraph [ref=e190]:
+                            - link "JAX" [ref=e191] [cursor=pointer]:
+                              - /url: https://rocm.docs.amd.com/projects/ai-ecosystem/en/latest/frameworks/jax/install.html
+                    - listitem [ref=e192]:
+                      - paragraph [ref=e193]: Inference
+                      - list [ref=e194]:
+                        - listitem [ref=e195]:
+                          - paragraph [ref=e196]:
+                            - link "vLLM" [ref=e197] [cursor=pointer]:
+                              - /url: https://rocm.docs.amd.com/projects/ai-ecosystem/en/latest/inference/vllm.html
+                        - listitem [ref=e198]:
+                          - paragraph [ref=e199]:
+                            - link "SGLang" [ref=e200] [cursor=pointer]:
+                              - /url: https://rocm.docs.amd.com/projects/ai-ecosystem/en/latest/inference/sglang.html
+                - paragraph [ref=e202]:
+                  - link "Go to AI Ecosystem docs " [ref=e203] [cursor=pointer]:
+                    - /url: https://rocm.docs.amd.com/projects/ai-ecosystem/en/latest/index.html
+              - generic [ref=e205]:
+                - generic [ref=e206]:
+                  - generic [ref=e207]: GPU Systems and Infrastructure
+                  - paragraph [ref=e208]: Deployment and operations guidance for AMD Instinct GPUs at scale, including AMD GPU Driver installation, cluster management, GPU partitioning, monitoring, virtualization, cloud deployments, and containers.
+                  - list [ref=e209]:
+                    - listitem [ref=e210]:
+                      - paragraph [ref=e211]:
+                        - link "AMD GPU Driver (amdgpu)" [ref=e212] [cursor=pointer]:
+                          - /url: https://instinct.docs.amd.com/projects/amdgpu-docs/en/latest/
+                    - listitem [ref=e213]:
+                      - paragraph [ref=e214]:
+                        - link "Network Operator (Kubernetes)" [ref=e215] [cursor=pointer]:
+                          - /url: https://instinct.docs.amd.com/projects/network-operator/en/latest/overview.html
+                - paragraph [ref=e217]:
+                  - link "Go to GPU Systems docs " [ref=e218] [cursor=pointer]:
+                    - /url: https://instinct.docs.amd.com
+              - generic [ref=e221]:
+                - generic [ref=e222]: Toolkits
+                - paragraph [ref=e223]: Open-source collections of ROCm-accelerated libraries for building high-performance domain-specific applications.
+                - list [ref=e224]:
+                  - listitem [ref=e225]:
+                    - paragraph [ref=e226]:
+                      - link "ROCm Data Science" [ref=e227] [cursor=pointer]:
+                        - /url: https://rocm.docs.amd.com/projects/rocm-ds/en/latest/index.html
+                  - listitem [ref=e228]:
+                    - paragraph [ref=e229]:
+                      - link "ROCm Finance" [ref=e230] [cursor=pointer]:
+                        - /url: https://rocm.docs.amd.com/projects/rocm-finance/en/latest/index.html
+                  - listitem [ref=e231]:
+                    - paragraph [ref=e232]:
+                      - link "ROCm Life Science" [ref=e233] [cursor=pointer]:
+                        - /url: https://rocm.docs.amd.com/projects/rocm-ls/en/latest/index.html
+                  - listitem [ref=e234]:
+                    - paragraph [ref=e235]:
+                      - link "ROCm LLMExt" [ref=e236] [cursor=pointer]:
+                        - /url: https://rocm.docs.amd.com/projects/rocm-llmext/en/latest/index.html
+                  - listitem [ref=e237]:
+                    - paragraph [ref=e238]:
+                      - link "ROCm Simulation" [ref=e239] [cursor=pointer]:
+                        - /url: https://rocm.docs.amd.com/projects/rocm-simulation/en/latest/index.html
+        - link [ref=e241] [cursor=pointer]:
+          - /url: about/release-notes.html
+          - generic [ref=e242]:
+            - paragraph [ref=e243]: next
+            - paragraph [ref=e244]: ROCm Core SDK 10.0.0 release notes
+          - img [ref=e245]: 
+      - generic [ref=e247]:
+        - paragraph
+  - contentinfo [ref=e248]:
+    - generic [ref=e250]:
+      - list [ref=e253]:
+        - listitem [ref=e254]:
+          - link "Terms and Conditions" [ref=e255] [cursor=pointer]:
+            - /url: https://www.amd.com/en/corporate/copyright
+          - text: "|"
+        - listitem [ref=e256]:
+          - link "ROCm Licenses and Disclaimers" [ref=e257] [cursor=pointer]:
+            - /url: https://rocm.docs.amd.com/en/latest/about/license.html
+          - text: "|"
+        - listitem [ref=e258]:
+          - link "Privacy" [ref=e259] [cursor=pointer]:
+            - /url: https://www.amd.com/en/corporate/privacy
+          - text: "|"
+        - listitem [ref=e260]:
+          - link "Trademarks" [ref=e261] [cursor=pointer]:
+            - /url: https://www.amd.com/en/corporate/trademarks
+          - text: "|"
+        - listitem [ref=e262]:
+          - link "Supply Chain Transparency" [ref=e263] [cursor=pointer]:
+            - /url: https://www.amd.com/content/dam/amd/en/documents/corporate/cr/supply-chain-transparency.pdf
+          - text: "|"
+        - listitem [ref=e264]:
+          - link "Fair and Open Competition" [ref=e265] [cursor=pointer]:
+            - /url: https://www.amd.com/en/corporate/competition
+          - text: "|"
+        - listitem [ref=e266]:
+          - link "UK Tax Strategy" [ref=e267] [cursor=pointer]:
+            - /url: https://www.amd.com/system/files/documents/amd-uk-tax-strategy.pdf
+          - text: "|"
+        - listitem [ref=e268]:
+          - link "Cookie Policy" [ref=e269] [cursor=pointer]:
+            - /url: https://www.amd.com/en/corporate/cookies
+          - text: "|"
+        - listitem [ref=e270]:
+          - link "Cookie Settings" [ref=e271] [cursor=pointer]:
+            - /url: "#cookie-settings"
+      - generic [ref=e272]: © 2026 Advanced Micro Devices, Inc
+  - banner [ref=e276] [cursor=pointer]:
+    - img "Read the Docs" [ref=e277]
+    - generic [ref=e278]: latest
+  - dialog "Cookie Notice" [ref=e285]:
+    - generic [ref=e287]:
+      - generic [ref=e289]:
+        - heading "Cookie Notice" [level=2] [ref=e290]
+        - generic [ref=e291]:
+          - text: This site uses cookies from us and our partners to make your browsing experience more efficient, relevant, convenient and personal. In some cases, they are essential to making the site work properly. By accessing this site, you direct us to use and consent to the use of cookies. You can change your settings by clicking on the Cookie Settings link. For more information, refer to AMD's
+          - link "privacy notice" [ref=e292] [cursor=pointer]:
+            - /url: https://www.amd.com/en/legal/privacy.html
+          - text: and
+          - link "cookie policy" [ref=e293] [cursor=pointer]:
+            - /url: https://www.amd.com/en/legal/cookies.html
+          - text: .
+      - generic [ref=e295]:
+        - button "Cookie Settings, Opens the preference center dialog" [ref=e296] [cursor=pointer]: Cookie Settings
+        - button "Accept Cookies" [ref=e297] [cursor=pointer]
+```
